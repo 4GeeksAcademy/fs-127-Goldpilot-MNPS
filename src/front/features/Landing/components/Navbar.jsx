@@ -1,96 +1,119 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Button, Flex, Box, Text, Heading } from "@radix-ui/themes";
-import { MoveRight, Plus, X } from "lucide-react";
+import { X, Globe } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 /**
- * Componente Navbar con Menú Expandible "Vidrio Líquido".
- * Reemplaza los botones visibles por un toggle "+" que revela un menú completo.
+ * Navbar Minimalista "Centrada" - Estructura Atlas.
+ * - Trigger: Botón "GP" centrado.
+ * - Modal: Card centrada con estructura: Logo -> Visual -> Botones -> Cerrar.
  */
 export const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
 
-    const toggleMenu = () => setIsOpen(!isOpen);
+    const toggleMenu = () => setIsOpen((prev) => !prev);
 
     return (
         <>
-            <nav className="fixed top-0 left-0 w-full z-50 px-6 py-6 flex items-center justify-between">
-                {/* LOGO */}
-                <Flex align="center" gap="2" className="z-50 relative">
-                    <div className="w-10 h-10 bg-gradient-to-br from-[var(--color-gold)] to-[#F5E6BE] rounded-full flex items-center justify-center shadow-[var(--glow-gold)]">
-                        <span className="text-black font-bold text-sm">GP</span>
-                    </div>
-                    <span className="text-xl font-bold tracking-tighter text-white mix-blend-difference">
-                        GOLDPILOT
-                    </span>
-                </Flex>
+            {/* BARRA DE NAVEGACIÓN (Centrada) */}
+            <nav className="fixed top-0 left-0 w-full z-50 px-8 py-6 flex justify-center items-center pointer-events-none">
 
-                {/* BOTÓN TOGGLE (+) */}
-                <button
-                    onClick={toggleMenu}
-                    className="z-50 relative w-12 h-12 rounded-full flex items-center justify-center bg-[var(--glass-white-lighter)] backdrop-blur-md border border-white/20 text-white hover:bg-[var(--color-gold)] transition-all duration-300 shadow-[var(--shadow-glass-sm)]"
-                >
-                    <motion.div
-                        animate={{ rotate: isOpen ? 45 : 0 }}
-                        transition={{ duration: 0.2 }}
-                    >
-                        <Plus size={24} strokeWidth={3} />
-                    </motion.div>
-                </button>
+                {/* BOTÓN TRIGGER (Solo visible si el menú está cerrado para evitar duplicidad visual) */}
+                <AnimatePresence>
+                    {!isOpen && (
+                        <motion.button
+                            initial={{ scale: 0, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0, opacity: 0 }}
+                            onClick={toggleMenu}
+                            className="pointer-events-auto relative z-50 w-12 h-12 rounded-full flex items-center justify-center font-bold text-sm text-black transition-all duration-300 hover:scale-105 active:scale-95 shadow-[var(--glow-gold)]"
+                            style={{
+                                background: "var(--gradient-gold)",
+                                border: "1px solid rgba(255,255,255,0.2)",
+                            }}
+                        >
+                            GP
+                        </motion.button>
+                    )}
+                </AnimatePresence>
+
             </nav>
 
-            {/* MENÚ EXPANDIBLE OVERLAY */}
+            {/* MODAL DROPDOWN (Overlay Centrado) */}
             <AnimatePresence>
                 {isOpen && (
-                    <motion.div
-                        initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
-                        animate={{ opacity: 1, backdropFilter: "blur(40px)" }}
-                        exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
-                        transition={{ duration: 0.4 }}
-                        className="fixed inset-0 z-40 bg-[var(--glass-brown-dark)] flex flex-col justify-center"
-                    >
-                        <Box className="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+                    <div className="fixed inset-0 z-50 flex items-center justify-center">
 
-                            {/* IZQUIERDA: TEXTO DE RELLENO / BRANDING */}
-                            <motion.div
-                                initial={{ x: -50, opacity: 0 }}
-                                animate={{ x: 0, opacity: 1 }}
-                                transition={{ delay: 0.2 }}
-                                className="hidden md:block"
-                            >
-                                <Heading size="9" className="text-[var(--color-gold)] mb-6 font-display leading-tight">
-                                    Excelencia <br /> Líquida.
-                                </Heading>
-                                <Text size="5" className="text-gray-300 max-w-md font-light">
-                                    {/* TODO: INSERTAR COPY FINAL MENÚ */}
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                    Invertir en oro nunca ha sido tan fluido y transparente.
-                                    Descubre una nueva era de estabilidad financiera.
-                                </Text>
-                            </motion.div>
+                        {/* BACKDROP (Clic para cerrar) */}
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+                            onClick={toggleMenu}
+                        />
 
-                            {/* DERECHA: BOTONES DE ACCIÓN */}
-                            <motion.div
-                                initial={{ x: 50, opacity: 0 }}
-                                animate={{ x: 0, opacity: 1 }}
-                                transition={{ delay: 0.3 }}
-                                className="flex flex-col gap-6"
-                            >
-                                <Link to="/login" onClick={toggleMenu}>
-                                    <h3 className="text-5xl md:text-7xl font-bold text-white hover:text-[var(--color-gold)] transition-colors cursor-pointer tracking-tighter">
-                                        Acceder
-                                    </h3>
-                                </Link>
-                                <Link to="/signup" onClick={toggleMenu}>
-                                    <h3 className="text-5xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-gold)] to-[#F5E6BE] hover:opacity-80 transition-opacity cursor-pointer tracking-tighter flex items-center gap-4">
-                                        Empezar <MoveRight size={48} className="text-[var(--color-gold)]" />
-                                    </h3>
-                                </Link>
-                            </motion.div>
+                        {/* CARD ESTRUCTURA ATLAS */}
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                            transition={{ type: "spring", stiffness: 350, damping: 25 }}
+                            className="relative z-10 w-[90%] max-w-sm rounded-[32px] overflow-hidden flex flex-col items-center"
+                            style={{
+                                background: "rgba(30, 30, 30, 0.75)",
+                                backdropFilter: "blur(40px)",
+                                WebkitBackdropFilter: "blur(40px)",
+                                border: "1px solid rgba(255, 255, 255, 0.15)",
+                                boxShadow: "0 40px 80px -12px rgba(0, 0, 0, 0.7)"
+                            }}
+                        >
+                            {/* BRILLO DE FONDO */}
+                            <div className="absolute top-0 inset-x-0 h-32 bg-[var(--color-gold)] opacity-20 blur-3xl pointer-events-none" />
 
-                        </Box>
-                    </motion.div>
+                            <div className="flex flex-col items-center w-full p-8 pb-6 gap-8 text-center relative z-20">
+
+                                {/* 1. LOGO HEADER */}
+                                <div className="flex items-center gap-2 text-white">
+                                    <div className="w-6 h-6 rounded-full bg-[var(--color-gold)] flex items-center justify-center text-[10px] font-bold text-black">GP</div>
+                                    <span className="font-bold tracking-tight text-lg">GOLDPILOT</span>
+                                </div>
+
+                                {/* 2. VISUAL ELEMENT (Ilustración Central) */}
+                                <div className="relative w-32 h-32 flex items-center justify-center">
+                                    <div className="absolute inset-0 bg-[var(--color-gold)] opacity-10 blur-xl rounded-full animate-pulse" />
+                                    <Globe size={80} strokeWidth={0.5} className="text-[var(--color-gold)] opacity-80" />
+                                </div>
+
+                                {/* 3. BOTONES DE ACCIÓN */}
+                                <div className="w-full flex flex-col gap-3">
+                                    <Link to="/login" onClick={toggleMenu} className="w-full">
+                                        <button className="w-full py-4 rounded-full bg-[var(--color-gold)] text-black font-bold text-sm tracking-wide hover:brightness-110 active:scale-[0.98] transition-all shadow-[var(--glow-gold)] uppercase">
+                                            Iniciar Sesión
+                                        </button>
+                                    </Link>
+
+                                    <Link to="/signup" onClick={toggleMenu} className="w-full">
+                                        <button className="w-full py-4 rounded-full bg-transparent text-white font-bold text-sm tracking-wide border border-white/20 hover:bg-white/5 active:scale-[0.98] transition-all uppercase">
+                                            Registrarse
+                                        </button>
+                                    </Link>
+                                </div>
+
+                                {/* LINEA DIVISORIA */}
+                                <div className="w-full h-px bg-white/10" />
+
+                                {/* 4. BOTÓN CERRAR (Inferior) */}
+                                <button
+                                    onClick={toggleMenu}
+                                    className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/10 transition-colors"
+                                >
+                                    <X size={18} />
+                                </button>
+
+                            </div>
+                        </motion.div>
+                    </div>
                 )}
             </AnimatePresence>
         </>

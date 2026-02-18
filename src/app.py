@@ -5,6 +5,7 @@ import os
 from flask import Flask, request, jsonify, url_for, send_from_directory
 from flask_migrate import Migrate
 from flask_swagger import swagger
+from flask_mail import Mail  # NUEVO: importamos Flask-Mail para envio de emails
 from api.utils import APIException, generate_sitemap
 from api.models import db
 from api.routes import api
@@ -28,9 +29,24 @@ else:
     app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:////tmp/test.db"
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-MIGRATE = Migrate(app, db, compare_type=True)
+migrations_dir = os.path.join(os.path.dirname(  # MODIFICADO: ruta absoluta a la carpeta migrations
+    os.path.realpath(__file__)), '../migrations')
+# MODIFICADO: añadido directory=
+MIGRATE = Migrate(app, db, compare_type=True, directory=migrations_dir)
 db.init_app(app)
 
+# NUEVO: Configuracion de Flask-Mail (Gmail SMTP) (NAPOLES)
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'  # NUEVO: servidor SMTP de Gmail
+app.config['MAIL_PORT'] = 587  # NUEVO: puerto TLS de Gmail
+app.config['MAIL_USE_TLS'] = True  # NUEVO: activamos cifrado TLS
+# NUEVO: email desde variable de entorno
+app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
+# NUEVO: app password desde variable de entorno
+app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
+app.config['MAIL_DEFAULT_SENDER'] = os.getenv(
+    'MAIL_USERNAME')  # NUEVO: remitente por defecto
+mail = Mail(app)  # NUEVO: inicializamos Flask-Mail con la app
+mail.init_app(app)  # NUEVO: aseguramos que Mail se inicialice con la app
 # add the admin
 setup_admin(app)
 
@@ -57,6 +73,8 @@ def sitemap():
     return send_from_directory(static_file_dir, 'index.html')
 
 # any other endpoint will try to serve it like a static file
+
+
 @app.route('/<path:path>', methods=['GET'])
 def serve_any_other_file(path):
     if not os.path.isfile(os.path.join(static_file_dir, path)):

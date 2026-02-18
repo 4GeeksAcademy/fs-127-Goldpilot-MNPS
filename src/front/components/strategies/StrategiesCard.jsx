@@ -1,0 +1,1 @@
+// Aquí irían el card de estrategias

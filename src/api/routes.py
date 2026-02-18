@@ -4,12 +4,16 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User
 from api.utils import generate_sitemap, APIException
+from api.controllers import register_controllers
 from flask_cors import CORS
 
 api = Blueprint('api', __name__)
 
 # Allow CORS requests to this API
 CORS(api)
+
+# Registrar todos los sub-blueprints (controllers)
+register_controllers(api)
 
 
 @api.route('/hello', methods=['POST', 'GET'])

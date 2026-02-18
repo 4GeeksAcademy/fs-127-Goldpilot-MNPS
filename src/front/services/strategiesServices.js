@@ -1,0 +1,1 @@
+// Aquí irán todos los serv icios relativos a las estrategias

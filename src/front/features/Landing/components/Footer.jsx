@@ -21,7 +21,7 @@ export const Footer = () => {
                     className="mb-24 text-center md:text-left"
                 >
                     <h2 className="text-[12vw] leading-none font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-600 opacity-90 select-none">
-                        GOLDPILOT
+                        XSNIPER
                     </h2>
                 </motion.div>
 
@@ -66,7 +66,7 @@ export const Footer = () => {
                             <RadixLink href="#" color="gray" className="hover:text-[var(--color-gold)]">LinkedIn</RadixLink>
                         </Flex>
                         <Text size="1" color="gray" className="mt-8 opacity-50">
-                            © 2024 GoldPilot Inc. <br /> All rights reserved.
+                            © 2024 Xsniper Inc. <br /> All rights reserved.
                         </Text>
                     </Flex>
 

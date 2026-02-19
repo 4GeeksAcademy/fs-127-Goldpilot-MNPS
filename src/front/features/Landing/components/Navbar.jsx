@@ -32,7 +32,7 @@ export const Navbar = () => {
                                 border: "1px solid rgba(255,255,255,0.2)",
                             }}
                         >
-                            GP
+                            XS
                         </motion.button>
                     )}
                 </AnimatePresence>
@@ -75,8 +75,8 @@ export const Navbar = () => {
 
                                 {/* 1. LOGO HEADER */}
                                 <div className="flex items-center gap-2 text-white">
-                                    <div className="w-6 h-6 rounded-full bg-[var(--color-gold)] flex items-center justify-center text-[10px] font-bold text-black">GP</div>
-                                    <span className="font-bold tracking-tight text-lg">GOLDPILOT</span>
+                                    <div className="w-6 h-6 rounded-full bg-[var(--color-gold)] flex items-center justify-center text-[10px] font-bold text-black">XS</div>
+                                    <span className="font-bold tracking-tight text-lg">XSNIPER</span>
                                 </div>
 
                                 {/* 2. VISUAL ELEMENT (Ilustración Central) */}
@@ -88,13 +88,13 @@ export const Navbar = () => {
                                 {/* 3. BOTONES DE ACCIÓN */}
                                 <div className="w-full flex flex-col gap-3">
                                     <Link to="/login" onClick={toggleMenu} className="w-full">
-                                        <button className="w-full py-4 rounded-full bg-[var(--color-gold)] text-black font-bold text-sm tracking-wide hover:brightness-110 active:scale-[0.98] transition-all shadow-[var(--glow-gold)] uppercase">
+                                        <button className="w-full py-4 rounded-full bg-[var(--color-gold)] text-white font-bold text-sm tracking-wide hover:bg-[#d4af37] hover:shadow-[0_0_20px_var(--color-gold)] transition-all shadow-lg backdrop-blur-sm border border-white/20 uppercase">
                                             Iniciar Sesión
                                         </button>
                                     </Link>
 
                                     <Link to="/signup" onClick={toggleMenu} className="w-full">
-                                        <button className="w-full py-4 rounded-full bg-transparent text-white font-bold text-sm tracking-wide border border-white/20 hover:bg-white/5 active:scale-[0.98] transition-all uppercase">
+                                        <button className="w-full py-4 rounded-full bg-white/5 text-white font-bold text-sm tracking-wide border border-white/10 hover:bg-white/10 hover:border-white/30 hover:shadow-[0_0_15px_rgba(255,255,255,0.1)] backdrop-blur-md transition-all uppercase">
                                             Registrarse
                                         </button>
                                     </Link>

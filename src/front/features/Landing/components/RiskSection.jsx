@@ -38,7 +38,7 @@ export const RiskSection = () => {
                         <h2
                             className="text-5xl md:text-7xl lg:text-8xl font-medium text-center"
                             style={{
-                                background: "linear-gradient(180deg, #FFFFFF 0%, #c38f37 100%)",
+                                background: "linear-gradient(180deg, #FFFFFF 0%, var(--color-gold) 100%)",
                                 WebkitBackgroundClip: "text",
                                 WebkitTextFillColor: "transparent",
                                 paddingBottom: "0.1em"
@@ -74,7 +74,7 @@ export const RiskSection = () => {
                     {/* BOTÓN LIQUID GLASS */}
                     <div className="mt-8">
                         <Link to="/strategies">
-                            <button className="px-8 py-4 rounded-full text-white font-medium text-lg transition-all duration-300 transform hover:scale-105 active:scale-95 border border-white/20 backdrop-blur-md bg-white/5 shadow-[0_4px_24px_rgba(0,0,0,0.5)] hover:bg-white/10 hover:border-white/30 hover:shadow-[0_0_20px_rgba(195,143,55,0.3)]">
+                            <button className="px-8 py-4 rounded-full text-white font-medium text-lg transition-all duration-300 transform hover:scale-105 active:scale-95 border border-white/20 backdrop-blur-md bg-white/5 shadow-[0_4px_24px_rgba(0,0,0,0.5)] hover:bg-[var(--color-gold)]/10 hover:border-[var(--color-gold)]/40 hover:text-[var(--color-gold)] hover:shadow-[0_0_25px_rgba(195,143,55,0.2)]">
                                 Explorar Estrategias
                             </button>
                         </Link>

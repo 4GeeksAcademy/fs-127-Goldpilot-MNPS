@@ -12,7 +12,7 @@ import bcrypt
 from sqlalchemy import String, Boolean, DateTime
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from datetime import datetime
-from api.models import db
+from api.models.db import db
 
 
 class User(db.Model):

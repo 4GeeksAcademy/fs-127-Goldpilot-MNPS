@@ -6,6 +6,7 @@ from flask import Flask, request, jsonify, url_for, send_from_directory
 from flask_migrate import Migrate
 from flask_swagger import swagger
 from flask_mail import Mail  # NUEVO: importamos Flask-Mail para envio de emails
+from flask_jwt_extended import JWTManager
 from api.utils import APIException, generate_sitemap
 from api.models import db
 from api.routes import api
@@ -29,16 +30,20 @@ else:
     app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:////tmp/test.db"
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+# JWT configuration
+app.config['JWT_SECRET_KEY'] = os.getenv('FLASK_APP_KEY', 'super-secret-key')
+jwt = JWTManager(app)
 migrations_dir = os.path.join(os.path.dirname(  # MODIFICADO: ruta absoluta a la carpeta migrations
     os.path.realpath(__file__)), '../migrations')
 # MODIFICADO: añadido directory=
 MIGRATE = Migrate(app, db, compare_type=True, directory=migrations_dir)
 db.init_app(app)
 
-# NUEVO: Configuracion de Flask-Mail (Gmail SMTP) (NAPOLES)
-app.config['MAIL_SERVER'] = 'smtp.gmail.com'  # NUEVO: servidor SMTP de Gmail
-app.config['MAIL_PORT'] = 587  # NUEVO: puerto TLS de Gmail
-app.config['MAIL_USE_TLS'] = True  # NUEVO: activamos cifrado TLS
+# Configuracion de Flask-Mail (Gmail SMTP)
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
 # NUEVO: email desde variable de entorno
 app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
 # NUEVO: app password desde variable de entorno

@@ -30,4 +30,11 @@ def verify_email(token):
     return jsonify(result), 200
 
 
-
+# POST /api/auth/login - Login de usuario
+@auth_bp.route('/login', methods=['POST'])
+def login():
+    body = request.get_json()
+    if not body:
+        abort(400, description="El body no puede estar vacio")
+    result = AuthService.login(body)
+    return jsonify(result), 200             

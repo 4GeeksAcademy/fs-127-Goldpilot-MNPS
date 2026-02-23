@@ -138,10 +138,7 @@ class AuthService:
         if user.is_verified:
             return {"msg": "El email ya fue verificado anteriormente"}
 
-        # NUEVO: marcamos el email como verificado(NAPOLES)
         user.is_verified = True
-        # NUEVO: invalidamos el token para que no se reutilice (NAPOLES)
-        user.verification_token = None
         db.session.commit()
 
         return {

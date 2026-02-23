@@ -8,7 +8,7 @@ import { Single } from "./pages/Single";
 import { Demo } from "./pages/Demo";
 import { Home } from "./pages/Home";
 import LandingPage from "./features/Landing/LandingPage";
-import SignupSignin from "./components/sinup&singin/SignupSignin";
+import SignupSignin from "./components/auth/SignupSignin";
 import VerifyEmail from "./pages/VerifyEmail";
 
 export const router = createBrowserRouter(

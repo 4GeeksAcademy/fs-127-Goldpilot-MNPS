@@ -200,17 +200,25 @@ const SignupSignin = () => {
                     </AnimatePresence>
 
                     {/* Footer */}
-                    <p className="text-center text-white/25 text-xs">
-                        {isLogin ? (
-                            <>¿No tienes cuenta?{" "}
-                                <Link to="/signup" className="text-[var(--color-gold)] hover:underline">Regístrate</Link>
-                            </>
-                        ) : (
-                            <>¿Ya tienes cuenta?{" "}
-                                <Link to="/login" className="text-[var(--color-gold)] hover:underline">Inicia sesión</Link>
-                            </>
+                    <div className="flex flex-col items-center gap-2">
+                        <p className="text-center text-white/25 text-xs">
+                            {isLogin ? (
+                                <>¿No tienes cuenta?{" "}
+                                    <Link to="/signup" className="text-[var(--color-gold)] hover:underline">Regístrate</Link>
+                                </>
+                            ) : (
+                                <>¿Ya tienes cuenta?{" "}
+                                    <Link to="/login" className="text-[var(--color-gold)] hover:underline">Inicia sesión</Link>
+                                </>
+                            )}
+                        </p>
+                        {isLogin && (
+                            <p className="text-center text-white/25 text-xs">
+                                ¿Quieres cambiar tu contraseña?{" "}
+                                <Link to="/change-password" className="text-[var(--color-gold)] hover:underline">Cámbiala aquí</Link>
+                            </p>
                         )}
-                    </p>
+                    </div>
 
                 </div>
             </motion.div>

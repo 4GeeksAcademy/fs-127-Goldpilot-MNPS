@@ -34,6 +34,30 @@ export const authServices = {
         return response.json();
     },
 
+    requestPasswordChange: async (data) => {
+        const response = await fetch(`${BACKEND_URL}/api/auth/change-password/request`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+        });
+        if (!response.ok) {
+            const msg = await parseError(response);
+            throw new Error(msg);
+        }
+        return response.json();
+    },
+
+    confirmPasswordChange: async (token) => {
+        const response = await fetch(`${BACKEND_URL}/api/auth/change-password/confirm/${token}`, {
+            method: "GET",
+        });
+        if (!response.ok) {
+            const msg = await parseError(response);
+            throw new Error(msg);
+        }
+        return response.json();
+    },
+
     login: async (data) => {
         const response = await fetch(`${BACKEND_URL}/api/auth/login`, {
             method: "POST",

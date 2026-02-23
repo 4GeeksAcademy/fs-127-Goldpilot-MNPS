@@ -4,11 +4,11 @@ import { motion } from "framer-motion";
 import { CheckCircle, XCircle, Loader } from "lucide-react";
 import { authServices } from "../services/authServices";
 
-const VerifyEmail = () => {
+const ConfirmPasswordChange = () => {
     const [searchParams] = useSearchParams();
     const token = searchParams.get("token");
 
-    const [status, setStatus] = useState("loading"); // loading | success | error
+    const [status,  setStatus]  = useState("loading"); // loading | success | error
     const [message, setMessage] = useState("");
     const called = useRef(false);
 
@@ -18,14 +18,14 @@ const VerifyEmail = () => {
 
         if (!token) {
             setStatus("error");
-            setMessage("El enlace de verificación no es válido. Asegúrate de usar el enlace completo del email.");
+            setMessage("El enlace no es válido. Asegúrate de usar el enlace completo del email.");
             return;
         }
 
-        authServices.verifyEmail(token)
+        authServices.confirmPasswordChange(token)
             .then((data) => {
                 setStatus("success");
-                setMessage(data.msg || "Email verificado correctamente.");
+                setMessage(data.msg || "Contraseña actualizada correctamente.");
             })
             .catch((err) => {
                 setStatus("error");
@@ -36,7 +36,7 @@ const VerifyEmail = () => {
     return (
         <div className="min-h-screen bg-[var(--color-brown-dark)] flex items-center justify-center relative overflow-hidden px-4">
 
-            {/* Fondo vídeo igual que Hero de Paola */}
+            {/* Fondo vídeo */}
             <div className="absolute inset-0 z-0">
                 <video autoPlay loop muted playsInline
                     className="w-full h-full object-cover scale-105 opacity-90 mix-blend-luminosity">
@@ -93,9 +93,9 @@ const VerifyEmail = () => {
 
                     {/* Título */}
                     <h2 className="text-white font-bold text-xl tracking-tight">
-                        {status === "loading" && "Verificando tu cuenta..."}
-                        {status === "success" && "¡Cuenta verificada!"}
-                        {status === "error" && "Enlace no válido"}
+                        {status === "loading" && "Confirmando cambio..."}
+                        {status === "success" && "¡Contraseña actualizada!"}
+                        {status === "error"   && "Enlace no válido"}
                     </h2>
 
                     {/* Mensaje */}
@@ -111,7 +111,7 @@ const VerifyEmail = () => {
                     {status !== "loading" && (
                         <Link to="/login" className="w-full">
                             <button className="w-full py-4 rounded-full bg-[var(--color-gold)] text-white font-bold text-sm tracking-wide uppercase transition-all shadow-lg backdrop-blur-sm border border-white/20 hover:bg-[#d4af37] hover:shadow-[0_0_20px_var(--color-gold)]">
-                                {status === "success" ? "Iniciar Sesión" : "Volver al inicio"}
+                                {status === "success" ? "Iniciar sesión" : "Volver al inicio"}
                             </button>
                         </Link>
                     )}
@@ -122,4 +122,4 @@ const VerifyEmail = () => {
     );
 };
 
-export default VerifyEmail;
+export default ConfirmPasswordChange;

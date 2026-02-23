@@ -147,6 +147,120 @@ class AuthService:
         }
 
     @staticmethod
+    def request_password_change(data):
+        """Valida la contraseña antigua, guarda la nueva en espera y manda el email de confirmacion."""
+        required_fields = ["email", "old_password", "new_password"]
+        for field in required_fields:
+            if field not in data or not data[field]:
+                abort(400, description=f"El campo '{field}' es obligatorio")
+
+        user = User.query.filter_by(email=data["email"]).first()
+        if not user or not user.check_password(data["old_password"]):
+            abort(401, description="Credenciales invalidas")
+
+        if not user.is_verified:
+            abort(403, description="Email no verificado. Verifica tu cuenta antes de cambiar la contraseña.")
+
+        if len(data["new_password"]) < 8:
+            abort(400, description="La nueva contraseña debe tener al menos 8 caracteres")
+
+        try:
+            # Guardamos la nueva contraseña hasheada como pendiente (no la aplicamos todavía)
+            import bcrypt
+            new_hashed = bcrypt.hashpw(
+                data["new_password"].encode("utf-8"), bcrypt.gensalt()
+            ).decode("utf-8")
+            user.pending_password = new_hashed
+            user.generate_password_change_token()
+            AuthService._send_password_change_email(user)
+            db.session.commit()
+            return {"msg": "Te hemos enviado un email para confirmar el cambio de contraseña."}
+        except Exception as error:
+            db.session.rollback()
+            abort(500, description=f"Error al procesar la solicitud: {str(error)}")
+
+    @staticmethod
+    def _send_password_change_email(user):
+        """Envia el email con el enlace para confirmar el cambio de contraseña."""
+        from app import mail
+
+        frontend_url = os.getenv("FRONTEND_URL", "http://localhost:3000")
+        confirm_link = f"{frontend_url}/confirm-password-change?token={user.password_change_token}"
+
+        msg = Message(
+            subject="Xsniper — Confirma tu cambio de contraseña",
+            recipients=[user.email],
+            html=f"""
+            <!DOCTYPE html>
+            <html lang="es">
+            <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
+            <body style="margin:0;padding:0;background-color:#1a1208;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;">
+                <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#1a1208;padding:48px 16px;">
+                    <tr><td align="center">
+                        <table width="100%" style="max-width:520px;background:rgba(30,22,14,0.95);border-radius:24px;border:1px solid rgba(195,143,55,0.2);overflow:hidden;">
+                            <tr>
+                                <td style="background:linear-gradient(135deg,#2c2117 0%,#1a1208 100%);padding:36px 40px 28px;text-align:center;border-bottom:1px solid rgba(195,143,55,0.15);">
+                                    <div style="display:inline-flex;align-items:center;gap:10px;">
+                                        <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#c38f37,#f5e6be);display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:#1a1208;letter-spacing:-0.5px;">XS</div>
+                                        <span style="font-size:20px;font-weight:700;color:#ffffff;letter-spacing:-0.5px;">XSNIPER</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding:40px 40px 32px;">
+                                    <p style="margin:0 0 8px;font-size:13px;color:#c38f37;font-weight:600;letter-spacing:2px;text-transform:uppercase;">Seguridad</p>
+                                    <h1 style="margin:0 0 20px;font-size:26px;font-weight:700;color:#ffffff;line-height:1.2;">Hola, {user.first_name} 👋</h1>
+                                    <p style="margin:0 0 28px;font-size:15px;color:rgba(255,255,255,0.6);line-height:1.7;">
+                                        Hemos recibido una solicitud para cambiar la contraseña de tu cuenta en <strong style="color:#c38f37;">Xsniper</strong>.
+                                    </p>
+                                    <p style="margin:0 0 28px;font-size:15px;color:rgba(255,255,255,0.6);line-height:1.7;">
+                                        Haz clic en el botón de abajo para confirmar el cambio. Si no fuiste tú, ignora este mensaje y tu contraseña no cambiará.
+                                    </p>
+                                    <div style="text-align:center;margin:32px 0;">
+                                        <a href="{confirm_link}" style="display:inline-block;background:linear-gradient(135deg,#c38f37,#d4af37);color:#1a1208;font-size:14px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;padding:16px 40px;border-radius:9999px;box-shadow:0 8px 24px rgba(195,143,55,0.35);">
+                                            Confirmar nueva contraseña
+                                        </a>
+                                    </div>
+                                    <p style="margin:28px 0 0;font-size:13px;color:rgba(255,255,255,0.3);line-height:1.6;">
+                                        Si no solicitaste este cambio, no es necesario que hagas nada.
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding:20px 40px 32px;border-top:1px solid rgba(255,255,255,0.06);text-align:center;">
+                                    <p style="margin:0;font-size:12px;color:rgba(255,255,255,0.2);">© 2025 Xsniper — Todos los derechos reservados</p>
+                                </td>
+                            </tr>
+                        </table>
+                    </td></tr>
+                </table>
+            </body>
+            </html>
+            """
+        )
+        mail.send(msg)
+
+    @staticmethod
+    def confirm_password_change(token):
+        """Aplica la nueva contraseña una vez confirmado el token del email."""
+        if not token:
+            abort(400, description="Token requerido")
+
+        user = User.query.filter_by(password_change_token=token).first()
+        if not user or not user.pending_password:
+            abort(404, description="El enlace no es válido o ya ha sido usado")
+
+        try:
+            user.password = user.pending_password
+            user.pending_password = None
+            user.password_change_token = None
+            db.session.commit()
+            return {"msg": "Contraseña actualizada correctamente. Ya puedes iniciar sesión."}
+        except Exception as error:
+            db.session.rollback()
+            abort(500, description=f"Error al actualizar la contraseña: {str(error)}")
+
+    @staticmethod
     def login(data):
         """Autentica al usuario y devuelve un token JWT."""
         required_fields = ["email", "password"]

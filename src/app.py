@@ -62,11 +62,34 @@ setup_commands(app)
 app.register_blueprint(api, url_prefix='/api')
 
 # Handle/serialize errors like a JSON object
-
-
 @app.errorhandler(APIException)
 def handle_invalid_usage(error):
     return jsonify(error.to_dict()), error.status_code
+
+# Convertir errores HTTP estándar (abort) a JSON
+@app.errorhandler(400)
+def bad_request(e):
+    return jsonify({"description": e.description}), 400
+
+@app.errorhandler(401)
+def unauthorized(e):
+    return jsonify({"description": e.description}), 401
+
+@app.errorhandler(403)
+def forbidden(e):
+    return jsonify({"description": e.description}), 403
+
+@app.errorhandler(404)
+def not_found(e):
+    return jsonify({"description": e.description}), 404
+
+@app.errorhandler(409)
+def conflict(e):
+    return jsonify({"description": e.description}), 409
+
+@app.errorhandler(500)
+def server_error(e):
+    return jsonify({"description": e.description}), 500
 
 # generate sitemap with all your endpoints
 

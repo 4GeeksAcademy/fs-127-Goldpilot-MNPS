@@ -35,6 +35,10 @@ class User(db.Model):
         Boolean(), default=False, nullable=False)
     verification_token: Mapped[str] = mapped_column(  # NUEVO: token UUID enviado por email para verificar (NAPOLES)
         String(256), unique=True, nullable=True)
+    password_change_token: Mapped[str] = mapped_column(  # token UUID para confirmar cambio de contraseña
+        String(256), unique=True, nullable=True)
+    pending_password: Mapped[str] = mapped_column(  # nueva contraseña hasheada en espera de confirmacion
+        String(256), nullable=True)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(), default=datetime.utcnow)
 
@@ -56,6 +60,11 @@ class User(db.Model):
         self.verification_token = str(
             uuid.uuid4())  # NUEVO: genera UUID v4 como token (NAPOLES)
         return self.verification_token
+
+    def generate_password_change_token(self):
+        """Genera un token unico para confirmar el cambio de contraseña."""
+        self.password_change_token = str(uuid.uuid4())
+        return self.password_change_token
 
     def __repr__(self):
         return f'<User {self.id}: {self.email}>'

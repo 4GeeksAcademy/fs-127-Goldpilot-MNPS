@@ -30,6 +30,7 @@ const SignupSignin = () => {
     const [error,   setError]   = useState("");
     const [success, setSuccess] = useState("");
     const [loading, setLoading] = useState(false);
+    const [showForm, setShowForm] = useState(true); // For animation when switching between login/signup
 
     // ─── Validation ───────────────────────────────────────────────────────────
     const validateSignup = () => {
@@ -61,7 +62,7 @@ const SignupSignin = () => {
         try {
             const data = await authServices.login(loginForm);
             dispatch({ type: "set_user", payload: { user: data.user, token: data.access_token } });
-            navigate("/");
+            navigate("/dashboard");
         } catch (err) {
             setError(friendlyMessage(err.message));
         } finally {
@@ -86,6 +87,7 @@ const SignupSignin = () => {
                 phone_number: `${countryCode}${signupForm.phone_number}`,
             });
             setSuccess("¡Cuenta creada! Revisa tu email y haz clic en el enlace de verificación para poder iniciar sesión.");
+            setShowForm(false);
         } catch (err) {
             setError(friendlyMessage(err.message));
         } finally {
@@ -143,7 +145,7 @@ const SignupSignin = () => {
                     </div>
 
                     {/* Tabs */}
-                    <div className="w-full flex flex-col gap-3">
+                    {(showForm && <div className="w-full flex flex-col gap-3">
                         <Link to="/login" className="w-full">
                             <button className={`w-full py-4 rounded-full font-bold text-sm tracking-wide transition-all uppercase ${
                                 isLogin
@@ -158,7 +160,7 @@ const SignupSignin = () => {
                                     : "bg-white/5 text-white border border-white/10 hover:bg-white/10 hover:border-white/30 backdrop-blur-md"
                             }`}>Registrarse</button>
                         </Link>
-                    </div>
+                    </div>)}
 
                     <div className="w-full h-px bg-white/10" />
 
@@ -188,14 +190,14 @@ const SignupSignin = () => {
                                 loading={loading} onSubmit={handleLogin}
                                 showPassword={showPassword}
                                 togglePassword={() => setShowPassword(v => !v)} />
-                            : <SignupForm
+                            : (showForm && <SignupForm
                                 form={signupForm} setForm={setSignupForm}
                                 loading={loading} onSubmit={handleSignup}
                                 countryCode={countryCode} setCountryCode={setCountryCode}
                                 confirmPassword={confirmPassword} setConfirmPassword={setConfirmPassword}
                                 showPassword={showPassword} togglePassword={() => setShowPassword(v => !v)}
                                 showConfirm={showConfirm}   toggleConfirm={() => setShowConfirm(v => !v)}
-                                fieldErrors={fieldErrors}   clearFieldError={clearFieldError} />
+                                fieldErrors={fieldErrors}   clearFieldError={clearFieldError} />)
                         }
                     </AnimatePresence>
 

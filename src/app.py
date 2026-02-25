@@ -5,6 +5,8 @@ import os
 from flask import Flask, request, jsonify, url_for, send_from_directory
 from flask_migrate import Migrate
 from flask_swagger import swagger
+from flask_mail import Mail  # NUEVO: importamos Flask-Mail para envio de emails
+from flask_jwt_extended import JWTManager
 from api.utils import APIException, generate_sitemap
 from api.models import db
 from api.routes import api
@@ -28,9 +30,28 @@ else:
     app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:////tmp/test.db"
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-MIGRATE = Migrate(app, db, compare_type=True)
+
+# JWT configuration
+app.config['JWT_SECRET_KEY'] = os.getenv('FLASK_APP_KEY', 'super-secret-key')
+jwt = JWTManager(app)
+migrations_dir = os.path.join(os.path.dirname(  # MODIFICADO: ruta absoluta a la carpeta migrations
+    os.path.realpath(__file__)), '../migrations')
+# MODIFICADO: añadido directory=
+MIGRATE = Migrate(app, db, compare_type=True, directory=migrations_dir)
 db.init_app(app)
 
+# Configuracion de Flask-Mail (Gmail SMTP)
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+# NUEVO: email desde variable de entorno
+app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
+# NUEVO: app password desde variable de entorno
+app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
+app.config['MAIL_DEFAULT_SENDER'] = os.getenv(
+    'MAIL_USERNAME')  # NUEVO: remitente por defecto
+mail = Mail(app)  # NUEVO: inicializamos Flask-Mail con la app
+mail.init_app(app)  # NUEVO: aseguramos que Mail se inicialice con la app
 # add the admin
 setup_admin(app)
 
@@ -41,11 +62,34 @@ setup_commands(app)
 app.register_blueprint(api, url_prefix='/api')
 
 # Handle/serialize errors like a JSON object
-
-
 @app.errorhandler(APIException)
 def handle_invalid_usage(error):
     return jsonify(error.to_dict()), error.status_code
+
+# Convertir errores HTTP estándar (abort) a JSON
+@app.errorhandler(400)
+def bad_request(e):
+    return jsonify({"description": e.description}), 400
+
+@app.errorhandler(401)
+def unauthorized(e):
+    return jsonify({"description": e.description}), 401
+
+@app.errorhandler(403)
+def forbidden(e):
+    return jsonify({"description": e.description}), 403
+
+@app.errorhandler(404)
+def not_found(e):
+    return jsonify({"description": e.description}), 404
+
+@app.errorhandler(409)
+def conflict(e):
+    return jsonify({"description": e.description}), 409
+
+@app.errorhandler(500)
+def server_error(e):
+    return jsonify({"description": e.description}), 500
 
 # generate sitemap with all your endpoints
 
@@ -57,6 +101,8 @@ def sitemap():
     return send_from_directory(static_file_dir, 'index.html')
 
 # any other endpoint will try to serve it like a static file
+
+
 @app.route('/<path:path>', methods=['GET'])
 def serve_any_other_file(path):
     if not os.path.isfile(os.path.join(static_file_dir, path)):

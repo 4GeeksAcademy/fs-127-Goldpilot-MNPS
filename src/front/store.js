@@ -12,7 +12,9 @@ export const initialStore=()=>{
         title: "Do my homework",
         background: null,
       }
-    ]
+    ],
+    user: null,
+    token: localStorage.getItem("token") || null,
   }
 }
 
@@ -23,7 +25,7 @@ export default function storeReducer(store, action = {}) {
         ...store,
         message: action.payload
       };
-      
+
     case 'add_task':
 
       const { id,  color } = action.payload
@@ -32,7 +34,24 @@ export default function storeReducer(store, action = {}) {
         ...store,
         todos: store.todos.map((todo) => (todo.id === id ? { ...todo, background: color } : todo))
       };
+
+    case 'set_user':
+      localStorage.setItem("token", action.payload.token);
+      return {
+        ...store,
+        user: action.payload.user,
+        token: action.payload.token,
+      };
+
+    case 'logout':
+      localStorage.removeItem("token");
+      return {
+        ...store,
+        user: null,
+        token: null,
+      };
+
     default:
       throw Error('Unknown action.');
-  }    
+  }
 }

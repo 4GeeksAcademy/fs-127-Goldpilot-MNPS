@@ -59,8 +59,8 @@ export const DashboardLayout = () => {
 
     const menuItems = [
         { label: "Dashboard", icon: "⊞" },
-        { label: "Wallet", icon: "◈" },
-        { label: "Markets", icon: "◳" },
+        { label: "Wallets", icon: "◈" },
+        { label: "Historial", icon: "◳" },
     ];
 
     return (
@@ -103,7 +103,7 @@ export const DashboardLayout = () => {
             {/* ── ÁREA PRINCIPAL ── */}
             <main ref={mainRef} className="flex-1 flex flex-col min-w-0 overflow-y-auto">
                 {/* Header */}
-                <header className="sticky top-0 z-10 w-full px-6 py-4 flex justify-between items-center border-b border-white/[0.05]"
+                <header className="sticky top-0 z-10 w-full px-6 py-4 flex items-center gap-8 border-b border-white/[0.05]"
                     style={{ background: "rgba(20, 28, 14, 0.7)", backdropFilter: "blur(16px)" }}
                 >
                     {/* Logo mobile */}
@@ -116,7 +116,25 @@ export const DashboardLayout = () => {
                         </div>
                         <span className="text-sm font-bold text-white">XSNIPER</span>
                     </div>
-                    <div className="flex-1" />
+                    {/* Saludo al usuario
+                     * TODO: Reemplazar texto hardcoded con el nombre real del usuario autenticado.
+                     * Fuente de datos: GET /api/users/me → first_name + last_name
+                     * (tabla: users, columnas: first_name, last_name)
+                     */}
+                    <div className="flex-1 flex flex-col hidden sm:flex">
+                        <span className="text-2xl font-black tracking-tight text-white leading-none">
+                            Hola, <span
+                                className="font-black"
+                                style={{
+                                    color: "var(--color-gold)",
+                                    textShadow: "0 0 24px rgba(195,143,55,0.35)",
+                                }}
+                            >Olivia Brooks</span>
+                        </span>
+                        <span className="text-xs text-white/30 mt-1 tracking-wide">
+                            Bienvenida a tu estrategia ganadora
+                        </span>
+                    </div>
                     <UserProfile />
                 </header>
 

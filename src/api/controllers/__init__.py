@@ -16,6 +16,7 @@ principal 'api', por lo que todas las rutas quedan bajo /api/...
 
 from api.controllers.user_controller import user_bp
 from api.controllers.auth_controller import auth_bp
+from api.controllers.dashboard_controller import dashboard_bp
 
 def register_controllers(api):
     """
@@ -24,3 +25,4 @@ def register_controllers(api):
     """
     api.register_blueprint(user_bp)
     api.register_blueprint(auth_bp)
+    api.register_blueprint(dashboard_bp)

@@ -1,43 +1,49 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { Outlet, NavLink, useLocation } from "react-router-dom";
 import { UserProfile } from "./components/UserProfile";
 
 /**
  * Ítem de navegación del sidebar.
- * Componente reutilizable para todos los ítems del menú.
- * @param {Object} props
+ * Usa NavLink de React Router para que la URL controle el estado activo.
  * @param {string} props.label - Etiqueta visible del ítem
- * @param {string} props.icon - Emoji/icono del ítem
- * @param {string} [props.to] - Ruta de destino (si se usa como NavLink)
- * @param {boolean} [props.active] - Fuerza estado activo manualmente
+ * @param {string} props.icon  - Emoji/icono del ítem
+ * @param {string} props.to    - Ruta de destino
  */
-const SidebarItem = ({ label, icon, to, active = false }) => {
+const SidebarItem = ({ label, icon, to }) => {
     const baseClasses =
         "relative flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium transition-all duration-200 cursor-pointer select-none group";
 
-    const activeClasses =
-        "bg-white/[0.06] text-white border border-white/10";
-
-    const inactiveClasses =
-        "text-white/40 hover:text-white/70 hover:bg-white/[0.03]";
+    const activeClasses = "bg-white/[0.06] text-white border border-white/10";
+    const inactiveClasses = "text-white/40 hover:text-white/70 hover:bg-white/[0.03] border border-transparent";
 
     return (
-        <div className={`${baseClasses} ${active ? activeClasses : inactiveClasses}`}>
-            {/* Barra de luz izquierda */}
-            {active && (
-                <span
-                    className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-6 rounded-r-full"
-                    style={{
-                        background: "var(--color-gold)",
-                        boxShadow: "0 0 10px var(--color-gold), 0 0 20px rgba(195,143,55,0.4)",
-                    }}
-                />
+        <NavLink
+            to={to}
+            end={to === "/dashboard"}  /* 'end' evita que /dashboard quede activo en subrutas */
+            className={({ isActive }) => `${baseClasses} ${isActive ? activeClasses : inactiveClasses}`}
+        >
+            {({ isActive }) => (
+                <>
+                    {/* Barra de luz dorada — solo cuando está activo */}
+                    {isActive && (
+                        <span
+                            className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-6 rounded-r-full"
+                            style={{
+                                background: "var(--color-gold)",
+                                boxShadow: "0 0 10px var(--color-gold), 0 0 20px rgba(195,143,55,0.4)",
+                            }}
+                        />
+                    )}
+                    <span
+                        className={`text-base transition-colors ${isActive ? "text-[var(--color-gold)]" : "text-white/30 group-hover:text-white/50"
+                            }`}
+                    >
+                        {icon}
+                    </span>
+                    <span>{label}</span>
+                </>
             )}
-            <span className={`text-base transition-colors ${active ? "text-[var(--color-gold)]" : "text-white/30 group-hover:text-white/50"}`}>
-                {icon}
-            </span>
-            <span>{label}</span>
-        </div>
+        </NavLink>
     );
 };
 
@@ -46,7 +52,6 @@ const SidebarItem = ({ label, icon, to, active = false }) => {
  * Sidebar izquierdo fijo + área de contenido principal scrollable.
  */
 export const DashboardLayout = () => {
-    const [activeItem, setActiveItem] = useState("Dashboard");
     const location = useLocation();
     const mainRef = useRef(null);
 
@@ -57,10 +62,11 @@ export const DashboardLayout = () => {
         }
     }, [location.pathname]);
 
+    /** Rutas del sidebar — alineadas con routes.jsx */
     const menuItems = [
-        { label: "Dashboard", icon: "⊞" },
-        { label: "Wallets", icon: "◈" },
-        { label: "Historial", icon: "◳" },
+        { label: "Dashboard", icon: "⊞", to: "/dashboard" },
+        { label: "Wallets", icon: "◈", to: "/dashboard/wallets" }, /* TODO: crear WalletsPage en siguiente tarea */
+        { label: "Historial", icon: "◳", to: "/dashboard/historial" },
     ];
 
     return (
@@ -89,13 +95,12 @@ export const DashboardLayout = () => {
                 {/* Seción MENU */}
                 <div className="flex flex-col gap-1">
                     {menuItems.map((item) => (
-                        <div key={item.label} onClick={() => setActiveItem(item.label)}>
-                            <SidebarItem
-                                label={item.label}
-                                icon={item.icon}
-                                active={activeItem === item.label}
-                            />
-                        </div>
+                        <SidebarItem
+                            key={item.label}
+                            label={item.label}
+                            icon={item.icon}
+                            to={item.to}
+                        />
                     ))}
                 </div>
             </aside>

@@ -35,10 +35,8 @@ class User(db.Model):
         Boolean(), default=False, nullable=False)
     verification_token: Mapped[str] = mapped_column(  # NUEVO: token UUID enviado por email para verificar (NAPOLES)
         String(256), unique=True, nullable=True)
-    password_change_token: Mapped[str] = mapped_column(  # token UUID para confirmar cambio de contraseña
+    password_change_token: Mapped[str] = mapped_column(  # token UUID para restablecer contraseña
         String(256), unique=True, nullable=True)
-    pending_password: Mapped[str] = mapped_column(  # nueva contraseña hasheada en espera de confirmacion
-        String(256), nullable=True)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(), default=datetime.utcnow)
 

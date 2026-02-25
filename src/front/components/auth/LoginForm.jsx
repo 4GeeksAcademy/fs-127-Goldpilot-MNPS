@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Mail, Lock } from "lucide-react";
+import { Link } from "react-router-dom";
 import { inputBase, inputOk, submitBtn } from "./constants";
 import EyeToggle from "./EyeToggle";
 
@@ -23,6 +24,12 @@ const LoginForm = ({ form, setForm, loading, onSubmit, showPassword, togglePassw
                 onChange={(e) => setForm(p => ({ ...p, password: e.target.value }))}
                 required className={`${inputBase} ${inputOk} pl-11 pr-12`} />
             <EyeToggle show={showPassword} onToggle={togglePassword} />
+        </div>
+
+        <div className="text-right -mt-1">
+            <Link to="/forgot-password" className="text-xs text-white/35 hover:text-[var(--color-gold)] transition-colors">
+                ¿Olvidaste tu contraseña?
+            </Link>
         </div>
 
         <button type="submit" disabled={loading} className={submitBtn}>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import { authServices } from "../services/authServices";
@@ -7,46 +7,42 @@ import EyeToggle from "../components/auth/EyeToggle";
 import PasswordStrengthBar from "../components/auth/PasswordStrengthBar";
 import { inputBase, inputOk, inputErr, errText, submitBtn } from "../components/auth/constants";
 
-// ─── Validación local ──────────────────────────────────────────────────────────
-const validate = (form, confirmPassword) => {
+const validate = (newPassword, confirmPassword) => {
     const e = {};
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))
-        e.email = "Introduce un email válido";
-    if (!form.old_password)
-        e.old_password = "Introduce tu contraseña actual";
-    if (form.new_password.length < 8)
-        e.new_password = "La nueva contraseña necesita al menos 8 caracteres";
+    if (newPassword.length < 8)
+        e.new_password = "La contraseña necesita al menos 8 caracteres";
     if (!confirmPassword)
-        e.confirm = "Repite la nueva contraseña para confirmarla";
-    else if (form.new_password !== confirmPassword)
+        e.confirm = "Repite la contraseña para confirmarla";
+    else if (newPassword !== confirmPassword)
         e.confirm = "Las contraseñas no coinciden, revísalas";
     return e;
 };
 
-// ─── Componente ────────────────────────────────────────────────────────────────
-const ChangePassword = () => {
-    const [form, setForm] = useState({ email: "", old_password: "", new_password: "" });
-    const [confirmPassword, setConfirmPassword] = useState("");
+const ResetPassword = () => {
+    const [searchParams] = useSearchParams();
+    const token = searchParams.get("token");
 
-    const [showOld,     setShowOld]     = useState(false);
+    const [newPassword,     setNewPassword]     = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
     const [showNew,     setShowNew]     = useState(false);
     const [showConfirm, setShowConfirm] = useState(false);
-
     const [fieldErrors, setFieldErrors] = useState({});
     const [error,   setError]   = useState("");
     const [success, setSuccess] = useState("");
     const [loading, setLoading] = useState(false);
 
-    const passwordsMatch = confirmPassword && confirmPassword === form.new_password;
-
-    const clearFieldError = (field) =>
-        setFieldErrors((p) => ({ ...p, [field]: "" }));
+    const passwordsMatch = confirmPassword && confirmPassword === newPassword;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError("");
-        setSuccess("");
-        const errors = validate(form, confirmPassword);
+
+        if (!token) {
+            setError("El enlace no es válido. Asegúrate de usar el enlace completo del email.");
+            return;
+        }
+
+        const errors = validate(newPassword, confirmPassword);
         if (Object.keys(errors).length > 0) {
             setFieldErrors(errors);
             return;
@@ -54,8 +50,8 @@ const ChangePassword = () => {
         setFieldErrors({});
         setLoading(true);
         try {
-            const data = await authServices.requestPasswordChange(form);
-            setSuccess(data.msg || "Revisa tu email y haz clic en el enlace para confirmar el cambio.");
+            const data = await authServices.resetPassword({ token, new_password: newPassword });
+            setSuccess(data.msg || "Contraseña actualizada correctamente. Ya puedes iniciar sesión.");
         } catch (err) {
             setError(err.message);
         } finally {
@@ -111,9 +107,9 @@ const ChangePassword = () => {
 
                     {/* Título */}
                     <div className="text-center">
-                        <h2 className="text-white font-bold text-xl tracking-tight">Cambiar contraseña</h2>
+                        <h2 className="text-white font-bold text-xl tracking-tight">Nueva contraseña</h2>
                         <p className="mt-1 text-white/35 text-sm">
-                            Introduce tu contraseña actual y la nueva. Te enviaremos un email para confirmar el cambio.
+                            Elige una contraseña segura para tu cuenta.
                         </p>
                     </div>
 
@@ -141,45 +137,25 @@ const ChangePassword = () => {
                     {!success && (
                         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
 
-                            {/* Email */}
-                            <div>
-                                <input type="email" placeholder="Tu email" value={form.email}
-                                    onChange={(e) => { setForm(p => ({ ...p, email: e.target.value })); clearFieldError("email"); }}
-                                    className={`${inputBase} ${fieldErrors.email ? inputErr : inputOk} px-4`} />
-                                {fieldErrors.email && <p className={errText}>{fieldErrors.email}</p>}
-                            </div>
-
-                            {/* Contraseña actual */}
-                            <div>
-                                <div className="relative">
-                                    <input type={showOld ? "text" : "password"}
-                                        placeholder="Contraseña actual" value={form.old_password}
-                                        onChange={(e) => { setForm(p => ({ ...p, old_password: e.target.value })); clearFieldError("old_password"); }}
-                                        className={`${inputBase} ${fieldErrors.old_password ? inputErr : inputOk} pl-4 pr-12`} />
-                                    <EyeToggle show={showOld} onToggle={() => setShowOld(v => !v)} />
-                                </div>
-                                {fieldErrors.old_password && <p className={errText}>{fieldErrors.old_password}</p>}
-                            </div>
-
                             {/* Nueva contraseña */}
                             <div>
                                 <div className="relative">
                                     <input type={showNew ? "text" : "password"}
-                                        placeholder="Nueva contraseña (mín. 8 caracteres)" value={form.new_password}
-                                        onChange={(e) => { setForm(p => ({ ...p, new_password: e.target.value })); clearFieldError("new_password"); }}
+                                        placeholder="Nueva contraseña (mín. 8 caracteres)" value={newPassword}
+                                        onChange={(e) => { setNewPassword(e.target.value); setFieldErrors(p => ({ ...p, new_password: "" })); }}
                                         className={`${inputBase} ${fieldErrors.new_password ? inputErr : inputOk} pl-4 pr-12`} />
                                     <EyeToggle show={showNew} onToggle={() => setShowNew(v => !v)} />
                                 </div>
-                                <PasswordStrengthBar password={form.new_password} />
+                                <PasswordStrengthBar password={newPassword} />
                                 {fieldErrors.new_password && <p className={errText}>{fieldErrors.new_password}</p>}
                             </div>
 
-                            {/* Confirmar nueva contraseña */}
+                            {/* Confirmar contraseña */}
                             <div>
                                 <div className="relative">
                                     <input type={showConfirm ? "text" : "password"}
-                                        placeholder="Confirmar nueva contraseña" value={confirmPassword}
-                                        onChange={(e) => { setConfirmPassword(e.target.value); clearFieldError("confirm"); }}
+                                        placeholder="Confirmar contraseña" value={confirmPassword}
+                                        onChange={(e) => { setConfirmPassword(e.target.value); setFieldErrors(p => ({ ...p, confirm: "" })); }}
                                         className={`${inputBase} pl-4 pr-12 ${
                                             fieldErrors.confirm
                                                 ? inputErr
@@ -196,16 +172,24 @@ const ChangePassword = () => {
                             </div>
 
                             <button type="submit" disabled={loading} className={submitBtn}>
-                                {loading ? "Enviando..." : "Solicitar cambio"}
+                                {loading ? "Guardando..." : "Guardar nueva contraseña"}
                             </button>
                         </form>
                     )}
 
                     {/* Pie */}
-                    <p className="text-center text-white/25 text-xs">
-                        ¿Recuerdas tu contraseña?{" "}
-                        <Link to="/login" className="text-[var(--color-gold)] hover:underline">Inicia sesión</Link>
-                    </p>
+                    {success && (
+                        <Link to="/login" className={submitBtn + " text-center"}>
+                            Iniciar sesión
+                        </Link>
+                    )}
+
+                    {!success && (
+                        <p className="text-center text-white/25 text-xs">
+                            ¿Recuerdas tu contraseña?{" "}
+                            <Link to="/login" className="text-[var(--color-gold)] hover:underline">Inicia sesión</Link>
+                        </p>
+                    )}
 
                 </div>
             </motion.div>
@@ -213,4 +197,4 @@ const ChangePassword = () => {
     );
 };
 
-export default ChangePassword;
+export default ResetPassword;

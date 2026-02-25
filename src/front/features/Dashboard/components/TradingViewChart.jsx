@@ -1,25 +1,27 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { createChart, CandlestickSeries } from "lightweight-charts";
 
+/** Intervalos disponibles y su equivalente en segundos para spacing de mock data */
+const INTERVALS = ["1H", "4H", "1D", "1W"];
+
 /**
- * Genera datos mock de velas (candlestick) para BTC/USD.
- * TODO: Reemplazar con llamada al endpoint real del backend o API de precios.
- * @param {number} count - Número de velas a generar
- * @returns {Array} Array de objetos { time, open, high, low, close }
+ * Genera velas (candlestick) mock para XAUUSD en el rango de precio del oro (~2000-2100 USD).
+ * @param {number} count - Número de velas
+ * @param {number} intervalSecs - Espaciado temporal entre velas en segundos
  */
-const generateMockCandles = (count = 80) => {
+const generateXauusdCandles = (count = 80, intervalSecs = 3600) => {
     const candles = [];
-    let base = 42000;
+    let base = 2050;
     const now = Math.floor(Date.now() / 1000);
 
     for (let i = count; i >= 0; i--) {
-        const open = base + (Math.random() - 0.5) * 800;
-        const close = open + (Math.random() - 0.5) * 600;
-        const high = Math.max(open, close) + Math.random() * 300;
-        const low = Math.min(open, close) - Math.random() * 300;
+        const open = base + (Math.random() - 0.5) * 15;
+        const close = open + (Math.random() - 0.5) * 12;
+        const high = Math.max(open, close) + Math.random() * 6;
+        const low = Math.min(open, close) - Math.random() * 6;
 
         candles.push({
-            time: now - i * 900, // Intervalo de 15 minutos
+            time: now - i * intervalSecs,
             open: parseFloat(open.toFixed(2)),
             high: parseFloat(high.toFixed(2)),
             low: parseFloat(low.toFixed(2)),
@@ -31,23 +33,20 @@ const generateMockCandles = (count = 80) => {
     return candles;
 };
 
-/**
- * Stub para conexión futura con el backend o API de TradingView.
- * TODO: Conectar con el endpoint real del compañero de backend (ej: GET /api/market/candles).
- */
-const fetchChartData = async () => {
-    // En producción, aquí irá: const response = await fetch('/api/market/candles?symbol=BTCUSD&interval=15m');
-    return generateMockCandles(80);
-};
+/** Mapeo de intervalo de UI → segundos para el mock de datos */
+const INTERVAL_SECS = { "1H": 3600, "4H": 14400, "1D": 86400, "1W": 604800 };
 
 /**
- * Componente principal del gráfico de TradingView (Lightweight Charts).
- * Muestra un gráfico de velas (candlestick) para el par BTC/USD.
- * El diseño está alineado con el sistema de diseño "Liquid Glass" del proyecto.
+ * Gráfico de velas (candlestick) para el par XAUUSD (Oro / USD).
+ * Usa Lightweight Charts con el sistema de diseño "Liquid Glass" del proyecto.
+ * TODO: Conectar con endpoint real GET /api/market/candles?symbol=XAUUSD&interval=1H
  */
 export const TradingViewChart = () => {
     const chartContainerRef = useRef(null);
     const chartRef = useRef(null);
+    const seriesRef = useRef(null);
+    const [activeInterval, setActiveInterval] = useState("1H");
+    const [lastCandle, setLastCandle] = useState(null);
 
     useEffect(() => {
         if (!chartContainerRef.current) return;
@@ -70,9 +69,7 @@ export const TradingViewChart = () => {
                 vertLine: { color: "rgba(195, 143, 55, 0.5)", width: 1, style: 1 },
                 horzLine: { color: "rgba(195, 143, 55, 0.5)", width: 1, style: 1 },
             },
-            rightPriceScale: {
-                borderColor: "rgba(255, 255, 255, 0.08)",
-            },
+            rightPriceScale: { borderColor: "rgba(255, 255, 255, 0.08)" },
             timeScale: {
                 borderColor: "rgba(255, 255, 255, 0.08)",
                 timeVisible: true,
@@ -83,20 +80,20 @@ export const TradingViewChart = () => {
         chartRef.current = chart;
 
         const candleSeries = chart.addSeries(CandlestickSeries, {
-            upColor: "#c38f37",           // Gold del sistema de diseño
-            downColor: "#564535",         // Brown Medium del sistema de diseño
+            upColor: "#c38f37",
+            downColor: "#564535",
             borderVisible: false,
             wickUpColor: "#c38f37",
             wickDownColor: "#7a6050",
         });
 
-        // Carga inicial de datos
-        fetchChartData().then((data) => {
-            candleSeries.setData(data);
-            chart.timeScale().fitContent();
-        });
+        seriesRef.current = candleSeries;
 
-        // Responsivo: redimensiona el gráfico si cambia el contenedor
+        const data = generateXauusdCandles(80, INTERVAL_SECS["1H"]);
+        candleSeries.setData(data);
+        setLastCandle(data[data.length - 1]);
+        chart.timeScale().fitContent();
+
         const resizeObserver = new ResizeObserver((entries) => {
             const { width, height } = entries[0].contentRect;
             chart.applyOptions({ width, height });
@@ -104,12 +101,27 @@ export const TradingViewChart = () => {
 
         resizeObserver.observe(container);
 
-        // Cleanup al desmontar el componente
         return () => {
             resizeObserver.disconnect();
             chart.remove();
         };
     }, []);
+
+    /** Actualiza los datos al cambiar el intervalo seleccionado */
+    const handleIntervalChange = (interval) => {
+        setActiveInterval(interval);
+        if (seriesRef.current) {
+            const secs = INTERVAL_SECS[interval] ?? 3600;
+            const data = generateXauusdCandles(80, secs);
+            seriesRef.current.setData(data);
+            setLastCandle(data[data.length - 1]);
+            chartRef.current?.timeScale().fitContent();
+        }
+    };
+
+    const priceChange = lastCandle ? (lastCandle.close - lastCandle.open) : 0;
+    const priceChangePct = lastCandle ? ((priceChange / lastCandle.open) * 100) : 0;
+    const isPositive = priceChange >= 0;
 
     return (
         <div className="w-full flex flex-col gap-4">
@@ -117,23 +129,32 @@ export const TradingViewChart = () => {
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div>
                     <div className="flex items-center gap-2">
+                        <span className="text-xs font-bold px-2 py-0.5 rounded-full"
+                            style={{ background: "rgba(195,143,55,0.15)", color: "var(--color-gold)" }}>
+                            XAUUSD
+                        </span>
                         <span className="text-2xl font-bold text-white tracking-tight">
-                            42,350.21
+                            {lastCandle ? lastCandle.close.toFixed(2) : "2,050.00"}
                         </span>
                         <span className="text-white/40 text-sm">USD</span>
                     </div>
-                    <p className="text-red-400 text-sm font-medium mt-0.5">
-                        −$234.45 (−0.55%)
+                    <p className="text-sm font-medium mt-0.5"
+                        style={{ color: isPositive ? "var(--color-olive)" : "#f87171" }}>
+                        {isPositive ? "+" : ""}{priceChange.toFixed(2)} ({isPositive ? "+" : ""}{priceChangePct.toFixed(2)}%)
                     </p>
                 </div>
+
+                {/* Selector de intervalo */}
                 <div className="flex gap-2">
-                    {["1H", "4H", "1D", "1W"].map((interval) => (
+                    {INTERVALS.map((interval) => (
                         <button
                             key={interval}
-                            className={`px-3 py-1 rounded-lg text-xs font-medium transition-all ${interval === "1H"
-                                    ? "bg-[var(--color-gold)] text-black"
-                                    : "bg-white/5 text-white/50 hover:bg-white/10"
-                                }`}
+                            onClick={() => handleIntervalChange(interval)}
+                            className="px-3 py-1 rounded-lg text-xs font-medium transition-all"
+                            style={activeInterval === interval
+                                ? { background: "var(--color-gold)", color: "#1a1005" }
+                                : { background: "rgba(255,255,255,0.05)", color: "rgba(255,255,255,0.5)" }
+                            }
                         >
                             {interval}
                         </button>

@@ -30,6 +30,23 @@ def verify_email(token):
     return jsonify(result), 200
 
 
+# POST /api/auth/change-password/request - Solicitar cambio de contraseña
+@auth_bp.route('/change-password/request', methods=['POST'])
+def request_password_change():
+    body = request.get_json()
+    if not body:
+        abort(400, description="El body no puede estar vacio")
+    result = AuthService.request_password_change(body)
+    return jsonify(result), 200
+
+
+# GET /api/auth/change-password/confirm/<token> - Confirmar cambio de contraseña
+@auth_bp.route('/change-password/confirm/<token>', methods=['GET'])
+def confirm_password_change(token):
+    result = AuthService.confirm_password_change(token)
+    return jsonify(result), 200
+
+
 # POST /api/auth/login - Login de usuario
 @auth_bp.route('/login', methods=['POST'])
 def login():

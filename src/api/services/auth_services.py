@@ -158,9 +158,10 @@ class AuthService:
             return {"msg": "Si tu email está registrado, recibirás un enlace para restablecer tu contraseña."}
 
         try:
-            user.generate_password_change_token()
+            if not user.password_change_token:
+                user.generate_password_change_token()
+                db.session.commit()
             AuthService._send_password_reset_email(user)
-            db.session.commit()
             return {"msg": "Si tu email está registrado, recibirás un enlace para restablecer tu contraseña."}
         except Exception as error:
             db.session.rollback()
@@ -183,7 +184,6 @@ class AuthService:
 
         try:
             user.set_password(data["new_password"])
-            user.pending_password = None
             user.password_change_token = None
             db.session.commit()
             return {"msg": "Contraseña actualizada correctamente. Ya puedes iniciar sesión."}

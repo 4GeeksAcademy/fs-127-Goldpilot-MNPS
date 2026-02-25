@@ -214,12 +214,6 @@ const SignupSignin = () => {
                                 </>
                             )}
                         </p>
-                        {isLogin && (
-                            <p className="text-center text-white/25 text-xs">
-                                ¿Quieres cambiar tu contraseña?{" "}
-                                <Link to="/change-password" className="text-[var(--color-gold)] hover:underline">Cámbiala aquí</Link>
-                            </p>
-                        )}
                     </div>
 
                 </div>

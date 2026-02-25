@@ -34,8 +34,8 @@ export const authServices = {
         return response.json();
     },
 
-    requestPasswordChange: async (data) => {
-        const response = await fetch(`${BACKEND_URL}/api/auth/change-password/request`, {
+    forgotPassword: async (data) => {
+        const response = await fetch(`${BACKEND_URL}/api/auth/forgot-password`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data),
@@ -47,9 +47,11 @@ export const authServices = {
         return response.json();
     },
 
-    confirmPasswordChange: async (token) => {
-        const response = await fetch(`${BACKEND_URL}/api/auth/change-password/confirm/${token}`, {
-            method: "GET",
+    resetPassword: async (data) => {
+        const response = await fetch(`${BACKEND_URL}/api/auth/reset-password`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
         });
         if (!response.ok) {
             const msg = await parseError(response);

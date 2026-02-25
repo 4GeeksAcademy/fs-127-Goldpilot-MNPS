@@ -147,45 +147,57 @@ class AuthService:
         }
 
     @staticmethod
-    def request_password_change(data):
-        """Valida la contraseña antigua, guarda la nueva en espera y manda el email de confirmacion."""
-        required_fields = ["email", "old_password", "new_password"]
-        for field in required_fields:
-            if field not in data or not data[field]:
-                abort(400, description=f"El campo '{field}' es obligatorio")
+    def forgot_password(data):
+        """Genera un token de reset y envía el email. No requiere contraseña actual."""
+        if "email" not in data or not data["email"]:
+            abort(400, description="El campo 'email' es obligatorio")
 
         user = User.query.filter_by(email=data["email"]).first()
-        if not user or not user.check_password(data["old_password"]):
-            abort(401, description="Credenciales invalidas")
-
-        if not user.is_verified:
-            abort(403, description="Email no verificado. Verifica tu cuenta antes de cambiar la contraseña.")
-
-        if len(data["new_password"]) < 8:
-            abort(400, description="La nueva contraseña debe tener al menos 8 caracteres")
+        # Por seguridad no revelamos si el email existe o no
+        if not user or not user.is_verified:
+            return {"msg": "Si tu email está registrado, recibirás un enlace para restablecer tu contraseña."}
 
         try:
-            # Guardamos la nueva contraseña hasheada como pendiente (no la aplicamos todavía)
-            import bcrypt
-            new_hashed = bcrypt.hashpw(
-                data["new_password"].encode("utf-8"), bcrypt.gensalt()
-            ).decode("utf-8")
-            user.pending_password = new_hashed
             user.generate_password_change_token()
-            AuthService._send_password_change_email(user)
+            AuthService._send_password_reset_email(user)
             db.session.commit()
-            return {"msg": "Te hemos enviado un email para confirmar el cambio de contraseña."}
+            return {"msg": "Si tu email está registrado, recibirás un enlace para restablecer tu contraseña."}
         except Exception as error:
             db.session.rollback()
             abort(500, description=f"Error al procesar la solicitud: {str(error)}")
 
     @staticmethod
-    def _send_password_change_email(user):
-        """Envia el email con el enlace para confirmar el cambio de contraseña."""
+    def reset_password(data):
+        """Aplica la nueva contraseña usando el token del email."""
+        required_fields = ["token", "new_password"]
+        for field in required_fields:
+            if field not in data or not data[field]:
+                abort(400, description=f"El campo '{field}' es obligatorio")
+
+        user = User.query.filter_by(password_change_token=data["token"]).first()
+        if not user:
+            abort(404, description="El enlace no es válido o ya ha sido usado")
+
+        if len(data["new_password"]) < 8:
+            abort(400, description="La contraseña debe tener al menos 8 caracteres")
+
+        try:
+            user.set_password(data["new_password"])
+            user.pending_password = None
+            user.password_change_token = None
+            db.session.commit()
+            return {"msg": "Contraseña actualizada correctamente. Ya puedes iniciar sesión."}
+        except Exception as error:
+            db.session.rollback()
+            abort(500, description=f"Error al actualizar la contraseña: {str(error)}")
+
+    @staticmethod
+    def _send_password_reset_email(user):
+        """Envia el email con el enlace para restablecer la contraseña."""
         from app import mail
 
         frontend_url = os.getenv("FRONTEND_URL", "http://localhost:3000")
-        confirm_link = f"{frontend_url}/confirm-password-change?token={user.password_change_token}"
+        confirm_link = f"{frontend_url}/reset-password?token={user.password_change_token}"
 
         msg = Message(
             subject="Xsniper — Confirma tu cambio de contraseña",
@@ -240,25 +252,6 @@ class AuthService:
         )
         mail.send(msg)
 
-    @staticmethod
-    def confirm_password_change(token):
-        """Aplica la nueva contraseña una vez confirmado el token del email."""
-        if not token:
-            abort(400, description="Token requerido")
-
-        user = User.query.filter_by(password_change_token=token).first()
-        if not user or not user.pending_password:
-            abort(404, description="El enlace no es válido o ya ha sido usado")
-
-        try:
-            user.password = user.pending_password
-            user.pending_password = None
-            user.password_change_token = None
-            db.session.commit()
-            return {"msg": "Contraseña actualizada correctamente. Ya puedes iniciar sesión."}
-        except Exception as error:
-            db.session.rollback()
-            abort(500, description=f"Error al actualizar la contraseña: {str(error)}")
 
     @staticmethod
     def login(data):

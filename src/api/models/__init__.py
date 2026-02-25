@@ -20,3 +20,6 @@ db = SQLAlchemy()
 # Importamos todos los modelos para que esten disponibles desde el paquete
 # IMPORTANTE: El orden de imports importa por las dependencias entre modelos
 from api.models.user import User
+from api.models.db import db
+from api.models.user import User
+from api.models.strategies import Strategy, UserStrategy

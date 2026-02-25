@@ -139,6 +139,7 @@ class AuthService:
             return {"msg": "El email ya fue verificado anteriormente"}
 
         user.is_verified = True
+        user.verification_token = None  # Invalida el token después de usarlo
         db.session.commit()
 
         return {

@@ -4,6 +4,7 @@ import { PortfolioCard } from "../components/PortfolioCard";
 import { WalletPanel } from "../components/WalletPanel";
 import { AdBanner } from "../components/AdBanner";
 import { TradeTable } from "../components/TradeTable";
+import { BotControlPage } from "./BotControlPage";
 
 const MOCK_SUMMARY = {
   account: {
@@ -113,6 +114,10 @@ export const DashboardHome = () => {
         </div>
 
       </div>
+
+      {/* Bot Control */}
+      <BotControlPage />
+
     </div>
   );
 };

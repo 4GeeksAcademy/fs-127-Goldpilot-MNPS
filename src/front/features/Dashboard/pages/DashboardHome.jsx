@@ -6,21 +6,7 @@ import { AdBanner } from "../components/AdBanner";
 import { TradeTable } from "../components/TradeTable";
 import { useState, useEffect } from 'react';
 import { getBotStatus, startBot, stopBot, connectAccount, getAccount } 
-/**
- * Datos mock del resumen de cuenta de trading.
- * Estructura alineada con GET /api/dashboard/summary del backend.
- * TODO: Reemplazar con useEffect + fetch al endpoint real cuando el backend esté conectado.
- */
-const MOCK_SUMMARY = {
-    account: { balance: 10000.00, equity: 10326.40, currency: "USD" },
-    stats: {
-        total_trades: 24,
-        winning_trades: 16,
-        losing_trades: 8,
-        win_rate: 66.7,
-        total_profit: 326.40,
-    },
-};
+
 
 /**
  * Página principal del Dashboard — GoldPilot XAUUSD.

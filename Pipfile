@@ -22,6 +22,7 @@ sqlalchemy = "*"
 bcrypt = "*"
 flask-jwt-extended = "*"
 flask-mail = "*"
+pandas = "*"
 
 [requires]
 python_version = "3.13"

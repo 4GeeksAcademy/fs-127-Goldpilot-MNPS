@@ -7,7 +7,6 @@ de las estrategias desde otros lugares del código.
 
 # Exportamos la estrategia LowRisk para que sea accesible directamente
 from .low_risk import LowRiskStrategy
+from .medium_risk import MediumRiskStrategy
 
-# Futuras estrategias irán aquí:
-# from .medium_risk import MediumRiskStrategy
 # from .high_risk import HighRiskStrategy

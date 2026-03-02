@@ -1,4 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import useGlobalReducer from "../../../hooks/useGlobalReducer.jsx";
 
 /**
  * Componente de perfil de usuario con dropdown de opciones.
@@ -8,6 +10,8 @@ import React, { useState, useRef, useEffect } from "react";
 export const UserProfile = () => {
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef(null);
+    const navigate = useNavigate();
+    const { dispatch } = useGlobalReducer();
 
     // Datos mock del usuario — TODO: reemplazar con contexto de autenticación JWT
     const user = {
@@ -27,11 +31,11 @@ export const UserProfile = () => {
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
 
-    /** Manejador de cierre de sesión — TODO: conectar con POST /api/auth/logout */
+    /** Manejador de cierre de sesión — limpia contexto global y redirige al landing */
     const handleLogout = () => {
         setIsOpen(false);
-        // TODO: dispatch logout action / clear JWT token
-        console.log("Cerrar sesión");
+        dispatch({ type: "logout" });
+        navigate("/");
     };
 
     return (

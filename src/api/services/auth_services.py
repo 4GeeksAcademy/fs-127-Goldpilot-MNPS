@@ -270,7 +270,7 @@ class AuthService:
             abort(
                 403, description="Email no verificado. Revisa tu email para verificar tu cuenta.")
 
-        access_token = create_access_token(identity=user.id)
+        access_token = create_access_token(identity=str(user.id))
         return {
             "msg": "Login exitoso",
             "access_token": access_token,

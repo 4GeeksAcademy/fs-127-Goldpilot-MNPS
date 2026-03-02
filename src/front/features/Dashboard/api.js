@@ -64,6 +64,70 @@ export const connectAccount = async (data) => {
     return response.json();
 };
 
+export const getWallet = async () => {
+    const token = localStorage.getItem("token");
+    const response = await fetch(`${BACKEND_URL}/api/wallet`, {
+        headers: { Authorization: `Bearer ${token}` },
+    });
+    if (!response.ok) {
+        const msg = await parseError(response);
+        throw new Error(msg);
+    }
+    return response.json();
+};
+
+export const connectWallet = async (data) => {
+    const token = localStorage.getItem("token");
+    const response = await fetch(`${BACKEND_URL}/api/wallet/connect`, {
+        method: "POST",
+        headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+    });
+    if (!response.ok) {
+        const msg = await parseError(response);
+        throw new Error(msg);
+    }
+    return response.json();
+};
+
+export const searchServers = async (query, platform = "mt4") => {
+    const token = localStorage.getItem("token");
+    const response = await fetch(
+        `${BACKEND_URL}/api/wallet/servers?query=${encodeURIComponent(query)}&platform=${platform}`,
+        { headers: { Authorization: `Bearer ${token}` } }
+    );
+    if (!response.ok) return { servers: {} };
+    return response.json();
+};
+
+export const getConfigLink = async () => {
+    const token = localStorage.getItem("token");
+    const response = await fetch(`${BACKEND_URL}/api/wallet/config-link`, {
+        headers: { Authorization: `Bearer ${token}` },
+    });
+    if (!response.ok) {
+        const msg = await parseError(response);
+        throw new Error(msg);
+    }
+    return response.json();
+};
+
+export const disconnectWallet = async () => {
+    const token = localStorage.getItem("token");
+    const response = await fetch(`${BACKEND_URL}/api/wallet/disconnect`, {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
+    });
+    if (!response.ok) {
+        const msg = await parseError(response);
+        throw new Error(msg);
+    }
+    return response.json();
+};
+
 export const updateBotStrategy = async (strategyId) => {
     const token = localStorage.getItem("token");
     const response = await fetch(`${BACKEND_URL}/api/bot/strategy`, {

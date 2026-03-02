@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { Outlet, NavLink, useLocation } from "react-router-dom";
+import { Outlet, NavLink, useLocation, Navigate } from "react-router-dom";
 import { UserProfile } from "./components/UserProfile";
 
 /**
@@ -52,6 +52,9 @@ const SidebarItem = ({ label, icon, to }) => {
  * Sidebar izquierdo fijo + área de contenido principal scrollable.
  */
 export const DashboardLayout = () => {
+    const token = localStorage.getItem("token");
+    if (!token) return <Navigate to="/login" replace />;
+
     const location = useLocation();
     const mainRef = useRef(null);
 

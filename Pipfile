@@ -15,7 +15,7 @@ python-dotenv = "*"
 flask-cors = "*"
 gunicorn = "*"
 cloudinary = "*"
-flask-admin = "==2.0.0"
+flask-admin = "==1.6.1"
 typing-extensions = "*"
 wtforms = "==3.1.2"
 sqlalchemy = "*"
@@ -23,9 +23,10 @@ bcrypt = "*"
 flask-jwt-extended = "*"
 flask-mail = "*"
 pandas = "*"
+requests = "*"
 
 [requires]
-python_version = "3.13"
+python_version = "3.9"
 
 [scripts]
 start="flask run -p 3001 -h 0.0.0.0"

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { TradingViewChart } from "../components/TradingViewChart";
 import { PortfolioCard } from "../components/PortfolioCard";
 import { WalletPanel } from "../components/WalletPanel";
@@ -6,118 +6,70 @@ import { AdBanner } from "../components/AdBanner";
 import { TradeTable } from "../components/TradeTable";
 import { BotControlPage } from "./BotControlPage";
 
-const MOCK_SUMMARY = {
-  account: {
-    balance: 10000.00,
-    equity: 10326.40,
-    currency: "USD",
-    margin: 150.00,
-    free_margin: 10176.40,
-    is_connected: false,
-  },
-  stats: {
-    total_trades: 24,
-    winning_trades: 16,
-    losing_trades: 8,
-    win_rate: 66.7,
-    total_profit: 326.40,
-  },
-  strategy: {
-    name: "Medio",
-    risk_level: "2",
-    is_active: true,
-  },
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
+const EMPTY_SUMMARY = {
+    account: { balance: null, equity: null, currency: "USD", margin: null, free_margin: null, is_connected: false },
+    stats: { total_trades: 0, winning_trades: 0, losing_trades: 0, win_rate: 0, total_profit: 0 },
 };
 
-/**
- * Datos mock del resumen de cuenta de trading.
- * Estructura alineada con GET /api/dashboard/summary del backend.
- * TODO: Reemplazar con useEffect + fetch al endpoint real cuando el backend esté conectado.
- */
+const fmt = (val, decimals = 2) =>
+    val != null ? `$${Number(val).toLocaleString("en-US", { minimumFractionDigits: decimals })}` : "–";
 
-/**
- * Página principal del Dashboard — GoldPilot XAUUSD.
- * Muestra estadísticas de cuenta, gráfico de Oro en vivo y historial de operaciones.
- */
 export const DashboardHome = () => {
-  const { account, stats } = MOCK_SUMMARY;
-  const isProfitable = stats.total_profit >= 0;
+    const [summary, setSummary] = useState(EMPTY_SUMMARY);
+    const [loading, setLoading] = useState(true);
 
-  return (
-    <div className="flex flex-col gap-5 w-full">
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        fetch(`${BACKEND_URL}/api/dashboard/summary`, {
+            headers: { Authorization: `Bearer ${token}` },
+        })
+            .then((r) => (r.ok ? r.json() : null))
+            .then((data) => { if (data) setSummary(data); })
+            .catch(() => {})
+            .finally(() => setLoading(false));
+    }, []);
 
-      <div className="pb-2 border-b border-white/[0.05]">
-        <h1 className="text-2xl font-bold tracking-tight text-white">Dashboard</h1>
-      </div>
+    const { account, stats } = summary;
+    const isProfitable = stats.total_profit >= 0;
 
-      {/* Stats cards — Balance · Equity · P&L · Win Rate */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
-        <PortfolioCard
-          title="Balance"
-          value={`$${account.balance.toLocaleString("en-US", { minimumFractionDigits: 2 })}`}
-          subtitle={account.currency}
-          icon="◈"
-          color="gold"
-        />
-        <PortfolioCard
-          title="Equity"
-          value={`$${account.equity.toLocaleString("en-US", { minimumFractionDigits: 2 })}`}
-          subtitle="Tiempo real"
-          icon="⇗"
-          color="green"
-        />
-        <PortfolioCard
-          title="Total P&L"
-          value={`${isProfitable ? "+" : ""}$${stats.total_profit.toFixed(2)}`}
-          subtitle={`${stats.winning_trades}G / ${stats.losing_trades}P`}
-          icon="◬"
-          trend={isProfitable ? "up" : "down"}
-          color={isProfitable ? "green" : "red"}
-        />
-        <PortfolioCard
-          title="Win Rate"
-          value={`${stats.win_rate.toFixed(1)}%`}
-          subtitle={`${stats.total_trades} operaciones`}
-          icon="%"
-          color="blue"
-        />
-      </div>
-      {/* Layout de 2 columnas — igual que antes */}
-      <div className="flex flex-col xl:flex-row gap-6 w-full">
+    return (
+        <div className="flex flex-col gap-5 w-full">
+            <div className="pb-2 border-b border-white/[0.05]">
+                <h1 className="text-2xl font-bold tracking-tight text-white">Dashboard</h1>
+            </div>
 
-        <div className="flex flex-col gap-5 flex-1 min-w-0">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
+                <PortfolioCard title="Balance" value={fmt(account.balance)} subtitle={account.currency} icon="◈" color="gold" />
+                <PortfolioCard title="Equity" value={fmt(account.equity)} subtitle="Tiempo real" icon="⇗" color="green" />
+                <PortfolioCard
+                    title="Total P&L"
+                    value={stats.total_profit !== 0 ? `${isProfitable ? "+" : ""}${fmt(stats.total_profit)}` : "–"}
+                    subtitle={stats.total_trades > 0 ? `${stats.winning_trades}G / ${stats.losing_trades}P` : "Sin operaciones"}
+                    icon="◬" trend={isProfitable ? "up" : "down"} color={isProfitable ? "green" : "red"}
+                />
+                <PortfolioCard
+                    title="Win Rate"
+                    value={stats.total_trades > 0 ? `${Number(stats.win_rate).toFixed(1)}%` : "–"}
+                    subtitle={`${stats.total_trades} operaciones`} icon="%" color="blue"
+                />
+            </div>
 
-          {/* Gráfico XAUUSD */}
-          <div
-            className="w-full rounded-2xl p-5 border border-white/[0.06]"
-            style={{ background: "rgba(255,255,255,0.03)", backdropFilter: "blur(16px)" }}
-          >
-            <TradingViewChart />
-          </div>
+            <div className="flex flex-col xl:flex-row gap-6 w-full">
+                <div className="flex flex-col gap-5 flex-1 min-w-0">
+                    <div className="w-full rounded-2xl p-5 border border-white/[0.06]" style={{ background: "rgba(255,255,255,0.03)", backdropFilter: "blur(16px)" }}>
+                        <TradingViewChart />
+                    </div>
+                    <TradeTable />
+                </div>
+                <div className="w-full xl:w-72 shrink-0" style={{ alignSelf: "stretch", display: "grid", gridTemplateRows: "auto 1fr", gap: "1.25rem" }}>
+                    <WalletPanel />
+                    <AdBanner className="h-full" />
+                </div>
+            </div>
 
-          {/* Historial de operaciones */}
-          <TradeTable />
+            <BotControlPage />
         </div>
-
-        {/* Columna derecha — WalletPanel + AdBanner */}
-        <div
-          className="w-full xl:w-72 shrink-0"
-          style={{
-            alignSelf: "stretch",
-            display: "grid",
-            gridTemplateRows: "auto 1fr",
-            gap: "1.25rem",
-          }}
-        >
-          <WalletPanel />
-          <AdBanner className="h-full" />
-        </div>
-
-      </div>
-
-      {/* Bot Control */}
-      <BotControlPage />
-
-    </div>
-  );
+    );
 };

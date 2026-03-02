@@ -5,44 +5,43 @@ Blueprint: /dashboard
 """
 
 from flask import Blueprint, jsonify
+from flask_jwt_extended import jwt_required, get_jwt_identity
+from api.models.wallet import MetaApiAccount
 
 dashboard_bp = Blueprint('dashboard', __name__, url_prefix='/dashboard')
 
 
 @dashboard_bp.route('/summary', methods=['GET'])
+@jwt_required()
 def get_summary():
     """
     Retorna el resumen del dashboard del usuario.
-    Datos mock mientras MetaApi no está conectado.
-    TODO: Reemplazar con datos reales de MetaApi cuando el servicio esté disponible.
-
-    Returns:
-        JSON con account (balance/equity), stats (trades/win_rate) y strategy activa.
+    Devuelve valores vacíos si no hay wallet conectada.
+    TODO: Integrar datos reales de MetaApi cuando el servicio esté disponible.
     """
-    mock_data = {
+    user_id = int(get_jwt_identity())
+    wallet = MetaApiAccount.query.filter_by(user_id=user_id).first()
+
+    data = {
         "account": {
-            "balance": 10000.00,
-            "equity": 10326.40,
+            "balance": None,
+            "equity": None,
             "currency": "USD",
-            "margin": 150.00,
-            "free_margin": 10176.40,
-            "is_connected": False,
+            "margin": None,
+            "free_margin": None,
+            "is_connected": wallet is not None,
         },
         "stats": {
-            "total_trades": 24,
-            "winning_trades": 16,
-            "losing_trades": 8,
-            "win_rate": 66.7,
-            "total_profit": 326.40,
+            "total_trades": 0,
+            "winning_trades": 0,
+            "losing_trades": 0,
+            "win_rate": 0,
+            "total_profit": 0,
         },
-        "strategy": {
-            "name": "Medio",
-            "risk_level": "2",
-            "is_active": True,
-        },
+        "wallet": wallet.serialize() if wallet else None,
     }
 
-    return jsonify(mock_data), 200
+    return jsonify(data), 200
 
 
 @dashboard_bp.route('/trades/history', methods=['GET'])

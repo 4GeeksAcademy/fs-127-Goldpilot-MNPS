@@ -48,10 +48,10 @@ app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
 # NUEVO: app password desde variable de entorno
 app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
-app.config['MAIL_DEFAULT_SENDER'] = os.getenv(
-    'MAIL_USERNAME')  # NUEVO: remitente por defecto
-mail = Mail(app)  # NUEVO: inicializamos Flask-Mail con la app
-mail.init_app(app)  # NUEVO: aseguramos que Mail se inicialice con la app
+app.config['MAIL_DEFAULT_SENDER'] = os.getenv('MAIL_USERNAME')
+app.config['MAIL_SUPPRESS_SEND'] = os.getenv('MAIL_SUPPRESS_SEND', '0') == '1'
+mail = Mail(app)
+mail.init_app(app)
 # add the admin
 setup_admin(app)
 

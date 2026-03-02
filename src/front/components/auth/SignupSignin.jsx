@@ -18,7 +18,7 @@ const SignupSignin = () => {
     const [loginForm,  setLoginForm]  = useState({ email: "", password: "" });
     const [signupForm, setSignupForm] = useState({
         email: "", username: "", password: "",
-        first_name: "", last_name: "", phone_number: "",
+        first_name: "", last_name: "", phone_number: "", birth_date: "",
     });
     const [confirmPassword, setConfirmPassword] = useState("");
     const [countryCode, setCountryCode]         = useState("+34");
@@ -45,6 +45,16 @@ const SignupSignin = () => {
             e.email = "Introduce un email válido (ej: nombre@email.com)";
         if (!signupForm.phone_number.trim())
             e.phone_number = "Introduce tu número de teléfono";
+        if (!signupForm.birth_date)
+            e.birth_date = "Introduce tu fecha de nacimiento";
+        else {
+            const birth = new Date(signupForm.birth_date);
+            const today = new Date();
+            let age = today.getFullYear() - birth.getFullYear();
+            const m = today.getMonth() - birth.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) age--;
+            if (age < 18) e.birth_date = "Debes ser mayor de 18 años para registrarte";
+        }
         if (signupForm.password.length < 8)
             e.password = "La contraseña necesita al menos 8 caracteres";
         if (!confirmPassword)

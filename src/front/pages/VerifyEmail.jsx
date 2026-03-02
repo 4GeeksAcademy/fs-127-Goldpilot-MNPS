@@ -1,15 +1,17 @@
 import { useEffect, useState, useRef } from "react";
-import { useSearchParams, Link } from "react-router-dom";
+import { useSearchParams, Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { CheckCircle, XCircle, Loader } from "lucide-react";
 import { authServices } from "../services/authServices";
 
 const VerifyEmail = () => {
     const [searchParams] = useSearchParams();
+    const navigate = useNavigate();
     const token = searchParams.get("token");
 
     const [status, setStatus] = useState("loading"); // loading | success | error
     const [message, setMessage] = useState("");
+    const [countdown, setCountdown] = useState(3);
     const called = useRef(false);
 
     useEffect(() => {
@@ -32,6 +34,14 @@ const VerifyEmail = () => {
                 setMessage(err.message || "El enlace no es válido o ya ha sido usado.");
             });
     }, [token]);
+
+    // Auto-redirect to login after successful verification
+    useEffect(() => {
+        if (status !== "success") return;
+        if (countdown <= 0) { navigate("/login"); return; }
+        const t = setTimeout(() => setCountdown(c => c - 1), 1000);
+        return () => clearTimeout(t);
+    }, [status, countdown, navigate]);
 
     return (
         <div className="min-h-screen bg-[var(--color-brown-dark)] flex items-center justify-center relative overflow-hidden px-4">
@@ -104,6 +114,11 @@ const VerifyEmail = () => {
                             status === "success" ? "text-white/60" : "text-red-300"
                         }`}>
                             {message}
+                        </p>
+                    )}
+                    {status === "success" && (
+                        <p className="text-xs text-white/30">
+                            Redirigiendo al login en {countdown}s...
                         </p>
                     )}
 

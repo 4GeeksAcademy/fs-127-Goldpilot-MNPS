@@ -28,7 +28,6 @@ class User(db.Model):
     password: Mapped[str] = mapped_column(String(256), nullable=False)
     first_name: Mapped[str] = mapped_column(String(100), nullable=True)
     last_name: Mapped[str] = mapped_column(String(100), nullable=True)
-    
     phone_number: Mapped[str] = mapped_column(String(20), nullable=True)
     birth_date: Mapped[date] = mapped_column(Date(), nullable=False)
     is_active: Mapped[bool] = mapped_column(

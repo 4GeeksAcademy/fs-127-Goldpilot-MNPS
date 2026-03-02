@@ -3,6 +3,7 @@ Servicio de autenticacion - Login, Signup y validacion de tokens
 """
 
 import os  # NUEVO: para leer variables de entorno (FRONTEND_URL)
+from datetime import date
 from flask import abort
 # NUEVO: clase para construir el email de verificacion
 from flask_mail import Message
@@ -15,10 +16,20 @@ class AuthService:
     def signup(data):
         """Registrar un nuevo usuario con password hasheado."""
         required_fields = ["email", "username",
-                           "password", "first_name", "last_name", "phone_number"]
+                           "password", "first_name", "last_name", "phone_number", "birth_date"]
         for field in required_fields:
             if field not in data or not data[field]:
                 abort(400, description=f"El campo '{field}' es obligatorio")
+
+        # Validar mayoría de edad (18+)
+        try:
+            birth_date = date.fromisoformat(data["birth_date"])
+        except ValueError:
+            abort(400, description="Formato de fecha de nacimiento inválido (use YYYY-MM-DD)")
+        today = date.today()
+        age = today.year - birth_date.year - ((today.month, today.day) < (birth_date.month, birth_date.day))
+        if age < 18:
+            abort(400, description="Debes ser mayor de edad (18 años o más) para registrarte")
 
         if User.query.filter_by(email=data["email"]).first():
             abort(409, description="Ya existe un usuario con ese email")
@@ -33,6 +44,7 @@ class AuthService:
                 first_name=data["first_name"],
                 last_name=data["last_name"],
                 phone_number=data["phone_number"],
+                birth_date=birth_date,
                 is_active=True
             )
             new_user.set_password(data["password"])

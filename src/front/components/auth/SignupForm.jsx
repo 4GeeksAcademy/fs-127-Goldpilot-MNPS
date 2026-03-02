@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Mail, Lock, User, Phone, ChevronDown } from "lucide-react";
+import { Mail, Lock, User, Phone, ChevronDown, Calendar } from "lucide-react";
 import { COUNTRY_CODES, inputBase, inputOk, inputErr, errText, submitBtn } from "./constants";
 import EyeToggle from "./EyeToggle";
 import PasswordStrengthBar from "./PasswordStrengthBar";
@@ -84,6 +84,22 @@ const SignupForm = ({
                     </div>
                 </div>
                 {fieldErrors.phone_number && <p className={errText}>{fieldErrors.phone_number}</p>}
+            </div>
+
+            {/* Fecha de nacimiento */}
+            <div>
+                <div className="relative">
+                    <Calendar size={15} className="absolute left-4 top-1/2 -translate-y-1/2 text-white/35 pointer-events-none" />
+                    <input type="date" value={form.birth_date}
+                        max={new Date(new Date().setFullYear(new Date().getFullYear() - 18)).toISOString().split("T")[0]}
+                        onChange={(e) => { setForm(p => ({ ...p, birth_date: e.target.value })); clearFieldError("birth_date"); }}
+                        className={`${inputBase} ${fieldErrors.birth_date ? inputErr : inputOk} pl-11 pr-4`}
+                        style={{ colorScheme: "dark" }} />
+                </div>
+                {fieldErrors.birth_date
+                    ? <p className={errText}>{fieldErrors.birth_date}</p>
+                    : <p className="mt-1.5 text-xs text-white/30">Fecha de nacimiento (debes ser mayor de 18 años)</p>
+                }
             </div>
 
             {/* Contraseña + termómetro */}

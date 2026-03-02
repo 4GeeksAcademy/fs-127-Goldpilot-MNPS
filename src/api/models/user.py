@@ -10,9 +10,9 @@ Tabla principal de usuarios.
 
 import bcrypt
 import uuid  # NUEVO: para generar tokens unicos de verificacion
-from sqlalchemy import String, Boolean, DateTime
+from sqlalchemy import String, Boolean, DateTime, Date
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from datetime import datetime
+from datetime import datetime, date
 from api.models.db import db
 
 
@@ -28,7 +28,9 @@ class User(db.Model):
     password: Mapped[str] = mapped_column(String(256), nullable=False)
     first_name: Mapped[str] = mapped_column(String(100), nullable=True)
     last_name: Mapped[str] = mapped_column(String(100), nullable=True)
+    
     phone_number: Mapped[str] = mapped_column(String(20), nullable=True)
+    birth_date: Mapped[date] = mapped_column(Date(), nullable=False)
     is_active: Mapped[bool] = mapped_column(
         Boolean(), default=True, nullable=False)
     is_verified: Mapped[bool] = mapped_column(  # NUEVO: indica si el usuario verifico su email (NAPOLES)
@@ -75,6 +77,7 @@ class User(db.Model):
             "first_name": self.first_name,
             "last_name": self.last_name,
             "phone_number": self.phone_number,
+            "birth_date": self.birth_date.isoformat() if self.birth_date else None,
             "is_active": self.is_active,
             "is_verified": self.is_verified,
             "created_at": self.created_at.isoformat() if self.created_at else None,

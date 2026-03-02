@@ -20,3 +20,11 @@ METAAPI_TOKEN=eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIxNzFjZWQ4Yjg5ODdhM
 # Front-End Variables
 VITE_BASENAME=/
 VITE_BACKEND_URL=http://127.0.0.1:3001
+
+# VARIABLES DE ENTORNO DE .ENV
+VITE_BASENAME=/
+VITE_BACKEND_URL=https://potential-space-palm-tree-7v44gjw4r4x7fxvjg-3001.app.github.dev/
+
+FRONTEND_URL=https://potential-space-palm-tree-7v44gjw4r4x7fxvjg-3000.app.github.dev/
+MAIL_USERNAME=proyectofinalxs@gmail.com
+MAIL_PASSWORD=vphy rvlf azsz bmyw

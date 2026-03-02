@@ -64,9 +64,9 @@ export const connectAccount = async (data) => {
     return response.json();
 };
 
-export const getWallet = async () => {
+export const getWallets = async () => {
     const token = localStorage.getItem("token");
-    const response = await fetch(`${BACKEND_URL}/api/wallet`, {
+    const response = await fetch(`${BACKEND_URL}/api/wallets`, {
         headers: { Authorization: `Bearer ${token}` },
     });
     if (!response.ok) {
@@ -76,9 +76,9 @@ export const getWallet = async () => {
     return response.json();
 };
 
-export const connectWallet = async (data) => {
+export const addWallet = async (data) => {
     const token = localStorage.getItem("token");
-    const response = await fetch(`${BACKEND_URL}/api/wallet/connect`, {
+    const response = await fetch(`${BACKEND_URL}/api/wallets`, {
         method: "POST",
         headers: {
             Authorization: `Bearer ${token}`,
@@ -96,16 +96,26 @@ export const connectWallet = async (data) => {
 export const searchServers = async (query, platform = "mt4") => {
     const token = localStorage.getItem("token");
     const response = await fetch(
-        `${BACKEND_URL}/api/wallet/servers?query=${encodeURIComponent(query)}&platform=${platform}`,
+        `${BACKEND_URL}/api/wallets/servers?query=${encodeURIComponent(query)}&platform=${platform}`,
         { headers: { Authorization: `Bearer ${token}` } }
     );
     if (!response.ok) return { servers: {} };
     return response.json();
 };
 
-export const getConfigLink = async () => {
+export const getWalletBalance = async (walletId) => {
     const token = localStorage.getItem("token");
-    const response = await fetch(`${BACKEND_URL}/api/wallet/config-link`, {
+    const response = await fetch(`${BACKEND_URL}/api/wallets/${walletId}/balance`, {
+        headers: { Authorization: `Bearer ${token}` },
+    });
+    if (!response.ok) return { balance: null, equity: null, currency: null };
+    return response.json();
+};
+
+export const syncWallet = async (walletId) => {
+    const token = localStorage.getItem("token");
+    const response = await fetch(`${BACKEND_URL}/api/wallets/${walletId}/sync`, {
+        method: "POST",
         headers: { Authorization: `Bearer ${token}` },
     });
     if (!response.ok) {
@@ -115,9 +125,21 @@ export const getConfigLink = async () => {
     return response.json();
 };
 
-export const disconnectWallet = async () => {
+export const getWalletConfigLink = async (walletId) => {
     const token = localStorage.getItem("token");
-    const response = await fetch(`${BACKEND_URL}/api/wallet/disconnect`, {
+    const response = await fetch(`${BACKEND_URL}/api/wallets/${walletId}/config-link`, {
+        headers: { Authorization: `Bearer ${token}` },
+    });
+    if (!response.ok) {
+        const msg = await parseError(response);
+        throw new Error(msg);
+    }
+    return response.json();
+};
+
+export const deleteWallet = async (walletId) => {
+    const token = localStorage.getItem("token");
+    const response = await fetch(`${BACKEND_URL}/api/wallets/${walletId}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
     });

@@ -63,3 +63,20 @@ export const connectAccount = async (data) => {
     }
     return response.json();
 };
+
+export const updateBotStrategy = async (strategyId) => {
+    const token = localStorage.getItem("token");
+    const response = await fetch(`${BACKEND_URL}/api/bot/strategy`, {
+        method: "POST",
+        headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ strategy: strategyId }),
+    });
+    if (!response.ok) {
+        const msg = await parseError(response);
+        throw new Error(msg);
+    }
+    return response.json();
+};

@@ -17,7 +17,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { getBotStatus, startBot, stopBot, connectAccount } from '../services/api';
+import { getBotStatus, startBot, stopBot, connectAccount } from '../api';
 
 export const BotControlPage = () => {
     // -- State --

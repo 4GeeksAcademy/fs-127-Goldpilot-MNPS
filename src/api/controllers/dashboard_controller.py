@@ -5,9 +5,11 @@ Blueprint: /dashboard
 """
 
 import requests as req
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, abort
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from api.models.wallet import MetaApiAccount
+from api.models.trade import Trade
+from api.models.db import db
 from api.controllers.wallet_controller import (
     _metaapi_headers,
     _check_token,
@@ -153,3 +155,36 @@ def get_trade_history():
     ]
 
     return jsonify({"trades": mock_trades}), 200
+
+
+@dashboard_bp.route('/trades/open', methods=['GET'])
+@jwt_required()
+def get_open_trades():
+    """
+    Retorna las operaciones abiertas (status='open') del usuario autenticado.
+    """
+    user_id = int(get_jwt_identity())
+    trades = Trade.query.filter_by(user_id=user_id, status='open').order_by(Trade.opened_at.desc()).all()
+    return jsonify({"trades": [t.serialize() for t in trades]}), 200
+
+
+@dashboard_bp.route('/trades/<int:trade_id>/cancel', methods=['PATCH'])
+@jwt_required()
+def cancel_trade(trade_id):
+    """
+    Cancela una operación abierta del usuario.
+    Solo se puede cancelar si pertenece al usuario y está en status='open'.
+    """
+    user_id = int(get_jwt_identity())
+    trade = Trade.query.filter_by(id=trade_id, user_id=user_id).first()
+
+    if not trade:
+        abort(404, description="Operación no encontrada")
+
+    if trade.status != 'open':
+        abort(400, description="Solo se pueden cancelar operaciones abiertas")
+
+    trade.status = 'cancelled'
+    db.session.commit()
+
+    return jsonify({"msg": "Operación cancelada correctamente", "trade": trade.serialize()}), 200

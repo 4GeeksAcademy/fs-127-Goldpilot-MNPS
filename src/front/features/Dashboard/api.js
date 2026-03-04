@@ -173,6 +173,18 @@ export const updateBotStrategy = async (strategyId) => {
   return response.json();
 };
 
+export const getDashboardSummary = async () => {
+  const token = localStorage.getItem("token");
+  const response = await fetch(`${BACKEND_URL}/api/dashboard/summary`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  if (!response.ok) {
+    const msg = await parseError(response);
+    throw new Error(msg);
+  }
+  return response.json();
+};
+
 export const getTradeHistory = async () => {
   const token = localStorage.getItem("token");
   const response = await fetch(`${BACKEND_URL}/api/dashboard/trades/history`, {

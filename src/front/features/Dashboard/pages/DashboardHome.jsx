@@ -1,37 +1,42 @@
 import React, { useState, useEffect } from "react";
 import { TradingViewChart } from "../components/TradingViewChart";
+import { OverviewCard } from "../components/OverviewCard";
 import { PortfolioCard } from "../components/PortfolioCard";
 import { WalletPanel } from "../components/WalletPanel";
 import { AdBanner } from "../components/AdBanner";
 import { TradeTable } from "../components/TradeTable";
 import { BotControlPage } from "./BotControlPage";
-
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+import { getDashboardSummary } from "../api";
 
 const EMPTY_SUMMARY = {
-    account: { balance: null, equity: null, currency: "USD", margin: null, free_margin: null, is_connected: false },
+    wallets: [],
     stats: { total_trades: 0, winning_trades: 0, losing_trades: 0, win_rate: 0, total_profit: 0 },
 };
 
 const fmt = (val, decimals = 2) =>
     val != null ? `$${Number(val).toLocaleString("en-US", { minimumFractionDigits: decimals })}` : "–";
 
+/**
+ * Calcula el porcentaje de variación entre equity y balance.
+ * Retorna 0 si alguno de los valores no está disponible.
+ */
+const calcChangePercent = (equity, balance) => {
+    if (equity == null || balance == null || balance === 0) return 0;
+    return ((equity - balance) / balance) * 100;
+};
+
 export const DashboardHome = () => {
     const [summary, setSummary] = useState(EMPTY_SUMMARY);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const token = localStorage.getItem("token");
-        fetch(`${BACKEND_URL}/api/dashboard/summary`, {
-            headers: { Authorization: `Bearer ${token}` },
-        })
-            .then((r) => (r.ok ? r.json() : null))
+        getDashboardSummary()
             .then((data) => { if (data) setSummary(data); })
-            .catch(() => {})
+            .catch(() => { })
             .finally(() => setLoading(false));
     }, []);
 
-    const { account, stats } = summary;
+    const { wallets, stats } = summary;
     const isProfitable = stats.total_profit >= 0;
 
     return (
@@ -40,9 +45,27 @@ export const DashboardHome = () => {
                 <h1 className="text-2xl font-bold tracking-tight text-white">Dashboard</h1>
             </div>
 
+            {/* Cards dinámicas: una por cada wallet del usuario */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
-                <PortfolioCard title="Balance" value={fmt(account.balance)} subtitle={account.currency} icon="◈" color="gold" />
-                <PortfolioCard title="Equity" value={fmt(account.equity)} subtitle="Tiempo real" icon="⇗" color="green" />
+                {wallets.length > 0 ? (
+                    wallets.map((wallet) => (
+                        <OverviewCard
+                            key={wallet.id}
+                            name={wallet.broker_name || wallet.server || "MetaTrader"}
+                            symbol={wallet.platform?.toUpperCase() || "MT4"}
+                            icon={wallet.status === "connected" ? "◈" : "◇"}
+                            balanceUSD={wallet.balance ?? 0}
+                            changePercent={calcChangePercent(wallet.equity, wallet.balance)}
+                        />
+                    ))
+                ) : (
+                    <div className="col-span-full flex items-center justify-center py-8 rounded-2xl border border-white/[0.06]"
+                        style={{ background: "rgba(255,255,255,0.02)" }}>
+                        <p className="text-sm text-white/30">No hay wallets conectadas — añade una desde el panel lateral</p>
+                    </div>
+                )}
+
+                {/* Tarjetas de estadísticas generales */}
                 <PortfolioCard
                     title="Total P&L"
                     value={stats.total_profit !== 0 ? `${isProfitable ? "+" : ""}${fmt(stats.total_profit)}` : "–"}

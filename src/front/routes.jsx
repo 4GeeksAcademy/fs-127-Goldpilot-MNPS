@@ -16,6 +16,7 @@ import { HistorialPage } from "./features/Dashboard/pages/HistorialPage";
 import { WalletsPage } from "./features/Dashboard/pages/WalletsPage";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
+import TermsAndConditions from "./pages/TermsAndConditions";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -26,6 +27,7 @@ export const router = createBrowserRouter(
       <Route path="/verify" element={<VerifyEmail />} errorElement={<h1>No encontrado!</h1>} />
       <Route path="/forgot-password" element={<ForgotPassword />} errorElement={<h1>No encontrado!</h1>} />
       <Route path="/reset-password" element={<ResetPassword />} errorElement={<h1>No encontrado!</h1>} />
+      <Route path="/terms" element={<TermsAndConditions />} errorElement={<h1>No encontrado!</h1>} />
       <Route path="/dashboard" element={<DashboardLayout />} errorElement={<h1>No encontrado!</h1>}>
         <Route index element={<DashboardHome />} />
         {/* Ruta: Historial de operaciones — HistorialPage (tabla: trades) */}

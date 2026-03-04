@@ -71,7 +71,7 @@ class AuthService:
         """Envia un email con el link de verificacion."""
         from app import mail  # NUEVO: importamos la instancia de Mail configurada en app.py
 
-        frontend_url = os.getenv("FRONTEND_URL", "http://localhost:3000")
+        frontend_url = os.getenv("FRONTEND_URL", "http://localhost:3000").rstrip("/")
         verification_link = f"{frontend_url}/verify?token={user.verification_token}"
 
         msg = Message(
@@ -209,7 +209,7 @@ class AuthService:
         """Envia el email con el enlace para restablecer la contraseña."""
         from app import mail
 
-        frontend_url = os.getenv("FRONTEND_URL", "http://localhost:3000")
+        frontend_url = os.getenv("FRONTEND_URL", "http://localhost:3000").rstrip("/")
         confirm_link = f"{frontend_url}/reset-password?token={user.password_change_token}"
 
         msg = Message(

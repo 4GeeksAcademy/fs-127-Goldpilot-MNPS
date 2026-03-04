@@ -4,11 +4,49 @@ Expone el resumen de cuenta, estadísticas de trading y estrategia activa.
 Blueprint: /dashboard
 """
 
+import requests as req
 from flask import Blueprint, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from api.models.wallet import MetaApiAccount
+from api.controllers.wallet_controller import (
+    _metaapi_headers,
+    _check_token,
+    METAAPI_CLIENT_BASE,
+)
 
 dashboard_bp = Blueprint('dashboard', __name__, url_prefix='/dashboard')
+
+
+def _fetch_wallet_balance(account):
+    """
+    Consulta balance, equity y margen libre de una wallet conectada vía MetaApi.
+    Retorna un dict con los valores o None para cada campo si no están disponibles.
+    """
+    empty = {"balance": None, "equity": None, "currency": None, "margin": None, "free_margin": None}
+
+    if account.status != "connected" or not account.region:
+        return empty
+
+    try:
+        base = METAAPI_CLIENT_BASE.format(region=account.region)
+        resp = req.get(
+            f"{base}/users/current/accounts/{account.account_id}/account-information",
+            headers=_metaapi_headers(),
+            timeout=10,
+        )
+        if resp.ok:
+            data = resp.json()
+            return {
+                "balance": data.get("balance"),
+                "equity": data.get("equity"),
+                "currency": data.get("currency", "USD"),
+                "margin": data.get("margin"),
+                "free_margin": data.get("freeMargin"),
+            }
+    except Exception:
+        pass
+
+    return empty
 
 
 @dashboard_bp.route('/summary', methods=['GET'])
@@ -16,21 +54,24 @@ dashboard_bp = Blueprint('dashboard', __name__, url_prefix='/dashboard')
 def get_summary():
     """
     Retorna el resumen del dashboard del usuario.
-    Devuelve valores vacíos si no hay wallet conectada.
-    TODO: Integrar datos reales de MetaApi cuando el servicio esté disponible.
+    Incluye todas las wallets con su balance real consultado a MetaApi.
     """
     user_id = int(get_jwt_identity())
-    wallet = MetaApiAccount.query.filter_by(user_id=user_id).first()
+    accounts = MetaApiAccount.query.filter_by(user_id=user_id).all()
+
+    has_token = _check_token()
+    wallets_data = []
+
+    for account in accounts:
+        wallet_info = account.serialize()
+        balance_info = _fetch_wallet_balance(account) if has_token else {
+            "balance": None, "equity": None, "currency": None, "margin": None, "free_margin": None
+        }
+        wallet_info.update(balance_info)
+        wallets_data.append(wallet_info)
 
     data = {
-        "account": {
-            "balance": None,
-            "equity": None,
-            "currency": "USD",
-            "margin": None,
-            "free_margin": None,
-            "is_connected": wallet is not None,
-        },
+        "wallets": wallets_data,
         "stats": {
             "total_trades": 0,
             "winning_trades": 0,
@@ -38,7 +79,6 @@ def get_summary():
             "win_rate": 0,
             "total_profit": 0,
         },
-        "wallet": wallet.serialize() if wallet else None,
     }
 
     return jsonify(data), 200

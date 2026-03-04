@@ -24,9 +24,10 @@ const SignupSignin = () => {
     const [countryCode, setCountryCode]         = useState("+34");
 
     // UI state
-    const [showPassword, setShowPassword] = useState(false);
-    const [showConfirm,  setShowConfirm]  = useState(false);
-    const [fieldErrors,  setFieldErrors]  = useState({});
+    const [showPassword,   setShowPassword]   = useState(false);
+    const [showConfirm,    setShowConfirm]    = useState(false);
+    const [fieldErrors,    setFieldErrors]    = useState({});
+    const [termsAccepted,  setTermsAccepted]  = useState(false);
     const [error,   setError]   = useState("");
     const [success, setSuccess] = useState("");
     const [loading, setLoading] = useState(false);
@@ -61,6 +62,8 @@ const SignupSignin = () => {
             e.confirm = "Repite la contraseña para confirmarla";
         else if (signupForm.password !== confirmPassword)
             e.confirm = "Las contraseñas no coinciden, revísalas";
+        if (!termsAccepted)
+            e.terms = "You must accept the Terms & Conditions to continue";
         return e;
     };
 
@@ -207,7 +210,8 @@ const SignupSignin = () => {
                                 confirmPassword={confirmPassword} setConfirmPassword={setConfirmPassword}
                                 showPassword={showPassword} togglePassword={() => setShowPassword(v => !v)}
                                 showConfirm={showConfirm}   toggleConfirm={() => setShowConfirm(v => !v)}
-                                fieldErrors={fieldErrors}   clearFieldError={clearFieldError} />)
+                                fieldErrors={fieldErrors}   clearFieldError={clearFieldError}
+                                termsAccepted={termsAccepted} onTermsToggle={() => { setTermsAccepted(v => !v); clearFieldError("terms"); }} />)
                         }
                     </AnimatePresence>
 

@@ -43,10 +43,17 @@ export const TradeTable = () => {
 
     const handleCancelClick = (tradeId) => {
         if (pendingCancel === tradeId) {
-            // Segundo click → cancelar operación
+            // Segundo click → llamar al endpoint y quitar de la lista
             clearTimeout(timeoutRef.current);
-            setTrades((prev) => prev.filter((t) => t.id !== tradeId));
             setPendingCancel(null);
+            const token = localStorage.getItem("token");
+            fetch(`/api/dashboard/trades/${tradeId}/cancel`, {
+                method: "PATCH",
+                headers: { Authorization: `Bearer ${token}` },
+            })
+                .then((r) => r.ok ? r.json() : Promise.reject(r))
+                .catch(() => {})
+                .finally(() => setTrades((prev) => prev.filter((t) => t.id !== tradeId)));
         } else {
             // Primer click → pedir confirmación
             setPendingCancel(tradeId);

@@ -24,3 +24,5 @@ from api.models.user import User
 from api.models.strategies import Strategy, UserStrategy
 from api.models.wallet import MetaApiAccount
 from api.models.trade import Trade
+from api.models.notification import Notification
+from api.models.activity_log import ActivityLog

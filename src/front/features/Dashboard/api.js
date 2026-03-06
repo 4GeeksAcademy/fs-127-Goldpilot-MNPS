@@ -9,6 +9,15 @@ const parseError = async (response) => {
   }
 };
 
+/** Si el token expiró o es inválido (401), limpia sesión y redirige al login */
+const checkAuth = (response) => {
+  if (response.status === 401) {
+    localStorage.removeItem("token");
+    window.location.href = "/login";
+  }
+  return response;
+};
+
 export const getBotStatus = async () => {
   const token = localStorage.getItem("token");
   const response = await fetch(`${BACKEND_URL}/api/bot/status`, {
@@ -175,9 +184,38 @@ export const updateBotStrategy = async (strategyId) => {
 
 export const getDashboardSummary = async () => {
   const token = localStorage.getItem("token");
-  const response = await fetch(`${BACKEND_URL}/api/dashboard/summary`, {
+  const response = checkAuth(await fetch(`${BACKEND_URL}/api/dashboard/summary`, {
     headers: { Authorization: `Bearer ${token}` },
-  });
+  }));
+  if (!response.ok) {
+    const msg = await parseError(response);
+    throw new Error(msg);
+  }
+  return response.json();
+};
+
+export const getProfile = async () => {
+  const token = localStorage.getItem("token");
+  const response = checkAuth(await fetch(`${BACKEND_URL}/api/users/me`, {
+    headers: { Authorization: `Bearer ${token}` },
+  }));
+  if (!response.ok) {
+    const msg = await parseError(response);
+    throw new Error(msg);
+  }
+  return response.json();
+};
+
+export const updateProfile = async (data) => {
+  const token = localStorage.getItem("token");
+  const response = checkAuth(await fetch(`${BACKEND_URL}/api/users/me`, {
+    method: "PATCH",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  }));
   if (!response.ok) {
     const msg = await parseError(response);
     throw new Error(msg);
@@ -187,9 +225,9 @@ export const getDashboardSummary = async () => {
 
 export const getTradeHistory = async () => {
   const token = localStorage.getItem("token");
-  const response = await fetch(`${BACKEND_URL}/api/dashboard/trades/history`, {
+  const response = checkAuth(await fetch(`${BACKEND_URL}/api/dashboard/trades/history`, {
     headers: { Authorization: `Bearer ${token}` },
-  });
+  }));
   if (!response.ok) {
     const msg = await parseError(response);
     throw new Error(msg);

@@ -5,7 +5,6 @@ import { PortfolioCard } from "../components/PortfolioCard";
 import { WalletPanel } from "../components/WalletPanel";
 import { AdBanner } from "../components/AdBanner";
 import { TradeTable } from "../components/TradeTable";
-import { BotControlPage } from "./BotControlPage";
 import { getDashboardSummary } from "../api";
 
 const EMPTY_SUMMARY = {
@@ -92,7 +91,6 @@ export const DashboardHome = () => {
                 </div>
             </div>
 
-            <BotControlPage />
         </div>
     );
 };

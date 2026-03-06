@@ -2,42 +2,27 @@
  * ============================================================
  * GoldPilot - Bot Control Page
  * ============================================================
- * Manages the trading bot and MetaApi account connection.
+ * Manages the trading bot.
  *
  * Sections:
  * 1. Bot Status Card — Shows if bot is running, with start/stop
- * 2. MetaApi Connection — Form to connect broker account
- * 3. Current Configuration — Shows active strategy and account
+ * 2. Current Configuration — Shows active strategy and account
  *
- * The bot requires:
- * - A connected MetaApi account
- * - A selected trading strategy
- * Both must be set before the bot can be started.
+ * MetaApi connection is handled in the Wallets page.
  * ============================================================
  */
 
 import React, { useState, useEffect } from 'react';
-import { getBotStatus, startBot, stopBot, connectAccount } from '../api';
+import { getBotStatus, startBot, stopBot } from '../api';
 
 export const BotControlPage = () => {
-    // -- State --
     const [botStatus, setBotStatus] = useState(null);
     const [account, setAccount] = useState(null);
     const [loading, setLoading] = useState(true);
     const [actionLoading, setActionLoading] = useState(false);
-    const [showConnectForm, setShowConnectForm] = useState(false);
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
 
-    // -- MetaApi connect form state --
-    const [connectForm, setConnectForm] = useState({
-        account_id: '',
-        api_token: '',
-        broker_name: '',
-        account_type: 'demo',
-    });
-
-    // -- Fetch bot status on mount --
     useEffect(() => {
         fetchStatus();
     }, []);
@@ -54,10 +39,6 @@ export const BotControlPage = () => {
         }
     };
 
-    /**
-     * Handle starting the bot.
-     * Calls /api/bot/start and updates the UI.
-     */
     const handleStart = async () => {
         setActionLoading(true);
         setError('');
@@ -73,9 +54,6 @@ export const BotControlPage = () => {
         }
     };
 
-    /**
-     * Handle stopping the bot.
-     */
     const handleStop = async () => {
         setActionLoading(true);
         setError('');
@@ -88,23 +66,6 @@ export const BotControlPage = () => {
             setError(err.message);
         } finally {
             setActionLoading(false);
-        }
-    };
-
-    /**
-     * Handle MetaApi account connection.
-     */
-    const handleConnect = async (e) => {
-        e.preventDefault();
-        setError('');
-        setSuccess('');
-        try {
-            await connectAccount(connectForm);
-            setSuccess('Account connected successfully!');
-            setShowConnectForm(false);
-            fetchStatus();
-        } catch (err) {
-            setError(err.message);
         }
     };
 
@@ -132,7 +93,6 @@ export const BotControlPage = () => {
                 {/* ==================== BOT STATUS CARD ==================== */}
                 <div className="glass-card p-8">
                     <div className="flex items-center gap-4 mb-6">
-                        {/* Status indicator — large animated dot */}
                         <div className={`w-16 h-16 rounded-2xl flex items-center justify-center ${botStatus?.bot_active
                             ? 'bg-green-500/10 border border-green-500/20'
                             : 'bg-dark-300 border border-gold-500/10'
@@ -154,7 +114,6 @@ export const BotControlPage = () => {
                         </div>
                     </div>
 
-                    {/* Start/Stop buttons */}
                     <div className="flex gap-3">
                         {botStatus?.bot_active ? (
                             <button
@@ -180,14 +139,12 @@ export const BotControlPage = () => {
                 <div className="glass-card p-8">
                     <h3 className="text-lg font-semibold text-white mb-4">Current Configuration</h3>
                     <div className="space-y-4">
-                        {/* Strategy info */}
                         <div className="flex items-center justify-between py-3 border-b border-dark-300/50">
                             <span className="text-gray-400">Active Strategy</span>
                             <span className="text-white font-medium">
                                 {botStatus?.strategy?.name || 'None selected'}
                             </span>
                         </div>
-                        {/* Account info */}
                         <div className="flex items-center justify-between py-3 border-b border-dark-300/50">
                             <span className="text-gray-400">Broker Account</span>
                             <span className="text-white font-medium">
@@ -214,91 +171,6 @@ export const BotControlPage = () => {
                         </div>
                     </div>
                 </div>
-            </div>
-
-            {/* ==================== METAAPI CONNECTION ==================== */}
-            <div className="glass-card p-8">
-                <div className="flex items-center justify-between mb-6">
-                    <div>
-                        <h3 className="text-lg font-semibold text-white">MetaApi Connection</h3>
-                        <p className="text-gray-400 text-sm">Connect your broker account via MetaApi</p>
-                    </div>
-                    {!account && (
-                        <button
-                            onClick={() => setShowConnectForm(!showConnectForm)}
-                            className="btn-gold text-sm"
-                        >
-                            {showConnectForm ? 'Cancel' : 'Connect Account'}
-                        </button>
-                    )}
-                </div>
-
-                {showConnectForm && !account && (
-                    <form onSubmit={handleConnect} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                            <label className="block text-sm text-gray-400 mb-1">MetaApi Account ID</label>
-                            <input
-                                type="text"
-                                value={connectForm.account_id}
-                                onChange={(e) => setConnectForm({ ...connectForm, account_id: e.target.value })}
-                                className="glass-input"
-                                placeholder="Your MetaApi account ID"
-                                required
-                            />
-                        </div>
-                        <div>
-                            <label className="block text-sm text-gray-400 mb-1">API Token</label>
-                            <input
-                                type="password"
-                                value={connectForm.api_token}
-                                onChange={(e) => setConnectForm({ ...connectForm, api_token: e.target.value })}
-                                className="glass-input"
-                                placeholder="Your MetaApi token"
-                                required
-                            />
-                        </div>
-                        <div>
-                            <label className="block text-sm text-gray-400 mb-1">Broker Name</label>
-                            <input
-                                type="text"
-                                value={connectForm.broker_name}
-                                onChange={(e) => setConnectForm({ ...connectForm, broker_name: e.target.value })}
-                                className="glass-input"
-                                placeholder="e.g., IC Markets"
-                            />
-                        </div>
-                        <div>
-                            <label className="block text-sm text-gray-400 mb-1">Account Type</label>
-                            <select
-                                value={connectForm.account_type}
-                                onChange={(e) => setConnectForm({ ...connectForm, account_type: e.target.value })}
-                                className="glass-input"
-                            >
-                                <option value="demo">Demo</option>
-                                <option value="live">Live</option>
-                            </select>
-                        </div>
-                        <div className="sm:col-span-2">
-                            <button type="submit" className="btn-gold">Connect Account</button>
-                        </div>
-                    </form>
-                )}
-
-                {account && (
-                    <div className="glass-card bg-dark-300/40 p-4 rounded-xl">
-                        <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-xl bg-gold-500/10 flex items-center justify-center">
-                                <svg className="w-5 h-5 text-gold-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                </svg>
-                            </div>
-                            <div>
-                                <p className="text-white font-medium">{account.broker_name} — {account.account_type}</p>
-                                <p className="text-gray-400 text-sm">Token: {account.api_token_masked}</p>
-                            </div>
-                        </div>
-                    </div>
-                )}
             </div>
         </div>
     );

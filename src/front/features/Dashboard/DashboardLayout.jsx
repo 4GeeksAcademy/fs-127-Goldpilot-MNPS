@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import { Outlet, NavLink, useLocation, Navigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { UserProfile } from "./components/UserProfile";
+import { LanguageSwitcher } from "./components/LanguageSwitcher";
 
 /**
  * Ítem de navegación del sidebar.
@@ -55,6 +57,7 @@ export const DashboardLayout = () => {
     const token = localStorage.getItem("token");
     if (!token) return <Navigate to="/login" replace />;
 
+    const { t } = useTranslation();
     const location = useLocation();
     const mainRef = useRef(null);
 
@@ -67,10 +70,10 @@ export const DashboardLayout = () => {
 
     /** Rutas del sidebar — alineadas con routes.jsx */
     const menuItems = [
-        { label: "Dashboard", icon: "⊞", to: "/dashboard" },
-        { label: "Wallets", icon: "◈", to: "/dashboard/wallets" },
-        { label: "Bot Control", icon: "◉", to: "/dashboard/bot-control" },
-        { label: "Historial", icon: "◳", to: "/dashboard/historial" },
+        { label: t("nav.dashboard"), icon: "⊞", to: "/dashboard" },
+        { label: t("nav.wallets"), icon: "◈", to: "/dashboard/wallets" },
+        { label: t("nav.botControl"), icon: "◉", to: "/dashboard/bot-control" },
+        { label: t("nav.historial"), icon: "◳", to: "/dashboard/historial" },
     ];
 
     return (
@@ -100,7 +103,7 @@ export const DashboardLayout = () => {
                 <div className="flex flex-col gap-1">
                     {menuItems.map((item) => (
                         <SidebarItem
-                            key={item.label}
+                            key={item.to}
                             label={item.label}
                             icon={item.icon}
                             to={item.to}
@@ -132,7 +135,7 @@ export const DashboardLayout = () => {
                      */}
                     <div className="flex-1 flex flex-col hidden sm:flex">
                         <span className="text-2xl font-black tracking-tight text-white leading-none">
-                            Hola, <span
+                            {t("header.greeting")} <span
                                 className="font-black"
                                 style={{
                                     color: "var(--color-gold)",
@@ -141,9 +144,10 @@ export const DashboardLayout = () => {
                             >Olivia Brooks</span>
                         </span>
                         <span className="text-xs text-white/30 mt-1 tracking-wide">
-                            Bienvenida a tu estrategia ganadora
+                            {t("header.subtitle")}
                         </span>
                     </div>
+                    <LanguageSwitcher />
                     <UserProfile />
                 </header>
 

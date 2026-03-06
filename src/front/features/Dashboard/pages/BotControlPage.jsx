@@ -13,9 +13,11 @@
  */
 
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { getBotStatus, startBot, stopBot } from '../api';
 
 export const BotControlPage = () => {
+    const { t } = useTranslation();
     const [botStatus, setBotStatus] = useState(null);
     const [account, setAccount] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -45,7 +47,7 @@ export const BotControlPage = () => {
         setSuccess('');
         try {
             await startBot();
-            setSuccess('Bot started successfully!');
+            setSuccess(t('botControl.started'));
             fetchStatus();
         } catch (err) {
             setError(err.message);
@@ -60,7 +62,7 @@ export const BotControlPage = () => {
         setSuccess('');
         try {
             await stopBot();
-            setSuccess('Bot stopped.');
+            setSuccess(t('botControl.stopped_msg'));
             fetchStatus();
         } catch (err) {
             setError(err.message);
@@ -79,7 +81,7 @@ export const BotControlPage = () => {
 
     return (
         <div className="space-y-6">
-            <h2 className="text-2xl font-bold text-white">Bot Control Panel</h2>
+            <h2 className="text-2xl font-bold text-white">{t('botControl.title')}</h2>
 
             {/* Alerts */}
             {error && (
@@ -104,12 +106,12 @@ export const BotControlPage = () => {
                         </div>
                         <div>
                             <h3 className="text-xl font-bold text-white">
-                                Bot is {botStatus?.bot_active ? 'Running' : 'Stopped'}
+                                {t('botControl.botIs')} {botStatus?.bot_active ? t('botControl.running') : t('botControl.stopped')}
                             </h3>
                             <p className="text-gray-400 text-sm">
                                 {botStatus?.bot_active
-                                    ? 'The bot is actively trading XAUUSD'
-                                    : 'Start the bot to begin automated trading'}
+                                    ? t('botControl.activelyTrading')
+                                    : t('botControl.startPrompt')}
                             </p>
                         </div>
                     </div>
@@ -121,7 +123,7 @@ export const BotControlPage = () => {
                                 disabled={actionLoading}
                                 className="btn-danger flex-1"
                             >
-                                {actionLoading ? 'Stopping...' : 'Stop Bot'}
+                                {actionLoading ? t('botControl.stopping') : t('botControl.stopBot')}
                             </button>
                         ) : (
                             <button
@@ -129,7 +131,7 @@ export const BotControlPage = () => {
                                 disabled={actionLoading}
                                 className="btn-gold flex-1"
                             >
-                                {actionLoading ? 'Starting...' : 'Start Bot'}
+                                {actionLoading ? t('botControl.starting') : t('botControl.startBot')}
                             </button>
                         )}
                     </div>
@@ -137,36 +139,36 @@ export const BotControlPage = () => {
 
                 {/* ==================== CURRENT CONFIG ==================== */}
                 <div className="glass-card p-8">
-                    <h3 className="text-lg font-semibold text-white mb-4">Current Configuration</h3>
+                    <h3 className="text-lg font-semibold text-white mb-4">{t('botControl.currentConfig')}</h3>
                     <div className="space-y-4">
                         <div className="flex items-center justify-between py-3 border-b border-dark-300/50">
-                            <span className="text-gray-400">Active Strategy</span>
+                            <span className="text-gray-400">{t('botControl.activeStrategy')}</span>
                             <span className="text-white font-medium">
-                                {botStatus?.strategy?.name || 'None selected'}
+                                {botStatus?.strategy?.name || t('botControl.noneSelected')}
                             </span>
                         </div>
                         <div className="flex items-center justify-between py-3 border-b border-dark-300/50">
-                            <span className="text-gray-400">Broker Account</span>
+                            <span className="text-gray-400">{t('botControl.brokerAccount')}</span>
                             <span className="text-white font-medium">
-                                {account?.broker_name || 'Not connected'}
+                                {account?.broker_name || t('botControl.notConnected')}
                             </span>
                         </div>
                         <div className="flex items-center justify-between py-3 border-b border-dark-300/50">
-                            <span className="text-gray-400">Account Type</span>
+                            <span className="text-gray-400">{t('botControl.accountType')}</span>
                             <span className={`px-2 py-1 rounded-lg text-xs font-medium ${account?.account_type === 'live'
                                 ? 'bg-red-500/10 text-red-400'
                                 : 'bg-green-500/10 text-green-400'
                                 }`}>
-                                {account?.account_type?.toUpperCase() || 'N/A'}
+                                {account?.account_type?.toUpperCase() || t('common.na')}
                             </span>
                         </div>
                         <div className="flex items-center justify-between py-3">
-                            <span className="text-gray-400">Connection Status</span>
+                            <span className="text-gray-400">{t('botControl.connectionStatus')}</span>
                             <span className={`px-2 py-1 rounded-lg text-xs font-medium ${account?.status === 'connected'
                                 ? 'bg-green-500/10 text-green-400'
                                 : 'bg-gray-500/10 text-gray-400'
                                 }`}>
-                                {account?.status || 'N/A'}
+                                {account?.status || t('common.na')}
                             </span>
                         </div>
                     </div>

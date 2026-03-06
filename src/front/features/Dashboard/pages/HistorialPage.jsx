@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { PortfolioCard } from "../components/PortfolioCard";
 import { getTradeHistory } from "../api";
 
 /**
  * Página de Historial de Operaciones — /dashboard/historial
- * Historia de usuario: "Como usuario quiero ver el historial de mis operaciones
- * para poder analizar mis inversiones."
- *
- * Conectada al endpoint GET /api/dashboard/trades/history
- * que consulta la tabla trades filtrada por user_id y status='closed'.
  */
 
 /**
@@ -32,21 +28,21 @@ const calcStats = (trades) => {
     return { totalTrades, winning, losing: totalTrades - winning, totalPnL, winRate };
 };
 
-/** Filtros disponibles para el tipo de operación */
-const FILTERS = [
-    { label: "Todos", value: "ALL" },
-    { label: "Compras", value: "BUY" },
-    { label: "Ventas", value: "SELL" },
-];
-
 /**
  * Página principal del Historial de Operaciones.
  * Muestra resumen estadístico + tabla completa de trades cerrados.
  */
 export const HistorialPage = () => {
+    const { t } = useTranslation();
     const [trades, setTrades] = useState([]);
     const [loading, setLoading] = useState(true);
     const [activeFilter, setActiveFilter] = useState("ALL");
+
+    const FILTERS = [
+        { label: t("historial.filterAll"), value: "ALL" },
+        { label: t("historial.filterBuy"), value: "BUY" },
+        { label: t("historial.filterSell"), value: "SELL" },
+    ];
 
     useEffect(() => {
         getTradeHistory()
@@ -67,32 +63,32 @@ export const HistorialPage = () => {
 
             {/* Cabecera de la página */}
             <div className="pb-2 border-b border-white/[0.05]">
-                <h1 className="text-2xl font-bold tracking-tight text-white">Historial</h1>
+                <h1 className="text-2xl font-bold tracking-tight text-white">{t("historial.title")}</h1>
                 <p className="text-xs text-white/30 mt-1">
-                    Registro completo de operaciones cerradas en XAUUSD
+                    {t("historial.subtitle")}
                 </p>
             </div>
 
             {/* Resumen estadístico — 3 PortfolioCards */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <PortfolioCard
-                    title="Total Operaciones"
+                    title={t("historial.totalOperations")}
                     value={String(stats.totalTrades)}
                     subtitle={`${stats.winning}G · ${stats.losing}P`}
                     icon="◳"
                     color="blue"
                 />
                 <PortfolioCard
-                    title="Win Rate"
+                    title={t("dashboard.winRate")}
                     value={`${stats.winRate.toFixed(1)}%`}
-                    subtitle="Operaciones filtradas"
+                    subtitle={t("historial.filteredOperations")}
                     icon="%"
                     color={stats.winRate >= 50 ? "green" : "red"}
                 />
                 <PortfolioCard
-                    title="P&L Total"
+                    title={t("dashboard.totalPnl")}
                     value={`${isProfitable ? "+" : ""}$${stats.totalPnL.toFixed(2)}`}
-                    subtitle="Resultado acumulado"
+                    subtitle={t("historial.accumulatedResult")}
                     icon="◬"
                     trend={isProfitable ? "up" : "down"}
                     color={isProfitable ? "green" : "red"}
@@ -106,9 +102,9 @@ export const HistorialPage = () => {
             >
                 {/* Cabecera tabla + filtros */}
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 px-6 py-4 border-b border-white/[0.05]">
-                    <h2 className="text-sm font-semibold text-white">Operaciones cerradas</h2>
+                    <h2 className="text-sm font-semibold text-white">{t("historial.closedOperations")}</h2>
 
-                    {/* Filtros BUY / SELL / Todos */}
+                    {/* Filtros BUY / SELL / All */}
                     <div className="flex gap-1 p-1 rounded-xl" style={{ background: "rgba(255,255,255,0.04)" }}>
                         {FILTERS.map(({ label, value }) => (
                             <button
@@ -131,21 +127,21 @@ export const HistorialPage = () => {
                     <table className="w-full">
                         <thead>
                             <tr className="text-[10px] font-medium text-white/30 uppercase tracking-wider border-b border-white/[0.04]">
-                                <th className="text-left px-5 py-3">Entrada</th>
-                                <th className="text-left px-4 py-3">Salida</th>
-                                <th className="text-left px-4 py-3 hidden lg:table-cell">Índice</th>
-                                <th className="text-left px-4 py-3">Tipo</th>
+                                <th className="text-left px-5 py-3">{t("historial.entry")}</th>
+                                <th className="text-left px-4 py-3">{t("historial.exit")}</th>
+                                <th className="text-left px-4 py-3 hidden lg:table-cell">{t("historial.index")}</th>
+                                <th className="text-left px-4 py-3">{t("historial.type")}</th>
                                 <th className="text-right px-4 py-3 hidden md:table-cell">Lots</th>
                                 <th className="text-right px-4 py-3 hidden md:table-cell">SL</th>
                                 <th className="text-right px-4 py-3 hidden md:table-cell">TP</th>
-                                <th className="text-right px-5 py-3">Revenue</th>
+                                <th className="text-right px-5 py-3">{t("historial.revenue")}</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-white/[0.03]">
                             {filteredTrades.length === 0 ? (
                                 <tr>
                                     <td colSpan={8} className="text-center py-12 text-xs text-white/20">
-                                        No hay operaciones para el filtro seleccionado
+                                        {t("historial.noTradesForFilter")}
                                     </td>
                                 </tr>
                             ) : (
@@ -184,7 +180,7 @@ export const HistorialPage = () => {
                                                             : "var(--color-gold)",
                                                     }}
                                                 >
-                                                    {trade.trade_type === "BUY" ? "▲ Compra" : "▼ Venta"}
+                                                    {trade.trade_type === "BUY" ? t("historial.buy") : t("historial.sell")}
                                                 </span>
                                             </td>
 
@@ -227,10 +223,9 @@ export const HistorialPage = () => {
                 {/* Footer de la tabla */}
                 <div className="px-6 py-3 border-t border-white/[0.04] flex items-center justify-between">
                     <span className="text-[11px] text-white/20">
-                        {filteredTrades.length} operación{filteredTrades.length !== 1 ? "es" : ""}
+                        {filteredTrades.length} {filteredTrades.length === 1 ? t("historial.operation_one") : t("historial.operation_other")}
                     </span>
-                    {/* TODO: Añadir paginación cuando el backend devuelva datos reales */}
-                    <span className="text-[10px] text-white/15">Página 1 de 1</span>
+                    <span className="text-[10px] text-white/15">{t("historial.page")}</span>
                 </div>
             </div>
         </div>

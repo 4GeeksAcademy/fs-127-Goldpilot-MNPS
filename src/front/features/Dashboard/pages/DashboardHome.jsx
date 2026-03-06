@@ -5,7 +5,6 @@ import { PortfolioCard } from "../components/PortfolioCard";
 import { WalletPanel } from "../components/WalletPanel";
 import { AdBanner } from "../components/AdBanner";
 import { TradeTable } from "../components/TradeTable";
-import { BotControlPage } from "./BotControlPage";
 import { getDashboardSummary } from "../api";
 import { StrategiesCard } from "../../../components/strategies/StrategiesCard";
 

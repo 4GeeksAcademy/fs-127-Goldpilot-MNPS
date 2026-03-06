@@ -1,0 +1,125 @@
+{
+  "nav": {
+    "dashboard": "Dashboard",
+    "wallets": "Wallets",
+    "botControl": "Control del Bot",
+    "historial": "Historial"
+  },
+  "header": {
+    "greeting": "Hola,",
+    "subtitle": "Bienvenida a tu estrategia ganadora"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "noWallets": "No hay wallets conectadas — añade una desde el panel lateral",
+    "totalPnl": "P&L Total",
+    "winRate": "Tasa de Éxito",
+    "operations": "operaciones",
+    "noOperations": "Sin operaciones",
+    "strategiesTitle": "Protocolos de Inversión",
+    "strategiesSubtitle": "Selecciona la estrategia que el bot ejecutará en tus cuentas conectadas."
+  },
+  "botControl": {
+    "title": "Panel de Control del Bot",
+    "running": "En ejecución",
+    "stopped": "Detenido",
+    "botIs": "El bot está",
+    "activelyTrading": "El bot está operando activamente en XAUUSD",
+    "startPrompt": "Inicia el bot para comenzar a operar automáticamente",
+    "stopBot": "Detener Bot",
+    "startBot": "Iniciar Bot",
+    "stopping": "Deteniendo...",
+    "starting": "Iniciando...",
+    "currentConfig": "Configuración Actual",
+    "activeStrategy": "Estrategia Activa",
+    "brokerAccount": "Cuenta del Broker",
+    "accountType": "Tipo de Cuenta",
+    "connectionStatus": "Estado de Conexión",
+    "noneSelected": "Ninguna seleccionada",
+    "notConnected": "No conectado",
+    "noStrategy": "Sin estrategia asignada. Selecciona una estrategia antes de iniciar el bot.",
+    "started": "¡Bot iniciado correctamente!",
+    "stopped_msg": "Bot detenido."
+  },
+  "wallets": {
+    "title": "Wallets",
+    "subtitle": "Gestiona tus cuentas MetaTrader conectadas",
+    "addWallet": "Añadir Wallet",
+    "noWallets": "Sin wallets aún",
+    "connected": "Conectado",
+    "disconnected": "Desconectado",
+    "balance": "Balance",
+    "equity": "Equity",
+    "platform": "Plataforma",
+    "broker": "Broker",
+    "server": "Servidor",
+    "accountType": "Tipo de Cuenta",
+    "sync": "Sincronizar",
+    "delete": "Eliminar",
+    "configLink": "Enlace de Configuración"
+  },
+  "historial": {
+    "title": "Historial",
+    "subtitle": "Registro completo de operaciones cerradas en XAUUSD",
+    "noTrades": "Sin operaciones cerradas aún",
+    "noTradesForFilter": "No hay operaciones para el filtro seleccionado",
+    "closedOperations": "Operaciones cerradas",
+    "totalOperations": "Total Operaciones",
+    "filteredOperations": "Operaciones filtradas",
+    "accumulatedResult": "Resultado acumulado",
+    "filterAll": "Todos",
+    "filterBuy": "Compras",
+    "filterSell": "Ventas",
+    "buy": "▲ Compra",
+    "sell": "▼ Venta",
+    "entry": "Entrada",
+    "exit": "Salida",
+    "index": "Índice",
+    "type": "Tipo",
+    "revenue": "Revenue",
+    "operation_one": "operación",
+    "operation_other": "operaciones",
+    "page": "Página 1 de 1"
+  },
+  "auth": {
+    "login": "Iniciar sesión",
+    "signup": "Registrarse",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "firstName": "Nombre",
+    "lastName": "Apellido",
+    "username": "Usuario",
+    "phone": "Teléfono",
+    "birthDate": "Fecha de nacimiento",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "noAccount": "¿No tienes cuenta?",
+    "hasAccount": "¿Ya tienes cuenta?",
+    "terms": "Acepto los",
+    "termsLink": "Términos y Condiciones",
+    "verifyEmail": "Verifica tu correo",
+    "verifyMsg": "Te enviamos un enlace de verificación a tu dirección de correo."
+  },
+  "landing": {
+    "hero": {
+      "title": "Opera en Oro con Precisión",
+      "subtitle": "Estrategias automatizadas en XAUUSD impulsadas por IA — conecta tu broker y deja que el algoritmo trabaje.",
+      "cta": "Comenzar",
+      "login": "Iniciar sesión"
+    },
+    "footer": {
+      "terms": "Términos",
+      "privacy": "Privacidad",
+      "contact": "Contacto"
+    }
+  },
+  "common": {
+    "loading": "Cargando...",
+    "error": "Ocurrió un error",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar",
+    "back": "Volver",
+    "close": "Cerrar",
+    "na": "N/A"
+  }
+}

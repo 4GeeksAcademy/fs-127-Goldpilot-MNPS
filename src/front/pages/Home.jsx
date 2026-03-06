@@ -1,6 +1,5 @@
 import React from "react";
 import { Theme, Container } from "@radix-ui/themes";
-import { StrategiesCard } from "../components/strategies/StrategiesCard.jsx";
 
 export const Home = () => {
     return (
@@ -20,7 +19,7 @@ export const Home = () => {
                         </p>
                     </div>
 
-                    <StrategiesCard />
+
                 </Container>
             </main>
         </Theme>

@@ -21,7 +21,10 @@ class Strategy(db.Model):
             "id": self.id,
             "name": self.name,
             "risk_level": self.risk_level,
-            "lot_size": self.default_lot_size
+            "description": self.description,
+            "lot_size": self.default_lot_size,
+            "tp": self.default_take_profit,
+            "sl": self.default_stop_loss
         }
 
 class UserStrategy(db.Model):

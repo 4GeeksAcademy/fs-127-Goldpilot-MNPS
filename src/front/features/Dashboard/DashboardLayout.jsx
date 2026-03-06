@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import { Outlet, NavLink, useLocation, Navigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { UserProfile } from "./components/UserProfile";
-import useGlobalReducer from "../../hooks/useGlobalReducer";
-import { getProfile } from "./api";
+import { LanguageSwitcher } from "./components/LanguageSwitcher";
 
 /**
  * Ítem de navegación del sidebar.
@@ -48,7 +48,7 @@ export const DashboardLayout = () => {
     const token = localStorage.getItem("token");
     if (!token) return <Navigate to="/login" replace />;
 
-    const { store, dispatch } = useGlobalReducer();
+    const { t } = useTranslation();
     const location = useLocation();
     const mainRef = useRef(null);
 
@@ -72,10 +72,9 @@ export const DashboardLayout = () => {
 
     const menuItems = [
         { label: "Dashboard", icon: "⊞", to: "/dashboard" },
-        { label: "Wallets",      icon: "◈", to: "/dashboard/wallets" },
-        { label: "Bot Control",  icon: "◉", to: "/dashboard/bot-control" },
-        { label: "Historial",    icon: "◳", to: "/dashboard/historial" },
-        { label: "Ajustes",   icon: "⚙", to: "/dashboard/ajustes" },
+        { label: "Estrategias", icon: "⌖", to: "/dashboard/strategies" },
+        { label: "Wallets", icon: "◈", to: "/dashboard/wallets" },
+        { label: "Historial", icon: "◳", to: "/dashboard/historial" },
     ];
 
     return (
@@ -102,7 +101,12 @@ export const DashboardLayout = () => {
                 {/* Menú */}
                 <div className="flex flex-col gap-1">
                     {menuItems.map((item) => (
-                        <SidebarItem key={item.label} label={item.label} icon={item.icon} to={item.to} />
+                        <SidebarItem
+                            key={item.to}
+                            label={item.label}
+                            icon={item.icon}
+                            to={item.to}
+                        />
                     ))}
                 </div>
             </aside>
@@ -126,15 +130,16 @@ export const DashboardLayout = () => {
                     </div>
                     <div className="flex-1 flex flex-col hidden sm:flex">
                         <span className="text-2xl font-black tracking-tight text-white leading-none">
-                            Hola, <span
+                            {t("header.greeting")} <span
                                 className="font-black"
                                 style={{ color: "var(--color-gold)", textShadow: "0 0 24px rgba(195,143,55,0.35)" }}
                             >{greeting}</span>
                         </span>
                         <span className="text-xs text-white/30 mt-1 tracking-wide">
-                            Bienvenida a tu estrategia ganadora
+                            {t("header.subtitle")}
                         </span>
                     </div>
+                    <LanguageSwitcher />
                     <UserProfile />
                 </header>
 

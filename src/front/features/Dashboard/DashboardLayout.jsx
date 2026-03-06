@@ -72,8 +72,9 @@ export const DashboardLayout = () => {
 
     const menuItems = [
         { label: "Dashboard", icon: "⊞", to: "/dashboard" },
-        { label: "Wallets",   icon: "◈", to: "/dashboard/wallets" },
-        { label: "Historial", icon: "◳", to: "/dashboard/historial" },
+        { label: "Wallets",      icon: "◈", to: "/dashboard/wallets" },
+        { label: "Bot Control",  icon: "◉", to: "/dashboard/bot-control" },
+        { label: "Historial",    icon: "◳", to: "/dashboard/historial" },
         { label: "Ajustes",   icon: "⚙", to: "/dashboard/ajustes" },
     ];
 

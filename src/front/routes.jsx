@@ -15,6 +15,7 @@ import { DashboardHome } from "./features/Dashboard/pages/DashboardHome";
 import { HistorialPage } from "./features/Dashboard/pages/HistorialPage";
 import { WalletsPage } from "./features/Dashboard/pages/WalletsPage";
 import { SettingsPage } from "./features/Dashboard/pages/SettingsPage";
+import { BotControlPage } from "./features/Dashboard/pages/BotControlPage";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import TermsAndConditions from "./pages/TermsAndConditions";
@@ -33,6 +34,7 @@ export const router = createBrowserRouter(
         <Route index element={<DashboardHome />} />
         <Route path="historial" element={<HistorialPage />} />
         <Route path="wallets" element={<WalletsPage />} />
+        <Route path="bot-control" element={<BotControlPage />} />
         <Route path="ajustes" element={<SettingsPage />} />
       </Route>
       <Route element={<Layout />} errorElement={<h1>No encontrado!</h1>} >

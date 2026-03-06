@@ -68,8 +68,8 @@ export const DashboardLayout = () => {
     /** Rutas del sidebar — alineadas con routes.jsx */
     const menuItems = [
         { label: "Dashboard", icon: "⊞", to: "/dashboard" },
+        { label: "Estrategias", icon: "⌖", to: "/dashboard/strategies" },
         { label: "Wallets", icon: "◈", to: "/dashboard/wallets" },
-        { label: "Bot Control", icon: "◉", to: "/dashboard/bot-control" },
         { label: "Historial", icon: "◳", to: "/dashboard/historial" },
     ];
 

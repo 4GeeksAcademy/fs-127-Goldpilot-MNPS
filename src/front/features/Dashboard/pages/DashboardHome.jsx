@@ -7,6 +7,7 @@ import { WalletPanel } from "../components/WalletPanel";
 import { AdBanner } from "../components/AdBanner";
 import { TradeTable } from "../components/TradeTable";
 import { getDashboardSummary } from "../api";
+import { StrategiesCard } from "../../../components/strategies/StrategiesCard";
 
 const EMPTY_SUMMARY = {
     wallets: [],
@@ -16,10 +17,6 @@ const EMPTY_SUMMARY = {
 const fmt = (val, decimals = 2) =>
     val != null ? `$${Number(val).toLocaleString("en-US", { minimumFractionDigits: decimals })}` : "–";
 
-/**
- * Calcula el porcentaje de variación entre equity y balance.
- * Retorna 0 si alguno de los valores no está disponible.
- */
 const calcChangePercent = (equity, balance) => {
     if (equity == null || balance == null || balance === 0) return 0;
     return ((equity - balance) / balance) * 100;
@@ -46,7 +43,7 @@ export const DashboardHome = () => {
                 <h1 className="text-2xl font-bold tracking-tight text-white">{t("dashboard.title")}</h1>
             </div>
 
-            {/* Cards dinámicas: una por cada wallet del usuario */}
+            {/* Cards dinámicas */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
                 {wallets.length > 0 ? (
                     wallets.map((wallet) => (
@@ -66,7 +63,6 @@ export const DashboardHome = () => {
                     </div>
                 )}
 
-                {/* Tarjetas de estadísticas generales */}
                 <PortfolioCard
                     title={t("dashboard.totalPnl")}
                     value={stats.total_profit !== 0 ? `${isProfitable ? "+" : ""}${fmt(stats.total_profit)}` : "–"}
@@ -80,6 +76,7 @@ export const DashboardHome = () => {
                 />
             </div>
 
+            {/* Bloque de Gráfica y Tabla (SOLO UNO) */}
             <div className="flex flex-col xl:flex-row gap-6 w-full">
                 <div className="flex flex-col gap-5 flex-1 min-w-0">
                     <div className="w-full rounded-2xl p-5 border border-white/[0.06]" style={{ background: "rgba(255,255,255,0.03)", backdropFilter: "blur(16px)" }}>
@@ -91,6 +88,15 @@ export const DashboardHome = () => {
                     <WalletPanel />
                     <AdBanner className="h-full" />
                 </div>
+            </div>
+
+            {/* Sección de Estrategias - ¡Aquí brilla! */}
+            <div className="w-full mt-8 pt-8 border-t border-white/[0.05]">
+                <div className="mb-6">
+                    <h2 className="text-2xl font-bold tracking-tight text-white mb-2 text-center lg:text-left">{t("dashboard.strategiesTitle")}</h2>
+                    <p className="text-sm text-gray-400 text-center lg:text-left">{t("dashboard.strategiesSubtitle")}</p>
+                </div>
+                <StrategiesCard />
             </div>
 
         </div>

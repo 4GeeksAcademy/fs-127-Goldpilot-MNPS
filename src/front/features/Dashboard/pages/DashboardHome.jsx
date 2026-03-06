@@ -5,8 +5,8 @@ import { PortfolioCard } from "../components/PortfolioCard";
 import { WalletPanel } from "../components/WalletPanel";
 import { AdBanner } from "../components/AdBanner";
 import { TradeTable } from "../components/TradeTable";
+import { BotControlPage } from "./BotControlPage";
 import { getDashboardSummary } from "../api";
-import { StrategiesCard } from "../../../components/strategies/StrategiesCard";
 
 const EMPTY_SUMMARY = {
     wallets: [],
@@ -86,15 +86,6 @@ export const DashboardHome = () => {
                     <WalletPanel />
                     <AdBanner className="h-full" />
                 </div>
-            </div>
-
-            {/* Sección de Estrategias - ¡Aquí brilla! */}
-            <div className="w-full mt-8 pt-8 border-t border-white/[0.05]">
-                <div className="mb-6">
-                    <h2 className="text-2xl font-bold tracking-tight text-white mb-2 text-center lg:text-left">Protocolos de Inversión</h2>
-                    <p className="text-sm text-gray-400 text-center lg:text-left">Selecciona la estrategia que el bot ejecutará en tus cuentas conectadas.</p>
-                </div>
-                <StrategiesCard />
             </div>
 
             <BotControlPage />

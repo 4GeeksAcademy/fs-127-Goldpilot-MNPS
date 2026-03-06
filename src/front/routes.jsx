@@ -18,6 +18,7 @@ import { BotControlPage } from "./features/Dashboard/pages/BotControlPage";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import TermsAndConditions from "./pages/TermsAndConditions";
+import { StrategiesPage } from "./features/Dashboard/pages/StrategiesPage";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -32,6 +33,7 @@ export const router = createBrowserRouter(
       <Route path="/dashboard" element={<DashboardLayout />} errorElement={<h1>No encontrado!</h1>}>
         <Route index element={<DashboardHome />} />
         {/* Ruta: Historial de operaciones — HistorialPage (tabla: trades) */}
+        <Route path="strategies" element={<StrategiesPage />} />
         <Route path="historial" element={<HistorialPage />} />
         <Route path="wallets" element={<WalletsPage />} />
         <Route path="bot-control" element={<BotControlPage />} />

@@ -70,10 +70,10 @@ export const DashboardLayout = () => {
 
     /** Rutas del sidebar — alineadas con routes.jsx */
     const menuItems = [
-        { label: t("nav.dashboard"), icon: "⊞", to: "/dashboard" },
-        { label: t("nav.wallets"), icon: "◈", to: "/dashboard/wallets" },
-        { label: t("nav.botControl"), icon: "◉", to: "/dashboard/bot-control" },
-        { label: t("nav.historial"), icon: "◳", to: "/dashboard/historial" },
+        { label: "Dashboard", icon: "⊞", to: "/dashboard" },
+        { label: "Estrategias", icon: "⌖", to: "/dashboard/strategies" },
+        { label: "Wallets", icon: "◈", to: "/dashboard/wallets" },
+        { label: "Historial", icon: "◳", to: "/dashboard/historial" },
     ];
 
     return (

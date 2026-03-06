@@ -64,7 +64,19 @@ class Strategy(Base):
     def __repr__(self):
         return f"<Strategy(id={self.id}, name='{self.name}', risk_level='{self.risk_level}')>"
 
-
+    def serialize(self):
+        """Convierte el objeto a un diccionario para enviarlo como JSON"""
+        return {
+            "id": self.id,
+            "name": self.name,
+            "display_name": self.display_name,
+            "risk_level": self.risk_level,
+            "description": self.description,
+            "max_trades_per_day": self.max_trades_per_day,
+            "lot_size_factor": self.lot_size_factor,
+            "is_active": self.is_active
+        }
+    
 class MetaApiAccount(Base):
     """MetaTrader API account connection model"""
     __tablename__ = 'meta_api_accounts'

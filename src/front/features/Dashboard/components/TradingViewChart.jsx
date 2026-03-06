@@ -1,172 +1,71 @@
-import React, { useEffect, useRef, useState } from "react";
-import { createChart, CandlestickSeries } from "lightweight-charts";
-
-/** Intervalos disponibles y su equivalente en segundos para spacing de mock data */
-const INTERVALS = ["1H", "4H", "1D", "1W"];
+import { useEffect, useRef, memo } from "react";
 
 /**
- * Genera velas (candlestick) mock para XAUUSD en el rango de precio del oro (~2000-2100 USD).
- * @param {number} count - Número de velas
- * @param {number} intervalSecs - Espaciado temporal entre velas en segundos
+ * Widget embed oficial de TradingView para gráfico avanzado de velas.
+ * Muestra datos reales en tiempo real directamente desde TradingView.
+ * No requiere backend ni wallet conectada.
+ *
+ * @param {string} symbol - Par de trading (default: 'OANDA:XAUUSD')
+ * @param {string} theme - Tema visual: 'dark' | 'light' (default: 'dark')
  */
-const generateXauusdCandles = (count = 80, intervalSecs = 3600) => {
-    const candles = [];
-    let base = 2050;
-    const now = Math.floor(Date.now() / 1000);
-
-    for (let i = count; i >= 0; i--) {
-        const open = base + (Math.random() - 0.5) * 15;
-        const close = open + (Math.random() - 0.5) * 12;
-        const high = Math.max(open, close) + Math.random() * 6;
-        const low = Math.min(open, close) - Math.random() * 6;
-
-        candles.push({
-            time: now - i * intervalSecs,
-            open: parseFloat(open.toFixed(2)),
-            high: parseFloat(high.toFixed(2)),
-            low: parseFloat(low.toFixed(2)),
-            close: parseFloat(close.toFixed(2)),
-        });
-        base = close;
-    }
-
-    return candles;
-};
-
-/** Mapeo de intervalo de UI → segundos para el mock de datos */
-const INTERVAL_SECS = { "1H": 3600, "4H": 14400, "1D": 86400, "1W": 604800 };
-
-/**
- * Gráfico de velas (candlestick) para el par XAUUSD (Oro / USD).
- * Usa Lightweight Charts con el sistema de diseño "Liquid Glass" del proyecto.
- * TODO: Conectar con endpoint real GET /api/market/candles?symbol=XAUUSD&interval=1H
- */
-export const TradingViewChart = () => {
-    const chartContainerRef = useRef(null);
-    const chartRef = useRef(null);
-    const seriesRef = useRef(null);
-    const [activeInterval, setActiveInterval] = useState("1H");
-    const [lastCandle, setLastCandle] = useState(null);
+const TradingViewWidget = ({ symbol = "OANDA:XAUUSD", theme = "dark" }) => {
+    const containerRef = useRef(null);
 
     useEffect(() => {
-        if (!chartContainerRef.current) return;
+        if (!containerRef.current) return;
 
-        const container = chartContainerRef.current;
+        containerRef.current.innerHTML = "";
 
-        const chart = createChart(container, {
-            width: container.clientWidth,
-            height: container.clientHeight,
-            layout: {
-                background: { color: "transparent" },
-                textColor: "rgba(255, 255, 255, 0.6)",
-                fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif",
-            },
-            grid: {
-                vertLines: { color: "rgba(255, 255, 255, 0.04)" },
-                horzLines: { color: "rgba(255, 255, 255, 0.04)" },
-            },
-            crosshair: {
-                vertLine: { color: "rgba(195, 143, 55, 0.5)", width: 1, style: 1 },
-                horzLine: { color: "rgba(195, 143, 55, 0.5)", width: 1, style: 1 },
-            },
-            rightPriceScale: { borderColor: "rgba(255, 255, 255, 0.08)" },
-            timeScale: {
-                borderColor: "rgba(255, 255, 255, 0.08)",
-                timeVisible: true,
-                secondsVisible: false,
-            },
+        const script = document.createElement("script");
+        script.src = "https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js";
+        script.type = "text/javascript";
+        script.async = true;
+        script.innerHTML = JSON.stringify({
+            autosize: true,
+            symbol,
+            interval: "60",
+            timezone: "Etc/UTC",
+            theme,
+            style: "1",
+            locale: "es",
+            enable_publishing: false,
+            allow_symbol_change: true,
+            calendar: false,
+            support_host: "https://www.tradingview.com",
+            hide_side_toolbar: false,
+            details: true,
+            hotlist: false,
+            backgroundColor: "rgba(0, 0, 0, 0)",
         });
 
-        chartRef.current = chart;
-
-        const candleSeries = chart.addSeries(CandlestickSeries, {
-            upColor: "#c38f37",
-            downColor: "#564535",
-            borderVisible: false,
-            wickUpColor: "#c38f37",
-            wickDownColor: "#7a6050",
-        });
-
-        seriesRef.current = candleSeries;
-
-        const data = generateXauusdCandles(80, INTERVAL_SECS["1H"]);
-        candleSeries.setData(data);
-        setLastCandle(data[data.length - 1]);
-        chart.timeScale().fitContent();
-
-        const resizeObserver = new ResizeObserver((entries) => {
-            const { width, height } = entries[0].contentRect;
-            chart.applyOptions({ width, height });
-        });
-
-        resizeObserver.observe(container);
+        containerRef.current.appendChild(script);
 
         return () => {
-            resizeObserver.disconnect();
-            chart.remove();
+            if (containerRef.current) {
+                containerRef.current.innerHTML = "";
+            }
         };
-    }, []);
-
-    /** Actualiza los datos al cambiar el intervalo seleccionado */
-    const handleIntervalChange = (interval) => {
-        setActiveInterval(interval);
-        if (seriesRef.current) {
-            const secs = INTERVAL_SECS[interval] ?? 3600;
-            const data = generateXauusdCandles(80, secs);
-            seriesRef.current.setData(data);
-            setLastCandle(data[data.length - 1]);
-            chartRef.current?.timeScale().fitContent();
-        }
-    };
-
-    const priceChange = lastCandle ? (lastCandle.close - lastCandle.open) : 0;
-    const priceChangePct = lastCandle ? ((priceChange / lastCandle.open) * 100) : 0;
-    const isPositive = priceChange >= 0;
+    }, [symbol, theme]);
 
     return (
-        <div className="w-full flex flex-col gap-4">
-            {/* Cabecera del gráfico */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                <div>
-                    <div className="flex items-center gap-2">
-                        <span className="text-xs font-bold px-2 py-0.5 rounded-full"
-                            style={{ background: "rgba(195,143,55,0.15)", color: "var(--color-gold)" }}>
-                            XAUUSD
-                        </span>
-                        <span className="text-2xl font-bold text-white tracking-tight">
-                            {lastCandle ? lastCandle.close.toFixed(2) : "2,050.00"}
-                        </span>
-                        <span className="text-white/40 text-sm">USD</span>
-                    </div>
-                    <p className="text-sm font-medium mt-0.5"
-                        style={{ color: isPositive ? "var(--color-olive)" : "#f87171" }}>
-                        {isPositive ? "+" : ""}{priceChange.toFixed(2)} ({isPositive ? "+" : ""}{priceChangePct.toFixed(2)}%)
-                    </p>
-                </div>
-
-                {/* Selector de intervalo */}
-                <div className="flex gap-2">
-                    {INTERVALS.map((interval) => (
-                        <button
-                            key={interval}
-                            onClick={() => handleIntervalChange(interval)}
-                            className="px-3 py-1 rounded-lg text-xs font-medium transition-all"
-                            style={activeInterval === interval
-                                ? { background: "var(--color-gold)", color: "#1a1005" }
-                                : { background: "rgba(255,255,255,0.05)", color: "rgba(255,255,255,0.5)" }
-                            }
-                        >
-                            {interval}
-                        </button>
-                    ))}
-                </div>
-            </div>
-
-            {/* Contenedor del gráfico */}
+        <div className="tradingview-widget-container" style={{ height: "100%", width: "100%" }}>
             <div
-                ref={chartContainerRef}
-                className="w-full h-[380px] rounded-xl overflow-hidden"
+                ref={containerRef}
+                className="tradingview-widget-container__widget"
+                style={{ height: "100%", width: "100%" }}
             />
         </div>
     );
 };
+
+/**
+ * Wrapper que expone TradingViewChart con la misma interfaz que el componente anterior.
+ * Usa memo para evitar re-renders innecesarios del widget embed.
+ */
+export const TradingViewChart = memo(() => (
+    <div className="w-full h-[500px]">
+        <TradingViewWidget symbol="OANDA:XAUUSD" theme="dark" />
+    </div>
+));
+
+TradingViewChart.displayName = "TradingViewChart";

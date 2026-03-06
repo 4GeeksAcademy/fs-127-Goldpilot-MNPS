@@ -196,3 +196,28 @@ export const getTradeHistory = async () => {
   }
   return response.json();
 };
+
+/**
+ * Obtiene candles históricas OHLCV para un símbolo de mercado vía MetaApi.
+ * @param {string} symbol - Instrumento (default: 'XAUUSD')
+ * @param {string} timeframe - Temporalidad: '1h','4h','1d','1w' (default: '1h')
+ * @param {number} limit - Número de velas (default: 100)
+ * @returns {{ candles: Array, symbol: string, timeframe: string }}
+ */
+export const getMarketCandles = async (
+  symbol = "XAUUSD",
+  timeframe = "1h",
+  limit = 100,
+) => {
+  const token = localStorage.getItem("token");
+  const params = new URLSearchParams({
+    symbol,
+    timeframe,
+    limit: String(limit),
+  });
+  const response = await fetch(`${BACKEND_URL}/api/market/candles?${params}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  if (!response.ok) return { candles: [], symbol, timeframe };
+  return response.json();
+};

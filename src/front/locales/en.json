@@ -15,7 +15,9 @@
     "totalPnl": "Total P&L",
     "winRate": "Win Rate",
     "operations": "operations",
-    "noOperations": "No operations"
+    "noOperations": "No operations",
+    "strategiesTitle": "Investment Protocols",
+    "strategiesSubtitle": "Select the strategy the bot will execute on your connected accounts."
   },
   "botControl": {
     "title": "Bot Control Panel",

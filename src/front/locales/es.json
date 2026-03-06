@@ -15,7 +15,9 @@
     "totalPnl": "P&L Total",
     "winRate": "Tasa de Éxito",
     "operations": "operaciones",
-    "noOperations": "Sin operaciones"
+    "noOperations": "Sin operaciones",
+    "strategiesTitle": "Protocolos de Inversión",
+    "strategiesSubtitle": "Selecciona la estrategia que el bot ejecutará en tus cuentas conectadas."
   },
   "botControl": {
     "title": "Panel de Control del Bot",

@@ -11,14 +11,18 @@ export const UserProfile = () => {
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef(null);
     const navigate = useNavigate();
-    const { dispatch } = useGlobalReducer();
+    const { store, dispatch } = useGlobalReducer();
 
-    // Datos mock del usuario — TODO: reemplazar con contexto de autenticación JWT
-    const user = {
-        name: "Olivia Brooks",
-        email: "admin2@ftn.net",
-        avatar: "https://i.pravatar.cc/150?u=olivia",
-    };
+    const storeUser = store?.user;
+    const fullName = storeUser
+        ? `${storeUser.first_name || ""} ${storeUser.last_name || ""}`.trim() || storeUser.username
+        : "–";
+    const email = storeUser?.email || "";
+    const userId = storeUser?.id;
+    const avatarSrc = storeUser?.avatar ?? (userId ? localStorage.getItem(`avatar_${userId}`) : null);
+    const initials = storeUser
+        ? `${(storeUser.first_name || storeUser.username || "?")[0]}`.toUpperCase()
+        : "?";
 
     /** Cierra el dropdown al hacer clic fuera del componente */
     useEffect(() => {
@@ -31,11 +35,15 @@ export const UserProfile = () => {
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
 
-    /** Manejador de cierre de sesión — limpia contexto global y redirige al landing */
     const handleLogout = () => {
         setIsOpen(false);
         dispatch({ type: "logout" });
         navigate("/");
+    };
+
+    const handleSettings = () => {
+        setIsOpen(false);
+        navigate("/dashboard/ajustes");
     };
 
     return (
@@ -46,26 +54,23 @@ export const UserProfile = () => {
                 className="flex items-center gap-3 p-2 pl-3 rounded-xl liquid-glass border border-white/10 hover:bg-white/5 transition-all cursor-pointer"
             >
                 <div className="flex flex-col items-end hidden md:flex">
-                    <span className="text-sm font-semibold text-white leading-none">
-                        {user.name}
-                    </span>
-                    <span className="text-[10px] text-white/50 leading-tight">
-                        {user.email}
-                    </span>
+                    <span className="text-sm font-semibold text-white leading-none">{fullName}</span>
+                    <span className="text-[10px] text-white/50 leading-tight">{email}</span>
                 </div>
-                {/* Chevron — indica que hay un menú desplegable */}
-                <span
-                    className="text-white/40 text-xs transition-transform duration-200"
-                    style={{ transform: isOpen ? "rotate(180deg)" : "rotate(0deg)" }}
-                >
+                <span className="text-white/40 text-xs transition-transform duration-200"
+                    style={{ transform: isOpen ? "rotate(180deg)" : "rotate(0deg)" }}>
                     ▾
                 </span>
                 <div className="relative">
-                    <img
-                        src={user.avatar}
-                        alt={user.name}
-                        className="w-10 h-10 rounded-lg object-cover border border-gold/30 shadow-glass-sm"
-                    />
+                    {avatarSrc ? (
+                        <img src={avatarSrc} alt={fullName}
+                            className="w-10 h-10 rounded-lg object-cover border border-white/10" />
+                    ) : (
+                        <div className="w-10 h-10 rounded-lg flex items-center justify-center text-sm font-bold text-black"
+                            style={{ background: "var(--gradient-gold)" }}>
+                            {initials}
+                        </div>
+                    )}
                     <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-green-500 border-2 border-[var(--color-brown-dark)] rounded-full" />
                 </div>
             </button>
@@ -79,7 +84,7 @@ export const UserProfile = () => {
                     <div className="flex flex-col py-1.5">
                         {/* Ajustes */}
                         <button
-                            onClick={() => setIsOpen(false)}
+                            onClick={handleSettings}
                             className="flex items-center gap-3 px-4 py-3 text-sm text-white/70 hover:text-white hover:bg-white/[0.05] transition-all text-left w-full"
                         >
                             <span className="text-base">⚙</span>

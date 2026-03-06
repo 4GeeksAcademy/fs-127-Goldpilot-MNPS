@@ -7,9 +7,6 @@ import { LanguageSwitcher } from "./components/LanguageSwitcher";
 /**
  * Ítem de navegación del sidebar.
  * Usa NavLink de React Router para que la URL controle el estado activo.
- * @param {string} props.label - Etiqueta visible del ítem
- * @param {string} props.icon  - Emoji/icono del ítem
- * @param {string} props.to    - Ruta de destino
  */
 const SidebarItem = ({ label, icon, to }) => {
     const baseClasses =
@@ -21,12 +18,11 @@ const SidebarItem = ({ label, icon, to }) => {
     return (
         <NavLink
             to={to}
-            end={to === "/dashboard"}  /* 'end' evita que /dashboard quede activo en subrutas */
+            end={to === "/dashboard"}
             className={({ isActive }) => `${baseClasses} ${isActive ? activeClasses : inactiveClasses}`}
         >
             {({ isActive }) => (
                 <>
-                    {/* Barra de luz dorada — solo cuando está activo */}
                     {isActive && (
                         <span
                             className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-6 rounded-r-full"
@@ -37,8 +33,7 @@ const SidebarItem = ({ label, icon, to }) => {
                         />
                     )}
                     <span
-                        className={`text-base transition-colors ${isActive ? "text-[var(--color-gold)]" : "text-white/30 group-hover:text-white/50"
-                            }`}
+                        className={`text-base transition-colors ${isActive ? "text-[var(--color-gold)]" : "text-white/30 group-hover:text-white/50"}`}
                     >
                         {icon}
                     </span>
@@ -49,10 +44,6 @@ const SidebarItem = ({ label, icon, to }) => {
     );
 };
 
-/**
- * Layout principal del Dashboard.
- * Sidebar izquierdo fijo + área de contenido principal scrollable.
- */
 export const DashboardLayout = () => {
     const token = localStorage.getItem("token");
     if (!token) return <Navigate to="/login" replace />;
@@ -61,14 +52,24 @@ export const DashboardLayout = () => {
     const location = useLocation();
     const mainRef = useRef(null);
 
-    /** Hace scroll al tope del área de contenido al cambiar de ruta dentro del dashboard. */
+    const storeUser = store?.user;
+    const greeting = storeUser?.first_name || storeUser?.username || "Usuario";
+
+    // Al recargar la página el store se reinicia: si hay token pero no user, recargar perfil
+    useEffect(() => {
+        if (!store?.user) {
+            getProfile()
+                .then((data) => dispatch({ type: "set_user_data", payload: data }))
+                .catch(() => {});
+        }
+    }, []);
+
     useEffect(() => {
         if (mainRef.current) {
             mainRef.current.scrollTo({ top: 0, behavior: "smooth" });
         }
     }, [location.pathname]);
 
-    /** Rutas del sidebar — alineadas con routes.jsx */
     const menuItems = [
         { label: "Dashboard", icon: "⊞", to: "/dashboard" },
         { label: "Estrategias", icon: "⌖", to: "/dashboard/strategies" },
@@ -86,7 +87,7 @@ export const DashboardLayout = () => {
                 className="w-60 h-full flex-shrink-0 hidden lg:flex flex-col py-6 px-3 gap-6 border-r border-white/[0.06]"
                 style={{ background: "rgba(20, 28, 14, 0.85)", backdropFilter: "blur(24px)" }}
             >
-                {/* Logo — mismo que la landing (círculo dorado XS) */}
+                {/* Logo */}
                 <div className="flex items-center gap-2.5 px-3 mb-2">
                     <div
                         className="w-8 h-8 rounded-full flex items-center justify-center text-[11px] font-black text-black flex-shrink-0"
@@ -94,12 +95,10 @@ export const DashboardLayout = () => {
                     >
                         XS
                     </div>
-                    <span className="text-base font-bold tracking-tight text-white">
-                        XSNIPER
-                    </span>
+                    <span className="text-base font-bold tracking-tight text-white">XSNIPER</span>
                 </div>
 
-                {/* Seción MENU */}
+                {/* Menú */}
                 <div className="flex flex-col gap-1">
                     {menuItems.map((item) => (
                         <SidebarItem
@@ -115,7 +114,8 @@ export const DashboardLayout = () => {
             {/* ── ÁREA PRINCIPAL ── */}
             <main ref={mainRef} className="flex-1 flex flex-col min-w-0 overflow-y-auto">
                 {/* Header */}
-                <header className="sticky top-0 z-10 w-full px-6 py-4 flex items-center gap-8 border-b border-white/[0.05]"
+                <header
+                    className="sticky top-0 z-10 w-full px-6 py-4 flex items-center gap-8 border-b border-white/[0.05]"
                     style={{ background: "rgba(20, 28, 14, 0.7)", backdropFilter: "blur(16px)" }}
                 >
                     {/* Logo mobile */}
@@ -128,20 +128,12 @@ export const DashboardLayout = () => {
                         </div>
                         <span className="text-sm font-bold text-white">XSNIPER</span>
                     </div>
-                    {/* Saludo al usuario
-                     * TODO: Reemplazar texto hardcoded con el nombre real del usuario autenticado.
-                     * Fuente de datos: GET /api/users/me → first_name + last_name
-                     * (tabla: users, columnas: first_name, last_name)
-                     */}
                     <div className="flex-1 flex flex-col hidden sm:flex">
                         <span className="text-2xl font-black tracking-tight text-white leading-none">
                             {t("header.greeting")} <span
                                 className="font-black"
-                                style={{
-                                    color: "var(--color-gold)",
-                                    textShadow: "0 0 24px rgba(195,143,55,0.35)",
-                                }}
-                            >Olivia Brooks</span>
+                                style={{ color: "var(--color-gold)", textShadow: "0 0 24px rgba(195,143,55,0.35)" }}
+                            >{greeting}</span>
                         </span>
                         <span className="text-xs text-white/30 mt-1 tracking-wide">
                             {t("header.subtitle")}

@@ -36,6 +36,8 @@ export const router = createBrowserRouter(
         <Route path="strategies" element={<StrategiesPage />} />
         <Route path="historial" element={<HistorialPage />} />
         <Route path="wallets" element={<WalletsPage />} />
+        <Route path="bot-control" element={<BotControlPage />} />
+        <Route path="ajustes" element={<SettingsPage />} />
       </Route>
       <Route element={<Layout />} errorElement={<h1>No encontrado!</h1>} >
         <Route path="/home" element={<Home />} />

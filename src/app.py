@@ -2,6 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 import os
+from datetime import timedelta
 from flask import Flask, request, jsonify, url_for, send_from_directory
 from flask_migrate import Migrate
 from flask_swagger import swagger
@@ -33,6 +34,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # JWT configuration
 app.config['JWT_SECRET_KEY'] = os.getenv('FLASK_APP_KEY', 'super-secret-key')
+app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(days=30)
 jwt = JWTManager(app)
 migrations_dir = os.path.join(os.path.dirname(  # MODIFICADO: ruta absoluta a la carpeta migrations
     os.path.realpath(__file__)), '../migrations')

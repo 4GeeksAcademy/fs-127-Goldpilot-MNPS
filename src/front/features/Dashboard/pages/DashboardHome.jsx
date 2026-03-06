@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { TradingViewChart } from "../components/TradingViewChart";
 import { OverviewCard } from "../components/OverviewCard";
 import { PortfolioCard } from "../components/PortfolioCard";
@@ -22,6 +23,7 @@ const calcChangePercent = (equity, balance) => {
 };
 
 export const DashboardHome = () => {
+    const { t } = useTranslation();
     const [summary, setSummary] = useState(EMPTY_SUMMARY);
     const [loading, setLoading] = useState(true);
 
@@ -38,7 +40,7 @@ export const DashboardHome = () => {
     return (
         <div className="flex flex-col gap-5 w-full">
             <div className="pb-2 border-b border-white/[0.05]">
-                <h1 className="text-2xl font-bold tracking-tight text-white">Dashboard</h1>
+                <h1 className="text-2xl font-bold tracking-tight text-white">{t("dashboard.title")}</h1>
             </div>
 
             {/* Cards dinámicas */}
@@ -57,20 +59,20 @@ export const DashboardHome = () => {
                 ) : (
                     <div className="col-span-full flex items-center justify-center py-8 rounded-2xl border border-white/[0.06]"
                         style={{ background: "rgba(255,255,255,0.02)" }}>
-                        <p className="text-sm text-white/30">No hay wallets conectadas</p>
+                        <p className="text-sm text-white/30">{t("dashboard.noWallets")}</p>
                     </div>
                 )}
 
                 <PortfolioCard
-                    title="Total P&L"
+                    title={t("dashboard.totalPnl")}
                     value={stats.total_profit !== 0 ? `${isProfitable ? "+" : ""}${fmt(stats.total_profit)}` : "–"}
-                    subtitle={stats.total_trades > 0 ? `${stats.winning_trades}G / ${stats.losing_trades}P` : "Sin operaciones"}
+                    subtitle={stats.total_trades > 0 ? `${stats.winning_trades}G / ${stats.losing_trades}P` : t("dashboard.noOperations")}
                     icon="◬" trend={isProfitable ? "up" : "down"} color={isProfitable ? "green" : "red"}
                 />
                 <PortfolioCard
-                    title="Win Rate"
+                    title={t("dashboard.winRate")}
                     value={stats.total_trades > 0 ? `${Number(stats.win_rate).toFixed(1)}%` : "–"}
-                    subtitle={`${stats.total_trades} operaciones`} icon="%" color="blue"
+                    subtitle={`${stats.total_trades} ${t("dashboard.operations")}`} icon="%" color="blue"
                 />
             </div>
 

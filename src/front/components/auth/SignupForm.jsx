@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Mail, Lock, User, Phone, ChevronDown, Calendar } from "lucide-react";
+import { Link } from "react-router-dom";
 import { COUNTRY_CODES, inputBase, inputOk, inputErr, errText, submitBtn } from "./constants";
 import EyeToggle from "./EyeToggle";
 import PasswordStrengthBar from "./PasswordStrengthBar";
@@ -11,6 +12,7 @@ const SignupForm = ({
     showPassword, togglePassword,
     showConfirm, toggleConfirm,
     fieldErrors, clearFieldError,
+    termsAccepted, onTermsToggle,
 }) => {
     const passwordsMatch = confirmPassword && confirmPassword === form.password;
 
@@ -136,6 +138,27 @@ const SignupForm = ({
                 {passwordsMatch && (
                     <p className="mt-1.5 text-xs text-green-400">Las contraseñas coinciden ✓</p>
                 )}
+            </div>
+
+            {/* Terms & Conditions checkbox */}
+            <div>
+                <label className="flex items-start gap-3 cursor-pointer group">
+                    <input
+                        type="checkbox"
+                        checked={termsAccepted}
+                        onChange={onTermsToggle}
+                        className="mt-0.5 w-4 h-4 shrink-0 accent-[var(--color-gold)] cursor-pointer"
+                    />
+                    <span className="text-xs text-white/50 leading-relaxed group-hover:text-white/70 transition-colors">
+                        I have read and agree to the{" "}
+                        <Link to="/terms" target="_blank"
+                            className="text-[var(--color-gold)] hover:underline">
+                            Terms &amp; Conditions
+                        </Link>
+                        . I understand that Xsniper is an algorithm provider and does not hold my funds or have access to withdrawals.
+                    </span>
+                </label>
+                {fieldErrors.terms && <p className={errText}>{fieldErrors.terms}</p>}
             </div>
 
             <button type="submit" disabled={loading} className={submitBtn}>

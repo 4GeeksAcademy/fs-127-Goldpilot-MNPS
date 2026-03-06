@@ -1,5 +1,6 @@
 import React from "react";
 import { Container, Grid, Flex, Text, Heading, Link as RadixLink } from "@radix-ui/themes";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
 /**
@@ -52,7 +53,7 @@ export const Footer = () => {
                         <Text weight="bold" className="text-white uppercase tracking-widest text-xs mb-4">
                             Legal
                         </Text>
-                        <RadixLink href="#" color="gray" className="hover:text-[var(--color-gold)] transition-colors">Términos</RadixLink>
+                        <Link to="/terms" className="text-[var(--radix-gray-11)] hover:text-[var(--color-gold)] transition-colors text-sm">Términos</Link>
                         <RadixLink href="#" color="gray" className="hover:text-[var(--color-gold)] transition-colors">Privacidad</RadixLink>
                     </Flex>
 

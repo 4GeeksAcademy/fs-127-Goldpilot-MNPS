@@ -1,3 +1,8 @@
+"""
+Modelo Trade — Registro de operaciones de trading.
+Almacena el historial completo de trades ejecutados por cada usuario.
+"""
+
 from datetime import datetime
 from typing import Optional
 from sqlalchemy import String, DateTime, ForeignKey, Float
@@ -11,9 +16,12 @@ class Trade(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
     user_id: Mapped[int] = mapped_column(ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
     strategy_id: Mapped[int] = mapped_column(ForeignKey('strategies.id', ondelete='CASCADE'), nullable=False)
+    wallet_id: Mapped[Optional[int]] = mapped_column(
+        ForeignKey('metaapi_accounts.id'), nullable=True
+    )
     meta_trade_id: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
-    symbol: Mapped[Optional[str]] = mapped_column(String(20), nullable=True)       # e.g. XAUUSD
-    trade_type: Mapped[Optional[str]] = mapped_column(String(10), nullable=True)   # BUY or SELL
+    symbol: Mapped[Optional[str]] = mapped_column(String(20), nullable=True)
+    trade_type: Mapped[Optional[str]] = mapped_column(String(10), nullable=True)
     lot_size: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
     open_price: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
     close_price: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
@@ -34,10 +42,12 @@ class Trade(db.Model):
         return f'<Trade {self.id}: {self.symbol} {self.trade_type} {self.status}>'
 
     def serialize(self):
+        """Serializa el trade a dict para la respuesta JSON."""
         return {
             "id": self.id,
             "user_id": self.user_id,
             "strategy_id": self.strategy_id,
+            "wallet_id": self.wallet_id,
             "meta_trade_id": self.meta_trade_id,
             "symbol": self.symbol,
             "trade_type": self.trade_type,

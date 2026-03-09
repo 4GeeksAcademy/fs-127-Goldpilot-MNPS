@@ -16,12 +16,11 @@ export const Navbar = () => {
         <nav className="fixed top-0 left-0 w-full z-50 px-8 py-4 flex justify-between items-center transition-all duration-300 bg-black/50 backdrop-blur-md border-b border-white/10">
             {/* IZQUIERDA: Marca */}
             <Link to="/" className="flex items-center gap-3 group relative cursor-pointer">
-                <div className="w-10 h-10 rounded-full bg-[var(--gradient-gold)] flex items-center justify-center text-xs font-bold text-black shadow-[0_0_15px_var(--glow-gold)] transition-transform group-hover:scale-105">
-                    XS
-                </div>
-                <span className="font-bold tracking-tight text-xl text-white group-hover:text-[var(--color-gold)] transition-colors">
-                    XSNIPER
-                </span>
+                <img
+                    src="/logo.png"
+                    alt="XSniper Logo"
+                    className="h-10 w-auto drop-shadow-md transition-transform duration-300 group-hover:scale-105"
+                />
             </Link>
 
             {/* DERECHA: Botones de Acción */}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { getProfile, updateProfile } from "../api";
 import useGlobalReducer from "../../../hooks/useGlobalReducer";
 
@@ -8,9 +8,12 @@ const fmtDate = (iso) => {
 };
 
 const ReadField = ({ label, value }) => (
-    <div className="flex items-center justify-between py-3.5 border-b border-white/[0.05] last:border-0">
-        <span className="text-sm text-white/50">{label}</span>
-        <span className="text-sm font-medium text-white text-right max-w-[60%] truncate">{value || "–"}</span>
+    <div className="flex items-center py-3.5 border-b border-white/[0.05] last:border-0">
+        <span className="text-sm text-white/50 w-44 shrink-0">{label}</span>
+        <div className="flex ml-auto w-52 items-center">
+            <div className="flex-1 text-sm font-medium text-white">{value || "–"}</div>
+            <div className="w-7 shrink-0 ml-3" />
+        </div>
     </div>
 );
 
@@ -34,10 +37,10 @@ const EditField = ({ label, value, onSave, saving }) => {
 
     return (
         <div className="py-3.5 border-b border-white/[0.05] last:border-0">
-            <div className="flex items-center justify-between gap-3">
-                <span className="text-sm text-white/50 shrink-0">{label}</span>
+            <div className="flex items-center">
+                <span className="text-sm text-white/50 w-44 shrink-0">{label}</span>
                 {editing ? (
-                    <div className="flex items-center gap-2">
+                    <div className="flex ml-auto w-52 items-center gap-2">
                         <input ref={inputRef} value={draft}
                             onChange={(e) => setDraft(e.target.value)}
                             onKeyDown={(e) => { if (e.key === "Enter") handleSave(); if (e.key === "Escape") handleCancel(); }}
@@ -51,10 +54,10 @@ const EditField = ({ label, value, onSave, saving }) => {
                         <button onClick={handleCancel} className="text-xs px-2 py-1.5 rounded-lg text-white/30 hover:text-white/60 transition-all">✕</button>
                     </div>
                 ) : (
-                    <div className="flex items-center gap-3">
-                        <span className="text-sm font-medium text-white">{value || "–"}</span>
+                    <div className="flex ml-auto w-52 items-center">
+                        <div className="flex-1 text-sm font-medium text-white">{value || "–"}</div>
                         <button onClick={() => { setDraft(value || ""); setEditing(true); }}
-                            className="w-7 h-7 rounded-lg flex items-center justify-center transition-all shrink-0"
+                            className="w-7 h-7 rounded-lg flex items-center justify-center transition-all shrink-0 ml-3"
                             style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }}>
                             <span className="text-[11px] text-white/40">✎</span>
                         </button>

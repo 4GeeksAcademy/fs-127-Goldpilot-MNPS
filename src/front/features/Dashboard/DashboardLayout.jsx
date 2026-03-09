@@ -3,6 +3,8 @@ import { Outlet, NavLink, useLocation, Navigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { UserProfile } from "./components/UserProfile";
 import { LanguageSwitcher } from "./components/LanguageSwitcher";
+import useGlobalReducer from "../../hooks/useGlobalReducer";
+import { getProfile } from "./api";
 
 /**
  * Ítem de navegación del sidebar.
@@ -49,6 +51,7 @@ export const DashboardLayout = () => {
     if (!token) return <Navigate to="/login" replace />;
 
     const { t } = useTranslation();
+    const { store, dispatch } = useGlobalReducer();
     const location = useLocation();
     const mainRef = useRef(null);
 
@@ -64,6 +67,7 @@ export const DashboardLayout = () => {
         }
     }, []);
 
+
     useEffect(() => {
         if (mainRef.current) {
             mainRef.current.scrollTo({ top: 0, behavior: "smooth" });
@@ -71,10 +75,11 @@ export const DashboardLayout = () => {
     }, [location.pathname]);
 
     const menuItems = [
-        { label: "Dashboard", icon: "⊞", to: "/dashboard" },
+        { label: "Dashboard",   icon: "⊞", to: "/dashboard" },
         { label: "Estrategias", icon: "⌖", to: "/dashboard/strategies" },
-        { label: "Wallets", icon: "◈", to: "/dashboard/wallets" },
-        { label: "Historial", icon: "◳", to: "/dashboard/historial" },
+        { label: "Wallets",     icon: "◈", to: "/dashboard/wallets" },
+        { label: "Historial",   icon: "◳", to: "/dashboard/historial" },
+        { label: "Ajustes",     icon: "⚙", to: "/dashboard/ajustes" },
     ];
 
     return (
@@ -128,11 +133,14 @@ export const DashboardLayout = () => {
                         </div>
                         <span className="text-sm font-bold text-white">XSNIPER</span>
                     </div>
-                    <div className="flex-1 flex flex-col hidden sm:flex">
+                    <div className="flex-1 flex-col hidden sm:flex">
                         <span className="text-2xl font-black tracking-tight text-white leading-none">
                             {t("header.greeting")} <span
                                 className="font-black"
-                                style={{ color: "var(--color-gold)", textShadow: "0 0 24px rgba(195,143,55,0.35)" }}
+                                style={{
+                                    color: "var(--color-gold)",
+                                    textShadow: "0 0 24px rgba(195,143,55,0.35)",
+                                }}
                             >{greeting}</span>
                         </span>
                         <span className="text-xs text-white/30 mt-1 tracking-wide">

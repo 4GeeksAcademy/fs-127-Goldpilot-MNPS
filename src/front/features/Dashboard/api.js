@@ -182,23 +182,15 @@ export const updateBotStrategy = async (strategyId) => {
   return response.json();
 };
 
-export const getDashboardSummary = async () => {
-  const token = localStorage.getItem("token");
-  const response = checkAuth(await fetch(`${BACKEND_URL}/api/dashboard/summary`, {
-    headers: { Authorization: `Bearer ${token}` },
-  }));
-  if (!response.ok) {
-    const msg = await parseError(response);
-    throw new Error(msg);
-  }
-  return response.json();
-};
-
 export const getProfile = async () => {
   const token = localStorage.getItem("token");
-  const response = checkAuth(await fetch(`${BACKEND_URL}/api/users/me`, {
+  const response = await fetch(`${BACKEND_URL}/api/users/me`, {
     headers: { Authorization: `Bearer ${token}` },
-  }));
+  });
+  if (response.status === 401) {
+    localStorage.removeItem("token");
+    window.location.href = "/login";
+  }
   if (!response.ok) {
     const msg = await parseError(response);
     throw new Error(msg);
@@ -208,13 +200,29 @@ export const getProfile = async () => {
 
 export const updateProfile = async (data) => {
   const token = localStorage.getItem("token");
-  const response = checkAuth(await fetch(`${BACKEND_URL}/api/users/me`, {
+  const response = await fetch(`${BACKEND_URL}/api/users/me`, {
     method: "PATCH",
     headers: {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
+  });
+  if (response.status === 401) {
+    localStorage.removeItem("token");
+    window.location.href = "/login";
+  }
+  if (!response.ok) {
+    const msg = await parseError(response);
+    throw new Error(msg);
+  }
+  return response.json();
+};
+
+export const getDashboardSummary = async () => {
+  const token = localStorage.getItem("token");
+  const response = checkAuth(await fetch(`${BACKEND_URL}/api/dashboard/summary`, {
+    headers: { Authorization: `Bearer ${token}` },
   }));
   if (!response.ok) {
     const msg = await parseError(response);

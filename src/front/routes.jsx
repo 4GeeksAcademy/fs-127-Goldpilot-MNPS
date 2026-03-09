@@ -19,6 +19,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import { StrategiesPage } from "./features/Dashboard/pages/StrategiesPage";
+import { SettingsPage } from "./features/Dashboard/pages/SettingsPage";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(

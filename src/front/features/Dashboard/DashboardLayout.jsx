@@ -64,7 +64,7 @@ export const DashboardLayout = () => {
         if (!store?.user) {
             getProfile()
                 .then((data) => dispatch({ type: "set_user_data", payload: data }))
-                .catch(() => {});
+                .catch(() => { });
         }
     }, []);
 
@@ -76,11 +76,11 @@ export const DashboardLayout = () => {
     }, [location.pathname]);
 
     const menuItems = [
-        { label: "Dashboard",   icon: "⊞", to: "/dashboard" },
+        { label: "Dashboard", icon: "⊞", to: "/dashboard" },
         { label: "Estrategias", icon: "⌖", to: "/dashboard/strategies" },
-        { label: "Wallets",     icon: "◈", to: "/dashboard/wallets" },
-        { label: "Historial",   icon: "◳", to: "/dashboard/historial" },
-        { label: "Ajustes",     icon: "⚙", to: "/dashboard/ajustes" },
+        { label: "Wallets", icon: "◈", to: "/dashboard/wallets" },
+        { label: "Historial", icon: "◳", to: "/dashboard/historial" },
+        { label: "Ajustes", icon: "⚙", to: "/dashboard/ajustes" },
     ];
 
     return (
@@ -94,14 +94,13 @@ export const DashboardLayout = () => {
                 style={{ background: "rgba(20, 28, 14, 0.85)", backdropFilter: "blur(24px)" }}
             >
                 {/* Logo */}
-                <div className="flex items-center gap-2.5 px-3 mb-2">
-                    <div
-                        className="w-8 h-8 rounded-full flex items-center justify-center text-[11px] font-black text-black flex-shrink-0"
-                        style={{ background: "var(--gradient-gold)", boxShadow: "var(--glow-gold)" }}
-                    >
-                        XS
-                    </div>
-                    <span className="text-base font-bold tracking-tight text-white">XSNIPER</span>
+                {/* Logo Sidebar con Cápsula para contraste */}
+                <div className="flex items-center justify-center bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/20 shadow-[0_0_15px_rgba(255,255,255,0.05)] mx-3 mb-4">
+                    <img
+                        src="/logo.png"
+                        alt="XSniper Logo"
+                        className="h-7 w-auto drop-shadow-sm"
+                    />
                 </div>
 
                 {/* Menú */}
@@ -125,14 +124,13 @@ export const DashboardLayout = () => {
                     style={{ background: "rgba(20, 28, 14, 0.7)", backdropFilter: "blur(16px)" }}
                 >
                     {/* Logo mobile */}
-                    <div className="lg:hidden flex items-center gap-2">
-                        <div
-                            className="w-7 h-7 rounded-full flex items-center justify-center text-[10px] font-black text-black"
-                            style={{ background: "var(--gradient-gold)" }}
-                        >
-                            XS
-                        </div>
-                        <span className="text-sm font-bold text-white">XSNIPER</span>
+                    {/* Logo Mobile con Cápsula */}
+                    <div className="lg:hidden flex items-center justify-center bg-white/10 backdrop-blur-md px-3 py-1 rounded-full border border-white/20 shadow-[0_0_10px_rgba(255,255,255,0.05)]">
+                        <img
+                            src="/logo.png"
+                            alt="XSniper Logo"
+                            className="h-6 w-auto drop-shadow-sm"
+                        />
                     </div>
                     <div className="flex-1 flex-col hidden sm:flex">
                         <span className="text-2xl font-black tracking-tight text-white leading-none">

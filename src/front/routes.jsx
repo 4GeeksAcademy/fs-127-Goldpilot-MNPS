@@ -20,6 +20,7 @@ import ResetPassword from "./pages/ResetPassword";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import { StrategiesPage } from "./features/Dashboard/pages/StrategiesPage";
 import { SettingsPage } from "./features/Dashboard/pages/SettingsPage";
+import { InvestorLevelPage } from "./features/Dashboard/pages/InvestorLevelPage";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -39,6 +40,7 @@ export const router = createBrowserRouter(
         <Route path="wallets" element={<WalletsPage />} />
         <Route path="bot-control" element={<BotControlPage />} />
         <Route path="ajustes" element={<SettingsPage />} />
+        <Route path="nivel-inversor" element={<InvestorLevelPage />} />
       </Route>
       <Route element={<Layout />} errorElement={<h1>No encontrado!</h1>} >
         <Route path="/home" element={<Home />} />

@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from "react";
 import { Outlet, NavLink, useLocation, Navigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { UserProfile } from "./components/UserProfile";
-import { LanguageSwitcher } from "./components/LanguageSwitcher";
 import useGlobalReducer from "../../hooks/useGlobalReducer";
 import { getProfile } from "./api";
 
@@ -53,6 +52,7 @@ export const DashboardLayout = () => {
     const { t } = useTranslation();
     const location = useLocation();
     const mainRef = useRef(null);
+
     const storeUser = store?.user;
     const greeting = storeUser?.first_name || storeUser?.username || "Usuario";
 
@@ -64,6 +64,7 @@ export const DashboardLayout = () => {
                 .catch(() => {});
         }
     }, []);
+
 
     useEffect(() => {
         if (mainRef.current) {
@@ -130,7 +131,7 @@ export const DashboardLayout = () => {
                         </div>
                         <span className="text-sm font-bold text-white">XSNIPER</span>
                     </div>
-                    <div className="flex-1 flex flex-col hidden sm:flex">
+                    <div className="flex-1 flex-col hidden sm:flex">
                         <span className="text-2xl font-black tracking-tight text-white leading-none">
                             {t("header.greeting")} <span
                                 className="font-black"

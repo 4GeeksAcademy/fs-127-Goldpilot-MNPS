@@ -15,7 +15,6 @@ import { DashboardHome } from "./features/Dashboard/pages/DashboardHome";
 import { HistorialPage } from "./features/Dashboard/pages/HistorialPage";
 import { WalletsPage } from "./features/Dashboard/pages/WalletsPage";
 import { BotControlPage } from "./features/Dashboard/pages/BotControlPage";
-import { SettingsPage } from "./features/Dashboard/pages/SettingsPage";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import TermsAndConditions from "./pages/TermsAndConditions";

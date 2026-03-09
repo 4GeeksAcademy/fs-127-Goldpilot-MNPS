@@ -5,6 +5,10 @@ export const StrategiesCard = () => {
     const [selected, setSelected] = useState(null);
     const [loading, setLoading] = useState(false);
     const [results, setResults] = useState(null);
+    
+    // 👇 NUEVOS ESTADOS PARA LOS PARÁMETROS DEL USUARIO 👇
+    const [customBalance, setCustomBalance] = useState(10000);
+    const [customStartDate, setCustomStartDate] = useState("2024-01-01");
 
     const strategies = [
         { id: "low", name: "LOW RISK", desc: "Correlación inversa Nasdaq/DXY y retest de SMA 50.", icon: "🛡️", stats: { lot: "0.10", risk: "2%" } },
@@ -26,7 +30,9 @@ export const StrategiesCard = () => {
         setResults(null);
         
         const baseUrl = import.meta.env.VITE_BACKEND_URL;
-        const url = `${baseUrl}/api/backtest/${selected}`;
+        
+        // 👇 AÑADIMOS LOS PARÁMETROS A LA URL 👇
+        const url = `${baseUrl}/api/backtest/${selected}?balance=${customBalance}&start=${customStartDate}`;
 
         try {
             const response = await fetch(url);
@@ -83,20 +89,48 @@ export const StrategiesCard = () => {
                 ))}
             </div>
 
-            {/* BOTÓN DE EJECUCIÓN */}
-            <div className="w-full flex flex-col items-center mt-4">
+            {/* SECCIÓN DE CONTROLES Y BOTÓN DE EJECUCIÓN */}
+            <div className="w-full flex flex-col items-center mt-4 min-h-[120px]">
                 <AnimatePresence mode="wait">
                     {!results && selected && (
-                        <motion.button 
-                            key="btn"
+                        <motion.div 
+                            key="controls"
                             initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, scale: 0.9 }}
-                            onClick={handleActivate}
-                            disabled={loading}
-                            className="px-12 py-4 rounded-full text-black font-bold text-sm uppercase tracking-[0.2em] transition-all duration-300 shadow-[0_0_20px_rgba(195,143,55,0.4)] disabled:opacity-50"
-                            style={{ background: "var(--gradient-gold)" }}
+                            className="flex flex-col items-center gap-6"
                         >
-                            {loading ? "Analizando Mercado Histórico..." : `Auditar Estrategia ${selected}`}
-                        </motion.button>
+                            {/* 👇 NUEVOS INPUTS DE PARÁMETROS 👇 */}
+                            <div className="flex flex-wrap justify-center gap-6 bg-white/5 p-4 rounded-2xl border border-white/10 shadow-lg">
+                                <div className="flex flex-col gap-2">
+                                    <label className="text-[10px] text-gray-500 uppercase tracking-widest">Balance Inicial ($)</label>
+                                    <input 
+                                        type="number" 
+                                        value={customBalance}
+                                        onChange={(e) => setCustomBalance(e.target.value)}
+                                        className="bg-[#0a0a0a] border border-white/10 rounded-lg p-3 text-white text-sm outline-none focus:border-[var(--color-gold)] transition-colors w-36 text-center"
+                                    />
+                                </div>
+                                <div className="flex flex-col gap-2">
+                                    <label className="text-[10px] text-gray-500 uppercase tracking-widest">Fecha de Inicio</label>
+                                    <input 
+                                        type="date" 
+                                        value={customStartDate}
+                                        max={new Date().toISOString().split("T")[0]}
+                                        onChange={(e) => setCustomStartDate(e.target.value)}
+                                        className="bg-[#0a0a0a] border border-white/10 rounded-lg p-3 text-gray-300 text-sm outline-none focus:border-[var(--color-gold)] transition-colors w-44 text-center"
+                                        style={{ colorScheme: "dark" }}
+                                    />
+                                </div>
+                            </div>
+
+                            <button 
+                                onClick={handleActivate}
+                                disabled={loading}
+                                className="px-12 py-4 rounded-full text-black font-bold text-sm uppercase tracking-[0.2em] transition-all duration-300 shadow-[0_0_20px_rgba(195,143,55,0.4)] disabled:opacity-50"
+                                style={{ background: "var(--gradient-gold)" }}
+                            >
+                                {loading ? "Analizando Mercado Histórico..." : `Auditar Estrategia ${selected}`}
+                            </button>
+                        </motion.div>
                     )}
                 </AnimatePresence>
             </div>

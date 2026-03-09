@@ -77,12 +77,11 @@ class GoldPilotMasterStrategy(bt.Strategy):
                 self.sell_bracket(limitprice=tp, stopprice=sl, size=self.logic.lot_size)
 
 # ==========================================================
-# 2. FUNCIÓN PARA FLASK CON VERIFICACIÓN DE DATOS
+# 2. FUNCIÓN PARA FLASK CON FECHAS Y BALANCE DINÁMICOS
 # ==========================================================
-def execute_backtest_by_level(level):
+def execute_backtest_by_level(level, initial_cash=10000.0, start_date='2024-01-01'):
     cerebro = bt.Cerebro()
-    initial_cash = 10000.0 
-    cerebro.broker.setcash(initial_cash)
+    cerebro.broker.setcash(initial_cash) 
     
     tickers = {'gold': 'GC=F'}
     if level in ['low', 'medium']: tickers['dxy'] = 'DX-Y.NYB'
@@ -90,7 +89,7 @@ def execute_backtest_by_level(level):
 
     data_count = 0
     for name, ticker in tickers.items():
-        df = yf.download(ticker, start='2024-01-01', interval='1d', progress=False)
+        df = yf.download(ticker, start=start_date, interval='1d', progress=False)
         df = df.dropna()
         
         if df.empty:
@@ -111,7 +110,7 @@ def execute_backtest_by_level(level):
     
     # Verificación de seguridad para evitar el list index out of range
     if not results:
-        return {"status": "error", "error": "La simulación no generó resultados"}
+        return {"status": "error", "error": "La simulación no generó resultados. Prueba con una fecha más antigua."}
 
     final_history = results[0].trade_history
     final_val = cerebro.broker.getvalue()

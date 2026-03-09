@@ -10,7 +10,7 @@ from flask_cors import CORS
 
 # Importamos los motores (Backtest y Live)
 from api.backtest_engine import execute_backtest_by_level
-from api.live_engine import evaluate_live_market  # <-- AÑADIDO: Importamos el motor en vivo
+from api.live_engine import evaluate_live_market  # <-- Importamos el motor en vivo
 
 api = Blueprint('api', __name__)
 
@@ -37,16 +37,22 @@ def get_all_strategies():
         return jsonify({"error": str(e)}), 500
     
 
+# 👇 AÑADIDO: Ahora recoge balance y fecha de la URL 👇
 @api.route('/backtest/<string:level>', methods=['GET'])
 def run_unified_backtest(level):
     # level puede ser 'low', 'medium' o 'high'
     try:
-        data = execute_backtest_by_level(level) 
+        # Extraemos balance y start_date de la query string (?balance=500&start=2023-01-01)
+        # Si no los mandan, usa 10,000 y 2024-01-01 por defecto
+        balance_param = request.args.get('balance', default=10000.0, type=float)
+        start_param = request.args.get('start', default='2024-01-01', type=str)
+        
+        data = execute_backtest_by_level(level, initial_cash=balance_param, start_date=start_param) 
         return jsonify(data), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-# 👇 AÑADIDO: Nuevo endpoint para encender el bot en vivo 👇
+# Endpoint para encender el bot en vivo
 @api.route('/activate-live-bot', methods=['POST'])
 def activate_live_bot():
     body = request.get_json()

@@ -22,8 +22,11 @@ sqlalchemy = "*"
 bcrypt = "*"
 flask-jwt-extended = "*"
 flask-mail = "*"
-pandas = "*"
 requests = "*"
+backtrader = "*"
+yfinance = "*"
+pandas = "*"
+metaapi-cloud-sdk = "*"
 
 [requires]
 python_version = "3.9"

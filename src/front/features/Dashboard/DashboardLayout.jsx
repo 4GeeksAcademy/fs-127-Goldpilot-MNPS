@@ -3,6 +3,8 @@ import { Outlet, NavLink, useLocation, Navigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { UserProfile } from "./components/UserProfile";
 import { LanguageSwitcher } from "./components/LanguageSwitcher";
+import useGlobalReducer from "../../hooks/useGlobalReducer";
+import { getProfile } from "./api";
 
 /**
  * Ítem de navegación del sidebar.
@@ -51,7 +53,6 @@ export const DashboardLayout = () => {
     const { t } = useTranslation();
     const location = useLocation();
     const mainRef = useRef(null);
-
     const storeUser = store?.user;
     const greeting = storeUser?.first_name || storeUser?.username || "Usuario";
 
@@ -71,10 +72,11 @@ export const DashboardLayout = () => {
     }, [location.pathname]);
 
     const menuItems = [
-        { label: "Dashboard", icon: "⊞", to: "/dashboard" },
+        { label: "Dashboard",   icon: "⊞", to: "/dashboard" },
         { label: "Estrategias", icon: "⌖", to: "/dashboard/strategies" },
-        { label: "Wallets", icon: "◈", to: "/dashboard/wallets" },
-        { label: "Historial", icon: "◳", to: "/dashboard/historial" },
+        { label: "Wallets",     icon: "◈", to: "/dashboard/wallets" },
+        { label: "Historial",   icon: "◳", to: "/dashboard/historial" },
+        { label: "Ajustes",     icon: "⚙", to: "/dashboard/ajustes" },
     ];
 
     return (
@@ -132,7 +134,10 @@ export const DashboardLayout = () => {
                         <span className="text-2xl font-black tracking-tight text-white leading-none">
                             {t("header.greeting")} <span
                                 className="font-black"
-                                style={{ color: "var(--color-gold)", textShadow: "0 0 24px rgba(195,143,55,0.35)" }}
+                                style={{
+                                    color: "var(--color-gold)",
+                                    textShadow: "0 0 24px rgba(195,143,55,0.35)",
+                                }}
                             >{greeting}</span>
                         </span>
                         <span className="text-xs text-white/30 mt-1 tracking-wide">

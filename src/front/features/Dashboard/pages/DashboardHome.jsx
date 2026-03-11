@@ -4,6 +4,7 @@ import { TradingViewChart } from "../components/TradingViewChart";
 import { OverviewCard } from "../components/OverviewCard";
 import { PortfolioCard } from "../components/PortfolioCard";
 import { WalletPanel } from "../components/WalletPanel";
+import { AdBanner } from "../components/AdBanner";
 import { TradeTable } from "../components/TradeTable";
 import { BotControlPage } from "./BotControlPage";
 import { getDashboardSummary } from "../api";
@@ -94,6 +95,11 @@ export const DashboardHome = () => {
             </div>
 
             <BotControlPage />
+
+            {/* Banner promocional debajo de todo */}
+            <div className="w-full mt-2">
+                <AdBanner />
+            </div>
         </div>
     );
 };

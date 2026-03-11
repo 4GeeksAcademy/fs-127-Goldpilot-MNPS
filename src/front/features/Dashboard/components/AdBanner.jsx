@@ -29,7 +29,7 @@ export const AdBanner = ({ className = "" }) => {
                     <div className="flex-shrink-0 flex items-center justify-center">
                         <img
                             src="/logo-principal-blanco.png"
-                            alt="GoldPilot"
+                            alt="xSniper"
                             className="h-10 md:h-12 w-auto drop-shadow-md"
                         />
                     </div>
@@ -40,7 +40,7 @@ export const AdBanner = ({ className = "" }) => {
                     {/* Textos Claros */}
                     <div className="flex flex-col flex-1 gap-1">
                         <h3 className="text-xl md:text-2xl font-black text-white leading-tight tracking-tight">
-                            Maximiza tu potencial con <span style={{ color: "var(--color-gold)" }}>GoldPilot PRO</span>
+                            Maximiza tu potencial con <span style={{ color: "var(--color-gold)" }}>xSniper PRO</span>
                         </h3>
                         <p className="text-sm text-white/50 leading-relaxed max-w-2xl">
                             Desbloquea el acceso a estrategias avanzadas, herramientas de análisis y alertas exclusivas en tiempo real.

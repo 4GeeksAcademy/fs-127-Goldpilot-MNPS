@@ -93,12 +93,12 @@ export const DashboardLayout = () => {
                 style={{ background: "rgba(20, 28, 14, 0.85)", backdropFilter: "blur(24px)" }}
             >
                 {/* Logo */}
-                {/* Logo Sidebar con Cápsula para contraste */}
-                <div className="flex items-center justify-center bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/20 shadow-[0_0_15px_rgba(255,255,255,0.05)] mx-3 mb-4">
+                {/* Logo Sidebar */}
+                <div className="flex items-center mx-3 mb-4">
                     <img
-                        src="/logo.png"
-                        alt="XSniper Logo"
-                        className="h-7 w-auto drop-shadow-sm"
+                        src="/logo-principal-blanco.png"
+                        alt="Logo Principal"
+                        className="h-8 w-auto drop-shadow-sm"
                     />
                 </div>
 
@@ -123,11 +123,11 @@ export const DashboardLayout = () => {
                     style={{ background: "rgba(20, 28, 14, 0.7)", backdropFilter: "blur(16px)" }}
                 >
                     {/* Logo mobile */}
-                    {/* Logo Mobile con Cápsula */}
-                    <div className="lg:hidden flex items-center justify-center bg-white/10 backdrop-blur-md px-3 py-1 rounded-full border border-white/20 shadow-[0_0_10px_rgba(255,255,255,0.05)]">
+                    {/* Logo Mobile */}
+                    <div className="lg:hidden flex items-center">
                         <img
-                            src="/logo.png"
-                            alt="XSniper Logo"
+                            src="/logo-principal-blanco.png"
+                            alt="Logo Principal"
                             className="h-6 w-auto drop-shadow-sm"
                         />
                     </div>

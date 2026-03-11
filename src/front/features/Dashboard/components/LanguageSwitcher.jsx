@@ -11,7 +11,7 @@ export const LanguageSwitcher = () => {
 
     return (
         <div className="flex items-center gap-1 rounded-xl border border-white/[0.08] p-1"
-            style={{ background: "rgba(255,255,255,0.03)" }}>
+            style={{ background: "rgba(255,255,255,0.03)", height: "48px" }}>
             {["en", "es"].map((lang) => (
                 <button
                     key={lang}

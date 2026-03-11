@@ -53,6 +53,7 @@ export const DashboardLayout = () => {
     const { t } = useTranslation();
     const { store, dispatch } = useGlobalReducer();
     const location = useLocation();
+
     const mainRef = useRef(null);
 
     const storeUser = store?.user;
@@ -146,6 +147,28 @@ export const DashboardLayout = () => {
                         </span>
                     </div>
                     <LanguageSwitcher />
+
+                    {/* Nivel Inversor */}
+                    <NavLink
+                        to="/dashboard/nivel-inversor"
+                        title="Nivel Inversor"
+                        className="shrink-0 transition-all hover:scale-110"
+                        style={{ background: "none", border: "none", padding: 0, lineHeight: 0 }}
+                    >
+                        <img
+                            src="/oro2.png"
+                            alt="Nivel Inversor"
+                            style={{
+                                width: 44,
+                                height: 44,
+                                objectFit: "contain",
+                                mixBlendMode: "screen",
+                                filter: "drop-shadow(0 0 10px rgba(195,143,55,0.6))",
+                                display: "block",
+                            }}
+                        />
+                    </NavLink>
+
                     <UserProfile />
                 </header>
 

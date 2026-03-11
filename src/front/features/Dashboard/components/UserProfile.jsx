@@ -2,7 +2,15 @@ import { useState, useRef, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { useNavigate } from "react-router-dom";
 import useGlobalReducer from "../../../hooks/useGlobalReducer.jsx";
-import { getProfile } from "../api";
+import { getProfile, getTradeHistory, getDashboardSummary } from "../api";
+
+const INVESTOR_LEVELS = [
+    { id: "base", label: "Base", karats: null, minGains: 0, color: "#9ca3af", gradient: "linear-gradient(135deg, #6b7280, #9ca3af)", badge: "⬡" },
+    { id: "k14",  label: "14 Kilates", karats: 14, minGains: 5000,  color: "#d4a843", gradient: "linear-gradient(135deg, #a07428, #d4a843, #f0c96a)", badge: "◈" },
+    { id: "k18",  label: "18 Kilates", karats: 18, minGains: 20000, color: "#c38f37", gradient: "linear-gradient(135deg, #8b6214, #c38f37, #e8b84b)", badge: "✦" },
+    { id: "k24",  label: "24 Kilates", karats: 24, minGains: 50000, color: "#ffd700", gradient: "linear-gradient(135deg, #b8860b, #ffd700, #fffacd)", badge: "★" },
+];
+const getInvestorLevel = (gains) => [...INVESTOR_LEVELS].reverse().find((l) => gains >= l.minGains) ?? INVESTOR_LEVELS[0];
 
 const fmtDate = (iso) => {
     if (!iso) return "–";
@@ -11,9 +19,22 @@ const fmtDate = (iso) => {
 
 const ProfileModal = ({ onClose, storeUser, avatarSrc }) => {
     const [profile, setProfile] = useState(null);
+    const [investorLevel, setInvestorLevel] = useState(INVESTOR_LEVELS[0]);
 
     useEffect(() => {
         getProfile().then(setProfile).catch(() => {});
+        Promise.allSettled([getTradeHistory(), getDashboardSummary()]).then(([history, summary]) => {
+            let gains = 0;
+            if (history.status === "fulfilled") {
+                const trades = Array.isArray(history.value) ? history.value : history.value?.trades ?? [];
+                gains = trades.reduce((acc, t) => { const p = parseFloat(t.profit ?? t.gain ?? 0); return p > 0 ? acc + p : acc; }, 0);
+            }
+            if (gains === 0 && summary.status === "fulfilled") {
+                const s = summary.value;
+                gains = parseFloat(s?.total_profit ?? s?.profit ?? s?.gains ?? 0);
+            }
+            setInvestorLevel(getInvestorLevel(Math.max(0, gains)));
+        });
     }, []);
 
     const fullName = storeUser
@@ -108,6 +129,21 @@ const ProfileModal = ({ onClose, storeUser, avatarSrc }) => {
                                 <span className="text-sm font-medium text-white">{value || "–"}</span>
                             </div>
                         ))}
+                        <div
+                            className="flex items-center justify-between px-5 py-3.5"
+                            style={{ background: "rgba(255,255,255,0.02)" }}
+                        >
+                            <span className="text-xs text-white/40">Nivel Inversor</span>
+                            <span className="flex items-center gap-1.5 text-sm font-bold" style={{ color: investorLevel.color }}>
+                                <span
+                                    className="w-5 h-5 rounded flex items-center justify-center text-xs"
+                                    style={{ background: investorLevel.gradient }}
+                                >
+                                    {investorLevel.badge}
+                                </span>
+                                {investorLevel.label}
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>

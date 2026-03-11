@@ -22,10 +22,13 @@ const TermsAndConditions = () => {
 
                 {/* Header */}
                 <div className="mb-12 border-b border-white/10 pb-10">
-                    <div className="flex items-center gap-2 mb-6">
-                        <div className="w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold text-black"
-                            style={{ background: "var(--gradient-gold)" }}>XS</div>
-                        <span className="font-bold tracking-tight text-white text-lg">XSNIPER</span>
+                    {/* Logo Principal */}
+                    <div className="flex items-center justify-center w-full mb-6">
+                        <img
+                            src="/logo-principal-blanco.png"
+                            alt="xSniper Logo"
+                            className="h-10 w-auto drop-shadow-md"
+                        />
                     </div>
                     <h1 className="text-4xl font-bold tracking-tight mb-3">Terms &amp; Conditions</h1>
                     <p className="text-white/40 text-sm">Last updated: March 2025</p>

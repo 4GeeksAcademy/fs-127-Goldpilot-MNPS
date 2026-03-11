@@ -4,7 +4,6 @@ import { TradingViewChart } from "../components/TradingViewChart";
 import { OverviewCard } from "../components/OverviewCard";
 import { PortfolioCard } from "../components/PortfolioCard";
 import { WalletPanel } from "../components/WalletPanel";
-import { AdBanner } from "../components/AdBanner";
 import { TradeTable } from "../components/TradeTable";
 import { BotControlPage } from "./BotControlPage";
 import { getDashboardSummary } from "../api";
@@ -76,17 +75,21 @@ export const DashboardHome = () => {
                 />
             </div>
 
-            {/* Bloque de Gráfica y Tabla (SOLO UNO) */}
-            <div className="flex flex-col xl:flex-row gap-6 w-full">
-                <div className="flex flex-col gap-5 flex-1 min-w-0">
-                    <div className="w-full rounded-2xl p-5 border border-white/[0.06]" style={{ background: "rgba(255,255,255,0.03)", backdropFilter: "blur(16px)" }}>
-                        <TradingViewChart />
-                    </div>
-                    <TradeTable />
+            {/* Bloque Secuencial: Gráfica -> Wallets -> Tabla */}
+            <div className="flex flex-col gap-6 w-full">
+                {/* Gráfica */}
+                <div className="w-full rounded-2xl p-5 border border-white/[0.06]" style={{ background: "rgba(255,255,255,0.03)", backdropFilter: "blur(16px)" }}>
+                    <TradingViewChart />
                 </div>
-                <div className="w-full xl:w-72 shrink-0" style={{ alignSelf: "stretch", display: "grid", gridTemplateRows: "auto 1fr", gap: "1.25rem" }}>
+
+                {/* Panel de Wallets expandido */}
+                <div className="w-full">
                     <WalletPanel />
-                    <AdBanner className="h-full" />
+                </div>
+
+                {/* Tabla de operaciones */}
+                <div className="w-full">
+                    <TradeTable />
                 </div>
             </div>
 

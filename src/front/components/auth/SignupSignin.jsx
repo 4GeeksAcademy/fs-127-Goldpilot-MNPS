@@ -10,25 +10,25 @@ import SignupForm from "./SignupForm";
 
 const SignupSignin = () => {
     const { pathname } = useLocation();
-    const navigate     = useNavigate();
+    const navigate = useNavigate();
     const { dispatch } = useGlobalReducer();
-    const isLogin      = pathname === "/login";
+    const isLogin = pathname === "/login";
 
     // Form state
-    const [loginForm,  setLoginForm]  = useState({ email: "", password: "" });
+    const [loginForm, setLoginForm] = useState({ email: "", password: "" });
     const [signupForm, setSignupForm] = useState({
         email: "", username: "", password: "",
         first_name: "", last_name: "", phone_number: "", birth_date: "",
     });
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [countryCode, setCountryCode]         = useState("+34");
+    const [countryCode, setCountryCode] = useState("+34");
 
     // UI state
-    const [showPassword,   setShowPassword]   = useState(false);
-    const [showConfirm,    setShowConfirm]    = useState(false);
-    const [fieldErrors,    setFieldErrors]    = useState({});
-    const [termsAccepted,  setTermsAccepted]  = useState(false);
-    const [error,   setError]   = useState("");
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirm, setShowConfirm] = useState(false);
+    const [fieldErrors, setFieldErrors] = useState({});
+    const [termsAccepted, setTermsAccepted] = useState(false);
+    const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
     const [loading, setLoading] = useState(false);
     const [showForm, setShowForm] = useState(true); // For animation when switching between login/signup
@@ -150,28 +150,28 @@ const SignupSignin = () => {
 
                 <div className="relative z-20 w-full p-10 flex flex-col gap-7">
 
-                    {/* Logo */}
-                    <div className="flex items-center justify-center gap-2">
-                        <div className="w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold text-black"
-                            style={{ background: "var(--gradient-gold)" }}>XS</div>
-                        <span className="font-bold tracking-tight text-white text-lg">XSNIPER</span>
+                    {/* Logo Principal */}
+                    <div className="flex items-center justify-center w-full mb-2">
+                        <img
+                            src="/logo-principal-blanco.png"
+                            alt="xSniper Logo"
+                            className="h-10 w-auto drop-shadow-md"
+                        />
                     </div>
 
                     {/* Tabs */}
                     {(showForm && <div className="w-full flex flex-col gap-3">
                         <Link to="/login" className="w-full">
-                            <button className={`w-full py-4 rounded-full font-bold text-sm tracking-wide transition-all uppercase ${
-                                isLogin
+                            <button className={`w-full py-4 rounded-full font-bold text-sm tracking-wide transition-all uppercase ${isLogin
                                     ? "bg-[var(--color-gold)] text-white shadow-lg backdrop-blur-sm border border-white/20 hover:bg-[#d4af37] hover:shadow-[0_0_20px_var(--color-gold)]"
                                     : "bg-white/5 text-white border border-white/10 hover:bg-white/10 hover:border-white/30 backdrop-blur-md"
-                            }`}>Iniciar Sesión</button>
+                                }`}>Iniciar Sesión</button>
                         </Link>
                         <Link to="/signup" className="w-full">
-                            <button className={`w-full py-4 rounded-full font-bold text-sm tracking-wide transition-all uppercase ${
-                                !isLogin
+                            <button className={`w-full py-4 rounded-full font-bold text-sm tracking-wide transition-all uppercase ${!isLogin
                                     ? "bg-[var(--color-gold)] text-white shadow-lg backdrop-blur-sm border border-white/20 hover:bg-[#d4af37] hover:shadow-[0_0_20px_var(--color-gold)]"
                                     : "bg-white/5 text-white border border-white/10 hover:bg-white/10 hover:border-white/30 backdrop-blur-md"
-                            }`}>Registrarse</button>
+                                }`}>Registrarse</button>
                         </Link>
                     </div>)}
 
@@ -209,8 +209,8 @@ const SignupSignin = () => {
                                 countryCode={countryCode} setCountryCode={setCountryCode}
                                 confirmPassword={confirmPassword} setConfirmPassword={setConfirmPassword}
                                 showPassword={showPassword} togglePassword={() => setShowPassword(v => !v)}
-                                showConfirm={showConfirm}   toggleConfirm={() => setShowConfirm(v => !v)}
-                                fieldErrors={fieldErrors}   clearFieldError={clearFieldError}
+                                showConfirm={showConfirm} toggleConfirm={() => setShowConfirm(v => !v)}
+                                fieldErrors={fieldErrors} clearFieldError={clearFieldError}
                                 termsAccepted={termsAccepted} onTermsToggle={() => { setTermsAccepted(v => !v); clearFieldError("terms"); }} />)
                         }
                     </AnimatePresence>

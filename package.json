@@ -59,7 +59,7 @@
   "dependencies": {
     "@radix-ui/themes": "^3.3.0",
     "framer-motion": "^12.34.2",
-    "i18next": "^25.8.14",
+    "i18next": "^25.8.17",
     "lightweight-charts": "^5.1.0",
     "lucide-react": "^0.574.0",
     "prop-types": "^15.8.1",

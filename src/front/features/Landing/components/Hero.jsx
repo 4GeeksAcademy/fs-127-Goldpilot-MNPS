@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import sovereignVideo from "../../../assets/img/Sovereign_Vault_Luxury_Industrial_Reveal.mp4";
+import sovereignVideo from "../../../assets/img/K_Video_for_Website_Login.mp4";
 
 /**
  * Componente Hero para la Landing Page
@@ -27,6 +27,7 @@ export const Hero = () => {
                     ref={videoRef}
                     autoPlay
                     muted
+                    loop
                     playsInline
                     webkit-playsinline="true"
                     onEnded={handleEnded}

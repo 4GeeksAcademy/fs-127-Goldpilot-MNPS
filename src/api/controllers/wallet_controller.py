@@ -13,12 +13,12 @@ METAAPI_CLIENT_BASE = "https://mt-client-api-v1.{region}.agiliumtrade.ai"
 
 
 def _metaapi_headers():
-    token = os.getenv("METAAPI_TOKEN", "")
+    token = os.getenv("META_API_TOKEN", os.getenv("METAAPI_TOKEN", ""))
     return {"auth-token": token, "Content-Type": "application/json"}
 
 
 def _check_token():
-    token = os.getenv("METAAPI_TOKEN", "")
+    token = os.getenv("META_API_TOKEN", os.getenv("METAAPI_TOKEN", ""))
     return token and token != "your_metaapi_token_here"
 
 

@@ -75,11 +75,13 @@ const VerifyEmail = () => {
 
                 <div className="relative z-20 p-10 flex flex-col items-center gap-6 text-center">
 
-                    {/* Logo */}
-                    <div className="flex items-center gap-2">
-                        <div className="w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold text-black"
-                            style={{ background: "var(--gradient-gold)" }}>XS</div>
-                        <span className="font-bold tracking-tight text-white text-lg">XSNIPER</span>
+                    {/* Logo Principal */}
+                    <div className="flex items-center justify-center w-full mb-2">
+                        <img
+                            src="/logo-principal-blanco.png"
+                            alt="xSniper Logo"
+                            className="h-10 w-auto drop-shadow-md"
+                        />
                     </div>
 
                     {/* Icono de estado */}
@@ -110,9 +112,8 @@ const VerifyEmail = () => {
 
                     {/* Mensaje */}
                     {message && (
-                        <p className={`text-sm leading-relaxed ${
-                            status === "success" ? "text-white/60" : "text-red-300"
-                        }`}>
+                        <p className={`text-sm leading-relaxed ${status === "success" ? "text-white/60" : "text-red-300"
+                            }`}>
                             {message}
                         </p>
                     )}

@@ -6,9 +6,9 @@ import { authServices } from "../services/authServices";
 import { inputBase, inputOk, inputErr, errText, submitBtn } from "../components/auth/constants";
 
 const ForgotPassword = () => {
-    const [email, setEmail]     = useState("");
+    const [email, setEmail] = useState("");
     const [emailError, setEmailError] = useState("");
-    const [error,   setError]   = useState("");
+    const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
     const [loading, setLoading] = useState(false);
 
@@ -72,11 +72,13 @@ const ForgotPassword = () => {
 
                 <div className="relative z-20 w-full p-10 flex flex-col gap-7">
 
-                    {/* Logo */}
-                    <div className="flex items-center justify-center gap-2">
-                        <div className="w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold text-black"
-                            style={{ background: "var(--gradient-gold)" }}>XS</div>
-                        <span className="font-bold tracking-tight text-white text-lg">XSNIPER</span>
+                    {/* Logo Principal */}
+                    <div className="flex items-center justify-center w-full mb-2">
+                        <img
+                            src="/logo-principal-blanco.png"
+                            alt="xSniper Logo"
+                            className="h-10 w-auto drop-shadow-md"
+                        />
                     </div>
 
                     {/* Título */}

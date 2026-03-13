@@ -14,6 +14,9 @@ from datetime import datetime
 
 Base = declarative_base()
 
+# ==========================================
+#              USER MODEL
+# ==========================================
 
 class User(Base):
     """User account model"""
@@ -37,10 +40,15 @@ class User(Base):
     trades = relationship('Trade', back_populates='user', cascade='all, delete-orphan')
     notifications = relationship('Notification', back_populates='user', cascade='all, delete-orphan')
     activity_logs = relationship('ActivityLog', back_populates='user', cascade='all, delete-orphan')
+    # 👇 NUEVA RELACIÓN PARA LOS LOGS DEL BOT 👇
+    bot_logs = relationship('BotLog', back_populates='user', cascade='all, delete-orphan')
 
     def __repr__(self):
         return f"<User(id={self.id}, email='{self.email}', role='{self.role}')>"
 
+# ==========================================
+#            STRATEGY MODEL
+# ==========================================
 
 class Strategy(Base):
     """Trading strategy model (seeded data - not user-editable)"""
@@ -65,7 +73,6 @@ class Strategy(Base):
         return f"<Strategy(id={self.id}, name='{self.name}', risk_level='{self.risk_level}')>"
 
     def serialize(self):
-        """Convierte el objeto a un diccionario para enviarlo como JSON"""
         return {
             "id": self.id,
             "name": self.name,
@@ -76,7 +83,11 @@ class Strategy(Base):
             "lot_size_factor": self.lot_size_factor,
             "is_active": self.is_active
         }
-    
+
+# ==========================================
+#          METAAPI ACCOUNT MODEL
+# ==========================================
+
 class MetaApiAccount(Base):
     """MetaTrader API account connection model"""
     __tablename__ = 'meta_api_accounts'
@@ -84,48 +95,45 @@ class MetaApiAccount(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     user_id = Column(Integer, ForeignKey('users.id', ondelete='CASCADE'), unique=True, nullable=False)
     meta_account_id = Column(String(255))
-    meta_token = Column(String(255))  # Should be encrypted in application layer
-    account_type = Column(String(10))  # 'demo' or 'real'
+    meta_token = Column(String(255))
+    account_type = Column(String(10)) 
     broker = Column(String(50))
     is_connected = Column(Boolean, default=False)
     last_synced_at = Column(DateTime)
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
-    # Relationships
     user = relationship('User', back_populates='meta_api_account')
 
     def __repr__(self):
-        return f"<MetaApiAccount(id={self.id}, user_id={self.user_id}, account_type='{self.account_type}')>"
+        return f"<MetaApiAccount(id={self.id}, user_id={self.user_id})>"
 
+# ==========================================
+#            USER STRATEGY MODEL
+# ==========================================
 
 class UserStrategy(Base):
-    """User-strategy association model (max 1 active per user)"""
+    """User-strategy association model"""
     __tablename__ = 'user_strategies'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     user_id = Column(Integer, ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
     strategy_id = Column(Integer, ForeignKey('strategies.id', ondelete='CASCADE'), nullable=False)
     is_active = Column(Boolean, default=True)
-    activated_at = Column(DateTime)
+    activated_at = Column(DateTime, default=datetime.utcnow)
     deactivated_at = Column(DateTime)
 
-    # Relationships
     user = relationship('User', back_populates='user_strategies')
     strategy = relationship('Strategy', back_populates='user_strategies')
 
-    # Indexes
     __table_args__ = (
         Index('idx_user_strategies_user_id', 'user_id'),
         Index('idx_user_strategies_strategy_id', 'strategy_id'),
-        # Unique constraint: only one active strategy per user
-        Index('idx_user_strategies_one_active', 'user_id', unique=True,
-              postgresql_where=(Column('is_active') == True)),
     )
 
-    def __repr__(self):
-        return f"<UserStrategy(id={self.id}, user_id={self.user_id}, strategy_id={self.strategy_id}, is_active={self.is_active})>"
-
+# ==========================================
+#               TRADE MODEL
+# ==========================================
 
 class Trade(Base):
     """Trade execution model"""
@@ -135,8 +143,8 @@ class Trade(Base):
     user_id = Column(Integer, ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
     strategy_id = Column(Integer, ForeignKey('strategies.id', ondelete='CASCADE'), nullable=False)
     meta_trade_id = Column(String(255))
-    symbol = Column(String(20))  # e.g., XAUUSD
-    trade_type = Column(String(10))  # 'BUY' or 'SELL'
+    symbol = Column(String(20))
+    trade_type = Column(String(10)) 
     lot_size = Column(Float)
     open_price = Column(Float)
     close_price = Column(Float)
@@ -149,25 +157,40 @@ class Trade(Base):
     closed_at = Column(DateTime)
     created_at = Column(DateTime, default=datetime.utcnow)
 
-    # Relationships
     user = relationship('User', back_populates='trades')
     strategy = relationship('Strategy', back_populates='trades')
 
-    # Indexes
-    __table_args__ = (
-        Index('idx_trades_user_id', 'user_id'),
-        Index('idx_trades_strategy_id', 'strategy_id'),
-        Index('idx_trades_created_at', 'created_at'),
-    )
+# ==========================================
+#             BOT LOG MODEL (NUEVO)
+# ==========================================
 
-    def __repr__(self):
-        return f"<Trade(id={self.id}, symbol='{self.symbol}', type='{self.trade_type}', status='{self.status}')>"
+class BotLog(Base):
+    """Logs específicos de la actividad del bot para la terminal en vivo"""
+    __tablename__ = 'bot_logs'
 
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    user_id = Column(Integer, ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
+    message = Column(String(255), nullable=False)
+    type = Column(String(50), default="info") # info, success, warning, danger
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+    # Relación inversa
+    user = relationship('User', back_populates='bot_logs')
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "message": self.message,
+            "type": self.type,
+            "time": self.created_at.strftime("%H:%M:%S")
+        }
+
+# ==========================================
+#           OTHER LOGS & NOTIFICATIONS
+# ==========================================
 
 class Notification(Base):
-    """User notification model"""
     __tablename__ = 'notifications'
-
     id = Column(Integer, primary_key=True, autoincrement=True)
     user_id = Column(Integer, ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
     type = Column(String(30))
@@ -175,73 +198,32 @@ class Notification(Base):
     message = Column(Text)
     is_read = Column(Boolean, default=False)
     created_at = Column(DateTime, default=datetime.utcnow)
-
-    # Relationships
     user = relationship('User', back_populates='notifications')
 
-    # Indexes
-    __table_args__ = (
-        Index('idx_notifications_user_id', 'user_id'),
-    )
-
-    def __repr__(self):
-        return f"<Notification(id={self.id}, user_id={self.user_id}, type='{self.type}', is_read={self.is_read})>"
-
-
 class ActivityLog(Base):
-    """System activity log model"""
     __tablename__ = 'activity_logs'
-
     id = Column(Integer, primary_key=True, autoincrement=True)
     user_id = Column(Integer, ForeignKey('users.id', ondelete='SET NULL'))
     action = Column(String(50))
     details = Column(Text)
     ip_address = Column(String(45))
     created_at = Column(DateTime, default=datetime.utcnow)
-
-    # Relationships
     user = relationship('User', back_populates='activity_logs')
 
-    # Indexes
-    __table_args__ = (
-        Index('idx_activity_logs_user_id', 'user_id'),
-        Index('idx_activity_logs_created_at', 'created_at'),
-    )
+# ==========================================
+#         DATABASE INITIALIZATION
+# ==========================================
 
-    def __repr__(self):
-        return f"<ActivityLog(id={self.id}, user_id={self.user_id}, action='{self.action}')>"
-
-
-# Database initialization and session management
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 def init_db(database_url: str):
-    """
-    Initialize the database connection and create all tables.
-
-    Args:
-        database_url: SQLAlchemy database URL
-                     Example: 'postgresql://user:password@localhost/goldpilot'
-
-    Returns:
-        engine, SessionLocal
-    """
-    engine = create_engine(database_url, echo=True)
+    engine = create_engine(database_url, echo=False)
     Base.metadata.create_all(engine)
-
     SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-
     return engine, SessionLocal
 
-
-# Example usage
 if __name__ == '__main__':
-    # For development (SQLite)
     DATABASE_URL = "sqlite:///./goldpilot.db"
-
-    # For production (PostgreSQL)
-    # DATABASE_URL = "postgresql://user:password@localhost/goldpilot"
-
     engine, SessionLocal = init_db(DATABASE_URL)
     print("Database initialized successfully!")

@@ -21,17 +21,19 @@ import TermsAndConditions from "./pages/TermsAndConditions";
 import { SettingsPage } from "./features/Dashboard/pages/SettingsPage";
 import { InvestorLevelPage } from "./features/Dashboard/pages/InvestorLevelPage";
 
-// 1. Importaciones de Páginas Públicas
+// --- IMPORTACIONES DE PÁGINAS DEL DASHBOARD (Usando el formato que funciona) ---
+import { SimulationPage } from "./features/Dashboard/pages/SimulationPage";
+import { BotTerminalPage } from "./features/Dashboard/pages/BotTerminalPage";
+
+// --- IMPORTACIONES DE PÁGINAS PÚBLICAS ---
 import { StrategiesPage as PublicStrategiesPage } from "./pages/PublicStrategiesPage"; 
 import { SecurityPage } from "./pages/SecurityPage";
 import { PrivacyPage } from "./pages/PrivacyPage";
 import { ContactPage } from "./pages/ContactPage";
 import { AboutUsPage } from "./pages/AboutUsPage";
 import { PressPage } from "./pages/PressPage";
-import { CookiesPage } from "./pages/CookiesPage"; // <-- Añadido Cookies
-
-// 2. Importación del Dashboard
-import { StrategiesPage as DashboardStrategiesPage } from "./features/Dashboard/pages/StrategiesPage";
+import { CookiesPage } from "./pages/CookiesPage";
+import { MetaApiTestPage } from "./pages/MetaApiTestPage"; 
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -49,15 +51,24 @@ export const router = createBrowserRouter(
       <Route path="/security" element={<SecurityPage />} errorElement={<h1>No encontrado!</h1>} />
       <Route path="/privacy" element={<PrivacyPage />} errorElement={<h1>No encontrado!</h1>} />
       <Route path="/terms" element={<TermsAndConditions />} errorElement={<h1>No encontrado!</h1>} />
-      <Route path="/cookies" element={<CookiesPage />} errorElement={<h1>No encontrado!</h1>} /> {/* <-- Ruta de Cookies */}
+      <Route path="/cookies" element={<CookiesPage />} errorElement={<h1>No encontrado!</h1>} />
       <Route path="/contact" element={<ContactPage />} errorElement={<h1>No encontrado!</h1>} />
       <Route path="/about" element={<AboutUsPage />} errorElement={<h1>No encontrado!</h1>} />
       <Route path="/press" element={<PressPage />} errorElement={<h1>No encontrado!</h1>} />
 
+      {/* LABORATORIO TÉCNICO */}
+      <Route path="/test-metaapi" element={<MetaApiTestPage />} errorElement={<h1>No encontrado!</h1>} />
+
       {/* RUTAS DEL DASHBOARD (Privadas) */}
       <Route path="/dashboard" element={<DashboardLayout />} errorElement={<h1>No encontrado!</h1>}>
         <Route index element={<DashboardHome />} />
-        <Route path="strategies" element={<DashboardStrategiesPage />} />
+        
+        {/* Simulación: Análisis y Backtesting */}
+        <Route path="simulacion" element={<SimulationPage />} />
+        
+        {/* Terminal: Control Real del Bot */}
+        <Route path="terminal" element={<BotTerminalPage />} />
+        
         <Route path="historial" element={<HistorialPage />} />
         <Route path="wallets" element={<WalletsPage />} />
         <Route path="bot-control" element={<BotControlPage />} />

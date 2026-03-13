@@ -1,5 +1,7 @@
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
+/** * Utilidad para procesar errores de la API 
+ */
 const parseError = async (response) => {
   try {
     const json = await response.json();
@@ -9,7 +11,8 @@ const parseError = async (response) => {
   }
 };
 
-/** Si el token expiró o es inválido (401), limpia sesión y redirige al login */
+/** * Si el token expiró o es inválido (401), limpia sesión y redirige al login 
+ */
 const checkAuth = (response) => {
   if (response.status === 401) {
     localStorage.removeItem("token");
@@ -17,6 +20,10 @@ const checkAuth = (response) => {
   }
   return response;
 };
+
+// ==========================================
+//           FUNCIONES DEL BOT
+// ==========================================
 
 export const getBotStatus = async () => {
   const token = localStorage.getItem("token");
@@ -30,11 +37,19 @@ export const getBotStatus = async () => {
   return response.json();
 };
 
-export const startBot = async () => {
+/**
+ * Inicia el bot enviando el protocolo seleccionado.
+ * @param {string} strategyId - El nombre o ID de la estrategia (ej: "X-Sniper Scalper")
+ */
+export const startBot = async (strategyId) => {
   const token = localStorage.getItem("token");
   const response = await fetch(`${BACKEND_URL}/api/bot/start`, {
     method: "POST",
-    headers: { Authorization: `Bearer ${token}` },
+    headers: { 
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json" // Crítico para enviar el body
+    },
+    body: JSON.stringify({ strategy: strategyId }),
   });
   if (!response.ok) {
     const msg = await parseError(response);
@@ -72,6 +87,27 @@ export const connectAccount = async (data) => {
   }
   return response.json();
 };
+
+export const updateBotStrategy = async (strategyId) => {
+  const token = localStorage.getItem("token");
+  const response = await fetch(`${BACKEND_URL}/api/bot/strategy`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ strategy: strategyId }),
+  });
+  if (!response.ok) {
+    const msg = await parseError(response);
+    throw new Error(msg);
+  }
+  return response.json();
+};
+
+// ==========================================
+//           GESTIÓN DE WALLETS
+// ==========================================
 
 export const getWallets = async () => {
   const token = localStorage.getItem("token");
@@ -165,22 +201,9 @@ export const deleteWallet = async (walletId) => {
   return response.json();
 };
 
-export const updateBotStrategy = async (strategyId) => {
-  const token = localStorage.getItem("token");
-  const response = await fetch(`${BACKEND_URL}/api/bot/strategy`, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ strategy: strategyId }),
-  });
-  if (!response.ok) {
-    const msg = await parseError(response);
-    throw new Error(msg);
-  }
-  return response.json();
-};
+// ==========================================
+//           USUARIO Y DASHBOARD
+// ==========================================
 
 export const getProfile = async () => {
   const token = localStorage.getItem("token");
@@ -243,13 +266,6 @@ export const getTradeHistory = async () => {
   return response.json();
 };
 
-/**
- * Obtiene candles históricas OHLCV para un símbolo de mercado vía MetaApi.
- * @param {string} symbol - Instrumento (default: 'XAUUSD')
- * @param {string} timeframe - Temporalidad: '1h','4h','1d','1w' (default: '1h')
- * @param {number} limit - Número de velas (default: 100)
- * @returns {{ candles: Array, symbol: string, timeframe: string }}
- */
 export const getMarketCandles = async (
   symbol = "XAUUSD",
   timeframe = "1h",

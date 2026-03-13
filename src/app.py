@@ -8,6 +8,8 @@ from flask_migrate import Migrate
 from flask_swagger import swagger
 from flask_mail import Mail  # NUEVO: importamos Flask-Mail para envio de emails
 from flask_jwt_extended import JWTManager
+from flask_cors import CORS # 👇 AÑADIDO: Importamos CORS para permitir conexión con el Frontend
+
 from api.utils import APIException, generate_sitemap
 from api.models import db
 from api.routes import api
@@ -19,7 +21,12 @@ from api.commands import setup_commands
 ENV = "development" if os.getenv("FLASK_DEBUG") == "1" else "production"
 static_file_dir = os.path.join(os.path.dirname(
     os.path.realpath(__file__)), '../dist/')
+    
 app = Flask(__name__)
+
+# 👇 AÑADIDO: Habilitamos CORS en toda la aplicación 👇
+CORS(app) 
+
 app.url_map.strict_slashes = False
 
 # database condiguration

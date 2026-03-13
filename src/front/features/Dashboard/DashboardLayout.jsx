@@ -8,7 +8,6 @@ import { getProfile } from "./api";
 
 /**
  * Ítem de navegación del sidebar.
- * Usa NavLink de React Router para que la URL controle el estado activo.
  */
 const SidebarItem = ({ label, icon, to }) => {
     const baseClasses =
@@ -59,7 +58,6 @@ export const DashboardLayout = () => {
     const storeUser = store?.user;
     const greeting = storeUser?.first_name || storeUser?.username || "Usuario";
 
-    // Al recargar la página el store se reinicia: si hay token pero no user, recargar perfil
     useEffect(() => {
         if (!store?.user) {
             getProfile()
@@ -68,33 +66,31 @@ export const DashboardLayout = () => {
         }
     }, []);
 
-
     useEffect(() => {
         if (mainRef.current) {
             mainRef.current.scrollTo({ top: 0, behavior: "smooth" });
         }
     }, [location.pathname]);
 
+    // 👇 CAMBIO REALIZADO AQUÍ: Nombre y Ruta actualizados 👇
     const menuItems = [
-        { label: "Dashboard", icon: "⊞", to: "/dashboard" },
-        { label: "Estrategias", icon: "⌖", to: "/dashboard/strategies" },
-        { label: "Wallets", icon: "◈", to: "/dashboard/wallets" },
-        { label: "Historial", icon: "◳", to: "/dashboard/historial" },
-        { label: "Ajustes", icon: "⚙", to: "/dashboard/ajustes" },
-    ];
+    { label: "Dashboard", icon: "⊞", to: "/dashboard" },
+    { label: "Simulación", icon: "⌖", to: "/dashboard/simulacion" },
+    { label: "Live Terminal", icon: "⚡", to: "/dashboard/terminal" }, // 👈 NUEVO ÍTEM
+    { label: "Wallets", icon: "◈", to: "/dashboard/wallets" },
+    { label: "Historial", icon: "◳", to: "/dashboard/historial" },
+    { label: "Ajustes", icon: "⚙", to: "/dashboard/ajustes" },
+];
 
     return (
         <div
             className="h-screen text-white flex overflow-hidden"
             style={{ background: "var(--color-green-dark)" }}
         >
-            {/* ── SIDEBAR ── */}
             <aside
                 className="w-60 h-full flex-shrink-0 hidden lg:flex flex-col py-6 px-3 gap-6 border-r border-white/[0.06]"
                 style={{ background: "rgba(20, 28, 14, 0.85)", backdropFilter: "blur(24px)" }}
             >
-                {/* Logo */}
-                {/* Logo Sidebar */}
                 <div className="flex items-center mx-3 mb-4">
                     <img
                         src="/logo-principal-blanco.png"
@@ -103,7 +99,6 @@ export const DashboardLayout = () => {
                     />
                 </div>
 
-                {/* Menú */}
                 <div className="flex flex-col gap-1">
                     {menuItems.map((item) => (
                         <SidebarItem
@@ -116,15 +111,11 @@ export const DashboardLayout = () => {
                 </div>
             </aside>
 
-            {/* ── ÁREA PRINCIPAL ── */}
             <main ref={mainRef} className="flex-1 flex flex-col min-w-0 overflow-y-auto">
-                {/* Header */}
                 <header
                     className="sticky top-0 z-10 w-full px-6 py-4 flex items-center gap-8 border-b border-white/[0.05]"
                     style={{ background: "rgba(20, 28, 14, 0.7)", backdropFilter: "blur(16px)" }}
                 >
-                    {/* Logo mobile */}
-                    {/* Logo Mobile */}
                     <div className="lg:hidden flex items-center">
                         <img
                             src="/logo-principal-blanco.png"
@@ -148,7 +139,6 @@ export const DashboardLayout = () => {
                     </div>
                     <LanguageSwitcher />
 
-                    {/* Nivel Inversor */}
                     <NavLink
                         to="/dashboard/nivel-inversor"
                         title="Nivel Inversor"
@@ -172,7 +162,6 @@ export const DashboardLayout = () => {
                     <UserProfile />
                 </header>
 
-                {/* Contenido dinámico */}
                 <section className="px-6 py-8 w-full max-w-[1400px] mx-auto flex flex-col gap-6">
                     <Outlet />
                 </section>

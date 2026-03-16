@@ -44,13 +44,18 @@ export const Footer = () => {
                 </Grid>
 
                 <div className="mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
-                    <div className="flex flex-col">
-                        <Text size="1" color="gray" className="opacity-40 uppercase tracking-[0.2em]">
+                    <div className="flex flex-col md:flex-row items-center gap-6">
+                        <img
+                            src="/logo-principal-blanco.png"
+                            alt="XSniper Logo"
+                            className="h-6 md:h-8 w-auto opacity-70 hover:opacity-100 transition-opacity"
+                        />
+                        <Text size="1" color="gray" className="opacity-40 uppercase tracking-[0.2em] text-center md:text-left">
                             © {new Date().getFullYear()} XSNIPER INC. PURA CERTEZA.
                         </Text>
                     </div>
-                    <div className="h-[1px] flex-grow bg-gradient-to-r from-transparent via-white/10 to-transparent mx-8 hidden md:block" />
-                    <Text size="1" color="gray" className="opacity-20 uppercase tracking-[0.1em] italic">
+                    <div className="h-[1px] flex-grow bg-gradient-to-r from-transparent via-white/10 to-transparent mx-4 hidden md:block" />
+                    <Text size="1" color="gray" className="opacity-20 uppercase tracking-[0.1em] italic text-center md:text-right">
                         All assets protected by digital encryption
                     </Text>
                 </div>

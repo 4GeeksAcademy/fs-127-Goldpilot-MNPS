@@ -72,11 +72,11 @@ export const DashboardLayout = () => {
     }, [location.pathname]);
 
     const menuItems = [
-        { label: "Dashboard", icon: "⊞", to: "/dashboard" },
-        { label: "Estrategias", icon: "⌖", to: "/dashboard/strategies" },
-        { label: "Wallets", icon: "◈", to: "/dashboard/wallets" },
-        { label: "Historial", icon: "◳", to: "/dashboard/historial" },
-        { label: "Ajustes", icon: "⚙", to: "/dashboard/ajustes" },
+        { label: t("nav.dashboard"), icon: "⊞", to: "/dashboard" },
+        { label: t("nav.strategies"), icon: "⌖", to: "/dashboard/strategies" },
+        { label: t("nav.wallets"), icon: "◈", to: "/dashboard/wallets" },
+        { label: t("nav.historial"), icon: "◳", to: "/dashboard/historial" },
+        { label: t("nav.settings"), icon: "⚙", to: "/dashboard/ajustes" },
     ];
 
     return (

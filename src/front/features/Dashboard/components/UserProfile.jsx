@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import useGlobalReducer from "../../../hooks/useGlobalReducer.jsx";
 import { getProfile, getTradeHistory, getDashboardSummary } from "../api";
 
@@ -18,6 +19,7 @@ const fmtDate = (iso) => {
 };
 
 const ProfileModal = ({ onClose, storeUser, avatarSrc }) => {
+    const { t } = useTranslation();
     const [profile, setProfile] = useState(null);
     const [investorLevel, setInvestorLevel] = useState(INVESTOR_LEVELS[0]);
 
@@ -103,7 +105,7 @@ const ProfileModal = ({ onClose, storeUser, avatarSrc }) => {
                         className="mt-3 text-[11px] font-bold px-3 py-1 rounded-full"
                         style={{ background: "rgba(195,143,55,0.12)", color: "var(--color-gold)", border: "1px solid rgba(195,143,55,0.2)" }}
                     >
-                        ● Cuenta activa
+                        {t("userProfile.accountActive")}
                     </span>
 
                     {/* Separador */}
@@ -112,10 +114,10 @@ const ProfileModal = ({ onClose, storeUser, avatarSrc }) => {
                     {/* Datos */}
                     <div className="w-full flex flex-col gap-0 rounded-2xl overflow-hidden border border-white/[0.06]">
                         {[
-                            { label: "Correo electrónico", value: storeUser?.email },
-                            { label: "Teléfono", value: profile?.phone_number },
-                            { label: "Fecha de nacimiento", value: fmtDate(profile?.birth_date) },
-                            { label: "Miembro desde", value: fmtDate(profile?.created_at) },
+                            { label: t("userProfile.email"), value: storeUser?.email },
+                            { label: t("userProfile.phone"), value: profile?.phone_number },
+                            { label: t("userProfile.birthDate"), value: fmtDate(profile?.birth_date) },
+                            { label: t("userProfile.memberSince"), value: fmtDate(profile?.created_at) },
                         ].map(({ label, value }, i) => (
                             <div
                                 key={label}
@@ -130,7 +132,7 @@ const ProfileModal = ({ onClose, storeUser, avatarSrc }) => {
                             className="flex items-center justify-between px-5 py-3.5"
                             style={{ background: "rgba(255,255,255,0.02)" }}
                         >
-                            <span className="text-xs text-white/40">Nivel Inversor</span>
+                            <span className="text-xs text-white/40">{t("userProfile.investorLevel")}</span>
                             <span className="flex items-center gap-1.5 text-sm font-bold" style={{ color: investorLevel.color }}>
                                 <span
                                     className="w-5 h-5 rounded flex items-center justify-center text-xs"
@@ -150,6 +152,7 @@ const ProfileModal = ({ onClose, storeUser, avatarSrc }) => {
 };
 
 export const UserProfile = () => {
+    const { t } = useTranslation();
     const [isOpen, setIsOpen] = useState(false);
     const [showProfile, setShowProfile] = useState(false);
     const dropdownRef = useRef(null);
@@ -234,7 +237,7 @@ export const UserProfile = () => {
                                 className="flex items-center gap-3 px-4 py-3 text-sm text-white/70 hover:text-white hover:bg-white/[0.05] transition-all text-left w-full"
                             >
                                 <span className="text-base">◉</span>
-                                Ver perfil
+                                {t("userProfile.viewProfile")}
                             </button>
 
                             <button
@@ -242,7 +245,7 @@ export const UserProfile = () => {
                                 className="flex items-center gap-3 px-4 py-3 text-sm text-white/70 hover:text-white hover:bg-white/[0.05] transition-all text-left w-full"
                             >
                                 <span className="text-base">⚙</span>
-                                Ajustes
+                                {t("userProfile.settings")}
                             </button>
 
                             <div className="h-px mx-3 my-1" style={{ background: "rgba(255,255,255,0.06)" }} />
@@ -252,7 +255,7 @@ export const UserProfile = () => {
                                 className="flex items-center gap-3 px-4 py-3 text-sm text-red-400 hover:text-red-300 hover:bg-red-500/[0.06] transition-all text-left w-full"
                             >
                                 <span className="text-base">⎋</span>
-                                Cerrar sesión
+                                {t("userProfile.logout")}
                             </button>
                         </div>
                     </div>

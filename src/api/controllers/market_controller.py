@@ -1,9 +1,3 @@
-"""
-Controlador de datos de mercado.
-Proxy hacia MetaApi para obtener candles históricas (OHLCV) del símbolo XAUUSD.
-Blueprint: /market
-"""
-
 import os
 from datetime import datetime, timezone
 
@@ -20,16 +14,11 @@ VALID_TIMEFRAMES = {"1m", "5m", "15m", "30m", "1h", "4h", "1d", "1w", "1mn"}
 
 
 def _metaapi_headers():
-    """Retorna los headers de autenticación para MetaApi."""
     token = os.getenv("METAAPI_TOKEN", "")
     return {"auth-token": token, "Content-Type": "application/json"}
 
 
 def _find_connected_account(user_id):
-    """
-    Busca la primera wallet del usuario con status 'connected' y region disponible.
-    Se necesita un account_id real para consultar datos de mercado en MetaApi.
-    """
     return MetaApiAccount.query.filter_by(
         user_id=user_id, status="connected"
     ).filter(MetaApiAccount.region.isnot(None)).first()

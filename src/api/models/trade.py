@@ -1,8 +1,3 @@
-"""
-Modelo Trade — Registro de operaciones de trading.
-Almacena el historial completo de trades ejecutados por cada usuario.
-"""
-
 from datetime import datetime
 from typing import Optional
 from sqlalchemy import String, DateTime, ForeignKey, Float

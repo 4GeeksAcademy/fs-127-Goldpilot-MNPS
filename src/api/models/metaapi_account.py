@@ -1,17 +1,3 @@
-"""
-============================================================
-GoldPilot - MetaApiAccount Model (SQLAlchemy 2)
-============================================================
-Represents a user's linked MetaApi broker account.
-
-MetaApi is a cloud service that connects to MetaTrader 4/5
-brokers, allowing our bot to execute trades programmatically.
-
-Table: metaapi_accounts
-Relationship: One User -> One MetaApiAccount
-============================================================
-"""
-
 from datetime import datetime
 from typing import Optional
 from sqlalchemy import String, DateTime, ForeignKey, Text
@@ -20,19 +6,6 @@ from src.config import db
 
 
 class MetaApiAccount(db.Model):
-    """
-    MetaApiAccount model — stores broker connection credentials.
-
-    Attributes:
-        id: Unique identifier (primary key)
-        user_id: FK to the user who owns this account
-        account_id: MetaApi account ID (from metaapi.cloud dashboard)
-        api_token: MetaApi API token for authentication
-        broker_name: Name of the broker (e.g., "IC Markets")
-        account_type: "demo" or "live"
-        status: Connection status ("connected", "disconnected", "error")
-        last_synced_at: Last successful data sync timestamp
-    """
     __tablename__ = "metaapi_accounts"
 
     # -- Primary Key --

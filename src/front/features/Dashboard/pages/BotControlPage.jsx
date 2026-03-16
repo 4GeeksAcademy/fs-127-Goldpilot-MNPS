@@ -1,17 +1,3 @@
-/**
- * ============================================================
- * GoldPilot - Bot Control Page
- * ============================================================
- * Manages the trading bot.
- *
- * Sections:
- * 1. Bot Status Card — Shows if bot is running, with start/stop
- * 2. Current Configuration — Shows active strategy and account
- *
- * MetaApi connection is handled in the Wallets page.
- * ============================================================
- */
-
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { getBotStatus, startBot, stopBot } from '../api';
@@ -92,7 +78,6 @@ export const BotControlPage = () => {
             )}
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                {/* ==================== BOT STATUS CARD ==================== */}
                 <div className="glass-card p-8">
                     <div className="flex items-center gap-4 mb-6">
                         <div className={`w-16 h-16 rounded-2xl flex items-center justify-center ${botStatus?.bot_active
@@ -137,7 +122,6 @@ export const BotControlPage = () => {
                     </div>
                 </div>
 
-                {/* ==================== CURRENT CONFIG ==================== */}
                 <div className="glass-card p-8">
                     <h3 className="text-lg font-semibold text-white mb-4">{t('botControl.currentConfig')}</h3>
                     <div className="space-y-4">

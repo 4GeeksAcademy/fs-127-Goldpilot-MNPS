@@ -33,7 +33,6 @@ const SignupSignin = () => {
     const [loading, setLoading] = useState(false);
     const [showForm, setShowForm] = useState(true); // For animation when switching between login/signup
 
-    // ─── Validation ───────────────────────────────────────────────────────────
     const validateSignup = () => {
         const e = {};
         if (!signupForm.first_name.trim())
@@ -67,7 +66,6 @@ const SignupSignin = () => {
         return e;
     };
 
-    // ─── Handlers ─────────────────────────────────────────────────────────────
     const handleLogin = async (e) => {
         e.preventDefault();
         setError("");

@@ -1,13 +1,3 @@
-"""
-=============================================================================
-                              MODELO: USER (Usuario)
-=============================================================================
-
-Tabla principal de usuarios.
-- Relacion 1 a 1 con ProfileInfo
-- Relacion 1 a Muchos con Order
-"""
-
 import bcrypt
 import uuid  # NUEVO: para generar tokens unicos de verificacion
 from sqlalchemy import String, Boolean, DateTime, Date

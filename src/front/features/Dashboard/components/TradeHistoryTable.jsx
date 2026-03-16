@@ -2,13 +2,8 @@ import React, { useState, useEffect } from "react";
 import { getTradeHistory } from "../api";
 
 /**
- * Tabla resumen de operaciones recientes de trading (XAUUSD).
- * Conectada al endpoint GET /api/dashboard/trades/history.
- * Columnas: Fecha | Símbolo | Tipo | Resultado (P&L)
- */
 
 /**
- * Formatea una fecha ISO a formato legible: "24 Feb, 09:15"
  * @param {string} isoString - Fecha en formato ISO 8601
  */
 const formatDate = (isoString) => {
@@ -32,7 +27,6 @@ export const TradeHistoryTable = () => {
 
     return (
         <div className="liquid-glass border border-white/5 rounded-2xl overflow-hidden">
-            {/* Cabecera */}
             <div className="flex items-center justify-between p-5 border-b border-white/5">
                 <h2 className="text-sm font-semibold text-white">Operaciones</h2>
                 <button className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-white/50 hover:text-white hover:bg-white/10 transition-all text-xs">

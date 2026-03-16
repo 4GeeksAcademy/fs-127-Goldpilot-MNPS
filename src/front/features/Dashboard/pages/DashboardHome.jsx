@@ -76,19 +76,15 @@ export const DashboardHome = () => {
                 />
             </div>
 
-            {/* Bloque Secuencial: Gráfica -> Wallets -> Tabla */}
             <div className="flex flex-col gap-6 w-full">
-                {/* Gráfica */}
                 <div className="w-full rounded-2xl p-5 border border-white/[0.06]" style={{ background: "rgba(255,255,255,0.03)", backdropFilter: "blur(16px)" }}>
                     <TradingViewChart />
                 </div>
 
-                {/* Panel de Wallets expandido */}
                 <div className="w-full">
                     <WalletPanel />
                 </div>
 
-                {/* Tabla de operaciones */}
                 <div className="w-full">
                     <TradeTable />
                 </div>
@@ -96,7 +92,6 @@ export const DashboardHome = () => {
 
             <BotControlPage />
 
-            {/* Banner promocional debajo de todo */}
             <div className="w-full mt-2">
                 <AdBanner />
             </div>

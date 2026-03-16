@@ -1,15 +1,3 @@
-"""
-Optimizer Engine v2.0 — uses backtesting.py bt.optimize()
-===========================================================
-Replaces the manual grid-search loop with backtesting.py's built-in optimizer.
-Runs each strategy's parameter space in the background and saves ranked results.
-
-Usage (from routes.py):
-    run_optimization_async(balance=100_000, start_date="2020-01-01")
-    get_status()    → {"running": bool, "progress": "X/3", ...}
-    get_results()   → saved JSON from last run
-"""
-
 import json
 import logging
 import os
@@ -23,7 +11,6 @@ logger = logging.getLogger(__name__)
 _HERE        = os.path.dirname(os.path.abspath(__file__))
 RESULTS_FILE = os.path.join(_HERE, "data", "optimizer_results.json")
 
-# ── Thread-safe state ─────────────────────────────────────────────────────────
 _state = {
     "running":    False,
     "progress":   "0/3",
@@ -48,7 +35,6 @@ def get_results() -> dict:
         return {"status": "error", "error": str(e)}
 
 
-# ── Helpers ───────────────────────────────────────────────────────────────────
 
 def _safe(val, default=0.0):
     try:
@@ -94,7 +80,6 @@ def _run_optimize(balance, start_date):
     bt_swing = _prep_for_bt(df_swing)
     logger.info("Optimizer using %s data: %d bars", tf_swing, len(bt_swing))
 
-    # ── 1 / 3  Low Risk — V4 Ghost ───────────────────────────────────────────
     with _state_lock:
         _state["progress"] = "1/3 — V4 Ghost (Low)"
     try:
@@ -120,7 +105,6 @@ def _run_optimize(balance, start_date):
         logger.exception("Low opt failed")
         errors.append("low: " + str(e))
 
-    # ── 2 / 3  Medium Risk — V4 Ghost ────────────────────────────────────────
     with _state_lock:
         _state["progress"] = "2/3 — V4 Ghost (Medium)"
     try:
@@ -146,7 +130,6 @@ def _run_optimize(balance, start_date):
         logger.exception("Medium opt failed")
         errors.append("medium: " + str(e))
 
-    # ── 3 / 3  High Risk — Golden Breakout (H1) ──────────────────────────────
     with _state_lock:
         _state["progress"] = "3/3 — Golden Breakout (High)"
     try:
@@ -174,7 +157,6 @@ def _run_optimize(balance, start_date):
         logger.exception("High opt failed")
         errors.append("high: " + str(e))
 
-    # ── Save results ─────────────────────────────────────────────────────────
     output = {
         "status":     "ok",
         "timestamp":  datetime.utcnow().isoformat(),

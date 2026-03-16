@@ -1,7 +1,6 @@
 import React, { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-// 👇 IMPORTACIÓN DE ICONOS
 import shieldIcon from "../../../monedas/shield.svg";
 import balanzaIcon from "../../../monedas/balanza.svg";
 import fireIcon from "../../../monedas/fire.svg";
@@ -69,7 +68,6 @@ export const StrategiesCard = () => {
     return (
         <div className="flex flex-col items-center gap-8 w-full max-w-7xl mx-auto p-4 pb-20">
             
-            {/* GRID DE ESTRATEGIAS */}
             <div className="flex flex-wrap justify-center gap-8 w-full">
                 {strategies.map((s) => (
                     <motion.div
@@ -88,12 +86,10 @@ export const StrategiesCard = () => {
                             </div>
                         )}
 
-                        {/* 👇 CONTENEDOR DE ICONO DORADO (Usando Máscara CSS) 👇 */}
                         <div className="w-20 h-20 mb-6 flex items-center justify-center">
                             <div 
                                 className={`w-full h-full transition-all duration-700 ${selected === s.id ? "scale-110" : "scale-100"}`}
                                 style={{
-                                    // El truco: el color de fondo es el que se verá a través de la forma del SVG
                                     backgroundColor: selected === s.id ? 'var(--color-gold)' : '#4b5563',
                                     maskImage: `url(${s.icon})`,
                                     WebkitMaskImage: `url(${s.icon})`,
@@ -103,7 +99,6 @@ export const StrategiesCard = () => {
                                     WebkitMaskRepeat: 'no-repeat',
                                     maskPosition: 'center',
                                     WebkitMaskPosition: 'center',
-                                    // Añadimos un pequeño brillo si está seleccionado
                                     filter: selected === s.id ? 'drop-shadow(0 0 8px rgba(212, 175, 55, 0.4))' : 'none'
                                 }}
                             />
@@ -126,7 +121,6 @@ export const StrategiesCard = () => {
                 ))}
             </div>
 
-            {/* SECCIÓN DE CONTROLES */}
             <div className="w-full flex flex-col items-center mt-4 min-h-[120px]">
                 <AnimatePresence mode="wait">
                     {!results && selected && (
@@ -171,7 +165,6 @@ export const StrategiesCard = () => {
                 </AnimatePresence>
             </div>
 
-            {/* DASHBOARD DE RESULTADOS */}
             <AnimatePresence>
                 {results && (
                     <motion.div 

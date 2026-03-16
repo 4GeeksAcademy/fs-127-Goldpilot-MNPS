@@ -120,10 +120,8 @@ export const InvestorLevelPage = () => {
     return (
         <div className="flex flex-col gap-5 w-full">
 
-            {/* ── ZONA SUPERIOR: nivel actual + roadmap ── */}
             <div className="flex gap-5">
 
-                {/* Nivel actual — tarjeta grande */}
                 <div
                     className="flex flex-col items-center p-7 rounded-2xl border border-white/[0.08] flex-1 gap-4"
                     style={{
@@ -131,7 +129,6 @@ export const InvestorLevelPage = () => {
                         boxShadow: `0 0 60px ${current.glow}`,
                     }}
                 >
-                    {/* Moneda del nivel */}
                     <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/35 self-start">Nivel actual</p>
                     <img
                         src={current.reward}
@@ -146,14 +143,12 @@ export const InvestorLevelPage = () => {
                         }}
                     />
 
-                    {/* Nombre y tagline */}
                     <div className="flex flex-col items-center gap-1 text-center">
                         <h1 className="text-3xl font-black text-white leading-none">{current.name}</h1>
                         <p className="text-lg font-bold" style={{ color: current.color }}>{current.label}</p>
                         <p className="text-sm text-white/40 mt-1">{current.tagline}</p>
                     </div>
 
-                    {/* Ganancias + progreso */}
                     <div className="w-full mt-2">
                         <div className="flex items-end justify-between mb-3">
                             <div>
@@ -190,7 +185,6 @@ export const InvestorLevelPage = () => {
                     </div>
                 </div>
 
-                {/* Roadmap de niveles */}
                 <div
                     className="w-80 shrink-0 flex flex-col p-6 rounded-2xl border border-white/[0.06]"
                     style={{ background: "rgba(255,255,255,0.02)" }}
@@ -248,7 +242,6 @@ export const InvestorLevelPage = () => {
                                             )}
                                         </div>
                                     </div>
-                                    {/* Línea separadora */}
                                     {!isLast && (
                                         <div
                                             className="w-0.5 ml-[34px] my-1"
@@ -262,7 +255,6 @@ export const InvestorLevelPage = () => {
                 </div>
             </div>
 
-            {/* ── RECOMPENSAS ── */}
             <div
                 className="shrink-0 rounded-2xl border border-white/[0.06] px-6 py-5"
                 style={{ background: "rgba(255,255,255,0.02)" }}
@@ -306,7 +298,6 @@ export const InvestorLevelPage = () => {
                     })}
                 </div>
 
-                {/* Lightbox */}
                 {zoomedReward && (
                     <div
                         className="fixed inset-0 z-[200] flex items-center justify-center"
@@ -334,7 +325,6 @@ export const InvestorLevelPage = () => {
                 )}
             </div>
 
-            {/* ── CÓMO FUNCIONA: 4 columnas de texto ── */}
             <div
                 className="shrink-0 rounded-2xl border border-white/[0.06] px-6 py-5"
                 style={{ background: "rgba(255,255,255,0.02)" }}

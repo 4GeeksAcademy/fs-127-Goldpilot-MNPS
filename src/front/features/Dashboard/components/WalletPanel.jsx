@@ -122,7 +122,6 @@ const ConfigLinkStep = ({ configLink, onDismiss }) => (
     </div>
 );
 
-/** Single wallet card — fetches its own balance, actions via callbacks */
 const WalletCard = ({ wallet, configLink, onDisconnect, onGetConfigLink, onSync, disconnecting, loadingLink, syncing }) => {
     const isDraft = wallet.status === "draft";
     const [balance, setBalance] = useState(null); // { balance, equity, currency } | null
@@ -137,7 +136,6 @@ const WalletCard = ({ wallet, configLink, onDisconnect, onGetConfigLink, onSync,
         <div className="flex flex-col gap-6 p-8 rounded-2xl border border-white/[0.08]"
             style={{ background: "rgba(255,255,255,0.03)" }}>
 
-            {/* ── HEADER ── */}
             <div className="flex items-center justify-between gap-4">
                 <div className="flex items-center gap-4">
                     <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/[0.08] flex items-center justify-center text-xl font-black flex-shrink-0"
@@ -164,7 +162,6 @@ const WalletCard = ({ wallet, configLink, onDisconnect, onGetConfigLink, onSync,
                 </span>
             </div>
 
-            {/* ── BALANCE ── */}
             {!isDraft && (
                 <>
                     <div className="h-px bg-white/[0.06]" />
@@ -192,7 +189,6 @@ const WalletCard = ({ wallet, configLink, onDisconnect, onGetConfigLink, onSync,
                 </>
             )}
 
-            {/* ── CONFIG LINK ── */}
             {configLink ? (
                 <ConfigLinkStep configLink={configLink} onDismiss={() => onGetConfigLink(null)} />
             ) : isDraft && (
@@ -219,7 +215,6 @@ const WalletCard = ({ wallet, configLink, onDisconnect, onGetConfigLink, onSync,
                 </>
             )}
 
-            {/* ── INFO ── */}
             <div className="h-px bg-white/[0.06]" />
             <div className="grid grid-cols-2 gap-3">
                 {[
@@ -236,7 +231,6 @@ const WalletCard = ({ wallet, configLink, onDisconnect, onGetConfigLink, onSync,
                 ))}
             </div>
 
-            {/* ── ACTIONS ── */}
             <div className="flex gap-3">
                 <button onClick={() => onGetConfigLink(wallet.id)} disabled={loadingLink}
                     className="flex-1 py-3 rounded-xl text-sm font-semibold border disabled:opacity-40"
@@ -416,7 +410,6 @@ export const WalletPanel = () => {
                 {loading ? (
                     <p className="text-xs text-white/30 text-center py-8">Cargando...</p>
                 ) : wallets.length === 0 ? (
-                    /* Empty state */
                     <div className="flex flex-col items-center gap-4 py-10 rounded-2xl border border-white/[0.06]"
                         style={{ background: "rgba(255,255,255,0.02)" }}>
                         <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/[0.08] flex items-center justify-center text-3xl">◈</div>

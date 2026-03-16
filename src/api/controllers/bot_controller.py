@@ -1,12 +1,3 @@
-"""
-Bot Controller
-Endpoints: GET /bot/status, POST /bot/start, POST /bot/stop
-
-Bot state is derived from UserStrategy.is_active:
-- bot_active = True  → user has a UserStrategy with is_active=True
-- start  → sets the user's latest UserStrategy to is_active=True
-- stop   → sets all user's UserStrategies to is_active=False
-"""
 
 from flask import Blueprint, jsonify, abort
 from flask_jwt_extended import jwt_required, get_jwt_identity

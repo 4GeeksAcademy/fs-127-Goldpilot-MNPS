@@ -6,14 +6,8 @@ import { Hero } from "./components/Hero";
 import { RiskSection } from "./components/RiskSection";
 import { Footer } from "./components/Footer";
 
-/**
- * Componente LandingPage.
- * Orquesta todas las secciones de la página de aterrizaje pública.
- * Envuelto en Radix UI Theme para un diseño consistente.
- */
 const LandingPage = () => {
 
-    // 2. MAGIA DE SCROLL: Forzar el inicio de la página al entrar
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);

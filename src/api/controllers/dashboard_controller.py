@@ -1,9 +1,3 @@
-"""
-Controlador del Dashboard.
-Expone el resumen de cuenta, estadísticas de trading y estrategia activa.
-Blueprint: /dashboard
-"""
-
 import requests as req
 from flask import Blueprint, jsonify, abort
 from flask_jwt_extended import jwt_required, get_jwt_identity
@@ -20,10 +14,6 @@ dashboard_bp = Blueprint('dashboard', __name__, url_prefix='/dashboard')
 
 
 def _fetch_wallet_balance(account):
-    """
-    Consulta balance, equity y margen libre de una wallet conectada vía MetaApi.
-    Retorna un dict con los valores o None para cada campo si no están disponibles.
-    """
     empty = {"balance": None, "equity": None, "currency": None, "margin": None, "free_margin": None}
 
     if account.status != "connected" or not account.region:
@@ -54,10 +44,6 @@ def _fetch_wallet_balance(account):
 @dashboard_bp.route('/summary', methods=['GET'])
 @jwt_required()
 def get_summary():
-    """
-    Retorna el resumen del dashboard del usuario.
-    Incluye todas las wallets con su balance real consultado a MetaApi.
-    """
     user_id = int(get_jwt_identity())
     accounts = MetaApiAccount.query.filter_by(user_id=user_id).all()
 
@@ -89,10 +75,6 @@ def get_summary():
 @dashboard_bp.route('/trades/history', methods=['GET'])
 @jwt_required()
 def get_trade_history():
-    """
-    Retorna el historial de operaciones cerradas del usuario.
-    Consulta la tabla trades filtrada por user_id y status='closed'.
-    """
     user_id = int(get_jwt_identity())
     trades = Trade.query.filter_by(
         user_id=user_id, status="closed"
@@ -104,9 +86,6 @@ def get_trade_history():
 @dashboard_bp.route('/trades/open', methods=['GET'])
 @jwt_required()
 def get_open_trades():
-    """
-    Retorna las operaciones abiertas (status='open') del usuario autenticado.
-    """
     user_id = int(get_jwt_identity())
     trades = Trade.query.filter_by(user_id=user_id, status='open').order_by(Trade.opened_at.desc()).all()
     return jsonify({"trades": [t.serialize() for t in trades]}), 200
@@ -115,10 +94,6 @@ def get_open_trades():
 @dashboard_bp.route('/trades/<int:trade_id>/cancel', methods=['PATCH'])
 @jwt_required()
 def cancel_trade(trade_id):
-    """
-    Cancela una operación abierta del usuario.
-    Solo se puede cancelar si pertenece al usuario y está en status='open'.
-    """
     user_id = int(get_jwt_identity())
     trade = Trade.query.filter_by(id=trade_id, user_id=user_id).first()
 

@@ -62,7 +62,6 @@ const ProfileModal = ({ onClose, storeUser, avatarSrc }) => {
                 style={{ background: "rgba(20,28,14,0.97)", backdropFilter: "blur(40px)", boxShadow: "0 40px 100px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.04)" }}
                 onClick={(e) => e.stopPropagation()}
             >
-                {/* Botón cerrar */}
                 <button
                     onClick={onClose}
                     className="absolute top-5 right-5 w-8 h-8 rounded-full flex items-center justify-center text-white/40 hover:text-white/80 transition-all z-10"
@@ -71,13 +70,11 @@ const ProfileModal = ({ onClose, storeUser, avatarSrc }) => {
                     ✕
                 </button>
 
-                {/* Banda superior dorada */}
                 <div
                     className="h-32 w-full rounded-t-3xl"
                     style={{ background: "linear-gradient(135deg, rgba(195,143,55,0.22) 0%, rgba(195,143,55,0.06) 100%)" }}
                 />
 
-                {/* Avatar centrado, solapando la banda */}
                 <div className="flex flex-col items-center -mt-14 px-8 pb-8">
                     <div className="relative">
                         {avatarSrc ? (
@@ -199,7 +196,6 @@ export const UserProfile = () => {
     return (
         <>
             <div className="relative" ref={dropdownRef}>
-                {/* Trigger */}
                 <button
                     onClick={() => setIsOpen((prev) => !prev)}
                     className="flex items-center gap-3 p-2 pl-3 rounded-xl liquid-glass border border-white/10 hover:bg-white/5 transition-all cursor-pointer"
@@ -233,7 +229,6 @@ export const UserProfile = () => {
                         style={{ background: "rgba(20,28,14,0.95)", backdropFilter: "blur(20px)" }}
                     >
                         <div className="flex flex-col py-1.5">
-                            {/* Ver perfil */}
                             <button
                                 onClick={handleViewProfile}
                                 className="flex items-center gap-3 px-4 py-3 text-sm text-white/70 hover:text-white hover:bg-white/[0.05] transition-all text-left w-full"
@@ -242,7 +237,6 @@ export const UserProfile = () => {
                                 Ver perfil
                             </button>
 
-                            {/* Ajustes */}
                             <button
                                 onClick={handleSettings}
                                 className="flex items-center gap-3 px-4 py-3 text-sm text-white/70 hover:text-white hover:bg-white/[0.05] transition-all text-left w-full"
@@ -251,10 +245,8 @@ export const UserProfile = () => {
                                 Ajustes
                             </button>
 
-                            {/* Separador */}
                             <div className="h-px mx-3 my-1" style={{ background: "rgba(255,255,255,0.06)" }} />
 
-                            {/* Cerrar sesión */}
                             <button
                                 onClick={handleLogout}
                                 className="flex items-center gap-3 px-4 py-3 text-sm text-red-400 hover:text-red-300 hover:bg-red-500/[0.06] transition-all text-left w-full"
@@ -267,7 +259,6 @@ export const UserProfile = () => {
                 )}
             </div>
 
-            {/* Modal de perfil */}
             {showProfile && (
                 <ProfileModal
                     onClose={() => setShowProfile(false)}

@@ -1,17 +1,5 @@
 import React from "react";
 
-/**
- * Tarjeta de resumen de una wallet (componente primario y reutilizable).
- * Positivo → colores del sistema de diseño (gold/olive).
- * Negativo → rojo (único uso permitido del rojo en el sistema).
- *
- * @param {Object} props
- * @param {string} props.name - Nombre del activo (ej: "Bitcoin")
- * @param {string} props.symbol - Símbolo del activo (ej: "BTC")
- * @param {string} props.icon - Emoji/icono del activo
- * @param {number} props.balanceUSD - Balance en USD
- * @param {number} props.changePercent - Porcentaje de cambio (positivo o negativo)
- */
 export const OverviewCard = ({
     name = "Bitcoin",
     symbol = "BTC",
@@ -21,7 +9,6 @@ export const OverviewCard = ({
 }) => {
     const isPositive = changePercent >= 0;
 
-    /* Paleta del sistema de diseño según rendimiento */
     const colorPositive = {
         badge: "bg-[rgba(99,119,66,0.15)] text-[var(--color-olive)] border border-[rgba(99,119,66,0.25)]",
         bar: "bg-[var(--color-olive)]",
@@ -44,7 +31,6 @@ export const OverviewCard = ({
                 backdropFilter: "blur(16px)",
             }}
         >
-            {/* Orb decorativo */}
             <div
                 className="absolute -top-6 -right-6 w-24 h-24 rounded-full blur-2xl opacity-10 pointer-events-none transition-opacity group-hover:opacity-20"
                 style={{
@@ -52,7 +38,6 @@ export const OverviewCard = ({
                 }}
             />
 
-            {/* Cabecera: icono + símbolo + badge rendimiento */}
             <div className="flex items-center justify-between relative z-10">
                 <div className="flex items-center gap-3 min-w-0 flex-1 overflow-hidden mr-2">
                     <div className="w-9 h-9 rounded-xl bg-white/[0.06] border border-white/[0.08] flex items-center justify-center text-lg flex-shrink-0">
@@ -70,7 +55,6 @@ export const OverviewCard = ({
                 </span>
             </div>
 
-            {/* Balance en USD */}
             <div className="relative z-10">
                 <p className="text-xl font-bold tracking-tight text-white leading-none">
                     ${balanceUSD.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
@@ -78,7 +62,6 @@ export const OverviewCard = ({
                 <p className="text-[11px] text-white/25 mt-1">Equity en USD</p>
             </div>
 
-            {/* Barra de progreso */}
             <div className="w-full h-[3px] rounded-full bg-white/[0.05] overflow-hidden relative z-10">
                 <div
                     className={`h-full rounded-full transition-all duration-1000 ${color.bar}`}

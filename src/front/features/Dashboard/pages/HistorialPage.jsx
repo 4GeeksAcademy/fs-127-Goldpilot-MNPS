@@ -4,11 +4,7 @@ import { PortfolioCard } from "../components/PortfolioCard";
 import { getTradeHistory } from "../api";
 
 /**
- * Página de Historial de Operaciones — /dashboard/historial
- */
-
 /**
- * Formatea fecha ISO a "24 Feb 09:15"
  * @param {string} iso - Fecha en formato ISO 8601
  */
 const fmt = (iso) => {

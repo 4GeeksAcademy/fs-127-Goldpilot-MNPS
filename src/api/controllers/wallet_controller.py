@@ -111,11 +111,7 @@ def get_wallets():
 @wallet_bp.route('', methods=['POST'])
 @jwt_required()
 def add_wallet():
-    """
-    Creates a new MetaApi account in DRAFT state under the admin's subscription.
-    Returns a configuration link — user enters MT credentials on MetaApi's secure page.
-    MT password never touches our server.
-    """
+
     user_id = int(get_jwt_identity())
     data = request.get_json() or {}
 
@@ -243,11 +239,7 @@ def get_config_link(wallet_id):
 @wallet_bp.route('/<int:wallet_id>/balance', methods=['GET'])
 @jwt_required()
 def get_wallet_balance(wallet_id):
-    """
-    Fetches live balance/equity from MetaApi's client REST API.
-    Requires the account to be DEPLOYED and CONNECTED to the broker.
-    Returns null values if unavailable (draft, disconnected, or error).
-    """
+
     user_id = int(get_jwt_identity())
     account = MetaApiAccount.query.filter_by(id=wallet_id, user_id=user_id).first()
     if not account:

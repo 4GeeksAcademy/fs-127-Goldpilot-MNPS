@@ -1,7 +1,3 @@
-"""
-Controlador de usuarios - Endpoints /api/users
-"""
-
 from flask import Blueprint, request, jsonify, abort
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from api.services import UserService
@@ -34,10 +30,6 @@ def get_me():
 @user_bp.route('/me', methods=['PATCH'])
 @jwt_required()
 def update_me():
-    """
-    Actualiza los campos editables del perfil: username y/o phone_number.
-    Solo se modifican los campos presentes en el body.
-    """
     user_id = int(get_jwt_identity())
     user = User.query.get(user_id)
     if not user:

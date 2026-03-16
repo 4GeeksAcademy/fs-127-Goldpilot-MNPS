@@ -1,10 +1,5 @@
 import React from "react";
 
-/**
- * Tabla de noticias y transacciones del mercado crypto.
- * Datos mock de muestra para desarrollo.
- * TODO: Conectar con endpoint del backend GET /api/market/news cuando el compañero lo implemente.
- */
 const MOCK_NEWS = [
     {
         id: 1,
@@ -63,7 +58,6 @@ const MOCK_NEWS = [
     },
 ];
 
-/** Mapa de estado a estilos visuales */
 const STATUS_STYLES = {
     success: { dot: "bg-emerald-400", label: "text-emerald-400", text: "Exitoso" },
     pending: { dot: "bg-yellow-400", label: "text-yellow-400", text: "Pendiente" },
@@ -73,7 +67,6 @@ const STATUS_STYLES = {
 export const NewsTable = () => {
     return (
         <div className="liquid-glass border border-white/5 rounded-2xl overflow-hidden">
-            {/* Cabecera de la tabla */}
             <div className="flex items-center justify-between p-5 border-b border-white/5">
                 <h2 className="text-sm font-semibold text-white">Mercados</h2>
                 <button className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-white/50 hover:text-white hover:bg-white/10 transition-all text-xs">
@@ -81,7 +74,6 @@ export const NewsTable = () => {
                 </button>
             </div>
 
-            {/* Tabla */}
             <div className="overflow-x-auto">
                 <table className="w-full">
                     <thead>
@@ -103,7 +95,6 @@ export const NewsTable = () => {
                                     key={item.id}
                                     className="hover:bg-white/[0.02] transition-colors cursor-pointer"
                                 >
-                                    {/* Nombre + ícono */}
                                     <td className="px-5 py-4">
                                         <div className="flex items-center gap-3">
                                             <div className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-base shrink-0">
@@ -123,17 +114,14 @@ export const NewsTable = () => {
                                         </div>
                                     </td>
 
-                                    {/* Fecha */}
                                     <td className="px-4 py-4 hidden sm:table-cell">
                                         <span className="text-xs text-white/40">{item.date}</span>
                                     </td>
 
-                                    {/* Precio */}
                                     <td className="px-4 py-4 hidden md:table-cell">
                                         <span className="text-sm font-medium text-white">{item.lastPrice}</span>
                                     </td>
 
-                                    {/* Estado */}
                                     <td className="px-4 py-4 hidden lg:table-cell">
                                         <div className="flex items-center gap-2">
                                             <div className={`w-1.5 h-1.5 rounded-full ${status.dot}`} />
@@ -141,7 +129,6 @@ export const NewsTable = () => {
                                         </div>
                                     </td>
 
-                                    {/* Cantidad */}
                                     <td className="px-5 py-4 text-right">
                                         <span className="text-sm font-bold text-white">{item.amount}</span>
                                     </td>

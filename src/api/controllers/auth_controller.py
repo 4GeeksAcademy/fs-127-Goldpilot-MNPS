@@ -8,7 +8,6 @@ from api.services import AuthService
 
 auth_bp = Blueprint('auth', __name__, url_prefix='/auth')
 
-# POST /api/auth/signup - Registrar un nuevo usuario
 
 
 @auth_bp.route('/signup', methods=['POST'])
@@ -19,18 +18,14 @@ def signup():
     result = AuthService.signup(body)
     return jsonify(result), 201
 
-# GET /api/auth/verify/<token> - Verificar email del usuario
 
 
-# NUEVO: endpoint de verificacion de email ()
 @auth_bp.route('/verify/<token>', methods=['GET'])
 def verify_email(token):
-    # NUEVO: llama al servicio que valida el token (NAPOLES)
     result = AuthService.verify_email(token)
     return jsonify(result), 200
 
 
-# POST /api/auth/forgot-password - Solicitar restablecimiento de contraseña
 @auth_bp.route('/forgot-password', methods=['POST'])
 def forgot_password():
     body = request.get_json()
@@ -40,7 +35,6 @@ def forgot_password():
     return jsonify(result), 200
 
 
-# POST /api/auth/reset-password - Aplicar nueva contraseña con token
 @auth_bp.route('/reset-password', methods=['POST'])
 def reset_password():
     body = request.get_json()
@@ -50,7 +44,6 @@ def reset_password():
     return jsonify(result), 200
 
 
-# POST /api/auth/login - Login de usuario
 @auth_bp.route('/login', methods=['POST'])
 def login():
     body = request.get_json()

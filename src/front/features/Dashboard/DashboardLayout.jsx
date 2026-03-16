@@ -6,10 +6,6 @@ import { LanguageSwitcher } from "./components/LanguageSwitcher";
 import useGlobalReducer from "../../hooks/useGlobalReducer";
 import { getProfile } from "./api";
 
-/**
- * Ítem de navegación del sidebar.
- * Usa NavLink de React Router para que la URL controle el estado activo.
- */
 const SidebarItem = ({ label, icon, to }) => {
     const baseClasses =
         "relative flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium transition-all duration-200 cursor-pointer select-none group";
@@ -88,13 +84,10 @@ export const DashboardLayout = () => {
             className="h-screen text-white flex overflow-hidden"
             style={{ background: "var(--color-green-dark)" }}
         >
-            {/* ── SIDEBAR ── */}
             <aside
                 className="w-60 h-full flex-shrink-0 hidden lg:flex flex-col py-6 px-3 gap-6 border-r border-white/[0.06]"
                 style={{ background: "rgba(20, 28, 14, 0.85)", backdropFilter: "blur(24px)" }}
             >
-                {/* Logo */}
-                {/* Logo Sidebar */}
                 <div className="flex items-center mx-3 mb-4">
                     <img
                         src="/logo-principal-blanco.png"
@@ -103,7 +96,6 @@ export const DashboardLayout = () => {
                     />
                 </div>
 
-                {/* Menú */}
                 <div className="flex flex-col gap-1">
                     {menuItems.map((item) => (
                         <SidebarItem
@@ -116,15 +108,11 @@ export const DashboardLayout = () => {
                 </div>
             </aside>
 
-            {/* ── ÁREA PRINCIPAL ── */}
             <main ref={mainRef} className="flex-1 flex flex-col min-w-0 overflow-y-auto">
-                {/* Header */}
                 <header
                     className="sticky top-0 z-10 w-full px-6 py-4 flex items-center gap-8 border-b border-white/[0.05]"
                     style={{ background: "rgba(20, 28, 14, 0.7)", backdropFilter: "blur(16px)" }}
                 >
-                    {/* Logo mobile */}
-                    {/* Logo Mobile */}
                     <div className="lg:hidden flex items-center">
                         <img
                             src="/logo-principal-blanco.png"
@@ -148,7 +136,6 @@ export const DashboardLayout = () => {
                     </div>
                     <LanguageSwitcher />
 
-                    {/* Nivel Inversor */}
                     <NavLink
                         to="/dashboard/nivel-inversor"
                         title="Nivel Inversor"
@@ -172,7 +159,6 @@ export const DashboardLayout = () => {
                     <UserProfile />
                 </header>
 
-                {/* Contenido dinámico */}
                 <section className="px-6 py-8 w-full max-w-[1400px] mx-auto flex flex-col gap-6">
                     <Outlet />
                 </section>

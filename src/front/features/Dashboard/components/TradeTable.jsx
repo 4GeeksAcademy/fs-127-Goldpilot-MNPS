@@ -1,14 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 
-/**
- * Tabla dinámica de operaciones de trading (XAUUSD).
- * Nombre alineado con el doc del proyecto (sección 5.1 Componentes: TradeTable dinámica).
- * Columnas: Fecha | Símbolo | Tipo | Resultado (P&L) | Cancelar (solo operaciones abiertas)
- * TODO: Conectar con GET /api/dashboard/trades/history cuando el backend esté listo.
- *
- * Esquema de datos basado en el modelo Trade (tabla: trades):
- *   symbol, trade_type ('BUY'|'SELL'), profit_loss, opened_at, status
- */
 const MOCK_TRADES = [
     { id: 1, symbol: "XAUUSD", trade_type: "BUY", profit_loss: null, opened_at: "2026-03-04T09:15:00", status: "open" },
     { id: 2, symbol: "XAUUSD", trade_type: "SELL", profit_loss: null, opened_at: "2026-03-04T13:00:00", status: "open" },
@@ -18,7 +9,6 @@ const MOCK_TRADES = [
 ];
 
 /**
- * Formatea una fecha ISO a formato legible: "24 Feb, 09:15"
  * @param {string} isoString - Fecha en formato ISO 8601
  */
 const formatDate = (isoString) => {
@@ -30,11 +20,9 @@ const formatDate = (isoString) => {
 
 export const TradeTable = () => {
     const [trades, setTrades] = useState(MOCK_TRADES);
-    // id de la operación que está en estado "primer click" (confirmación pendiente)
     const [pendingCancel, setPendingCancel] = useState(null);
     const timeoutRef = useRef(null);
 
-    // Si el usuario no hace el segundo click en 3s, se resetea
     useEffect(() => {
         if (pendingCancel === null) return;
         timeoutRef.current = setTimeout(() => setPendingCancel(null), 3000);
@@ -43,7 +31,6 @@ export const TradeTable = () => {
 
     const handleCancelClick = (tradeId) => {
         if (pendingCancel === tradeId) {
-            // Segundo click → llamar al endpoint y quitar de la lista
             clearTimeout(timeoutRef.current);
             setPendingCancel(null);
             const token = localStorage.getItem("token");
@@ -55,14 +42,12 @@ export const TradeTable = () => {
                 .catch(() => {})
                 .finally(() => setTrades((prev) => prev.filter((t) => t.id !== tradeId)));
         } else {
-            // Primer click → pedir confirmación
             setPendingCancel(tradeId);
         }
     };
 
     return (
         <div className="liquid-glass border border-white/5 rounded-2xl overflow-hidden">
-            {/* Cabecera */}
             <div className="flex items-center justify-between p-5 border-b border-white/5">
                 <h2 className="text-sm font-semibold text-white">Operaciones</h2>
                 <button className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-white/50 hover:text-white hover:bg-white/10 transition-all text-xs">
@@ -70,7 +55,6 @@ export const TradeTable = () => {
                 </button>
             </div>
 
-            {/* Tabla */}
             <div className="overflow-x-auto">
                 <table className="w-full">
                     <thead>
@@ -93,14 +77,12 @@ export const TradeTable = () => {
                                     key={trade.id}
                                     className="hover:bg-white/[0.02] transition-colors cursor-pointer"
                                 >
-                                    {/* Fecha */}
                                     <td className="px-5 py-4">
                                         <span className="text-xs text-white/40">
                                             {formatDate(trade.opened_at)}
                                         </span>
                                     </td>
 
-                                    {/* Símbolo */}
                                     <td className="px-4 py-4">
                                         <div className="flex items-center gap-2">
                                             <div className="w-7 h-7 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-xs flex-shrink-0 font-bold"
@@ -113,7 +95,6 @@ export const TradeTable = () => {
                                         </div>
                                     </td>
 
-                                    {/* Tipo (BUY / SELL) */}
                                     <td className="px-4 py-4 hidden sm:table-cell">
                                         <span
                                             className="text-[11px] font-bold px-2.5 py-1 rounded-full"
@@ -130,7 +111,6 @@ export const TradeTable = () => {
                                         </span>
                                     </td>
 
-                                    {/* Resultado P&L */}
                                     <td className="px-5 py-4 text-right">
                                         {isOpen ? (
                                             <span className="text-xs text-white/30 italic">En curso</span>
@@ -144,7 +124,6 @@ export const TradeTable = () => {
                                         )}
                                     </td>
 
-                                    {/* Botón cancelar — solo operaciones abiertas */}
                                     <td className="px-4 py-4 text-right">
                                         {isOpen && (
                                             <button

@@ -203,7 +203,6 @@ export const SettingsPage = () => {
                     </div>
                 </div>
 
-                {/* Columna lateral */}
                 <div className="flex flex-col gap-8 h-full">
 
                     <div className="rounded-2xl border border-white/[0.06] px-5 py-5"

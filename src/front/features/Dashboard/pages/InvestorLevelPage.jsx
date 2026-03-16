@@ -96,10 +96,8 @@ export const InvestorLevelPage = () => {
     return (
         <div className="flex flex-col gap-5 w-full">
 
-            {/* ── ZONA SUPERIOR: nivel actual + roadmap ── */}
             <div className="flex gap-5">
 
-                {/* Nivel actual — tarjeta grande */}
                 <div
                     className="flex flex-col items-center p-7 rounded-2xl border border-white/[0.08] flex-1 gap-4"
                     style={{
@@ -127,7 +125,6 @@ export const InvestorLevelPage = () => {
                         <p className="text-sm text-white/40 mt-1">{t(`investorLevel.level_${current.id}_tagline`)}</p>
                     </div>
 
-                    {/* Ganancias + progreso */}
                     <div className="w-full mt-2">
                         <div className="flex items-end justify-between mb-3">
                             <div>
@@ -164,7 +161,6 @@ export const InvestorLevelPage = () => {
                     </div>
                 </div>
 
-                {/* Roadmap de niveles */}
                 <div
                     className="w-80 shrink-0 flex flex-col p-6 rounded-2xl border border-white/[0.06]"
                     style={{ background: "rgba(255,255,255,0.02)" }}
@@ -233,7 +229,6 @@ export const InvestorLevelPage = () => {
                 </div>
             </div>
 
-            {/* ── RECOMPENSAS ── */}
             <div
                 className="shrink-0 rounded-2xl border border-white/[0.06] px-6 py-5"
                 style={{ background: "rgba(255,255,255,0.02)" }}
@@ -277,7 +272,6 @@ export const InvestorLevelPage = () => {
                     })}
                 </div>
 
-                {/* Lightbox */}
                 {zoomedReward && (
                     <div
                         className="fixed inset-0 z-[200] flex items-center justify-center"
@@ -305,7 +299,6 @@ export const InvestorLevelPage = () => {
                 )}
             </div>
 
-            {/* ── CÓMO FUNCIONA ── */}
             <div
                 className="shrink-0 rounded-2xl border border-white/[0.06] px-6 py-5"
                 style={{ background: "rgba(255,255,255,0.02)" }}

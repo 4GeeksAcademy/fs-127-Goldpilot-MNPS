@@ -3,13 +3,6 @@ import pandas as pd
 from api.strategies.base_strategy import BaseStrategyLogic
 
 class MediumRiskStrategy(BaseStrategyLogic):
-    """
-    Estrategia Moderada (Medium Risk)
-    ---------------------------------
-    Lógica: Confluencia de tendencia del DXY.
-    Setup: Retroceso al 61.8% de Fibonacci en H1 + RSI en confluencia.
-    """
-
     def __init__(self):
         super().__init__() # Hereda lot_size=0.1, SL=100 pips, RR 1:3
         self.symbol = "XAUUSD"
@@ -21,7 +14,6 @@ class MediumRiskStrategy(BaseStrategyLogic):
         if dxy_data is None:
             return {"action": "WAIT", "reason": "Faltan datos del DXY"}
             
-        # 1. ANÁLISIS MACRO (Tendencia DXY)
         dxy_trend = self._get_trend_direction(dxy_data)
         
         if dxy_trend == "UP":
@@ -31,21 +23,14 @@ class MediumRiskStrategy(BaseStrategyLogic):
         else:
             return {"action": "WAIT", "reason": "DXY sin tendencia clara"}
 
-        # 2. ANÁLISIS TÉCNICO (Gatillo Fibo 61.8% + RSI)
         if not self._check_fibo_rsi_confluence(gold_data, sentiment):
             return {"action": "WAIT", "reason": f"Esperando retroceso Fibo 61.8 y RSI para {sentiment}"}
 
-        # 3. RETORNO DE SEÑAL
-        # El motor aplicará automáticamente el SL de 100 pips y el RR 1:3
         return {
             "action": sentiment,
             "symbol": self.symbol,
             "comment": "GoldPilot MediumRisk V1 (Fibo+RSI)"
         }
-
-    # =========================================
-    # MÉTODOS AUXILIARES
-    # =========================================
 
     def _get_trend_direction(self, df):
         if len(df) < 20: return "NEUTRAL"
@@ -56,7 +41,6 @@ class MediumRiskStrategy(BaseStrategyLogic):
     def _check_fibo_rsi_confluence(self, df, direction):
         if len(df) < 40: return False
         
-        # 1. CÁLCULO DEL RSI (14 periodos)
         delta = df['close'].diff()
         gain = delta.where(delta > 0, 0.0)
         loss = -delta.where(delta < 0, 0.0)
@@ -66,14 +50,12 @@ class MediumRiskStrategy(BaseStrategyLogic):
         rsi = 100 - (100 / (1 + rs))
         current_rsi = rsi.iloc[-1]
         
-        # 2. CÁLCULO DE FIBONACCI (Retroceso 61.8%)
         recent_data = df.tail(40)
         swing_high = recent_data['high'].max()
         swing_low = recent_data['low'].min()
         diff = swing_high - swing_low
         current_price = df['close'].iloc[-1]
         
-        # Margen de error para el nivel Fibo
         threshold = current_price * 0.0015 
         
         if direction == "BUY":

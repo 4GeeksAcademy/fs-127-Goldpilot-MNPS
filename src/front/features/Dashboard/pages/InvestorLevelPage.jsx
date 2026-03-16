@@ -226,7 +226,7 @@ export const InvestorLevelPage = () => {
                                                     objectFit: "contain",
                                                     filter: isUnlocked
                                                         ? `drop-shadow(0 0 8px ${lvl.glow})`
-                                                        : "grayscale(1) brightness(0.25)",
+                                                        : "grayscale(1) brightness(0.6) opacity(0.5)",
                                                     display: "block",
                                                 }}
                                             />
@@ -286,17 +286,12 @@ export const InvestorLevelPage = () => {
                                             transform: `scale(${lvl.imgScale ?? 1})`,
                                             filter: unlocked
                                                 ? `drop-shadow(0 0 18px ${lvl.glow})`
-                                                : "grayscale(1) brightness(0.2)",
+                                                : "grayscale(1) brightness(0.6) opacity(0.5)",
                                             transition: "filter 0.4s, transform 0.2s",
                                             display: "block",
                                         }}
                                         className="hover:scale-105 transition-transform"
                                     />
-                                    {!unlocked && (
-                                        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                                            <span className="text-3xl opacity-50">🔒</span>
-                                        </div>
-                                    )}
                                 </div>
                                 <div className="text-center">
                                     <p className="text-xs font-bold" style={{ color: unlocked ? lvl.color : "rgba(255,255,255,0.2)" }}>
@@ -328,7 +323,7 @@ export const InvestorLevelPage = () => {
                                     objectFit: "contain",
                                     filter: totalGains >= zoomedReward.minGains
                                         ? `drop-shadow(0 0 40px ${zoomedReward.glow}) drop-shadow(0 0 80px ${zoomedReward.glow})`
-                                        : "grayscale(1) brightness(0.2)",
+                                        : "grayscale(1) brightness(0.6) opacity(0.5)",
                                     display: "block",
                                 }}
                             />

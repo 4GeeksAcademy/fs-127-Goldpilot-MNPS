@@ -13,6 +13,8 @@ const LEVELS = [
         gradient: "linear-gradient(135deg, #6b7280, #9ca3af)",
         badge: "⬡",
         tagline: "El punto de partida de todo gran inversor.",
+        reward: "/9k.png",
+        imgScale: 1,
     },
     {
         id: "k14",
@@ -25,6 +27,8 @@ const LEVELS = [
         gradient: "linear-gradient(135deg, #a07428, #d4a843, #f0c96a)",
         badge: "◈",
         tagline: "Consistencia probada. El oro comienza a brillar.",
+        reward: "/14k.png",
+        imgScale: 1,
     },
     {
         id: "k18",
@@ -37,6 +41,8 @@ const LEVELS = [
         gradient: "linear-gradient(135deg, #8b6214, #c38f37, #e8b84b)",
         badge: "✦",
         tagline: "Alto rendimiento. Estrategia sólida y contrastada.",
+        reward: "/18k.png",
+        imgScale: 1.25,
     },
     {
         id: "k24",
@@ -49,6 +55,8 @@ const LEVELS = [
         gradient: "linear-gradient(135deg, #b8860b, #ffd700, #fffacd)",
         badge: "★",
         tagline: "Oro puro. La élite máxima de XSNIPER.",
+        reward: "/24k.png",
+        imgScale: 1.25,
     },
 ];
 
@@ -79,6 +87,7 @@ const fmtMoney = (n) => new Intl.NumberFormat("es-ES", { style: "currency", curr
 export const InvestorLevelPage = () => {
     const [totalGains, setTotalGains] = useState(0);
     const [loading, setLoading] = useState(true);
+    const [zoomedReward, setZoomedReward] = useState(null);
 
     useEffect(() => {
         Promise.allSettled([getTradeHistory(), getDashboardSummary()]).then(([history, summary]) => {
@@ -109,41 +118,43 @@ export const InvestorLevelPage = () => {
     }
 
     return (
-        <div className="flex flex-col gap-5 w-full" style={{ height: "calc(100vh - 130px)" }}>
+        <div className="flex flex-col gap-5 w-full">
 
             {/* ── ZONA SUPERIOR: nivel actual + roadmap ── */}
-            <div className="flex gap-5 flex-1 min-h-0">
+            <div className="flex gap-5">
 
                 {/* Nivel actual — tarjeta grande */}
                 <div
-                    className="flex flex-col justify-between p-7 rounded-2xl border border-white/[0.08] flex-1"
+                    className="flex flex-col items-center p-7 rounded-2xl border border-white/[0.08] flex-1 gap-4"
                     style={{
                         background: "rgba(20,28,14,0.7)",
                         boxShadow: `0 0 60px ${current.glow}`,
                     }}
                 >
-                    {/* Badge */}
-                    <div className="flex items-start gap-5">
-                        <div
-                            className="w-20 h-20 rounded-2xl flex items-center justify-center text-4xl shrink-0"
-                            style={{ background: current.gradient, boxShadow: `0 0 28px ${current.glow}` }}
-                        >
-                            {current.badge}
-                        </div>
-                        <div>
-                            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/35 mb-1">Nivel actual</p>
-                            <h1 className="text-3xl font-black text-white leading-none">
-                                {current.name}
-                            </h1>
-                            <p className="text-lg font-bold mt-0.5" style={{ color: current.color }}>
-                                {current.label}
-                            </p>
-                            <p className="text-sm text-white/40 mt-2">{current.tagline}</p>
-                        </div>
+                    {/* Moneda del nivel */}
+                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/35 self-start">Nivel actual</p>
+                    <img
+                        src={current.reward}
+                        alt={current.label}
+                        style={{
+                            width: 220,
+                            height: 220,
+                            objectFit: "contain",
+                            transform: `scale(${current.imgScale ?? 1})`,
+                            filter: `drop-shadow(0 0 32px ${current.glow}) drop-shadow(0 0 60px ${current.glow})`,
+                            display: "block",
+                        }}
+                    />
+
+                    {/* Nombre y tagline */}
+                    <div className="flex flex-col items-center gap-1 text-center">
+                        <h1 className="text-3xl font-black text-white leading-none">{current.name}</h1>
+                        <p className="text-lg font-bold" style={{ color: current.color }}>{current.label}</p>
+                        <p className="text-sm text-white/40 mt-1">{current.tagline}</p>
                     </div>
 
                     {/* Ganancias + progreso */}
-                    <div>
+                    <div className="w-full mt-2">
                         <div className="flex items-end justify-between mb-3">
                             <div>
                                 <p className="text-[11px] text-white/35 uppercase tracking-wider">Ganancias acumuladas</p>
@@ -181,60 +192,151 @@ export const InvestorLevelPage = () => {
 
                 {/* Roadmap de niveles */}
                 <div
-                    className="w-64 shrink-0 flex flex-col justify-between p-5 rounded-2xl border border-white/[0.06]"
+                    className="w-80 shrink-0 flex flex-col p-6 rounded-2xl border border-white/[0.06]"
                     style={{ background: "rgba(255,255,255,0.02)" }}
                 >
                     <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/35 mb-4">Tu progreso</p>
 
-                    <div className="flex flex-col gap-0 flex-1 justify-around">
+                    <div className="flex flex-col flex-1 justify-between">
                         {LEVELS.map((lvl, i) => {
                             const isActive = lvl.id === current.id;
                             const isUnlocked = totalGains >= lvl.minGains;
                             const isLast = i === LEVELS.length - 1;
 
                             return (
-                                <div key={lvl.id} className="flex gap-3">
-                                    {/* Línea vertical + dot */}
-                                    <div className="flex flex-col items-center">
+                                <div key={lvl.id} className="flex flex-col">
+                                    <div className="flex gap-4 items-center">
+                                        {/* Moneda */}
                                         <div
-                                            className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-black shrink-0 border-2"
+                                            className="shrink-0 flex items-center justify-center rounded-full border-2"
                                             style={{
-                                                background: isUnlocked ? lvl.gradient : "rgba(255,255,255,0.04)",
+                                                width: 70,
+                                                height: 70,
                                                 borderColor: isActive ? lvl.color : "transparent",
-                                                boxShadow: isActive ? `0 0 12px ${lvl.glow}` : "none",
-                                                color: isUnlocked ? "#000" : "rgba(255,255,255,0.2)",
+                                                boxShadow: isActive ? `0 0 16px ${lvl.glow}` : "none",
+                                                background: "transparent",
                                             }}
                                         >
-                                            {isUnlocked ? (isActive ? lvl.badge : "✓") : "○"}
-                                        </div>
-                                        {!isLast && (
-                                            <div
-                                                className="w-0.5 flex-1 mt-1"
-                                                style={{ background: isUnlocked && !isActive ? lvl.gradient : "rgba(255,255,255,0.06)", minHeight: 20 }}
+                                            <img
+                                                src={lvl.reward}
+                                                alt={lvl.label}
+                                                style={{
+                                                    width: Math.round(58 * (lvl.imgScale ?? 1)),
+                                                    height: Math.round(58 * (lvl.imgScale ?? 1)),
+                                                    objectFit: "contain",
+                                                    filter: isUnlocked
+                                                        ? `drop-shadow(0 0 8px ${lvl.glow})`
+                                                        : "grayscale(1) brightness(0.25)",
+                                                    display: "block",
+                                                }}
                                             />
-                                        )}
-                                    </div>
+                                        </div>
 
-                                    {/* Texto */}
-                                    <div className="pb-4">
-                                        <p className={`text-sm font-bold leading-none ${isActive ? "text-white" : isUnlocked ? "text-white/70" : "text-white/25"}`}>
-                                            {lvl.name}
-                                            {lvl.karats && <span className="ml-1 text-xs" style={{ color: isUnlocked ? lvl.color : "rgba(255,255,255,0.2)" }}>{lvl.karats}K</span>}
-                                        </p>
-                                        <p className="text-[11px] text-white/30 mt-0.5">
-                                            {lvl.minGains > 0 ? `desde ${fmtMoney(lvl.minGains)}` : "nivel inicial"}
-                                        </p>
-                                        {isActive && (
-                                            <span className="inline-block mt-1 text-[9px] font-black px-1.5 py-0.5 rounded" style={{ background: lvl.gradient, color: "#000" }}>
-                                                ACTUAL
-                                            </span>
-                                        )}
+                                        {/* Texto */}
+                                        <div>
+                                            <p className={`text-sm font-bold leading-none ${isActive ? "text-white" : isUnlocked ? "text-white/70" : "text-white/25"}`}>
+                                                {lvl.name}
+                                                {lvl.karats && <span className="ml-1 text-xs" style={{ color: isUnlocked ? lvl.color : "rgba(255,255,255,0.2)" }}>{lvl.karats}K</span>}
+                                            </p>
+                                            <p className="text-[11px] text-white/30 mt-0.5">
+                                                {lvl.minGains > 0 ? `desde ${fmtMoney(lvl.minGains)}` : "nivel inicial"}
+                                            </p>
+                                            {isActive && (
+                                                <span className="inline-block mt-1 text-[9px] font-black px-1.5 py-0.5 rounded" style={{ background: lvl.gradient, color: "#000" }}>
+                                                    ACTUAL
+                                                </span>
+                                            )}
+                                        </div>
                                     </div>
+                                    {/* Línea separadora */}
+                                    {!isLast && (
+                                        <div
+                                            className="w-0.5 ml-[34px] my-1"
+                                            style={{ background: isUnlocked ? lvl.gradient : "rgba(255,255,255,0.06)", height: 16 }}
+                                        />
+                                    )}
                                 </div>
                             );
                         })}
                     </div>
                 </div>
+            </div>
+
+            {/* ── RECOMPENSAS ── */}
+            <div
+                className="shrink-0 rounded-2xl border border-white/[0.06] px-6 py-5"
+                style={{ background: "rgba(255,255,255,0.02)" }}
+            >
+                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/35 mb-4">Recompensas desbloqueadas</p>
+                <div className="flex gap-8 justify-around">
+                    {LEVELS.map((lvl) => {
+                        const unlocked = totalGains >= lvl.minGains;
+                        return (
+                            <div key={lvl.id} className="flex flex-col items-center gap-3">
+                                <div className="relative" style={{ width: 110, height: 110 }}>
+                                    <img
+                                        src={lvl.reward}
+                                        alt={lvl.label}
+                                        onClick={() => setZoomedReward(lvl)}
+                                        style={{
+                                            width: 110,
+                                            height: 110,
+                                            objectFit: "contain",
+                                            cursor: "pointer",
+                                            transform: `scale(${lvl.imgScale ?? 1})`,
+                                            filter: unlocked
+                                                ? `drop-shadow(0 0 18px ${lvl.glow})`
+                                                : "grayscale(1) brightness(0.2)",
+                                            transition: "filter 0.4s, transform 0.2s",
+                                            display: "block",
+                                        }}
+                                        className="hover:scale-105 transition-transform"
+                                    />
+                                    {!unlocked && (
+                                        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                                            <span className="text-3xl opacity-50">🔒</span>
+                                        </div>
+                                    )}
+                                </div>
+                                <div className="text-center">
+                                    <p className="text-xs font-bold" style={{ color: unlocked ? lvl.color : "rgba(255,255,255,0.2)" }}>
+                                        {lvl.label}
+                                    </p>
+                                    <p className="text-[10px] text-white/25 mt-0.5">
+                                        {unlocked ? "✓ Desbloqueada" : `desde ${fmtMoney(lvl.minGains)}`}
+                                    </p>
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
+
+                {/* Lightbox */}
+                {zoomedReward && (
+                    <div
+                        className="fixed inset-0 z-[200] flex items-center justify-center"
+                        style={{ background: "rgba(0,0,0,0.75)", backdropFilter: "blur(12px)" }}
+                        onClick={() => setZoomedReward(null)}
+                    >
+                        <div className="flex flex-col items-center gap-5" onClick={(e) => e.stopPropagation()}>
+                            <img
+                                src={zoomedReward.reward}
+                                alt={zoomedReward.label}
+                                style={{
+                                    width: 300,
+                                    height: 300,
+                                    objectFit: "contain",
+                                    filter: totalGains >= zoomedReward.minGains
+                                        ? `drop-shadow(0 0 40px ${zoomedReward.glow}) drop-shadow(0 0 80px ${zoomedReward.glow})`
+                                        : "grayscale(1) brightness(0.2)",
+                                    display: "block",
+                                }}
+                            />
+                            <p className="text-xl font-black" style={{ color: zoomedReward.color }}>{zoomedReward.label}</p>
+                            <p className="text-xs text-white/40">Pulsa fuera para cerrar</p>
+                        </div>
+                    </div>
+                )}
             </div>
 
             {/* ── CÓMO FUNCIONA: 4 columnas de texto ── */}

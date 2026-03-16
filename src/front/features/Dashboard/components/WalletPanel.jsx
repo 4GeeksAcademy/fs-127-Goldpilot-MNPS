@@ -134,107 +134,119 @@ const WalletCard = ({ wallet, configLink, onDisconnect, onGetConfigLink, onSync,
     }, [wallet.id, isDraft]);
 
     return (
-        <div className="flex flex-col gap-3 p-4 rounded-2xl border border-white/[0.06]"
+        <div className="flex flex-col gap-6 p-8 rounded-2xl border border-white/[0.08]"
             style={{ background: "rgba(255,255,255,0.03)" }}>
-            {/* Header */}
-            <div className="flex items-center justify-between gap-2">
-                <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-xl bg-white/5 border border-white/[0.08] flex items-center justify-center text-xs font-bold flex-shrink-0"
+
+            {/* ── HEADER ── */}
+            <div className="flex items-center justify-between gap-4">
+                <div className="flex items-center gap-4">
+                    <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/[0.08] flex items-center justify-center text-xl font-black flex-shrink-0"
                         style={{ color: "var(--color-gold)" }}>
                         {(wallet.broker_name || wallet.server || "M")[0].toUpperCase()}
                     </div>
                     <div>
-                        <p className="text-sm font-semibold text-white leading-none">
+                        <p className="text-lg font-bold text-white leading-tight">
                             {wallet.broker_name || wallet.server || "MetaTrader"}
                         </p>
-                        <p className="text-[10px] text-white/30 mt-0.5">
-                            {wallet.platform?.toUpperCase()} · {wallet.account_type === "live" ? "Real" : "Demo"}
+                        <p className="text-sm text-white/40 mt-1">
+                            {wallet.platform?.toUpperCase()} · {wallet.account_type === "live" ? "Cuenta Real" : "Cuenta Demo"}
                         </p>
                     </div>
                 </div>
-                <span className="flex items-center gap-1.5 text-[10px] font-bold px-2 py-1 rounded-full border flex-shrink-0"
+                <span className="flex items-center gap-2 text-xs font-bold px-3 py-1.5 rounded-full border flex-shrink-0"
                     style={isDraft
                         ? { color: "rgba(195,143,55,0.9)", background: "rgba(195,143,55,0.1)", borderColor: "rgba(195,143,55,0.25)" }
-                        : { color: "var(--color-olive)", background: "rgba(99,119,66,0.12)", borderColor: "rgba(99,119,66,0.2)" }
+                        : { color: "#6aab45", background: "rgba(106,171,69,0.1)", borderColor: "rgba(106,171,69,0.3)" }
                     }>
-                    <span className="w-1.5 h-1.5 rounded-full inline-block"
-                        style={{ background: isDraft ? "rgba(195,143,55,0.9)" : "var(--color-olive)" }} />
-                    {isDraft ? "Pendiente" : "Conectado"}
+                    <span className="w-2 h-2 rounded-full"
+                        style={{ background: isDraft ? "rgba(195,143,55,0.9)" : "#6aab45" }} />
+                    {isDraft ? "Pendiente de configuración" : "Conectado"}
                 </span>
             </div>
 
-            {/* Balance strip — shown when connected and balance is available */}
+            {/* ── BALANCE ── */}
             {!isDraft && (
-                <div className="grid grid-cols-3 gap-2">
-                    {[
-                        { label: "Balance", value: balance?.balance },
-                        { label: "Equity", value: balance?.equity },
-                        { label: "Margen libre", value: balance?.free_margin },
-                    ].map(({ label, value }) => (
-                        <div key={label} className="flex flex-col items-center py-2 rounded-xl border border-white/[0.05]"
-                            style={{ background: "rgba(255,255,255,0.02)" }}>
-                            <span className="text-[9px] text-white/30 uppercase tracking-wide">{label}</span>
-                            <span className="text-sm font-bold mt-0.5"
-                                style={{ color: value != null ? "var(--color-gold)" : "rgba(255,255,255,0.2)" }}>
-                                {value != null
-                                    ? `${balance.currency ?? ""} ${Number(value).toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
-                                    : "–"}
-                            </span>
-                        </div>
-                    ))}
-                </div>
+                <>
+                    <div className="h-px bg-white/[0.06]" />
+                    <div className="grid grid-cols-3 gap-4">
+                        {[
+                            { label: "Balance", value: balance?.balance },
+                            { label: "Equity", value: balance?.equity },
+                            { label: "Margen libre", value: balance?.free_margin },
+                        ].map(({ label, value }) => (
+                            <div key={label} className="flex flex-col gap-2 p-4 rounded-xl border border-white/[0.05]"
+                                style={{ background: "rgba(255,255,255,0.02)" }}>
+                                <span className="text-[11px] text-white/30 uppercase tracking-widest">{label}</span>
+                                <span className="text-xl font-black leading-none"
+                                    style={{ color: value != null ? "var(--color-gold)" : "rgba(255,255,255,0.15)" }}>
+                                    {value != null
+                                        ? Number(value).toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+                                        : "–"}
+                                </span>
+                                {value != null && balance?.currency && (
+                                    <span className="text-xs text-white/25">{balance.currency}</span>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+                </>
             )}
 
-            {/* Config link banner */}
+            {/* ── CONFIG LINK ── */}
             {configLink ? (
                 <ConfigLinkStep configLink={configLink} onDismiss={() => onGetConfigLink(null)} />
             ) : isDraft && (
-                <div className="flex flex-col gap-2 p-3 rounded-xl border border-[rgba(195,143,55,0.15)]"
-                    style={{ background: "rgba(195,143,55,0.05)" }}>
-                    <p className="text-[10px] text-white/50">
-                        Si ya configuraste tus credenciales en MetaApi, verifica la conexión. Si no, genera el enlace de configuración.
-                    </p>
-                    <div className="flex gap-2">
-                        <button onClick={() => onSync(wallet.id)} disabled={syncing}
-                            className="flex-1 py-1.5 rounded-lg text-xs font-semibold border disabled:opacity-50"
-                            style={{ color: "rgba(255,255,255,0.7)", borderColor: "rgba(255,255,255,0.15)", background: "rgba(255,255,255,0.05)" }}>
-                            {syncing ? "Verificando..." : "✓ Verificar conexión"}
-                        </button>
-                        <button onClick={() => onGetConfigLink(wallet.id)} disabled={loadingLink}
-                            className="flex-1 py-1.5 rounded-lg text-xs font-semibold disabled:opacity-50"
-                            style={{ background: "var(--color-gold)", color: "#000" }}>
-                            {loadingLink ? "Generando..." : "Obtener enlace"}
-                        </button>
+                <>
+                    <div className="h-px bg-white/[0.06]" />
+                    <div className="flex flex-col gap-4 p-5 rounded-xl border border-[rgba(195,143,55,0.2)]"
+                        style={{ background: "rgba(195,143,55,0.04)" }}>
+                        <p className="text-sm text-white/50 leading-relaxed">
+                            Si ya configuraste tus credenciales en MetaApi, verifica la conexión. Si aún no lo has hecho, genera el enlace de configuración seguro.
+                        </p>
+                        <div className="flex gap-3">
+                            <button onClick={() => onSync(wallet.id)} disabled={syncing}
+                                className="flex-1 py-2.5 rounded-xl text-sm font-semibold border disabled:opacity-50"
+                                style={{ color: "rgba(255,255,255,0.7)", borderColor: "rgba(255,255,255,0.15)", background: "rgba(255,255,255,0.05)" }}>
+                                {syncing ? "Verificando..." : "✓ Verificar conexión"}
+                            </button>
+                            <button onClick={() => onGetConfigLink(wallet.id)} disabled={loadingLink}
+                                className="flex-1 py-2.5 rounded-xl text-sm font-semibold disabled:opacity-50"
+                                style={{ background: "var(--color-gold)", color: "#000" }}>
+                                {loadingLink ? "Generando..." : "Obtener enlace →"}
+                            </button>
+                        </div>
                     </div>
-                </div>
+                </>
             )}
 
-            {/* Info rows */}
-            <div className="flex flex-col divide-y divide-white/[0.04]">
+            {/* ── INFO ── */}
+            <div className="h-px bg-white/[0.06]" />
+            <div className="grid grid-cols-2 gap-3">
                 {[
-                    { label: "Login", value: wallet.login || "–" },
+                    { label: "Login / Cuenta", value: wallet.login || "–" },
                     { label: "Servidor", value: wallet.server || "–" },
                     { label: "Plataforma", value: wallet.platform?.toUpperCase() || "–" },
-                    { label: "Registrado", value: new Date(wallet.created_at).toLocaleDateString("es-ES") },
+                    { label: "Fecha de registro", value: new Date(wallet.created_at).toLocaleDateString("es-ES") },
                 ].map(({ label, value }) => (
-                    <div key={label} className="flex items-center justify-between py-1.5">
-                        <span className="text-[10px] text-white/30">{label}</span>
-                        <span className="text-[10px] font-semibold text-white/60 truncate max-w-[140px]">{value}</span>
+                    <div key={label} className="flex flex-col gap-1 px-4 py-3 rounded-xl border border-white/[0.04]"
+                        style={{ background: "rgba(255,255,255,0.015)" }}>
+                        <span className="text-[11px] text-white/30 uppercase tracking-wide">{label}</span>
+                        <span className="text-sm font-medium text-white/70 truncate">{value}</span>
                     </div>
                 ))}
             </div>
 
-            {/* Actions */}
-            <div className="flex gap-2 pt-1">
+            {/* ── ACTIONS ── */}
+            <div className="flex gap-3">
                 <button onClick={() => onGetConfigLink(wallet.id)} disabled={loadingLink}
-                    className="flex-1 py-2 rounded-xl text-xs font-semibold border disabled:opacity-40"
-                    style={{ color: "var(--color-gold)", borderColor: "rgba(195,143,55,0.25)", background: "rgba(195,143,55,0.05)" }}>
-                    {loadingLink ? "..." : "Reconfigurar"}
+                    className="flex-1 py-3 rounded-xl text-sm font-semibold border disabled:opacity-40"
+                    style={{ color: "var(--color-gold)", borderColor: "rgba(195,143,55,0.3)", background: "rgba(195,143,55,0.06)" }}>
+                    {loadingLink ? "Generando..." : "Reconfigurar"}
                 </button>
                 <button onClick={() => onDisconnect(wallet.id)} disabled={disconnecting}
-                    className="flex-1 py-2 rounded-xl text-xs font-semibold border disabled:opacity-40"
-                    style={{ color: "rgba(255,80,80,0.8)", borderColor: "rgba(255,80,80,0.15)", background: "rgba(255,80,80,0.04)" }}>
-                    {disconnecting ? "..." : "Desconectar"}
+                    className="flex-1 py-3 rounded-xl text-sm font-semibold border disabled:opacity-40"
+                    style={{ color: "rgba(255,80,80,0.8)", borderColor: "rgba(255,80,80,0.2)", background: "rgba(255,80,80,0.05)" }}>
+                    {disconnecting ? "Desconectando..." : "Desconectar wallet"}
                 </button>
             </div>
         </div>
@@ -422,7 +434,7 @@ export const WalletPanel = () => {
                     </div>
                 ) : (
                     /* Wallet list */
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div className="flex flex-col gap-6">
                         {wallets.map((wallet) => (
                             <WalletCard
                                 key={wallet.id}

@@ -37,7 +37,7 @@ _TF_DIRS = {
 _STRATEGY_NAMES = {
     "low":    "V4 Ghost Protocol — Conservative",
     "medium": "V4 Ghost Protocol — Balanced",
-    "high":   "Fibonacci Scalper",
+    "high":   "V4 Ghost Protocol — Aggressive (3% Risk)",
 }
 
 # ─────────────────────────────────────────────
@@ -204,34 +204,23 @@ def execute_backtest_by_level(level: str, initial_cash: float = 100_000.0,
     """
     from backtesting import Backtest
     from api.strategies.v4_ghost import V4GhostStrategy
-    from api.strategies.fibonacci_scalper import FibonacciScalper
 
     # Low / Medium: V4 Ghost (PDH/PDL sweep, proven profitable)
-    # High:         Fibonacci Scalper on M1 data (<5 min trades)
+    # High:         Golden Breakout (Fibonacci 61.8% + RSI on H1 — works from 2020)
     strategy_map = {
         "low":    (V4GhostStrategy, {"atr_sl_mult": 1.5, "rr_ratio": 3.0, "lookback_bars": 24, "risk_pct": 0.005}),
         "medium": (V4GhostStrategy, {"atr_sl_mult": 1.5, "rr_ratio": 3.0, "lookback_bars": 24, "risk_pct": 0.01}),
-        "high":   (FibonacciScalper, {"atr_sl_mult": 2.5, "rr_ratio": 2.0, "max_bars_open": 300,
-                                      "swing_bars": 60, "rsi_long_max": 55, "rsi_short_min": 45}),
+        "high":   (V4GhostStrategy,  {"atr_sl_mult": 1.5, "rr_ratio": 3.0, "lookback_bars": 24, "risk_pct": 0.03}),
     }
 
     if level not in strategy_map:
         return {"status": "error", "error": f"Unknown level '{level}'. Use: low, medium, high"}
 
     try:
-        # High risk: prefer M5 (better ATR/commission ratio for scalper); low/medium use M15 or H1
-        if level == "high":
-            df = load_csv("M5", start_date)
-            tf = "M5"
-            if df is None or len(df) < 500:
-                df = load_csv("M1", start_date)
-                tf = "M1"
-            if df is None or df.empty:
-                return {"status": "error", "error": "No M5/M1 data found. Upload Dukascopy files to src/api/data/5MinuteData/"}
-        else:
-            df, tf = _best_df(start_date)
-            if df is None:
-                return {"status": "error", "error": "No CSV data found. Upload Dukascopy files to src/api/data/1HourData/"}
+        # All levels use M15 → H1 fallback
+        df, tf = _best_df(start_date)
+        if df is None:
+            return {"status": "error", "error": "No CSV data found. Upload Dukascopy files to src/api/data/1HourData/"}
 
         bt_df  = _prep_for_bt(df)
         StratClass, run_params = strategy_map[level]

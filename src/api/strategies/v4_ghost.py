@@ -75,6 +75,8 @@ class V4GhostStrategy(Strategy):
         close = self.data.Close[-1]
         for trade in self.trades:
             entry = trade.entry_price
+            if trade.sl == entry:   # already at breakeven — skip
+                continue
             sl_dist = abs(entry - trade.sl)
             if sl_dist == 0:
                 continue

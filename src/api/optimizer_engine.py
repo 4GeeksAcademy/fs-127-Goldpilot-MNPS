@@ -76,14 +76,14 @@ def _format_opt(stats, strategy_name, level, best_params):
 
 def _run_optimize(balance, start_date):
     from backtesting import Backtest
-    from api.backtest_engine import load_csv, _best_df, _prep_for_bt
+    from api.backtest_engine import _best_df, _prep_for_bt
     from api.strategies.v4_ghost import V4GhostStrategy
-    from api.strategies.fibonacci_scalper import FibonacciScalper
+    from api.strategies.golden_breakout import GoldenBreakout
 
     results = {}
     errors  = []
 
-    # Low/Medium use M15 or H1; High uses M5
+    # All levels use M15 or H1 — covers full 2020-2026 range
     df_swing, tf_swing = _best_df(start_date)
     if df_swing is None:
         with _state_lock:
@@ -92,16 +92,7 @@ def _run_optimize(balance, start_date):
         return
 
     bt_swing = _prep_for_bt(df_swing)
-    logger.info("Optimizer (swing) using %s data: %d bars", tf_swing, len(bt_swing))
-
-    # Load M5 for high risk scalper
-    df_m5 = load_csv("M5", start_date)
-    if df_m5 is None or len(df_m5) < 500:
-        df_m5 = load_csv("M1", start_date)
-        tf_high = "M1"
-    else:
-        tf_high = "M5"
-    bt_m5 = _prep_for_bt(df_m5) if df_m5 is not None else None
+    logger.info("Optimizer using %s data: %d bars", tf_swing, len(bt_swing))
 
     # ── 1 / 3  Low Risk — V4 Ghost ───────────────────────────────────────────
     with _state_lock:
@@ -155,36 +146,33 @@ def _run_optimize(balance, start_date):
         logger.exception("Medium opt failed")
         errors.append("medium: " + str(e))
 
-    # ── 3 / 3  High Risk — Fibonacci Scalper (M5) ────────────────────────────
+    # ── 3 / 3  High Risk — Golden Breakout (H1) ──────────────────────────────
     with _state_lock:
-        _state["progress"] = "3/3 — Fibonacci Scalper (High)"
-    if bt_m5 is None:
-        errors.append("high: No M5/M1 data for Fibonacci scalper")
-    else:
-        try:
-            bt  = Backtest(bt_m5, FibonacciScalper, cash=balance, commission=0.0002,
-                           exclusive_orders=True, margin=1/50)
-            opt = bt.optimize(
-                swing_bars    = [40, 60, 80],
-                atr_sl_mult   = [2.0, 2.5, 3.0],
-                rr_ratio      = [2.0, 2.5, 3.0],
-                max_bars_open = [120, 300, 480],
-                rsi_long_max  = [50, 55, 60],
-                maximize      = "Equity Final [$]",
-                constraint    = lambda p: p.rr_ratio >= 2,
-                max_tries     = 200,
-            )
-            best_params = {
-                "swing_bars":    int(opt._strategy.swing_bars),
-                "atr_sl_mult":   float(opt._strategy.atr_sl_mult),
-                "rr_ratio":      float(opt._strategy.rr_ratio),
-                "max_bars_open": int(opt._strategy.max_bars_open),
-                "rsi_long_max":  int(opt._strategy.rsi_long_max),
-            }
-            results["high"] = _format_opt(opt, "Fibonacci Scalper", "high", best_params)
-        except Exception as e:
-            logger.exception("High opt failed")
-            errors.append("high: " + str(e))
+        _state["progress"] = "3/3 — Golden Breakout (High)"
+    try:
+        bt  = Backtest(bt_swing, GoldenBreakout, cash=balance, commission=0.0002,
+                       exclusive_orders=True, margin=1/50)
+        opt = bt.optimize(
+            swing_bars    = [10, 20, 30],
+            fib_tolerance = [1.0, 1.5, 2.0],
+            atr_sl_mult   = [1.0, 1.5, 2.0],
+            rr_ratio      = [2.0, 3.0, 4.0],
+            risk_pct      = [0.02, 0.03, 0.05],
+            maximize      = "Equity Final [$]",
+            constraint    = lambda p: p.rr_ratio >= 2,
+            max_tries     = 200,
+        )
+        best_params = {
+            "swing_bars":    int(opt._strategy.swing_bars),
+            "fib_tolerance": float(opt._strategy.fib_tolerance),
+            "atr_sl_mult":   float(opt._strategy.atr_sl_mult),
+            "rr_ratio":      float(opt._strategy.rr_ratio),
+            "risk_pct":      float(opt._strategy.risk_pct),
+        }
+        results["high"] = _format_opt(opt, "Golden Breakout — Fibonacci H1", "high", best_params)
+    except Exception as e:
+        logger.exception("High opt failed")
+        errors.append("high: " + str(e))
 
     # ── Save results ─────────────────────────────────────────────────────────
     output = {

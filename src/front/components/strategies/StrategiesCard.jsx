@@ -13,13 +13,13 @@ export const StrategiesCard = () => {
     const strategies = [
         { id: "low", name: "LOW RISK", desc: "Correlación inversa Nasdaq/DXY y retest de SMA 50.", icon: "🛡️", stats: { lot: "0.10", risk: "2%" } },
         { id: "medium", name: "MEDIUM RISK", desc: "Retroceso Fibonacci 61.8% y confluencia RSI en H1.", icon: "⚖️", stats: { lot: "0.25", risk: "5%" } },
-        { id: "high", name: "HIGH RISK", desc: "Estrategia agresiva de ruptura de rango (Breakout).", icon: "🔥", stats: { lot: "0.50", risk: "12%" } }
+        { id: "high", name: "HIGH RISK", desc: "V4 Ghost Agresivo — PDH/PDL sweep con 3% riesgo por operación. Alta recompensa.", icon: "🔥", stats: { lot: "0.50", risk: "12%" } }
     ];
 
     // Cálculo inteligente del Win Rate
     const winRate = useMemo(() => {
         if (!results || !results.history || results.history.length === 0) return 0;
-        const wins = results.history.filter(t => t.profit > 0).length;
+        const wins = results.history.filter(t => t.pnl > 0).length;
         return ((wins / results.history.length) * 100).toFixed(1);
     }, [results]);
 
@@ -38,7 +38,7 @@ export const StrategiesCard = () => {
             const response = await fetch(url);
             const data = await response.json();
             
-            if (data.status === "success") {
+            if (data.status === "ok") {
                 setResults(data);
             } else {
                 alert("Error en el motor: " + data.error);
@@ -114,7 +114,8 @@ export const StrategiesCard = () => {
                                     <input 
                                         type="date" 
                                         value={customStartDate}
-                                        max={new Date().toISOString().split("T")[0]}
+                                        min="2020-01-01"
+                                        max="2026-03-11"
                                         onChange={(e) => setCustomStartDate(e.target.value)}
                                         className="bg-[#0a0a0a] border border-white/10 rounded-lg p-3 text-gray-300 text-sm outline-none focus:border-[var(--color-gold)] transition-colors w-44 text-center"
                                         style={{ colorScheme: "dark" }}
@@ -189,19 +190,19 @@ export const StrategiesCard = () => {
                                     <tbody className="text-sm">
                                         {results.history.map((trade, i) => (
                                             <tr key={i} className="border-b border-white/5 hover:bg-white/[0.03] transition-colors">
-                                                <td className="p-4 text-gray-400 font-mono text-xs">{trade.date}</td>
+                                                <td className="p-4 text-gray-400 font-mono text-xs">{trade.entry_time?.slice(0, 16)}</td>
                                                 <td className="p-4">
-                                                    <span className={`px-2 py-1 rounded text-[10px] font-bold tracking-wider ${trade.type === 'BUY' ? 'bg-green-500/10 text-green-400' : 'bg-red-500/10 text-red-400'}`}>
-                                                        {trade.type}
+                                                    <span className={`px-2 py-1 rounded text-[10px] font-bold tracking-wider ${trade.direction === 'BUY' ? 'bg-green-500/10 text-green-400' : 'bg-red-500/10 text-red-400'}`}>
+                                                        {trade.direction}
                                                     </span>
                                                 </td>
-                                                <td className="p-4 text-white">${trade.entry_price}</td>
-                                                <td className="p-4 text-gray-400">${trade.exit_price}</td>
-                                                <td className={`p-4 text-right font-bold ${trade.profit >= 0 ? "text-green-400" : "text-red-500"}`}>
-                                                    {trade.profit >= 0 ? "+" : ""}{trade.profit}
+                                                <td className="p-4 text-white">${Number(trade.entry_price).toFixed(2)}</td>
+                                                <td className="p-4 text-gray-400">${Number(trade.exit_price).toFixed(2)}</td>
+                                                <td className={`p-4 text-right font-bold ${trade.pnl >= 0 ? "text-green-400" : "text-red-500"}`}>
+                                                    {trade.pnl >= 0 ? "+" : ""}{Number(trade.pnl).toFixed(2)}
                                                 </td>
                                                 <td className="p-4 text-center">
-                                                    {trade.profit >= 0 ? "✅" : "❌"}
+                                                    {trade.pnl >= 0 ? "✅" : "❌"}
                                                 </td>
                                             </tr>
                                         ))}

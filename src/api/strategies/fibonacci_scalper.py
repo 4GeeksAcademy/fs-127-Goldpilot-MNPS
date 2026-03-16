@@ -115,7 +115,7 @@ class FibonacciScalper(Strategy):
     def next(self) -> None:
         # ── Force-exit stale trades ───────────────────────────────────────────
         current_time = self.data.index[-1]
-        for trade in list(self.trades):
+        for trade in self.trades:
             try:
                 elapsed = current_time - trade.entry_time
                 if elapsed >= timedelta(minutes=self.max_bars_open):

@@ -46,7 +46,7 @@ def run_unified_backtest(level):
         # Extraemos balance y start_date de la query string (?balance=500&start=2023-01-01)
         # Si no los mandan, usa 10,000 y 2024-01-01 por defecto
         balance_param = request.args.get('balance', default=10000.0, type=float)
-        start_param = request.args.get('start', default='2026-01-01', type=str)
+        start_param = request.args.get('start', default='2024-01-01', type=str)
         
         data = execute_backtest_by_level(level, initial_cash=balance_param, start_date=start_param) 
         return jsonify(data), 200
@@ -59,7 +59,7 @@ def run_unified_backtest(level):
 def start_optimization():
     """Launch full grid-search optimization in background."""
     balance   = request.args.get('balance', default=100_000.0, type=float)
-    start     = request.args.get('start',   default='2026-01-01', type=str)
+    start     = request.args.get('start',   default='2024-01-01', type=str)
     result    = run_optimization_async(balance=balance, start_date=start)
     return jsonify(result), 202
 

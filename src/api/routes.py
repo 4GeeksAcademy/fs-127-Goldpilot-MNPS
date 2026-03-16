@@ -10,7 +10,8 @@ from flask_cors import CORS
 
 # Importamos los motores (Backtest y Live)
 from api.backtest_engine import execute_backtest_by_level
-from api.live_engine import evaluate_live_market  # <-- Importamos el motor en vivo
+from api.live_engine import evaluate_live_market
+from api.optimizer_engine import run_optimization_async, get_status, get_results
 
 api = Blueprint('api', __name__)
 
@@ -51,6 +52,29 @@ def run_unified_backtest(level):
         return jsonify(data), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+# ─── Optimizer endpoints ────────────────────────────────────────────────────
+
+@api.route('/optimize', methods=['POST', 'GET'])
+def start_optimization():
+    """Launch full grid-search optimization in background."""
+    balance   = request.args.get('balance', default=100_000.0, type=float)
+    start     = request.args.get('start',   default='2024-01-01', type=str)
+    result    = run_optimization_async(balance=balance, start_date=start)
+    return jsonify(result), 202
+
+
+@api.route('/optimize/status', methods=['GET'])
+def optimization_status():
+    """Check if optimization is running and how far it has progressed."""
+    return jsonify(get_status()), 200
+
+
+@api.route('/optimize/results', methods=['GET'])
+def optimization_results():
+    """Return the ranked results from the last completed optimization run."""
+    return jsonify(get_results()), 200
+
 
 # Endpoint para encender el bot en vivo
 @api.route('/activate-live-bot', methods=['POST'])

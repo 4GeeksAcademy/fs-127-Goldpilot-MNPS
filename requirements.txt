@@ -32,3 +32,5 @@ wtforms==2.3.3
 bcrypt
 flask-jwt-extended
 typing-extensions
+backtesting
+ta

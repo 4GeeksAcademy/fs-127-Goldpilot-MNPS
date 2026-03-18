@@ -1,3 +1,31 @@
+High-risk, high-frequency scalping strategy.
+Trades last < 5 minutes (force-exited via `max_bars_open`).
+
+Concept:
+  After a strong impulse move, price often retraces to the 61.8% Fibonacci
+  ("golden ratio") level before continuing in the original direction.
+  We enter at this retracement zone with a tight ATR stop and let backtesting.py
+  manage the 1:3 RR target.
+
+Entry — LONG (all conditions must be true):
+  1. Price > EMA(ema_period) → uptrend confirmed
+  2. RSI(rsi_period) < rsi_long_max  → slight oversold on the pullback
+  3. Current close is within ±(ATR × fib_tolerance) of the 61.8% fib level
+
+Entry — SHORT (mirror of long):
+  1. Price < EMA(ema_period)
+  2. RSI > rsi_short_min
+  3. Close within ±(ATR × fib_tolerance) of the bearish 61.8% fib level
+
+Exit:
+  - TP = entry ± ATR × atr_sl_mult × rr_ratio
+  - SL = entry ∓ ATR × atr_sl_mult
+  - Force close after `max_bars_open` bars regardless (prevents overnight drag)
+
+Risk:
+  - risk_pct × equity per trade (default 2%)
+  - margin=1/50 must be set in Backtest() constructor
+"""
 from __future__ import annotations
 
 from datetime import timedelta

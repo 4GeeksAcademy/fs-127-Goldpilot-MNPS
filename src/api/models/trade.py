@@ -38,11 +38,16 @@ class Trade(db.Model):
 
     def serialize(self):
         """Serializa el trade a dict para la respuesta JSON."""
+        from api.models.wallet import MetaApiAccount
+        wallet = MetaApiAccount.query.get(self.wallet_id) if self.wallet_id else None
         return {
             "id": self.id,
             "user_id": self.user_id,
             "strategy_id": self.strategy_id,
             "wallet_id": self.wallet_id,
+            "wallet_name": wallet.broker_name if wallet else None,
+            "is_prop_firm": wallet.is_prop_firm if wallet else False,
+            "prop_phase": wallet.prop_phase if wallet else None,
             "meta_trade_id": self.meta_trade_id,
             "symbol": self.symbol,
             "trade_type": self.trade_type,

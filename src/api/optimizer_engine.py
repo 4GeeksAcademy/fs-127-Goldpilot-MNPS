@@ -1,3 +1,12 @@
+Replaces the manual grid-search loop with backtesting.py's built-in optimizer.
+Runs each strategy's parameter space in the background and saves ranked results.
+
+Usage (from routes.py):
+    run_optimization_async(balance=100_000, start_date="2020-01-01")
+    get_status()    → {"running": bool, "progress": "X/3", ...}
+    get_results()   → saved JSON from last run
+"""
+
 import json
 import logging
 import os

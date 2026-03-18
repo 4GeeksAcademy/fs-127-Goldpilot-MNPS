@@ -1,3 +1,17 @@
+Loads Dukascopy CSV files and runs backtests using the backtesting.py framework.
+Supports all three risk levels with their corresponding strategies.
+
+Strategy mapping:
+  low    → V4GhostStrategy    (PDH/PDL sweep — proven +44% ROI)
+  medium → RsiMacdStrategy    (RSI + MACD + EMA200 trend filter)
+  high   → EmaCrossStrategy   (EMA 5/20 crossover — aggressive scalper)
+
+Expected folder structure (drop Dukascopy files as-is, no renaming):
+  src/api/data/1HourData/   → H1 monthly exports (XAU-USD_Hour_*_UTC.csv)
+  src/api/data/15MinuteData → M15 daily exports  (optional, H1 used if missing)
+  src/api/data/1DayData/    → D1 yearly exports  (optional)
+"""
+
 import os
 import glob
 import logging

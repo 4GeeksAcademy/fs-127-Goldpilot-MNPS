@@ -5,7 +5,7 @@ from api.utils import generate_sitemap, APIException
 from api.controllers import register_controllers
 from flask_cors import CORS
 
-# Importamos los motores (Backtest y Live)
+# Importamos los motores (Backtest y Optimizer)
 from api.backtest_engine import execute_backtest_by_level
 from api.live_engine import evaluate_live_market
 from api.optimizer_engine import run_optimization_async, get_status, get_results

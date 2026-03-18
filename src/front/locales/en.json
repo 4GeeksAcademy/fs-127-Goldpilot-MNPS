@@ -1,6 +1,7 @@
 {
   "nav": {
     "dashboard": "Dashboard",
+    "strategies": "Strategies",
     "wallets": "Wallets",
     "botControl": "Bot Control",
     "historial": "History",

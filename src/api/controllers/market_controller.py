@@ -103,3 +103,51 @@ def get_candles():
         return jsonify({"description": "Timeout al conectar con MetaApi", "candles": []}), 200
     except req.exceptions.RequestException as exc:
         return jsonify({"description": f"Error de red: {str(exc)}", "candles": []}), 200
+
+
+@market_bp.route("/price", methods=["GET"])
+@jwt_required()
+def get_price():
+    """
+    Returns current XAUUSD bid/ask from MetaAPI.  1 API call.
+    Query param: symbol (default XAUUSD)
+    """
+    user_id = int(get_jwt_identity())
+    symbol  = request.args.get("symbol", "XAUUSD").strip().upper()
+
+    token = os.getenv("METAAPI_TOKEN", "")
+    if not token or token == "your_metaapi_token_here":
+        return jsonify({"error": "METAAPI_TOKEN not set"}), 503
+
+    account = _find_connected_account(user_id)
+    if not account:
+        return jsonify({"error": "No connected wallet"}), 200
+
+    try:
+        base = METAAPI_CLIENT_BASE.format(region=account.region)
+        url  = f"{base}/users/current/accounts/{account.account_id}/symbols/{symbol}/current-price"
+        resp = req.get(url, headers=_metaapi_headers(), timeout=10)
+        if resp.ok:
+            data = resp.json()
+            return jsonify({
+                "symbol": symbol,
+                "bid":    data.get("bid"),
+                "ask":    data.get("ask"),
+                "time":   data.get("time"),
+            }), 200
+        # Fallback: get price from latest candle
+        candle_url = (
+            f"{base}/users/current/accounts/{account.account_id}"
+            f"/historical-market-data/symbols/{symbol}/timeframes/1m/candles"
+        )
+        cr = req.get(candle_url, headers=_metaapi_headers(),
+                     params={"startTime": datetime.now(timezone.utc).isoformat(), "limit": 1},
+                     timeout=10)
+        if cr.ok:
+            candles = cr.json()
+            if candles:
+                price = candles[0].get("close") or candles[0].get("open")
+                return jsonify({"symbol": symbol, "bid": price, "ask": price, "time": candles[0].get("time")}), 200
+        return jsonify({"error": resp.text[:200]}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 200

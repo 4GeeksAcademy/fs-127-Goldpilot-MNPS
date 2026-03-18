@@ -24,6 +24,15 @@ class MetaApiAccount(db.Model):
     region: Mapped[Optional[str]] = mapped_column(String(30), nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, nullable=False)
 
+    # Prop firm challenge fields (null = regular account)
+    is_prop_firm: Mapped[bool] = mapped_column(db.Boolean, default=False, nullable=False)
+    prop_phase: Mapped[Optional[str]] = mapped_column(String(20), nullable=True)  # phase1|phase2|phase3|funded
+    prop_initial_balance: Mapped[Optional[float]] = mapped_column(db.Float, nullable=True)
+    prop_max_loss_usd: Mapped[Optional[float]] = mapped_column(db.Float, nullable=True)         # e.g. 250.0
+    prop_profit_target_usd: Mapped[Optional[float]] = mapped_column(db.Float, nullable=True)    # e.g. 300.0
+    prop_daily_loss_pct: Mapped[Optional[float]] = mapped_column(db.Float, nullable=True)       # kept for legacy
+    prop_profit_target_pct: Mapped[Optional[float]] = mapped_column(db.Float, nullable=True)    # kept for legacy
+
     def serialize(self):
         return {
             "id": self.id,
@@ -36,4 +45,9 @@ class MetaApiAccount(db.Model):
             "status": self.status,
             "region": self.region,
             "created_at": self.created_at.isoformat() if self.created_at else None,
+            "is_prop_firm": self.is_prop_firm,
+            "prop_phase": self.prop_phase,
+            "prop_initial_balance": self.prop_initial_balance,
+            "prop_max_loss_usd": self.prop_max_loss_usd,
+            "prop_profit_target_usd": self.prop_profit_target_usd,
         }

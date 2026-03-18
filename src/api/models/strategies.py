@@ -1,3 +1,4 @@
+from typing import Optional
 from sqlalchemy import String, Boolean, ForeignKey, DateTime, Float, Integer
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.sql import func
@@ -36,13 +37,16 @@ class UserStrategy(db.Model):
     user_id: Mapped[int] = mapped_column(ForeignKey('users.id'), nullable=False)
     strategy_id: Mapped[int] = mapped_column(ForeignKey('strategies.id'), nullable=False)
     
+    # Target wallet (nullable — if set, bot runs on this specific account)
+    wallet_id: Mapped[Optional[int]] = mapped_column(ForeignKey('metaapi_accounts.id'), nullable=True)
+
     # Auditoría
     created_at = db.Column(DateTime(timezone=True), server_default=func.now())
     is_active: Mapped[bool] = mapped_column(Boolean(), default=True)
 
     # Relaciones SQLAlchemy para acceder a los objetos
     strategy = relationship("Strategy")
-    # user = relationship("User") # Descomentar si necesitas acceder al usuario desde aquí
+    wallet   = relationship("MetaApiAccount", foreign_keys=[wallet_id])
 
     def serialize(self):
         return {

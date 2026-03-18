@@ -1,3 +1,20 @@
+Logic: Fibonacci 61.8% retracement + RSI(7) momentum cross + EMA(50) trend bias.
+
+After a strong impulse, institutional money re-enters at the 61.8% golden ratio.
+RSI crossing 50 confirms momentum has turned. 3% risk per trade = high risk/reward.
+
+Differentiator from V4 Ghost:
+  V4 Ghost (low/medium) = contrarian — sweeps above PDH / below PDL
+  GoldenBreakout (high) = trend-continuation — retracement back into trend
+
+Key edges:
+  1. 61.8% fib level = highest-probability Fibonacci retracement (institutional magnet)
+  2. RSI(7) cross 50 = momentum confirmation (not just "near the level")
+  3. EMA(50) trend bias = only trade WITH the dominant H1 trend
+  4. Breakeven at 1:1 — same proven edge as V4 Ghost
+  5. 1:3 RR — needs only 25% win rate to break even
+  6. 3% risk/trade — genuinely high risk vs 0.5–1% for low/medium
+"""
 from __future__ import annotations
 
 import numpy as np

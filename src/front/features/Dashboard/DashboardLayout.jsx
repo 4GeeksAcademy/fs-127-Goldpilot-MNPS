@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { Outlet, NavLink, useLocation, Navigate } from "react-router-dom";
+import { Outlet, NavLink, useLocation, Navigate, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { UserProfile } from "./components/UserProfile";
 import { LanguageSwitcher } from "./components/LanguageSwitcher";
@@ -48,7 +48,14 @@ export const DashboardLayout = () => {
 
     const { t } = useTranslation();
     const { store, dispatch } = useGlobalReducer();
-    const location = useLocation();
+    const location  = useLocation();
+    const navigate  = useNavigate();
+
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        dispatch({ type: "logout" });
+        navigate("/login");
+    };
 
     const mainRef = useRef(null);
 

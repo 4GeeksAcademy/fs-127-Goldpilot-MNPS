@@ -60,6 +60,10 @@ setup_admin(app)
 # add the admin
 setup_commands(app)
 
+# Start background trading scheduler (evaluates signals every 15 min)
+from api.scheduler import init_scheduler
+init_scheduler(app)
+
 # Add all endpoints form the API with a "api" prefix
 app.register_blueprint(api, url_prefix='/api')
 
@@ -91,7 +95,8 @@ def conflict(e):
 
 @app.errorhandler(500)
 def server_error(e):
-    return jsonify({"description": e.description}), 500
+    desc = getattr(e, "description", None) or str(e)
+    return jsonify({"description": desc}), 500
 
 # generate sitemap with all your endpoints
 

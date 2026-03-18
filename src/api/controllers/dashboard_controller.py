@@ -58,14 +58,24 @@ def get_summary():
         wallet_info.update(balance_info)
         wallets_data.append(wallet_info)
 
+    closed_trades = Trade.query.filter_by(user_id=user_id, status="closed").all()
+    open_trades   = Trade.query.filter_by(user_id=user_id, status="open").all()
+    wins          = [t for t in closed_trades if (t.profit_loss or 0) > 0]
+    realized_pnl  = sum(t.profit_loss or 0 for t in closed_trades)
+    floating_pnl  = sum(t.profit_loss or 0 for t in open_trades if t.profit_loss is not None)
+    total_profit  = realized_pnl + floating_pnl
+
     data = {
         "wallets": wallets_data,
         "stats": {
-            "total_trades": 0,
-            "winning_trades": 0,
-            "losing_trades": 0,
-            "win_rate": 0,
-            "total_profit": 0,
+            "total_trades":   len(closed_trades),
+            "winning_trades": len(wins),
+            "losing_trades":  len(closed_trades) - len(wins),
+            "win_rate":       round(len(wins) / len(closed_trades) * 100, 1) if closed_trades else 0,
+            "total_profit":   round(total_profit, 2),
+            "realized_pnl":   round(realized_pnl, 2),
+            "floating_pnl":   round(floating_pnl, 2),
+            "open_trades":    len(open_trades),
         },
     }
 
@@ -89,6 +99,30 @@ def get_open_trades():
     user_id = int(get_jwt_identity())
     trades = Trade.query.filter_by(user_id=user_id, status='open').order_by(Trade.opened_at.desc()).all()
     return jsonify({"trades": [t.serialize() for t in trades]}), 200
+
+
+@dashboard_bp.route('/sync', methods=['POST'])
+@jwt_required()
+def sync_trades():
+    """
+    Poll MetaAPI for open positions and deal history.
+    Closes any DB Trade records that MetaAPI has already closed.
+    MetaAPI calls: 2 (positions + history-deals).
+    """
+    user_id = int(get_jwt_identity())
+
+    accounts = MetaApiAccount.query.filter_by(user_id=user_id, status="connected").all()
+    if not accounts:
+        return jsonify({"msg": "No connected wallets — nothing to sync"}), 200
+
+    from api.trade_engine import sync_open_trades
+    total_updated = 0
+    for account in accounts:
+        wallet_trades = Trade.query.filter_by(user_id=user_id, wallet_id=account.id, status="open").all()
+        if wallet_trades:
+            total_updated += sync_open_trades(account, wallet_trades, db)
+
+    return jsonify({"msg": f"Synced all wallets", "updated": total_updated}), 200
 
 
 @dashboard_bp.route('/trades/<int:trade_id>/cancel', methods=['PATCH'])

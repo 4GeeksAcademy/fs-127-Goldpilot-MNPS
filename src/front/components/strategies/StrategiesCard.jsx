@@ -39,7 +39,7 @@ export const StrategiesCard = () => {
 
     const winRate = useMemo(() => {
         if (!results || !results.history || results.history.length === 0) return 0;
-        const wins = results.history.filter(t => t.profit > 0).length;
+        const wins = results.history.filter(t => t.pnl > 0).length;
         return ((wins / results.history.length) * 100).toFixed(1);
     }, [results]);
 
@@ -144,7 +144,8 @@ export const StrategiesCard = () => {
                                     <input 
                                         type="date" 
                                         value={customStartDate}
-                                        max={new Date().toISOString().split("T")[0]}
+                                        min="2020-01-01"
+                                        max="2026-03-11"
                                         onChange={(e) => setCustomStartDate(e.target.value)}
                                         className="bg-[#0a0a0a] border border-white/10 rounded-xl p-3 text-gray-300 text-sm outline-none focus:border-[var(--color-gold)] transition-colors w-44 text-center"
                                         style={{ colorScheme: "dark" }}

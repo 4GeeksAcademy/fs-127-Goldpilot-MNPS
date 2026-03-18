@@ -1,3 +1,16 @@
+The ONLY proven profitable strategy from the evolution analysis (+44% ROI on demo).
+
+Core rules (from STRATEGY_EVOLUTION_ANALYSIS.md — DO NOT add extra filters):
+  1. PDH/PDL sweep detection (rolling high/low over `lookback_bars`)
+  2. 1:1 breakeven trigger (ironclad shield — THE edge)
+  3. Full 1:3 RR take profit (no partials — they reduce avg win)
+  4. ATR × 1.5 stop loss
+  5. Full session hours: London 07:00 + NY 13:00 combined → 07:00–21:00 UTC
+  6. No displacement filter, no mean reversion filter, no time-based exits
+
+Why it works: 5.9% win rate × 7.9:1 win/loss ratio = positive expectancy.
+  Volume (100+ trades) + 40% breakeven rate + large wins = edge.
+"""
 from __future__ import annotations
 
 import numpy as np

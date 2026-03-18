@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import sovereignVideo from "../../../assets/img/Sovereign_Vault_Luxury_Industrial_Reveal.mp4";
 
 export const Hero = () => {
@@ -20,7 +20,6 @@ export const Hero = () => {
                     ref={videoRef}
                     autoPlay
                     muted
-                    loop
                     playsInline
                     webkit-playsinline="true"
                     onEnded={handleEnded}
@@ -37,6 +36,38 @@ export const Hero = () => {
 
                 <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-[var(--color-brown-dark)] to-transparent z-30" />
             </div>
+
+            {/* Scroll arrow */}
+            <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-40 flex flex-col items-center"
+                style={{ animation: "scrollBounce 1.8s ease-in-out infinite" }}>
+                <div
+                    className="flex items-center justify-center"
+                    style={{
+                        width: 56,
+                        height: 56,
+                        borderRadius: "50%",
+                        background: "rgba(255,255,255,0.06)",
+                        backdropFilter: "blur(16px)",
+                        WebkitBackdropFilter: "blur(16px)",
+                        border: "1px solid rgba(255,255,255,0.15)",
+                        boxShadow: "0 4px 24px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.12)",
+                    }}
+                >
+                    <svg
+                        width="22" height="14" viewBox="0 0 32 18" fill="none"
+                        style={{ color: "var(--color-gold)" }}
+                    >
+                        <path d="M1 1L16 16L31 1" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                </div>
+            </div>
+
+            <style>{`
+                @keyframes scrollBounce {
+                    0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.8; }
+                    50% { transform: translateX(-50%) translateY(7px); opacity: 1; }
+                }
+            `}</style>
         </section>
     );
 };

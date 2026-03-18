@@ -18,42 +18,39 @@ export const RiskSection = () => {
                 >
                     <div className="flex flex-col items-center leading-[0.9] tracking-tighter">
 
-                        <h2 className="text-5xl md:text-7xl lg:text-8xl font-medium text-white text-center">
+                        <h2 className="text-[clamp(4rem,10vw,90px)] whitespace-nowrap font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-800 opacity-90 select-none" style={{ lineHeight: 1.15, paddingBottom: "0.1em" }}>
                             Más allá del riesgo.
                         </h2>
 
                         <h2
-                            className="text-5xl md:text-7xl lg:text-8xl font-medium text-center"
+                            className="text-[clamp(4rem,10vw,80px)] whitespace-nowrap leading-none font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-800 opacity-90 select-none"
                             style={{
                                 background: "linear-gradient(180deg, #FFFFFF 0%, var(--color-gold) 100%)",
                                 WebkitBackgroundClip: "text",
                                 WebkitTextFillColor: "transparent",
-                                paddingBottom: "0.1em"
+                                paddingBottom: "0.2em"
                             }}
                         >
-                            Pura certeza.
+                            Seguridad.
                         </h2>
                     </div>
 
                     <div
                         style={{
                             textAlign: 'center',
-                            justifyContent: 'center',
+                            ustifyContent: 'center',
                             display: 'flex',
                             flexDirection: 'column',
                             color: 'var(--color-grey-50, #808080)',
-                            fontSize: '28px', 
+                            fontSize: '29px', 
                             fontFamily: 'Roboto, sans-serif',
                             fontWeight: 400, 
-                            lineHeight: '1.4',
+                            lineHeight: '1.',
                             wordWrap: 'break-word',
-                            maxWidth: '850px',
+                            maxWidth: '3000px',
                         }}
                     >
-                        Acceso único a experiencias exclusivas, desde<br className="hidden md:block" />
-                        la seguridad de bóvedas físicas, hasta la liquidez<br className="hidden md:block" />
-                        digital instantánea en los mercados globales,<br className="hidden md:block" />
-                        todo a través de tu conserje Atlas.
+                        Accede a una forma más inteligente de invertir en oro compra y vende oro digital respaldado, con la confianza de seguir el precio real del mercado y la flexibilidad de operar al instante a nivel global. Todo de manera sencilla, transparente y gestionado directamente desde tu asistente.
                     </div>
 
                 </motion.div>

@@ -1,6 +1,3 @@
-"""
-Fibonacci Retracement Scalper — M1 XAUUSD
-==========================================
 High-risk, high-frequency scalping strategy.
 Trades last < 5 minutes (force-exited via `max_bars_open`).
 
@@ -62,39 +59,27 @@ def _atr(high: np.ndarray, low: np.ndarray, close: np.ndarray,
     return tr.ewm(span=period, adjust=False).mean().values
 
 
-# ── Strategy ─────────────────────────────────────────────────────────────────
 
 class FibonacciScalper(Strategy):
-    """
-    Fibonacci 61.8% retracement scalper on M1 XAUUSD.
 
-    All parameters are exposed for grid-search via bt.optimize().
-    """
-
-    # ── Swing definition ───────────────────────────────────────────────────────
     swing_bars: int      = 60      # bars to measure recent swing H/L
 
-    # ── Fibonacci ──────────────────────────────────────────────────────────────
     fib_entry: float     = 0.618   # enter at 61.8% retracement (golden ratio)
     fib_tolerance: float = 2.0     # ATR multiples to define the fib "zone"
     rng_min: float       = 3.0     # minimum swing range in price units (noise filter)
 
-    # ── Indicators ────────────────────────────────────────────────────────────
     ema_period: int      = 20
     rsi_period: int      = 7
     atr_period: int      = 14
 
-    # ── Signal filters ────────────────────────────────────────────────────────
     rsi_long_max: int    = 55      # long RSI must be below this (slight oversold)
     rsi_short_min: int   = 45      # short RSI must be above this
 
-    # ── Risk / exit ───────────────────────────────────────────────────────────
     atr_sl_mult: float   = 2.5     # 2.5×ATR stop — room for M5 noise
     rr_ratio: float      = 2.0     # 1:2 RR
     risk_pct: float      = 0.005   # 0.5% equity per trade
     max_bars_open: int   = 300     # force-exit after 300 min wall-clock (intraday cap)
 
-    # ── Session ───────────────────────────────────────────────────────────────
     session_start: int   = 7
     session_end: int     = 21
 
@@ -113,7 +98,6 @@ class FibonacciScalper(Strategy):
         )
 
     def next(self) -> None:
-        # ── Force-exit stale trades ───────────────────────────────────────────
         current_time = self.data.index[-1]
         for trade in self.trades:
             try:
@@ -123,11 +107,9 @@ class FibonacciScalper(Strategy):
             except Exception:
                 pass
 
-        # ── Only one position at a time ───────────────────────────────────────
         if self.position:
             return
 
-        # ── Session filter ────────────────────────────────────────────────────
         try:
             hour = current_time.hour
         except Exception:
@@ -135,7 +117,6 @@ class FibonacciScalper(Strategy):
         if not (self.session_start <= hour < self.session_end):
             return
 
-        # ── Enough bars for swing detection ───────────────────────────────────
         if len(self.data) < self.swing_bars + 2:
             return
 
@@ -144,11 +125,9 @@ class FibonacciScalper(Strategy):
         swing_l = float(np.min(self.data.Low[-self.swing_bars - 1:-1]))
         rng = swing_h - swing_l
 
-        # Ignore micro-ranges (noise) — configurable minimum range
         if rng < self.rng_min:
             return
 
-        # ── Indicators ────────────────────────────────────────────────────────
         price = self.data.Close[-1]
         ema   = self._ema_vals[-1]
         rsi   = self._rsi_vals[-1]
@@ -164,7 +143,6 @@ class FibonacciScalper(Strategy):
         if sl_dist <= 0:
             return
 
-        # ── LONG — price retraces to 61.8% in uptrend ────────────────────────
         fib_long = swing_h - rng * self.fib_entry   # support zone center
         if (
             price > ema                              # uptrend
@@ -176,7 +154,6 @@ class FibonacciScalper(Strategy):
             size = max(int(round((self.equity * self.risk_pct) / sl_dist)), 1)
             self.buy(sl=sl, tp=tp, size=size)
 
-        # ── SHORT — price retraces to 61.8% in downtrend ─────────────────────
         elif (
             price < ema                              # downtrend
             and rsi > self.rsi_short_min             # pullback (not overbought extreme)
@@ -189,6 +166,5 @@ class FibonacciScalper(Strategy):
             self.sell(sl=sl, tp=tp, size=size)
 
 
-# Backward-compatible alias
 class HighRiskStrategy(FibonacciScalper):
     pass

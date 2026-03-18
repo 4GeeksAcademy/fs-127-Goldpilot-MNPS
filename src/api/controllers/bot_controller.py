@@ -1,15 +1,3 @@
-"""
-Bot Controller
-Endpoints:
-  GET  /bot/status    — returns bot state + active strategy + linked account
-  POST /bot/strategy  — assign a risk-level strategy to the user
-  POST /bot/start     — activate the current UserStrategy (sets is_active=True)
-  POST /bot/stop      — deactivate all UserStrategies
-  POST /bot/signal    — evaluate M15 signal + place MetaAPI trade if found
-
-Bot state is derived from UserStrategy.is_active:
-  bot_active = True  → user has a UserStrategy with is_active=True
-"""
 
 from datetime import datetime
 

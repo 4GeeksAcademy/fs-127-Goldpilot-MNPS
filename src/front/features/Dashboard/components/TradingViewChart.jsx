@@ -1,10 +1,6 @@
 import { useEffect, useRef, memo } from "react";
 
 /**
- * Widget embed oficial de TradingView para gráfico avanzado de velas.
- * Muestra datos reales en tiempo real directamente desde TradingView.
- * No requiere backend ni wallet conectada.
- *
  * @param {string} symbol - Par de trading (default: 'OANDA:XAUUSD')
  * @param {string} theme - Tema visual: 'dark' | 'light' (default: 'dark')
  */
@@ -58,10 +54,6 @@ const TradingViewWidget = ({ symbol = "OANDA:XAUUSD", theme = "dark" }) => {
     );
 };
 
-/**
- * Wrapper que expone TradingViewChart con la misma interfaz que el componente anterior.
- * Usa memo para evitar re-renders innecesarios del widget embed.
- */
 export const TradingViewChart = memo(() => (
     <div className="w-full h-[500px]">
         <TradingViewWidget symbol="OANDA:XAUUSD" theme="dark" />

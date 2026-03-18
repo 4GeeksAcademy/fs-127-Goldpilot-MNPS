@@ -1,6 +1,3 @@
-"""
-V4 Ghost Protocol — backtesting.py implementation
-===================================================
 The ONLY proven profitable strategy from the evolution analysis (+44% ROI on demo).
 
 Core rules (from STRATEGY_EVOLUTION_ANALYSIS.md — DO NOT add extra filters):
@@ -34,17 +31,6 @@ def _atr(high: np.ndarray, low: np.ndarray, close: np.ndarray, period: int = 14)
 
 
 class V4GhostStrategy(Strategy):
-    """
-    V4 Ghost Protocol — the baseline that achieved +44% ROI.
-
-    Optimizable parameters:
-        lookback_bars : bars to define PDH/PDL (24 on H1 ≈ 1 trading day)
-        atr_period    : ATR smoothing period
-        atr_sl_mult   : ATR multiplier for stop loss (1.5 = V4 original)
-        rr_ratio      : risk-to-reward ratio (3.0 = V4 original)
-        session_start : first hour allowed for entries (UTC)
-        session_end   : last hour allowed for entries (UTC, exclusive)
-    """
 
     lookback_bars: int   = 24
     atr_period: int      = 14
@@ -63,7 +49,6 @@ class V4GhostStrategy(Strategy):
         )
 
     def next(self) -> None:
-        # ── Session filter ───────────────────────────────────────────────────
         try:
             hour = self.data.index[-1].hour
         except Exception:
@@ -71,7 +56,6 @@ class V4GhostStrategy(Strategy):
         if not (self.session_start <= hour < self.session_end):
             return
 
-        # ── Breakeven management for open trades ─────────────────────────────
         close = self.data.Close[-1]
         for trade in self.trades:
             entry = trade.entry_price
@@ -85,11 +69,9 @@ class V4GhostStrategy(Strategy):
             elif trade.is_short and close <= entry - sl_dist and trade.sl > entry:
                 trade.sl = entry
 
-        # ── Only one trade at a time ──────────────────────────────────────────
         if self.position:
             return
 
-        # ── PDH / PDL from the last `lookback_bars` closed bars ──────────────
         if len(self.data) < self.lookback_bars + 2:
             return
 
@@ -107,23 +89,18 @@ class V4GhostStrategy(Strategy):
         sl_dist = atr * self.atr_sl_mult
         tp_dist = sl_dist * self.rr_ratio
 
-        # Position size: risk `risk_pct` of equity per trade
-        # size = integer units of gold (margin=1/50 set in Backtest constructor)
         size = max(int(round((self.equity * self.risk_pct) / sl_dist)), 1)
 
-        # ── LONG — wick below PDL, close back above PDL ───────────────────────
         if curr_low < pdl and curr_close > pdl:
             sl = curr_close - sl_dist
             tp = curr_close + tp_dist
             self.buy(sl=sl, tp=tp, size=size)
 
-        # ── SHORT — wick above PDH, close back below PDH ──────────────────────
         elif curr_high > pdh and curr_close < pdh:
             sl = curr_close + sl_dist
             tp = curr_close - tp_dist
             self.sell(sl=sl, tp=tp, size=size)
 
 
-# Backward-compatible alias used by existing routes / yfinance fallback
 class LowRiskStrategy(V4GhostStrategy):
     pass

@@ -1,7 +1,3 @@
-"""
-Servicio de autenticacion - Login, Signup y validacion de tokens
-"""
-
 import os  # NUEVO: para leer variables de entorno (FRONTEND_URL)
 from datetime import date
 from flask import abort
@@ -14,7 +10,6 @@ from api.models import db, User
 class AuthService:
     @staticmethod
     def signup(data):
-        """Registrar un nuevo usuario con password hasheado."""
         required_fields = ["email", "username",
                            "password", "first_name", "last_name", "phone_number", "birth_date"]
         for field in required_fields:

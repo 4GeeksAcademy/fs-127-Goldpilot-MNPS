@@ -10,7 +10,6 @@ export const AdBanner = ({ className = "" }) => {
                 backdropFilter: "blur(20px)",
             }}
         >
-            {/* Orbs Decorativos */}
             <div
                 className="absolute -top-32 -left-20 w-80 h-80 rounded-full opacity-10 blur-3xl pointer-events-none"
                 style={{ background: "var(--color-gold)" }}
@@ -20,12 +19,9 @@ export const AdBanner = ({ className = "" }) => {
                 style={{ background: "var(--color-olive)" }}
             />
 
-            {/* Contenedor Principal */}
             <div className="relative z-10 w-full flex flex-col md:flex-row items-center p-6 md:px-8 gap-6 md:gap-8 justify-between">
 
-                {/* Agrupación Izquierda: Logo + Separador + Texto */}
                 <div className="flex flex-col md:flex-row items-center gap-6 flex-1 text-center md:text-left">
-                    {/* Logo Pequeño */}
                     <div className="flex-shrink-0 flex items-center justify-center">
                         <img
                             src="/logo-principal-blanco.png"
@@ -34,10 +30,8 @@ export const AdBanner = ({ className = "" }) => {
                         />
                     </div>
 
-                    {/* Separador Desktop */}
                     <div className="hidden md:block w-px h-12 bg-white/10" />
 
-                    {/* Textos Claros */}
                     <div className="flex flex-col flex-1 gap-1">
                         <h3 className="text-xl md:text-2xl font-black text-white leading-tight tracking-tight">
                             Maximiza tu potencial con <span style={{ color: "var(--color-gold)" }}>xSniper PRO</span>
@@ -48,7 +42,6 @@ export const AdBanner = ({ className = "" }) => {
                     </div>
                 </div>
 
-                {/* Botón CTA a la Derecha */}
                 <div className="flex-shrink-0 w-full md:w-auto mt-2 md:mt-0">
                     <button
                         className="w-full md:w-auto px-8 py-3.5 rounded-xl text-sm font-black transition-all hover:scale-105 tracking-wide flex items-center justify-center gap-2"
@@ -63,7 +56,6 @@ export const AdBanner = ({ className = "" }) => {
                 </div>
             </div>
 
-            {/* Cierre (Dismiss) */}
             <button className="absolute top-4 right-4 text-white/20 hover:text-white/50 text-xl transition-colors z-20 leading-none">×</button>
         </div>
     );

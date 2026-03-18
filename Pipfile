@@ -29,7 +29,7 @@ pandas = "*"
 metaapi-cloud-sdk = "*"
 
 [requires]
-python_version = "3.9"
+python_version = "3.13.12"
 
 [scripts]
 start="flask run -p 3001 -h 0.0.0.0"

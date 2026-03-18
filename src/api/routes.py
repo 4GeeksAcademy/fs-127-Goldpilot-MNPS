@@ -1,6 +1,3 @@
-"""
-This module takes care of starting the API Server, Loading the DB and Adding the endpoints
-"""
 from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models.db import db
 from api.models import User, Strategy # <-- Importamos Strategy
@@ -10,14 +7,13 @@ from flask_cors import CORS
 
 # Importamos los motores (Backtest y Optimizer)
 from api.backtest_engine import execute_backtest_by_level
+from api.live_engine import evaluate_live_market
 from api.optimizer_engine import run_optimization_async, get_status, get_results
 
 api = Blueprint('api', __name__)
 
-# Allow CORS requests to this API
 CORS(api)
 
-# Registrar todos los sub-blueprints (controllers)
 register_controllers(api)
 
 
@@ -37,13 +33,9 @@ def get_all_strategies():
         return jsonify({"error": str(e)}), 500
     
 
-# 👇 AÑADIDO: Ahora recoge balance y fecha de la URL 👇
 @api.route('/backtest/<string:level>', methods=['GET'])
 def run_unified_backtest(level):
-    # level puede ser 'low', 'medium' o 'high'
     try:
-        # Extraemos balance y start_date de la query string (?balance=500&start=2023-01-01)
-        # Si no los mandan, usa 10,000 y 2024-01-01 por defecto
         balance_param = request.args.get('balance', default=10000.0, type=float)
         start_param = request.args.get('start', default='2024-01-01', type=str)
         
@@ -52,7 +44,6 @@ def run_unified_backtest(level):
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-# ─── Optimizer endpoints ────────────────────────────────────────────────────
 
 @api.route('/optimize', methods=['POST', 'GET'])
 def start_optimization():
@@ -75,3 +66,22 @@ def optimization_results():
     return jsonify(get_results()), 200
 
 
+@api.route('/activate-live-bot', methods=['POST'])
+def activate_live_bot():
+    body = request.get_json()
+    
+    if not body or "strategy_id" not in body:
+        return jsonify({"error": "Falta strategy_id"}), 400
+
+    strategy_id = body.get("strategy_id") # "low", "medium", "high"
+    
+    try:
+        live_scan = evaluate_live_market(strategy_id)
+
+        return jsonify({
+            "status": "success",
+            "msg": f"¡Bot armado y vigilando con protocolo {strategy_id.upper()}!",
+            "live_scan": live_scan
+        }), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500

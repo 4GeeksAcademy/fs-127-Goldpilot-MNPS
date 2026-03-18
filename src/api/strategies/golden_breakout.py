@@ -1,6 +1,3 @@
-"""
-Golden Breakout — High Risk Strategy (H1)
-==========================================
 Logic: Fibonacci 61.8% retracement + RSI(7) momentum cross + EMA(50) trend bias.
 
 After a strong impulse, institutional money re-enters at the 61.8% golden ratio.
@@ -50,23 +47,6 @@ def _rsi(close: np.ndarray, period: int = 7) -> np.ndarray:
 # ── Strategy ──────────────────────────────────────────────────────────────────
 
 class GoldenBreakout(Strategy):
-    """
-    Fibonacci 61.8% retracement scalper on H1 XAUUSD.
-
-    Optimizable parameters:
-        swing_bars    : H1 bars for swing High/Low window (~20 bars = 20 days)
-        fib_level     : Fibonacci retracement ratio (0.618 = golden ratio)
-        fib_tolerance : fib zone width = ATR × this value
-        ema_period    : EMA trend bias period
-        rsi_period    : RSI momentum period
-        rsi_threshold : RSI level for cross detection (50 = neutral)
-        atr_period    : ATR period for SL/TP sizing
-        atr_sl_mult   : SL = ATR × this
-        rr_ratio      : TP = SL × this (1:3 default)
-        risk_pct      : fraction of equity per trade (0.03 = 3% — high risk)
-        session_start : first allowed hour UTC
-        session_end   : last allowed hour UTC (hard close)
-    """
 
     swing_bars: int      = 20
     fib_level: float     = 0.618
@@ -90,7 +70,6 @@ class GoldenBreakout(Strategy):
         self._rsi_vals = self.I(_rsi, self.data.Close, self.rsi_period, name="RSI")
 
     def next(self) -> None:
-        # ── Breakeven management (same proven edge as V4 Ghost) ───────────────
         close = self.data.Close[-1]
         for trade in self.trades:
             entry   = trade.entry_price
@@ -102,7 +81,6 @@ class GoldenBreakout(Strategy):
             elif trade.is_short and close <= entry - sl_dist and trade.sl > entry:
                 trade.sl = entry
 
-        # ── Session hard exit ─────────────────────────────────────────────────
         try:
             hour = self.data.index[-1].hour
         except Exception:
@@ -115,16 +93,13 @@ class GoldenBreakout(Strategy):
         if hour < self.session_start:
             return
 
-        # ── Only one position at a time ───────────────────────────────────────
         if self.position:
             return
 
-        # ── Warm-up guard ─────────────────────────────────────────────────────
         min_bars = max(self.swing_bars, self.ema_period, self.atr_period) + 2
         if len(self.data) < min_bars:
             return
 
-        # ── Indicators ───────────────────────────────────────────────────────
         ema      = self._ema_vals[-1]
         atr      = self._atr_vals[-1]
         rsi      = self._rsi_vals[-1]
@@ -133,26 +108,21 @@ class GoldenBreakout(Strategy):
         if atr <= 0 or np.isnan(ema) or np.isnan(atr):
             return
 
-        # ── Swing High / Low ─────────────────────────────────────────────────
         swing_h = float(np.max(self.data.High[-self.swing_bars:]))
         swing_l = float(np.min(self.data.Low[-self.swing_bars:]))
         rng     = swing_h - swing_l
 
-        # Skip if no meaningful swing (range too small vs ATR)
         if rng < atr:
             return
 
-        # ── Fibonacci levels ─────────────────────────────────────────────────
         fib_long  = swing_h - rng * self.fib_level   # 61.8% below swing high
         fib_short = swing_l + rng * self.fib_level   # 61.8% above swing low
         zone      = atr * self.fib_tolerance
 
-        # ── Sizing ───────────────────────────────────────────────────────────
         sl_dist = atr * self.atr_sl_mult
         tp_dist = sl_dist * self.rr_ratio
         size    = max(int(round((self.equity * self.risk_pct) / sl_dist)), 1)
 
-        # ── LONG: uptrend + in fib zone + RSI just crossed above 50 ──────────
         if (close > ema
                 and abs(close - fib_long) <= zone
                 and rsi >= self.rsi_threshold > rsi_prev):
@@ -162,7 +132,6 @@ class GoldenBreakout(Strategy):
                 size=size,
             )
 
-        # ── SHORT: downtrend + in fib zone + RSI just crossed below 50 ───────
         elif (close < ema
                 and abs(close - fib_short) <= zone
                 and rsi <= self.rsi_threshold < rsi_prev):

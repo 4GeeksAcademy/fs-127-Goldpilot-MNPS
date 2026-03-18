@@ -1,6 +1,3 @@
-"""
-Backtest Engine v3.0 — backtesting.py
-======================================
 Loads Dukascopy CSV files and runs backtests using the backtesting.py framework.
 Supports all three risk levels with their corresponding strategies.
 
@@ -39,11 +36,6 @@ _STRATEGY_NAMES = {
     "medium": "V4 Ghost Protocol — Balanced",
     "high":   "V4 Ghost Protocol — Aggressive (3% Risk)",
 }
-
-# ─────────────────────────────────────────────
-# CSV LOADER  (unchanged from v2.2)
-# ─────────────────────────────────────────────
-
 def _find_csvs(timeframe: str):
     entry = _TF_DIRS.get(timeframe.upper())
     if not entry:
@@ -127,19 +119,10 @@ def _best_df(start_date: str):
 
 
 def _prep_for_bt(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Rename lowercase columns to capitalized form required by backtesting.py.
-    Returns a copy with Open, High, Low, Close, Volume columns.
-    """
     rename = {c: c.capitalize() for c in df.columns if c in ("open", "high", "low", "close", "volume")}
     out = df.rename(columns=rename)
     # backtesting.py requires tz-naive or tz-aware index — keep as-is
     return out
-
-
-# ─────────────────────────────────────────────
-# STATS FORMATTER
-# ─────────────────────────────────────────────
 
 def _safe(val, default=0.0):
     """Return val unless it is NaN/inf, in which case return default."""
@@ -187,21 +170,8 @@ def _format_stats(stats, level: str, initial_cash: float, timeframe: str) -> dic
     }
 
 
-# ─────────────────────────────────────────────
-# MAIN ENTRY POINT
-# ─────────────────────────────────────────────
-
 def execute_backtest_by_level(level: str, initial_cash: float = 100_000.0,
                                start_date: str = "2020-01-01") -> dict:
-    """
-    Run a backtest for the given risk level using backtesting.py.
-
-    level      : "low" | "medium" | "high"
-    initial_cash: starting equity
-    start_date : ISO date string — filters data to >= this date
-
-    Returns dict compatible with existing /api/backtest/<level> response format.
-    """
     from backtesting import Backtest
     from api.strategies.v4_ghost import V4GhostStrategy
 

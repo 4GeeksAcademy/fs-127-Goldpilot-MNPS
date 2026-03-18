@@ -219,31 +219,22 @@ export const DashboardHome = () => {
                 />
             </div>
 
-            {/* Bloque Secuencial: Gráfica -> Wallets -> Tabla */}
             <div className="flex flex-col gap-6 w-full">
-                {/* Gráfica + Quick Trade */}
-                <div className="w-full rounded-2xl border border-white/[0.06] overflow-hidden"
-                     style={{ background: "rgba(255,255,255,0.03)", backdropFilter: "blur(16px)" }}>
-                    <div className="p-4 border-b border-white/[0.06]">
-                        <QuickTradePanel />
-                    </div>
-                    <div className="p-5">
-                        <TradingViewChart />
-                    </div>
+                <div className="w-full rounded-2xl p-5 border border-white/[0.06]" style={{ background: "rgba(255,255,255,0.03)", backdropFilter: "blur(16px)" }}>
+                    <TradingViewChart />
                 </div>
 
-                {/* Panel de Wallets expandido */}
                 <div className="w-full">
                     <WalletPanel />
                 </div>
 
-                {/* Tabla de operaciones */}
                 <div className="w-full">
                     <TradeTable />
                 </div>
             </div>
 
-            {/* Banner promocional debajo de todo */}
+            <BotControlPage />
+
             <div className="w-full mt-2">
                 <AdBanner />
             </div>

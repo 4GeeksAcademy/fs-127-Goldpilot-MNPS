@@ -1,16 +1,3 @@
-/**
- * ============================================================
- * GoldPilot - Bot Control Page
- * ============================================================
- * Flow:
- *   1. Select a risk level (Low / Medium / High) → calls POST /bot/strategy
- *   2. Click Start Bot → calls POST /bot/start
- *   3. Click "Evaluar Señal" → calls POST /bot/signal
- *      - WAITING: no setup right now
- *      - TRADE_PLACED: order sent to MetaAPI + recorded in DB
- * ============================================================
- */
-
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { getBotStatus, startBot, stopBot, updateBotStrategy, getBotSignal, getWallets, setWalletPropFirm } from '../api';
@@ -288,36 +275,17 @@ export const BotControlPage = () => {
                 <div className="p-4 rounded-xl bg-green-500/10 border border-green-500/20 text-green-400">{success}</div>
             )}
 
-            {/* ==================== STRATEGY SELECTOR ==================== */}
-            <div className="glass-card p-6">
-                <h3 className="text-sm font-semibold text-white/60 uppercase tracking-widest mb-4">
-                    Seleccionar Estrategia
-                </h3>
-
-                {/* Wallet selector */}
-                {wallets.length > 0 && (
-                    <div className="mb-4">
-                        <p className="text-[10px] text-white/40 uppercase tracking-widest mb-2">Account</p>
-                        <div className="flex flex-wrap gap-2">
-                            {wallets.filter(w => w.status === 'connected').map(w => {
-                                const isSelected = selectedWalletId === w.id;
-                                return (
-                                    <button
-                                        key={w.id}
-                                        onClick={() => { setSelectedWalletId(isSelected ? null : w.id); setSelectedPhase(null); }}
-                                        className={`px-3 py-2 rounded-xl text-xs font-medium border transition-all ${
-                                            isSelected
-                                                ? 'bg-gold-500/20 border-gold-500/60 text-yellow-300'
-                                                : 'bg-white/5 border-white/10 text-white/50 hover:border-white/20 hover:text-white/80'
-                                        }`}
-                                    >
-                                        <span className={`inline-block w-1.5 h-1.5 rounded-full mr-1.5 ${w.is_prop_firm ? 'bg-purple-400' : 'bg-green-400'}`} />
-                                        {w.broker_name || `Wallet #${w.id}`}
-                                        {w.is_prop_firm && <span className="ml-1.5 text-purple-400 text-[10px]">PROP</span>}
-                                        <span className="ml-1.5 text-white/30">{w.account_type?.toUpperCase()}</span>
-                                    </button>
-                                );
-                            })}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div className="glass-card p-8">
+                    <div className="flex items-center gap-4 mb-6">
+                        <div className={`w-16 h-16 rounded-2xl flex items-center justify-center ${botStatus?.bot_active
+                            ? 'bg-green-500/10 border border-green-500/20'
+                            : 'bg-dark-300 border border-gold-500/10'
+                            }`}>
+                            <div className={`w-6 h-6 rounded-full ${botStatus?.bot_active
+                                ? 'bg-green-400 animate-pulse shadow-lg shadow-green-500/50'
+                                : 'bg-gray-600'
+                                }`} />
                         </div>
                     </div>
                 )}
@@ -392,43 +360,26 @@ export const BotControlPage = () => {
                 </div>
             </div>
 
-            {/* ==================== BOT CARDS — one per wallet ==================== */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                {(botStatus?.bots || []).map(bot => {
-                    const isActive = bot.bot_active;
-                    const isProp   = bot.account?.is_prop_firm;
-                    const phase    = PHASE_LABELS[bot.account?.prop_phase] || null;
-                    return (
-                        <div key={bot.wallet_id} className={`glass-card p-6 border ${
-                            isActive
-                                ? isProp ? 'border-purple-500/30' : 'border-green-500/20'
-                                : 'border-white/5'
-                        }`}>
-                            {/* Header */}
-                            <div className="flex items-center justify-between mb-5">
-                                <div className="flex items-center gap-3">
-                                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
-                                        isActive
-                                            ? isProp ? 'bg-purple-500/10 border border-purple-500/20' : 'bg-green-500/10 border border-green-500/20'
-                                            : 'bg-white/5 border border-white/10'
-                                    }`}>
-                                        <div className={`w-3 h-3 rounded-full ${
-                                            isActive
-                                                ? isProp ? 'bg-purple-400 animate-pulse' : 'bg-green-400 animate-pulse'
-                                                : 'bg-gray-600'
-                                        }`} />
-                                    </div>
-                                    <div>
-                                        <p className="text-sm font-bold text-white">{bot.account?.broker_name || `Wallet #${bot.wallet_id}`}</p>
-                                        <p className="text-[11px] text-white/40">
-                                            {isProp && phase ? `${phase.label} · ` : ''}{bot.account?.account_type?.toUpperCase()} · {bot.account?.platform?.toUpperCase()}
-                                        </p>
-                                    </div>
-                                </div>
-                                <span className={`px-2 py-1 rounded-lg text-[10px] font-bold uppercase ${
-                                    isActive
-                                        ? isProp ? 'bg-purple-500/20 text-purple-300' : 'bg-green-500/10 text-green-400'
-                                        : 'bg-white/5 text-white/30'
+                <div className="glass-card p-8">
+                    <h3 className="text-lg font-semibold text-white mb-4">{t('botControl.currentConfig')}</h3>
+                    <div className="space-y-4">
+                        <div className="flex items-center justify-between py-3 border-b border-dark-300/50">
+                            <span className="text-gray-400">{t('botControl.activeStrategy')}</span>
+                            <span className="text-white font-medium">
+                                {botStatus?.strategy?.name || t('botControl.noneSelected')}
+                            </span>
+                        </div>
+                        <div className="flex items-center justify-between py-3 border-b border-dark-300/50">
+                            <span className="text-gray-400">{t('botControl.brokerAccount')}</span>
+                            <span className="text-white font-medium">
+                                {account?.broker_name || t('botControl.notConnected')}
+                            </span>
+                        </div>
+                        <div className="flex items-center justify-between py-3 border-b border-dark-300/50">
+                            <span className="text-gray-400">{t('botControl.accountType')}</span>
+                            <span className={`px-2 py-1 rounded-lg text-xs font-medium ${account?.account_type === 'live'
+                                ? 'bg-red-500/10 text-red-400'
+                                : 'bg-green-500/10 text-green-400'
                                 }`}>
                                     {isActive ? 'Running' : 'Stopped'}
                                 </span>

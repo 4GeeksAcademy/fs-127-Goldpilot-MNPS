@@ -6,7 +6,7 @@ import { PortfolioCard } from "../components/PortfolioCard";
 import { WalletPanel } from "../components/WalletPanel";
 import { AdBanner } from "../components/AdBanner";
 import { TradeTable } from "../components/TradeTable";
-import { getDashboardSummary } from "../api";
+import { getDashboardSummary, getWallets } from "../api";
 
 const BACKEND = import.meta.env.VITE_BACKEND_URL;
 
@@ -25,13 +25,15 @@ const calcChangePercent = (equity, balance) => {
 
 // ── Quick Trade Panel ────────────────────────────────────────────────────────
 const QuickTradePanel = () => {
-    const [price, setPrice]       = useState(null);
-    const [priceErr, setPriceErr] = useState(null);
-    const [volume, setVolume]     = useState("0.10");
-    const [sl, setSl]             = useState("");
-    const [tp, setTp]             = useState("");
-    const [loading, setLoading]   = useState(false);
-    const [result, setResult]     = useState(null);
+    const [price, setPrice]           = useState(null);
+    const [priceErr, setPriceErr]     = useState(null);
+    const [volume, setVolume]         = useState("0.10");
+    const [sl, setSl]                 = useState("");
+    const [tp, setTp]                 = useState("");
+    const [loading, setLoading]       = useState(false);
+    const [result, setResult]         = useState(null);
+    const [wallets, setWallets]       = useState([]);
+    const [selectedWallet, setSelectedWallet] = useState(null); // null = auto
 
     const token   = () => localStorage.getItem("token");
     const headers = () => ({ Authorization: `Bearer ${token()}`, "Content-Type": "application/json" });
@@ -41,17 +43,22 @@ const QuickTradePanel = () => {
         try {
             const r    = await fetch(`${BACKEND}/api/market/price?symbol=XAUUSD`, { headers: { Authorization: `Bearer ${token()}` } });
             const data = await r.json();
-            if (data.bid) {
-                setPrice(data.bid);
-            } else {
-                setPriceErr(data.error || "No price available");
-            }
+            if (data.bid) setPrice(data.bid);
+            else setPriceErr(data.error || "No price available");
         } catch {
             setPriceErr("Connection error");
         }
     }, []);
 
-    useEffect(() => { fetchPrice(); }, [fetchPrice]);
+    useEffect(() => {
+        fetchPrice();
+        getWallets()
+            .then(data => {
+                const list = data.wallets || data || [];
+                setWallets(list.filter(w => w.status === "connected"));
+            })
+            .catch(() => {});
+    }, [fetchPrice]);
 
     const placeOrder = async (action) => {
         setLoading(true);
@@ -61,9 +68,9 @@ const QuickTradePanel = () => {
             entry:  price || 3100,
             volume: parseFloat(volume) || 0.01,
         };
-        // Only include SL/TP if user filled them in
         if (sl && parseFloat(sl) > 0)  body.sl = parseFloat(sl);
         if (tp && parseFloat(tp) > 0)  body.tp = parseFloat(tp);
+        if (selectedWallet)            body.wallet_id = selectedWallet;
 
         try {
             const r = await fetch(`${BACKEND}/api/bot/manual-trade`, {
@@ -83,69 +90,105 @@ const QuickTradePanel = () => {
         }
     };
 
+    const activeWallet = wallets.find(w => w.id === selectedWallet);
+
     return (
-        <div className="flex flex-wrap items-center gap-3 p-4 rounded-xl border border-white/10"
+        <div className="flex flex-col gap-3 p-4 rounded-xl border border-white/10"
              style={{ background: "rgba(255,255,255,0.03)" }}>
 
-            {/* Live price */}
-            <div className="flex items-center gap-2 min-w-[130px]">
-                <span className="text-[10px] text-white/30 uppercase tracking-widest">XAUUSD</span>
-                {price ? (
-                    <span className="text-lg font-bold" style={{ color: "var(--color-gold)" }}>
-                        ${Number(price).toFixed(2)}
-                    </span>
-                ) : (
-                    <span className="text-sm text-white/30">{priceErr || "…"}</span>
+            <div className="flex flex-wrap items-center gap-3">
+                {/* Live price */}
+                <div className="flex items-center gap-2 min-w-[130px]">
+                    <span className="text-[10px] text-white/30 uppercase tracking-widest">XAUUSD</span>
+                    {price ? (
+                        <span className="text-lg font-bold" style={{ color: "var(--color-gold)" }}>
+                            ${Number(price).toFixed(2)}
+                        </span>
+                    ) : (
+                        <span className="text-sm text-white/30">{priceErr || "…"}</span>
+                    )}
+                    <button onClick={fetchPrice} title="Actualizar precio"
+                        className="w-6 h-6 rounded-md bg-white/5 border border-white/10 text-white/40 hover:text-white text-xs flex items-center justify-center transition-all">
+                        ↻
+                    </button>
+                </div>
+
+                <div className="w-px h-8 bg-white/10 hidden sm:block" />
+
+                {/* Account selector */}
+                {wallets.length > 0 && (
+                    <div className="flex flex-col gap-1">
+                        <label className="text-[9px] text-white/30 uppercase tracking-widest">Cuenta</label>
+                        <select
+                            value={selectedWallet ?? ""}
+                            onChange={e => setSelectedWallet(e.target.value ? Number(e.target.value) : null)}
+                            className="bg-black/40 border border-white/10 rounded-lg px-2 py-1.5 text-white text-xs outline-none focus:border-[var(--color-gold)] transition-colors cursor-pointer"
+                        >
+                            <option value="">Auto (primera conectada)</option>
+                            {wallets.map(w => (
+                                <option key={w.id} value={w.id}>
+                                    {w.broker_name || w.server || `Wallet #${w.id}`}{w.is_prop_firm ? " · PROP" : ""}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
                 )}
-                <button onClick={fetchPrice} title="Actualizar precio"
-                    className="w-6 h-6 rounded-md bg-white/5 border border-white/10 text-white/40 hover:text-white text-xs flex items-center justify-center transition-all">
-                    ↻
-                </button>
+
+                <div className="w-px h-8 bg-white/10 hidden sm:block" />
+
+                {/* Inputs */}
+                <div className="flex flex-wrap gap-2 items-center text-xs">
+                    <div className="flex flex-col gap-1">
+                        <label className="text-[9px] text-white/30 uppercase tracking-widest">Lotes</label>
+                        <input type="number" step="0.01" min="0.01" value={volume}
+                            onChange={e => setVolume(e.target.value)}
+                            className="w-20 bg-black/40 border border-white/10 rounded-lg px-2 py-1.5 text-white text-xs outline-none focus:border-[var(--color-gold)] transition-colors text-center" />
+                    </div>
+                    <div className="flex flex-col gap-1">
+                        <label className="text-[9px] text-white/30 uppercase tracking-widest">SL <span className="normal-case opacity-50">(opcional)</span></label>
+                        <input type="number" step="0.01" value={sl} placeholder="—"
+                            onChange={e => setSl(e.target.value)}
+                            className="w-24 bg-black/40 border border-white/10 rounded-lg px-2 py-1.5 text-white text-xs outline-none focus:border-red-400 transition-colors text-center" />
+                    </div>
+                    <div className="flex flex-col gap-1">
+                        <label className="text-[9px] text-white/30 uppercase tracking-widest">TP <span className="normal-case opacity-50">(opcional)</span></label>
+                        <input type="number" step="0.01" value={tp} placeholder="—"
+                            onChange={e => setTp(e.target.value)}
+                            className="w-24 bg-black/40 border border-white/10 rounded-lg px-2 py-1.5 text-white text-xs outline-none focus:border-green-400 transition-colors text-center" />
+                    </div>
+                </div>
+
+                <div className="w-px h-8 bg-white/10 hidden sm:block" />
+
+                {/* BUY / SELL buttons */}
+                <div className="flex gap-2">
+                    <button onClick={() => placeOrder("BUY")} disabled={loading}
+                        className="px-5 py-2 rounded-lg text-sm font-bold uppercase tracking-wider transition-all disabled:opacity-50"
+                        style={{ background: "rgba(99,119,66,0.2)", border: "1px solid rgba(99,119,66,0.5)", color: "var(--color-olive)" }}>
+                        {loading ? "…" : "▲ BUY"}
+                    </button>
+                    <button onClick={() => placeOrder("SELL")} disabled={loading}
+                        className="px-5 py-2 rounded-lg text-sm font-bold uppercase tracking-wider transition-all disabled:opacity-50"
+                        style={{ background: "rgba(195,143,55,0.12)", border: "1px solid rgba(195,143,55,0.4)", color: "var(--color-gold)" }}>
+                        {loading ? "…" : "▼ SELL"}
+                    </button>
+                </div>
             </div>
 
-            <div className="w-px h-8 bg-white/10 hidden sm:block" />
-
-            {/* Inputs */}
-            <div className="flex flex-wrap gap-2 items-center text-xs">
-                <div className="flex flex-col gap-1">
-                    <label className="text-[9px] text-white/30 uppercase tracking-widest">Lotes</label>
-                    <input type="number" step="0.01" min="0.01" value={volume}
-                        onChange={e => setVolume(e.target.value)}
-                        className="w-20 bg-black/40 border border-white/10 rounded-lg px-2 py-1.5 text-white text-xs outline-none focus:border-[var(--color-gold)] transition-colors text-center" />
+            {/* Active account badge */}
+            {activeWallet && (
+                <div className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-green-400" />
+                    <span className="text-[10px] text-white/30">
+                        Enviando a: <span className="text-white/60">{activeWallet.broker_name || activeWallet.server}</span>
+                        {activeWallet.is_prop_firm && <span className="ml-1 text-yellow-400">PROP</span>}
+                    </span>
                 </div>
-                <div className="flex flex-col gap-1">
-                    <label className="text-[9px] text-white/30 uppercase tracking-widest">SL <span className="normal-case opacity-50">(opcional)</span></label>
-                    <input type="number" step="0.01" value={sl} placeholder="—"
-                        onChange={e => setSl(e.target.value)}
-                        className="w-24 bg-black/40 border border-white/10 rounded-lg px-2 py-1.5 text-white text-xs outline-none focus:border-red-400 transition-colors text-center" />
-                </div>
-                <div className="flex flex-col gap-1">
-                    <label className="text-[9px] text-white/30 uppercase tracking-widest">TP <span className="normal-case opacity-50">(opcional)</span></label>
-                    <input type="number" step="0.01" value={tp} placeholder="—"
-                        onChange={e => setTp(e.target.value)}
-                        className="w-24 bg-black/40 border border-white/10 rounded-lg px-2 py-1.5 text-white text-xs outline-none focus:border-green-400 transition-colors text-center" />
-                </div>
-            </div>
-
-            <div className="w-px h-8 bg-white/10 hidden sm:block" />
-
-            {/* BUY / SELL buttons */}
-            <div className="flex gap-2">
-                <button onClick={() => placeOrder("BUY")} disabled={loading}
-                    className="px-5 py-2 rounded-lg text-sm font-bold uppercase tracking-wider transition-all disabled:opacity-50"
-                    style={{ background: "rgba(99,119,66,0.2)", border: "1px solid rgba(99,119,66,0.5)", color: "var(--color-olive)" }}>
-                    {loading ? "…" : "▲ BUY"}
-                </button>
-                <button onClick={() => placeOrder("SELL")} disabled={loading}
-                    className="px-5 py-2 rounded-lg text-sm font-bold uppercase tracking-wider transition-all disabled:opacity-50"
-                    style={{ background: "rgba(195,143,55,0.12)", border: "1px solid rgba(195,143,55,0.4)", color: "var(--color-gold)" }}>
-                    {loading ? "…" : "▼ SELL"}
-                </button>
-            </div>
+            )}
 
             {/* Result feedback */}
             {result && (
-                <div className={`w-full mt-1 px-3 py-2 rounded-lg text-xs ${
+                <div className={`px-3 py-2 rounded-lg text-xs ${
                     result.meta_trade_id
                         ? "bg-green-500/10 border border-green-500/20 text-green-400"
                         : "bg-red-500/10 border border-red-500/20 text-red-400"
@@ -231,9 +274,14 @@ export const DashboardHome = () => {
                 <div className="w-full">
                     <TradeTable />
                 </div>
-            </div>
 
-            <BotControlPage />
+                <div className="w-full">
+                    <div className="pb-2 mb-1">
+                        <h2 className="text-sm font-semibold text-white/60 uppercase tracking-widest">Operación Manual</h2>
+                    </div>
+                    <QuickTradePanel />
+                </div>
+            </div>
 
             <div className="w-full mt-2">
                 <AdBanner />

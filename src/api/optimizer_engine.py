@@ -1,3 +1,4 @@
+"""
 Replaces the manual grid-search loop with backtesting.py's built-in optimizer.
 Runs each strategy's parameter space in the background and saves ranked results.
 

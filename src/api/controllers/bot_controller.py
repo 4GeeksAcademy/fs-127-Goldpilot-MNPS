@@ -217,7 +217,11 @@ def manual_trade():
     sl            = float(body.get("sl",    entry - 15.0))
     tp            = float(body.get("tp",    entry + 45.0))
 
-    connected_account = MetaApiAccount.query.filter_by(user_id=user_id, status="connected").first()
+    req_wallet_id = body.get("wallet_id")
+    if req_wallet_id:
+        connected_account = MetaApiAccount.query.filter_by(user_id=user_id, id=int(req_wallet_id), status="connected").first()
+    else:
+        connected_account = MetaApiAccount.query.filter_by(user_id=user_id, status="connected").first()
 
     meta_error = None
     if connected_account:

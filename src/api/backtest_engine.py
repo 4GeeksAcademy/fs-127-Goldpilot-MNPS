@@ -1,3 +1,4 @@
+"""
 Loads Dukascopy CSV files and runs backtests using the backtesting.py framework.
 Supports all three risk levels with their corresponding strategies.
 

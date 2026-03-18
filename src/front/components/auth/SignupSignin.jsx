@@ -157,24 +157,6 @@ const SignupSignin = () => {
                         />
                     </div>
 
-                    {/* Tabs */}
-                    {(showForm && <div className="w-full flex flex-col gap-3">
-                        <Link to="/login" className="w-full">
-                            <button className={`w-full py-4 rounded-full font-bold text-sm tracking-wide transition-all uppercase ${isLogin
-                                    ? "bg-[var(--color-gold)] text-white shadow-lg backdrop-blur-sm border border-white/20 hover:bg-[#d4af37] hover:shadow-[0_0_20px_var(--color-gold)]"
-                                    : "bg-white/5 text-white border border-white/10 hover:bg-white/10 hover:border-white/30 backdrop-blur-md"
-                                }`}>Iniciar Sesión</button>
-                        </Link>
-                        <Link to="/signup" className="w-full">
-                            <button className={`w-full py-4 rounded-full font-bold text-sm tracking-wide transition-all uppercase ${!isLogin
-                                    ? "bg-[var(--color-gold)] text-white shadow-lg backdrop-blur-sm border border-white/20 hover:bg-[#d4af37] hover:shadow-[0_0_20px_var(--color-gold)]"
-                                    : "bg-white/5 text-white border border-white/10 hover:bg-white/10 hover:border-white/30 backdrop-blur-md"
-                                }`}>Registrarse</button>
-                        </Link>
-                    </div>)}
-
-                    <div className="w-full h-px bg-white/10" />
-
                     {/* Global messages */}
                     <AnimatePresence>
                         {error && (
@@ -213,20 +195,15 @@ const SignupSignin = () => {
                         }
                     </AnimatePresence>
 
-                    {/* Footer */}
-                    <div className="flex flex-col items-center gap-2">
-                        <p className="text-center text-white/25 text-xs">
-                            {isLogin ? (
-                                <>¿No tienes cuenta?{" "}
-                                    <Link to="/signup" className="text-[var(--color-gold)] hover:underline">Regístrate</Link>
-                                </>
-                            ) : (
-                                <>¿Ya tienes cuenta?{" "}
-                                    <Link to="/login" className="text-[var(--color-gold)] hover:underline">Inicia sesión</Link>
-                                </>
-                            )}
-                        </p>
-                    </div>
+                    {/* Botón alternativo */}
+                    {showForm && (
+                        <Link to={isLogin ? "/signup" : "/login"} className="w-full">
+                            <button className="w-full py-3 rounded-full font-bold text-sm tracking-wide transition-all uppercase bg-white/5 text-white border border-white/10 hover:bg-white/10 hover:border-white/30 backdrop-blur-md">
+                                {isLogin ? "Registrarse" : "Iniciar Sesión"}
+                            </button>
+                        </Link>
+                    )}
+
 
                 </div>
             </motion.div>

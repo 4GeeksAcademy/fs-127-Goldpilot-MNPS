@@ -209,7 +209,39 @@
     "subtitle": "Configura tus protocolos de trading y gestiona la ejecución del bot.",
     "investmentProtocols": "Protocolos de Inversión",
     "executionStatus": "Estado de Ejecución",
-    "selectStrategyWarning": "Asegúrate de tener una estrategia seleccionada antes de iniciar el bot."
+    "selectStrategyWarning": "Asegúrate de tener una estrategia seleccionada antes de iniciar el bot.",
+    "card": {
+      "low": {
+        "name": "BAJO RIESGO",
+        "desc": "Correlación inversa Nasdaq/DXY y retest de SMA 50."
+      },
+      "medium": {
+        "name": "RIESGO MEDIO",
+        "desc": "Retroceso Fibonacci 61.8% y confluencia RSI en H1."
+      },
+      "high": {
+        "name": "ALTO RIESGO",
+        "desc": "Estrategia agresiva de ruptura de rango (Breakout)."
+      },
+      "lots": "Lotes",
+      "risk": "Riesgo",
+      "initialBalance": "Balance Inicial ($)",
+      "startDate": "Fecha de Inicio",
+      "analyzing": "Analizando Mercado...",
+      "auditButton": "Auditar Estrategia",
+      "newAudit": "Nueva Auditoría",
+      "logTitle": "Bitácora de Vuelo (Historial)",
+      "finalBalance": "Balance Final",
+      "profitLoss": "Profit / Loss",
+      "winRate": "Win Rate",
+      "totalTrades": "Total Trades",
+      "colDate": "Fecha",
+      "colDirection": "Dirección",
+      "colEntry": "Entrada",
+      "colExit": "Salida",
+      "colProfit": "Beneficio",
+      "colStatus": "Status"
+    }
   },
   "auth": {
     "login": "Iniciar sesión",

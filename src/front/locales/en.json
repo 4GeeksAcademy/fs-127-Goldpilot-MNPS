@@ -209,7 +209,39 @@
     "subtitle": "Configure your trading protocols and manage bot execution.",
     "investmentProtocols": "Investment Protocols",
     "executionStatus": "Execution Status",
-    "selectStrategyWarning": "Make sure you have a strategy selected before starting the bot."
+    "selectStrategyWarning": "Make sure you have a strategy selected before starting the bot.",
+    "card": {
+      "low": {
+        "name": "LOW RISK",
+        "desc": "Inverse Nasdaq/DXY correlation and SMA 50 retest."
+      },
+      "medium": {
+        "name": "MEDIUM RISK",
+        "desc": "Fibonacci 61.8% retracement and RSI confluence on H1."
+      },
+      "high": {
+        "name": "HIGH RISK",
+        "desc": "Aggressive breakout range strategy."
+      },
+      "lots": "Lots",
+      "risk": "Risk",
+      "initialBalance": "Initial Balance ($)",
+      "startDate": "Start Date",
+      "analyzing": "Analyzing Market...",
+      "auditButton": "Audit Strategy",
+      "newAudit": "New Audit",
+      "logTitle": "Flight Log (History)",
+      "finalBalance": "Final Balance",
+      "profitLoss": "Profit / Loss",
+      "winRate": "Win Rate",
+      "totalTrades": "Total Trades",
+      "colDate": "Date",
+      "colDirection": "Direction",
+      "colEntry": "Entry",
+      "colExit": "Exit",
+      "colProfit": "Profit",
+      "colStatus": "Status"
+    }
   },
   "auth": {
     "login": "Log in",

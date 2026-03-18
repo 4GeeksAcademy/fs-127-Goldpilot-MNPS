@@ -30,11 +30,13 @@ export const getBotStatus = async () => {
   return response.json();
 };
 
-export const startBot = async () => {
+export const startBot = async (walletId = null) => {
   const token = localStorage.getItem("token");
+  const body  = walletId ? JSON.stringify({ wallet_id: walletId }) : null;
   const response = await fetch(`${BACKEND_URL}/api/bot/start`, {
     method: "POST",
-    headers: { Authorization: `Bearer ${token}` },
+    headers: { Authorization: `Bearer ${token}`, ...(body ? { "Content-Type": "application/json" } : {}) },
+    ...(body ? { body } : {}),
   });
   if (!response.ok) {
     const msg = await parseError(response);
@@ -43,28 +45,13 @@ export const startBot = async () => {
   return response.json();
 };
 
-export const stopBot = async () => {
+export const stopBot = async (walletId = null) => {
   const token = localStorage.getItem("token");
+  const body  = walletId ? JSON.stringify({ wallet_id: walletId }) : null;
   const response = await fetch(`${BACKEND_URL}/api/bot/stop`, {
     method: "POST",
-    headers: { Authorization: `Bearer ${token}` },
-  });
-  if (!response.ok) {
-    const msg = await parseError(response);
-    throw new Error(msg);
-  }
-  return response.json();
-};
-
-export const connectAccount = async (data) => {
-  const token = localStorage.getItem("token");
-  const response = await fetch(`${BACKEND_URL}/api/bot/connect`, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
+    headers: { Authorization: `Bearer ${token}`, ...(body ? { "Content-Type": "application/json" } : {}) },
+    ...(body ? { body } : {}),
   });
   if (!response.ok) {
     const msg = await parseError(response);
@@ -165,15 +152,34 @@ export const deleteWallet = async (walletId) => {
   return response.json();
 };
 
-export const updateBotStrategy = async (strategyId) => {
+export const updateBotStrategy = async (strategyId, walletId = null) => {
   const token = localStorage.getItem("token");
+  const body = { strategy: strategyId };
+  if (walletId) body.wallet_id = walletId;
   const response = await fetch(`${BACKEND_URL}/api/bot/strategy`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ strategy: strategyId }),
+    body: JSON.stringify(body),
+  });
+  if (!response.ok) {
+    const msg = await parseError(response);
+    throw new Error(msg);
+  }
+  return response.json();
+};
+
+export const setWalletPropFirm = async (walletId, phase) => {
+  const token = localStorage.getItem("token");
+  const response = await fetch(`${BACKEND_URL}/api/wallets/${walletId}/set-prop-firm`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ phase }),
   });
   if (!response.ok) {
     const msg = await parseError(response);
@@ -212,6 +218,44 @@ export const updateProfile = async (data) => {
     localStorage.removeItem("token");
     window.location.href = "/login";
   }
+  if (!response.ok) {
+    const msg = await parseError(response);
+    throw new Error(msg);
+  }
+  return response.json();
+};
+
+export const getOpenTrades = async () => {
+  const token = localStorage.getItem("token");
+  const response = checkAuth(await fetch(`${BACKEND_URL}/api/dashboard/trades/open`, {
+    headers: { Authorization: `Bearer ${token}` },
+  }));
+  if (!response.ok) {
+    const msg = await parseError(response);
+    throw new Error(msg);
+  }
+  return response.json();
+};
+
+export const syncTrades = async () => {
+  const token = localStorage.getItem("token");
+  const response = checkAuth(await fetch(`${BACKEND_URL}/api/dashboard/sync`, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${token}` },
+  }));
+  if (!response.ok) {
+    const msg = await parseError(response);
+    throw new Error(msg);
+  }
+  return response.json();
+};
+
+export const getBotSignal = async () => {
+  const token = localStorage.getItem("token");
+  const response = checkAuth(await fetch(`${BACKEND_URL}/api/bot/signal`, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${token}` },
+  }));
   if (!response.ok) {
     const msg = await parseError(response);
     throw new Error(msg);

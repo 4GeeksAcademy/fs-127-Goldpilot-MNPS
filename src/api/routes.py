@@ -8,9 +8,8 @@ from api.utils import generate_sitemap, APIException
 from api.controllers import register_controllers
 from flask_cors import CORS
 
-# Importamos los motores (Backtest y Live)
+# Importamos los motores (Backtest y Optimizer)
 from api.backtest_engine import execute_backtest_by_level
-from api.live_engine import evaluate_live_market
 from api.optimizer_engine import run_optimization_async, get_status, get_results
 
 api = Blueprint('api', __name__)
@@ -76,30 +75,3 @@ def optimization_results():
     return jsonify(get_results()), 200
 
 
-# Endpoint para encender el bot en vivo
-@api.route('/activate-live-bot', methods=['POST'])
-def activate_live_bot():
-    body = request.get_json()
-    
-    if not body or "strategy_id" not in body:
-        return jsonify({"error": "Falta strategy_id"}), 400
-
-    strategy_id = body.get("strategy_id") # "low", "medium", "high"
-    
-    # AQUÍ IRÁ LA LÓGICA DE BASE DE DATOS MÁS ADELANTE:
-    # user = User.query.get(current_user_id)
-    # user.active_strategy = strategy_id
-    # user.bot_enabled = True
-    # db.session.commit()
-
-    try:
-        # Tomamos una "foto" del mercado actual y la evaluamos
-        live_scan = evaluate_live_market(strategy_id)
-
-        return jsonify({
-            "status": "success",
-            "msg": f"¡Bot armado y vigilando con protocolo {strategy_id.upper()}!",
-            "live_scan": live_scan
-        }), 200
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500

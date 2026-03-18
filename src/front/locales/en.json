@@ -1,9 +1,11 @@
 {
   "nav": {
     "dashboard": "Dashboard",
+    "strategies": "Strategies",
     "wallets": "Wallets",
     "botControl": "Bot Control",
-    "historial": "History"
+    "historial": "History",
+    "settings": "Settings"
   },
   "header": {
     "greeting": "Hello,",

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { Outlet, NavLink, useLocation, Navigate } from "react-router-dom";
+import { Outlet, NavLink, useLocation, Navigate, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { UserProfile } from "./components/UserProfile";
 import { LanguageSwitcher } from "./components/LanguageSwitcher";
@@ -52,7 +52,14 @@ export const DashboardLayout = () => {
 
     const { t } = useTranslation();
     const { store, dispatch } = useGlobalReducer();
-    const location = useLocation();
+    const location  = useLocation();
+    const navigate  = useNavigate();
+
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        dispatch({ type: "logout" });
+        navigate("/login");
+    };
 
     const mainRef = useRef(null);
 
@@ -76,11 +83,12 @@ export const DashboardLayout = () => {
     }, [location.pathname]);
 
     const menuItems = [
-        { label: "Dashboard", icon: "⊞", to: "/dashboard" },
-        { label: "Estrategias", icon: "⌖", to: "/dashboard/strategies" },
-        { label: "Wallets", icon: "◈", to: "/dashboard/wallets" },
-        { label: "Historial", icon: "◳", to: "/dashboard/historial" },
-        { label: "Ajustes", icon: "⚙", to: "/dashboard/ajustes" },
+        { label: t("nav.dashboard"), icon: "⊞", to: "/dashboard" },
+        { label: t("nav.strategies"), icon: "⌖", to: "/dashboard/strategies" },
+        { label: t("nav.wallets"), icon: "◈", to: "/dashboard/wallets" },
+        { label: t("nav.botControl"), icon: "◉", to: "/dashboard/bot-control" },
+        { label: t("nav.historial"), icon: "◳", to: "/dashboard/historial" },
+        { label: t("nav.settings"), icon: "⚙", to: "/dashboard/ajustes" },
     ];
 
     return (
@@ -147,6 +155,19 @@ export const DashboardLayout = () => {
                         </span>
                     </div>
                     <LanguageSwitcher />
+
+                    {/* Logout — mobile only */}
+                    <button
+                        onClick={handleLogout}
+                        className="lg:hidden shrink-0 w-8 h-8 flex items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white/40 hover:text-red-400 hover:border-red-500/30 hover:bg-red-500/10 transition-all"
+                        title="Cerrar sesión"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                            <polyline points="16 17 21 12 16 7"/>
+                            <line x1="21" y1="12" x2="9" y2="12"/>
+                        </svg>
+                    </button>
 
                     {/* Nivel Inversor */}
                     <NavLink

@@ -309,3 +309,50 @@ def delete_wallet(wallet_id):
     db.session.delete(account)
     db.session.commit()
     return jsonify({"msg": "Wallet desconectada"}), 200
+
+
+PROP_PHASES = {
+    "phase1": {"initial_balance": 5_000,  "max_loss_usd": 250, "profit_target_usd": 300},
+    "phase2": {"initial_balance": 10_000, "max_loss_usd": 500, "profit_target_usd": 600},
+    "phase3": {"initial_balance": 15_000, "max_loss_usd": 750, "profit_target_usd": 900},
+    "funded": {"initial_balance": 20_000, "max_loss_usd": 800, "profit_target_usd": 1_000},
+}
+
+@wallet_bp.route('/<int:wallet_id>/set-prop-firm', methods=['POST'])
+@jwt_required()
+def set_prop_firm(wallet_id):
+    """
+    Flag a wallet as a prop firm challenge account and store its rules.
+    Body: { "phase": "phase1" }  — auto-populates all limits from PROP_PHASES config.
+    Or manual: { "initial_balance": 5000, "max_loss_usd": 250, "profit_target_usd": 300 }
+    """
+    user_id = int(get_jwt_identity())
+    account = MetaApiAccount.query.filter_by(id=wallet_id, user_id=user_id).first()
+    if not account:
+        return jsonify({"description": "Wallet not found"}), 404
+
+    body  = request.get_json(silent=True) or {}
+    phase = body.get("phase")
+
+    if phase:
+        if phase not in PROP_PHASES:
+            return jsonify({"description": f"Unknown phase '{phase}'. Use: phase1, phase2, phase3, funded"}), 400
+        cfg = PROP_PHASES[phase]
+        account.prop_phase             = phase
+        account.prop_initial_balance   = cfg["initial_balance"]
+        account.prop_max_loss_usd      = cfg["max_loss_usd"]
+        account.prop_profit_target_usd = cfg["profit_target_usd"]
+    else:
+        account.prop_phase             = body.get("phase", account.prop_phase)
+        account.prop_initial_balance   = float(body.get("initial_balance", account.prop_initial_balance or 5000))
+        account.prop_max_loss_usd      = float(body.get("max_loss_usd", account.prop_max_loss_usd or 250))
+        account.prop_profit_target_usd = float(body.get("profit_target_usd", account.prop_profit_target_usd or 300))
+
+    account.is_prop_firm = True
+    db.session.commit()
+
+    return jsonify({
+        "msg":     "Prop firm rules saved",
+        "phase":   account.prop_phase,
+        "account": account.serialize(),
+    }), 200

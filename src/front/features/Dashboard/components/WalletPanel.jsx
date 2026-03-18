@@ -165,16 +165,17 @@ const WalletCard = ({ wallet, configLink, onDisconnect, onGetConfigLink, onSync,
 
             {/* Balance strip — shown when connected and balance is available */}
             {!isDraft && (
-                <div className="grid grid-cols-3 gap-2">
+                <div className="rounded-xl border border-white/[0.05] overflow-hidden"
+                    style={{ background: "rgba(255,255,255,0.02)" }}>
                     {[
-                        { label: "Balance", value: balance?.balance },
-                        { label: "Equity", value: balance?.equity },
+                        { label: "Balance",      value: balance?.balance },
+                        { label: "Equity",       value: balance?.equity },
                         { label: "Margen libre", value: balance?.free_margin },
-                    ].map(({ label, value }) => (
-                        <div key={label} className="flex flex-col items-center py-2 rounded-xl border border-white/[0.05]"
-                            style={{ background: "rgba(255,255,255,0.02)" }}>
-                            <span className="text-[9px] text-white/30 uppercase tracking-wide">{label}</span>
-                            <span className="text-sm font-bold mt-0.5"
+                    ].map(({ label, value }, i, arr) => (
+                        <div key={label}
+                            className={`flex items-center justify-between px-3 py-2.5 ${i < arr.length - 1 ? "border-b border-white/[0.04]" : ""}`}>
+                            <span className="text-[10px] text-white/35 uppercase tracking-wide">{label}</span>
+                            <span className="text-sm font-bold tabular-nums"
                                 style={{ color: value != null ? "var(--color-gold)" : "rgba(255,255,255,0.2)" }}>
                                 {value != null
                                     ? `${balance.currency ?? ""} ${Number(value).toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
@@ -422,7 +423,7 @@ export const WalletPanel = () => {
                     </div>
                 ) : (
                     /* Wallet list */
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {wallets.map((wallet) => (
                             <WalletCard
                                 key={wallet.id}

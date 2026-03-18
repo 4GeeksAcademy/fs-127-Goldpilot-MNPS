@@ -1,0 +1,2189 @@
+====================================================================================================
+STRATEGY v6.0: RESILIENT SNIPER - DETAILED TRADE REPORT
+====================================================================================================
+
+TEST PERIOD: November 1 - December 27, 2025 (57 days)
+DATA SOURCE: Twelve Data API (15-minute candles)
+
+====================================================================================================
+EXECUTIVE SUMMARY
+====================================================================================================
+
+Initial Balance:      $10,000.00
+Final Balance:        $9,380.84
+Total P&L:            $-619.16
+ROI:                  -6.19%
+
+TRADE STATISTICS:
+  Total Trades:       83
+  Wins:               11 (13.3%)
+  Losses:             38 (45.8%)
+  Breakevens:         10 (12.0%)
+  Open:               24 (28.9%)
+
+v6.0 ENHANCEMENTS:
+  Partial Activations: 25 (30.1%)
+  - Close 50% at 1:1.5 RR
+  - Move SL to entry after partial
+  - Displacement filter required
+  - Time windows: London 07:00-11:00 + NY 13:00-16:00 UTC
+
+AVERAGES:
+  Average Win:        $207.93
+  Average Loss:       $-95.14
+  Average Breakeven:  $70.90
+  Win/Loss Ratio:     2.2:1
+
+MARKET STRUCTURE BREAKDOWN:
+  BEARISH:
+    Total: 2, Wins: 1, Losses: 0, BE: 1
+  NEUTRAL:
+    Total: 81, Wins: 10, Losses: 38, BE: 9
+
+SESSION BREAKDOWN:
+  LONDON:
+    Total: 43, Wins: 8, Losses: 17, BE: 5
+  NY:
+    Total: 40, Wins: 3, Losses: 21, BE: 5
+
+====================================================================================================
+
+====================================================================================================
+WINNING TRADES (11 TOTAL)
+====================================================================================================
+
+TRADE #010 - BUY - WIN
+Date & Time:      2025-11-08 10:45 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_LOW ($3987.32)
+
+Entry Price:      $3991.08
+Stop Loss:        $3960.05
+Take Profit:      $4084.19
+Lot Size:         0.31
+ATR at Entry:     $20.69
+
+🎯 PARTIAL PROFIT TAKEN:
+   50% closed at:  $4037.62 (1:1.5 RR)
+   After candles:  19
+   SL moved to:    $3991.08 (breakeven)
+
+Exit Price:       $4084.19
+Exit Time:        2025-11-10 12:00 UTC
+Candles in Trade: 62 (930 minutes)
+
+P&L:              $+216.47
+Balance Before:   $9,602.32
+Balance After:    $9,818.78
+
+✅ WINNER - Full TP achieved
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #018 - SELL - WIN
+Date & Time:      2025-11-13 14:30 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      PDH ($4213.31)
+
+Entry Price:      $4195.54
+Stop Loss:        $4243.03
+Take Profit:      $4053.05
+Lot Size:         0.2
+ATR at Entry:     $31.66
+
+🎯 PARTIAL PROFIT TAKEN:
+   50% closed at:  $4124.31 (1:1.5 RR)
+   After candles:  87
+   SL moved to:    $4195.54 (breakeven)
+
+Exit Price:       $4053.05
+Exit Time:        2025-11-14 13:30 UTC
+Candles in Trade: 92 (1380 minutes)
+
+P&L:              $+213.72
+Balance Before:   $9,447.54
+Balance After:    $9,661.26
+
+✅ WINNER - Full TP achieved
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #034 - BUY - WIN
+Date & Time:      2025-11-24 09:15 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDL ($4065.79)
+
+Entry Price:      $4068.53
+Stop Loss:        $4044.86
+Take Profit:      $4139.56
+Lot Size:         0.4
+ATR at Entry:     $15.78
+
+🎯 PARTIAL PROFIT TAKEN:
+   50% closed at:  $4104.03 (1:1.5 RR)
+   After candles:  37
+   SL moved to:    $4068.53 (breakeven)
+
+Exit Price:       $4139.56
+Exit Time:        2025-11-24 21:30 UTC
+Candles in Trade: 49 (735 minutes)
+
+P&L:              $+213.07
+Balance Before:   $9,505.91
+Balance After:    $9,718.98
+
+✅ WINNER - Full TP achieved
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #072 - SELL - WIN
+Date & Time:      2025-12-15 09:45 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_HIGH ($4347.37)
+
+Entry Price:      $4343.00
+Stop Loss:        $4366.91
+Take Profit:      $4271.28
+Lot Size:         0.39
+ATR at Entry:     $15.94
+
+🎯 PARTIAL PROFIT TAKEN:
+   50% closed at:  $4307.14 (1:1.5 RR)
+   After candles:  25
+   SL moved to:    $4343.00 (breakeven)
+
+Exit Price:       $4271.28
+Exit Time:        2025-12-16 05:30 UTC
+Candles in Trade: 79 (1185 minutes)
+
+P&L:              $+209.79
+Balance Before:   $9,340.93
+Balance After:    $9,550.72
+
+✅ WINNER - Full TP achieved
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #009 - BUY - WIN
+Date & Time:      2025-11-08 10:30 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_LOW ($3987.32)
+
+Entry Price:      $3989.34
+Stop Loss:        $3958.31
+Take Profit:      $4082.45
+Lot Size:         0.3
+ATR at Entry:     $20.69
+
+🎯 PARTIAL PROFIT TAKEN:
+   50% closed at:  $4035.89 (1:1.5 RR)
+   After candles:  20
+   SL moved to:    $3989.34 (breakeven)
+
+Exit Price:       $4082.45
+Exit Time:        2025-11-10 12:00 UTC
+Candles in Trade: 63 (945 minutes)
+
+P&L:              $+209.48
+Balance Before:   $9,392.84
+Balance After:    $9,602.32
+
+✅ WINNER - Full TP achieved
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #033 - BUY - WIN
+Date & Time:      2025-11-24 09:00 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDL ($4065.79)
+
+Entry Price:      $4071.37
+Stop Loss:        $4047.69
+Take Profit:      $4142.40
+Lot Size:         0.39
+ATR at Entry:     $15.78
+
+🎯 PARTIAL PROFIT TAKEN:
+   50% closed at:  $4106.89 (1:1.5 RR)
+   After candles:  38
+   SL moved to:    $4071.37 (breakeven)
+
+Exit Price:       $4142.40
+Exit Time:        2025-11-24 23:45 UTC
+Candles in Trade: 59 (885 minutes)
+
+P&L:              $+207.77
+Balance Before:   $9,298.14
+Balance After:    $9,505.91
+
+✅ WINNER - Full TP achieved
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #043 - BUY - WIN
+Date & Time:      2025-11-28 09:30 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_LOW ($4163.25)
+
+Entry Price:      $4165.89
+Stop Loss:        $4140.34
+Take Profit:      $4242.53
+Lot Size:         0.36
+ATR at Entry:     $17.03
+
+🎯 PARTIAL PROFIT TAKEN:
+   50% closed at:  $4204.22 (1:1.5 RR)
+   After candles:  20
+   SL moved to:    $4165.89 (breakeven)
+
+Exit Price:       $4242.53
+Exit Time:        2025-12-01 01:45 UTC
+Candles in Trade: 161 (2415 minutes)
+
+P&L:              $+206.94
+Balance Before:   $9,240.84
+Balance After:    $9,447.78
+
+✅ WINNER - Full TP achieved
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #071 - SELL - WIN
+Date & Time:      2025-12-15 09:30 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_HIGH ($4347.37)
+
+Entry Price:      $4344.98
+Stop Loss:        $4368.89
+Take Profit:      $4273.25
+Lot Size:         0.38
+ATR at Entry:     $15.94
+
+🎯 PARTIAL PROFIT TAKEN:
+   50% closed at:  $4309.11 (1:1.5 RR)
+   After candles:  26
+   SL moved to:    $4344.98 (breakeven)
+
+Exit Price:       $4273.25
+Exit Time:        2025-12-16 05:30 UTC
+Candles in Trade: 80 (1200 minutes)
+
+P&L:              $+204.43
+Balance Before:   $9,136.50
+Balance After:    $9,340.93
+
+✅ WINNER - Full TP achieved
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #017 - SELL - WIN
+Date & Time:      2025-11-13 14:15 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      PDH ($4213.31)
+
+Entry Price:      $4210.33
+Stop Loss:        $4257.82
+Take Profit:      $4067.84
+Lot Size:         0.19
+ATR at Entry:     $31.66
+
+🎯 PARTIAL PROFIT TAKEN:
+   50% closed at:  $4139.10 (1:1.5 RR)
+   After candles:  86
+   SL moved to:    $4210.33 (breakeven)
+
+Exit Price:       $4067.84
+Exit Time:        2025-11-14 13:15 UTC
+Candles in Trade: 92 (1380 minutes)
+
+P&L:              $+203.04
+Balance Before:   $9,244.50
+Balance After:    $9,447.54
+
+✅ WINNER - Full TP achieved
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #068 - BUY - WIN
+Date & Time:      2025-12-10 14:00 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_LOW ($4202.08)
+
+Entry Price:      $4205.11
+Stop Loss:        $4176.14
+Take Profit:      $4292.01
+Lot Size:         0.31
+ATR at Entry:     $19.31
+
+🎯 PARTIAL PROFIT TAKEN:
+   50% closed at:  $4248.56 (1:1.5 RR)
+   After candles:  102
+   SL moved to:    $4205.11 (breakeven)
+
+Exit Price:       $4292.01
+Exit Time:        2025-12-12 08:00 UTC
+Candles in Trade: 168 (2520 minutes)
+
+P&L:              $+202.05
+Balance Before:   $9,119.54
+Balance After:    $9,321.59
+
+✅ WINNER - Full TP achieved
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #025 - BUY - WIN
+Date & Time:      2025-11-18 07:30 UTC
+Session:          LONDON
+Market Structure: BEARISH
+Level Swept:      PDL ($4008.68)
+
+Entry Price:      $4012.52
+Stop Loss:        $3973.79
+Take Profit:      $4128.72
+Lot Size:         0.23
+ATR at Entry:     $25.82
+
+🎯 PARTIAL PROFIT TAKEN:
+   50% closed at:  $4070.61 (1:1.5 RR)
+   After candles:  26
+   SL moved to:    $4012.52 (breakeven)
+
+Exit Price:       $4128.72
+Exit Time:        2025-11-19 15:00 UTC
+Candles in Trade: 126 (1890 minutes)
+
+P&L:              $+200.44
+Balance Before:   $9,097.70
+Balance After:    $9,298.14
+
+✅ WINNER - Full TP achieved
+
+----------------------------------------------------------------------------------------------------
+
+====================================================================================================
+LOSING TRADES (38 TOTAL)
+====================================================================================================
+
+TRADE #002 - SELL - LOSS
+Date & Time:      2025-11-05 09:00 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_HIGH ($3968.69)
+
+Entry Price:      $3968.61
+Stop Loss:        $4017.42
+Take Profit:      $3822.18
+Lot Size:         0.21
+ATR at Entry:     $32.54
+
+❌ No partial activation - full stop loss hit
+
+Exit Price:       $4017.42
+Exit Time:        2025-11-06 12:00 UTC
+Candles in Trade: 108 (1620 minutes)
+
+P&L:              $-102.50
+Balance Before:   $10,076.26
+Balance After:    $9,973.76
+
+❌ LOSS - Stop loss hit
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #006 - SELL - LOSS
+Date & Time:      2025-11-07 08:15 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_HIGH ($4002.87)
+
+Entry Price:      $4000.24
+Stop Loss:        $4036.76
+Take Profit:      $3890.68
+Lot Size:         0.27
+ATR at Entry:     $24.35
+
+❌ No partial activation - full stop loss hit
+
+Exit Price:       $4036.76
+Exit Time:        2025-11-10 01:15 UTC
+Candles in Trade: 125 (1875 minutes)
+
+P&L:              $-98.60
+Balance Before:   $9,681.34
+Balance After:    $9,582.74
+
+❌ LOSS - Stop loss hit
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #038 - SELL - LOSS
+Date & Time:      2025-11-25 14:15 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      PDH ($4145.20)
+
+Entry Price:      $4135.71
+Stop Loss:        $4170.59
+Take Profit:      $4031.08
+Lot Size:         0.28
+ATR at Entry:     $23.25
+
+❌ No partial activation - full stop loss hit
+
+Exit Price:       $4170.59
+Exit Time:        2025-11-26 11:30 UTC
+Candles in Trade: 85 (1275 minutes)
+
+P&L:              $-97.66
+Balance Before:   $9,621.37
+Balance After:    $9,523.70
+
+❌ LOSS - Stop loss hit
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #003 - SELL - LOSS
+Date & Time:      2025-11-05 09:15 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_HIGH ($3968.69)
+
+Entry Price:      $3959.30
+Stop Loss:        $4008.11
+Take Profit:      $3812.87
+Lot Size:         0.2
+ATR at Entry:     $32.54
+
+❌ No partial activation - full stop loss hit
+
+Exit Price:       $4008.11
+Exit Time:        2025-11-06 08:15 UTC
+Candles in Trade: 92 (1380 minutes)
+
+P&L:              $-97.62
+Balance Before:   $9,973.76
+Balance After:    $9,876.14
+
+❌ LOSS - Stop loss hit
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #035 - SELL - LOSS
+Date & Time:      2025-11-24 14:15 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      PDH ($4076.79)
+
+Entry Price:      $4075.60
+Stop Loss:        $4096.82
+Take Profit:      $4011.92
+Lot Size:         0.46
+ATR at Entry:     $14.15
+
+❌ No partial activation - full stop loss hit
+
+Exit Price:       $4096.82
+Exit Time:        2025-11-24 16:30 UTC
+Candles in Trade: 9 (135 minutes)
+
+P&L:              $-97.61
+Balance Before:   $9,718.98
+Balance After:    $9,621.37
+
+❌ LOSS - Stop loss hit
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #004 - SELL - LOSS
+Date & Time:      2025-11-06 14:15 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      PDH ($3988.23)
+
+Entry Price:      $3987.00
+Stop Loss:        $4033.38
+Take Profit:      $3847.85
+Lot Size:         0.21
+ATR at Entry:     $30.92
+
+❌ No partial activation - full stop loss hit
+
+Exit Price:       $4033.38
+Exit Time:        2025-11-10 01:15 UTC
+Candles in Trade: 197 (2955 minutes)
+
+P&L:              $-97.40
+Balance Before:   $9,876.14
+Balance After:    $9,778.74
+
+❌ LOSS - Stop loss hit
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #005 - SELL - LOSS
+Date & Time:      2025-11-06 15:00 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      PDH ($3988.23)
+
+Entry Price:      $3974.97
+Stop Loss:        $4021.35
+Take Profit:      $3835.82
+Lot Size:         0.21
+ATR at Entry:     $30.92
+
+❌ No partial activation - full stop loss hit
+
+Exit Price:       $4021.35
+Exit Time:        2025-11-10 01:00 UTC
+Candles in Trade: 193 (2895 minutes)
+
+P&L:              $-97.40
+Balance Before:   $9,778.74
+Balance After:    $9,681.34
+
+❌ LOSS - Stop loss hit
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #011 - SELL - LOSS
+Date & Time:      2025-11-10 08:30 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_HIGH ($4075.00)
+
+Entry Price:      $4074.26
+Stop Loss:        $4103.68
+Take Profit:      $3986.00
+Lot Size:         0.33
+ATR at Entry:     $19.61
+
+❌ No partial activation - full stop loss hit
+
+Exit Price:       $4103.68
+Exit Time:        2025-11-10 13:00 UTC
+Candles in Trade: 18 (270 minutes)
+
+P&L:              $-97.09
+Balance Before:   $9,818.78
+Balance After:    $9,721.70
+
+❌ LOSS - Stop loss hit
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #012 - SELL - LOSS
+Date & Time:      2025-11-10 09:00 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_HIGH ($4075.00)
+
+Entry Price:      $4071.10
+Stop Loss:        $4100.52
+Take Profit:      $3982.84
+Lot Size:         0.33
+ATR at Entry:     $19.61
+
+❌ No partial activation - full stop loss hit
+
+Exit Price:       $4100.52
+Exit Time:        2025-11-10 13:00 UTC
+Candles in Trade: 16 (240 minutes)
+
+P&L:              $-97.09
+Balance Before:   $9,721.70
+Balance After:    $9,624.61
+
+❌ LOSS - Stop loss hit
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #074 - SELL - LOSS
+Date & Time:      2025-12-17 14:00 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      PDH ($4334.18)
+
+Entry Price:      $4332.22
+Stop Loss:        $4372.53
+Take Profit:      $4211.31
+Lot Size:         0.24
+ATR at Entry:     $26.87
+
+❌ No partial activation - full stop loss hit
+
+Exit Price:       $4372.53
+Exit Time:        2025-12-18 16:15 UTC
+Candles in Trade: 105 (1575 minutes)
+
+P&L:              $-96.74
+Balance Before:   $9,622.45
+Balance After:    $9,525.71
+
+❌ LOSS - Stop loss hit
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #079 - SELL - LOSS
+Date & Time:      2025-12-22 13:15 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_HIGH ($4419.55)
+
+Entry Price:      $4418.75
+Stop Loss:        $4435.93
+Take Profit:      $4367.22
+Lot Size:         0.56
+ATR at Entry:     $11.45
+
+❌ No partial activation - full stop loss hit
+
+Exit Price:       $4435.93
+Exit Time:        2025-12-22 16:00 UTC
+Candles in Trade: 11 (165 minutes)
+
+P&L:              $-96.21
+Balance Before:   $9,668.94
+Balance After:    $9,572.73
+
+❌ LOSS - Stop loss hit
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #080 - SELL - LOSS
+Date & Time:      2025-12-22 15:00 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_HIGH ($4419.55)
+
+Entry Price:      $4417.08
+Stop Loss:        $4434.26
+Take Profit:      $4365.55
+Lot Size:         0.56
+ATR at Entry:     $11.45
+
+❌ No partial activation - full stop loss hit
+
+Exit Price:       $4434.26
+Exit Time:        2025-12-22 15:45 UTC
+Candles in Trade: 3 (45 minutes)
+
+P&L:              $-96.21
+Balance Before:   $9,572.73
+Balance After:    $9,476.53
+
+❌ LOSS - Stop loss hit
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #013 - SELL - LOSS
+Date & Time:      2025-11-11 14:00 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_HIGH ($4139.34)
+
+Entry Price:      $4137.99
+Stop Loss:        $4176.39
+Take Profit:      $4022.82
+Lot Size:         0.25
+ATR at Entry:     $25.59
+
+❌ No partial activation - full stop loss hit
+
+Exit Price:       $4176.39
+Exit Time:        2025-11-12 15:30 UTC
+Candles in Trade: 102 (1530 minutes)
+
+P&L:              $-96.00
+Balance Before:   $9,624.61
+Balance After:    $9,528.61
+
+❌ LOSS - Stop loss hit
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #015 - SELL - LOSS
+Date & Time:      2025-11-11 15:00 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      PDH ($4120.97)
+
+Entry Price:      $4120.86
+Stop Loss:        $4159.26
+Take Profit:      $4005.69
+Lot Size:         0.25
+ATR at Entry:     $25.59
+
+❌ No partial activation - full stop loss hit
+
+Exit Price:       $4159.26
+Exit Time:        2025-11-12 15:15 UTC
+Candles in Trade: 97 (1455 minutes)
+
+P&L:              $-96.00
+Balance Before:   $9,432.64
+Balance After:    $9,336.64
+
+❌ LOSS - Stop loss hit
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #014 - SELL - LOSS
+Date & Time:      2025-11-11 14:15 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_HIGH ($4139.34)
+
+Entry Price:      $4130.46
+Stop Loss:        $4168.85
+Take Profit:      $4015.28
+Lot Size:         0.25
+ATR at Entry:     $25.59
+
+❌ No partial activation - full stop loss hit
+
+Exit Price:       $4168.85
+Exit Time:        2025-11-12 15:15 UTC
+Candles in Trade: 100 (1500 minutes)
+
+P&L:              $-95.98
+Balance Before:   $9,528.61
+Balance After:    $9,432.64
+
+❌ LOSS - Stop loss hit
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #020 - BUY - LOSS
+Date & Time:      2025-11-14 07:45 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_LOW ($4167.92)
+
+Entry Price:      $4180.23
+Stop Loss:        $4126.94
+Take Profit:      $4340.10
+Lot Size:         0.18
+ATR at Entry:     $35.53
+
+❌ No partial activation - full stop loss hit
+
+Exit Price:       $4126.94
+Exit Time:        2025-11-14 12:00 UTC
+Candles in Trade: 17 (255 minutes)
+
+P&L:              $-95.92
+Balance Before:   $9,565.36
+Balance After:    $9,469.44
+
+❌ LOSS - Stop loss hit
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #019 - BUY - LOSS
+Date & Time:      2025-11-14 07:30 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_LOW ($4167.92)
+
+Entry Price:      $4171.46
+Stop Loss:        $4118.18
+Take Profit:      $4331.33
+Lot Size:         0.18
+ATR at Entry:     $35.53
+
+❌ No partial activation - full stop loss hit
+
+Exit Price:       $4118.18
+Exit Time:        2025-11-14 12:15 UTC
+Candles in Trade: 19 (285 minutes)
+
+P&L:              $-95.90
+Balance Before:   $9,661.26
+Balance After:    $9,565.36
+
+❌ LOSS - Stop loss hit
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #081 - SELL - LOSS
+Date & Time:      2025-12-23 14:30 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      PDH ($4461.83)
+
+Entry Price:      $4456.10
+Stop Loss:        $4491.54
+Take Profit:      $4349.75
+Lot Size:         0.27
+ATR at Entry:     $23.63
+
+❌ No partial activation - full stop loss hit
+
+Exit Price:       $4491.54
+Exit Time:        2025-12-23 19:00 UTC
+Candles in Trade: 18 (270 minutes)
+
+P&L:              $-95.69
+Balance Before:   $9,476.53
+Balance After:    $9,380.84
+
+❌ LOSS - Stop loss hit
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #007 - SELL - LOSS
+Date & Time:      2025-11-07 09:15 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_HIGH ($4002.87)
+
+Entry Price:      $4002.79
+Stop Loss:        $4039.31
+Take Profit:      $3893.23
+Lot Size:         0.26
+ATR at Entry:     $24.35
+
+❌ No partial activation - full stop loss hit
+
+Exit Price:       $4039.31
+Exit Time:        2025-11-10 01:15 UTC
+Candles in Trade: 121 (1815 minutes)
+
+P&L:              $-94.95
+Balance Before:   $9,582.74
+Balance After:    $9,487.79
+
+❌ LOSS - Stop loss hit
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #008 - SELL - LOSS
+Date & Time:      2025-11-07 09:30 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_HIGH ($4002.87)
+
+Entry Price:      $3999.88
+Stop Loss:        $4036.40
+Take Profit:      $3890.32
+Lot Size:         0.26
+ATR at Entry:     $24.35
+
+❌ No partial activation - full stop loss hit
+
+Exit Price:       $4036.40
+Exit Time:        2025-11-10 01:15 UTC
+Candles in Trade: 120 (1800 minutes)
+
+P&L:              $-94.95
+Balance Before:   $9,487.79
+Balance After:    $9,392.84
+
+❌ LOSS - Stop loss hit
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #042 - SELL - LOSS
+Date & Time:      2025-11-28 09:15 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDH ($4167.07)
+
+Entry Price:      $4162.39
+Stop Loss:        $4187.94
+Take Profit:      $4085.75
+Lot Size:         0.37
+ATR at Entry:     $17.03
+
+❌ No partial activation - full stop loss hit
+
+Exit Price:       $4187.94
+Exit Time:        2025-11-28 14:00 UTC
+Candles in Trade: 19 (285 minutes)
+
+P&L:              $-94.53
+Balance Before:   $9,335.38
+Balance After:    $9,240.84
+
+❌ LOSS - Stop loss hit
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #041 - SELL - LOSS
+Date & Time:      2025-11-28 08:15 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDH ($4167.07)
+
+Entry Price:      $4164.33
+Stop Loss:        $4189.87
+Take Profit:      $4087.69
+Lot Size:         0.37
+ATR at Entry:     $17.03
+
+❌ No partial activation - full stop loss hit
+
+Exit Price:       $4189.87
+Exit Time:        2025-11-28 14:00 UTC
+Candles in Trade: 23 (345 minutes)
+
+P&L:              $-94.50
+Balance Before:   $9,429.87
+Balance After:    $9,335.38
+
+❌ LOSS - Stop loss hit
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #044 - SELL - LOSS
+Date & Time:      2025-11-28 10:30 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDH ($4167.07)
+
+Entry Price:      $4166.25
+Stop Loss:        $4191.79
+Take Profit:      $4089.61
+Lot Size:         0.37
+ATR at Entry:     $17.03
+
+❌ No partial activation - full stop loss hit
+
+Exit Price:       $4191.79
+Exit Time:        2025-11-28 14:15 UTC
+Candles in Trade: 15 (225 minutes)
+
+P&L:              $-94.50
+Balance Before:   $9,447.78
+Balance After:    $9,353.28
+
+❌ LOSS - Stop loss hit
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #060 - SELL - LOSS
+Date & Time:      2025-12-05 09:00 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDH ($4220.43)
+
+Entry Price:      $4219.13
+Stop Loss:        $4249.44
+Take Profit:      $4128.22
+Lot Size:         0.31
+ATR at Entry:     $20.20
+
+❌ No partial activation - full stop loss hit
+
+Exit Price:       $4249.44
+Exit Time:        2025-12-05 15:30 UTC
+Candles in Trade: 26 (390 minutes)
+
+P&L:              $-93.96
+Balance Before:   $9,285.65
+Balance After:    $9,191.68
+
+❌ LOSS - Stop loss hit
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #040 - SELL - LOSS
+Date & Time:      2025-11-26 13:30 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      PDH ($4159.15)
+
+Entry Price:      $4156.32
+Stop Loss:        $4198.97
+Take Profit:      $4028.39
+Lot Size:         0.22
+ATR at Entry:     $28.43
+
+❌ No partial activation - full stop loss hit
+
+Exit Price:       $4198.97
+Exit Time:        2025-11-28 14:15 UTC
+Candles in Trade: 195 (2925 minutes)
+
+P&L:              $-93.83
+Balance Before:   $9,523.70
+Balance After:    $9,429.87
+
+❌ LOSS - Stop loss hit
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #022 - BUY - LOSS
+Date & Time:      2025-11-17 07:45 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDL ($4078.10)
+
+Entry Price:      $4087.52
+Stop Loss:        $4052.87
+Take Profit:      $4191.46
+Lot Size:         0.27
+ATR at Entry:     $23.10
+
+❌ No partial activation - full stop loss hit
+
+Exit Price:       $4052.87
+Exit Time:        2025-11-17 16:00 UTC
+Candles in Trade: 33 (495 minutes)
+
+P&L:              $-93.56
+Balance Before:   $9,375.88
+Balance After:    $9,282.33
+
+❌ LOSS - Stop loss hit
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #021 - BUY - LOSS
+Date & Time:      2025-11-17 07:30 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDL ($4078.10)
+
+Entry Price:      $4082.49
+Stop Loss:        $4047.84
+Take Profit:      $4186.43
+Lot Size:         0.27
+ATR at Entry:     $23.10
+
+❌ No partial activation - full stop loss hit
+
+Exit Price:       $4047.84
+Exit Time:        2025-11-17 19:30 UTC
+Candles in Trade: 48 (720 minutes)
+
+P&L:              $-93.55
+Balance Before:   $9,469.44
+Balance After:    $9,375.88
+
+❌ LOSS - Stop loss hit
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #064 - BUY - LOSS
+Date & Time:      2025-12-08 14:00 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      PDL ($4197.16)
+
+Entry Price:      $4209.09
+Stop Loss:        $4191.10
+Take Profit:      $4263.05
+Lot Size:         0.52
+ATR at Entry:     $11.99
+
+❌ No partial activation - full stop loss hit
+
+Exit Price:       $4191.10
+Exit Time:        2025-12-08 15:00 UTC
+Candles in Trade: 4 (60 minutes)
+
+P&L:              $-93.55
+Balance Before:   $9,330.10
+Balance After:    $9,236.55
+
+❌ LOSS - Stop loss hit
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #069 - SELL - LOSS
+Date & Time:      2025-12-11 14:45 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      PDH ($4238.50)
+
+Entry Price:      $4230.70
+Stop Loss:        $4265.30
+Take Profit:      $4126.90
+Lot Size:         0.27
+ATR at Entry:     $23.07
+
+❌ No partial activation - full stop loss hit
+
+Exit Price:       $4265.30
+Exit Time:        2025-12-11 16:45 UTC
+Candles in Trade: 8 (120 minutes)
+
+P&L:              $-93.42
+Balance Before:   $9,321.59
+Balance After:    $9,228.17
+
+❌ LOSS - Stop loss hit
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #024 - BUY - LOSS
+Date & Time:      2025-11-17 13:00 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      PDL ($4078.10)
+
+Entry Price:      $4083.71
+Stop Loss:        $4059.86
+Take Profit:      $4155.26
+Lot Size:         0.39
+ATR at Entry:     $15.90
+
+❌ No partial activation - full stop loss hit
+
+Exit Price:       $4059.86
+Exit Time:        2025-11-17 16:00 UTC
+Candles in Trade: 12 (180 minutes)
+
+P&L:              $-93.01
+Balance Before:   $9,190.71
+Balance After:    $9,097.70
+
+❌ LOSS - Stop loss hit
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #066 - SELL - LOSS
+Date & Time:      2025-12-09 14:00 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_HIGH ($4199.12)
+
+Entry Price:      $4191.41
+Stop Loss:        $4215.86
+Take Profit:      $4118.06
+Lot Size:         0.38
+ATR at Entry:     $16.30
+
+❌ No partial activation - full stop loss hit
+
+Exit Price:       $4215.86
+Exit Time:        2025-12-09 16:00 UTC
+Candles in Trade: 8 (120 minutes)
+
+P&L:              $-92.91
+Balance Before:   $9,305.36
+Balance After:    $9,212.45
+
+❌ LOSS - Stop loss hit
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #067 - SELL - LOSS
+Date & Time:      2025-12-09 15:00 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_HIGH ($4199.12)
+
+Entry Price:      $4195.39
+Stop Loss:        $4219.84
+Take Profit:      $4122.04
+Lot Size:         0.38
+ATR at Entry:     $16.30
+
+❌ No partial activation - full stop loss hit
+
+Exit Price:       $4219.84
+Exit Time:        2025-12-09 16:30 UTC
+Candles in Trade: 6 (90 minutes)
+
+P&L:              $-92.91
+Balance Before:   $9,212.45
+Balance After:    $9,119.54
+
+❌ LOSS - Stop loss hit
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #059 - SELL - LOSS
+Date & Time:      2025-12-05 07:30 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_HIGH ($4229.76)
+
+Entry Price:      $4224.79
+Stop Loss:        $4256.81
+Take Profit:      $4128.73
+Lot Size:         0.29
+ATR at Entry:     $21.35
+
+❌ No partial activation - full stop loss hit
+
+Exit Price:       $4256.81
+Exit Time:        2025-12-05 15:30 UTC
+Candles in Trade: 32 (480 minutes)
+
+P&L:              $-92.86
+Balance Before:   $9,378.50
+Balance After:    $9,285.65
+
+❌ LOSS - Stop loss hit
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #049 - BUY - LOSS
+Date & Time:      2025-12-02 14:00 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      PDL ($4216.46)
+
+Entry Price:      $4222.19
+Stop Loss:        $4181.91
+Take Profit:      $4343.02
+Lot Size:         0.23
+ATR at Entry:     $26.85
+
+❌ No partial activation - full stop loss hit
+
+Exit Price:       $4181.91
+Exit Time:        2025-12-02 15:30 UTC
+Candles in Trade: 6 (90 minutes)
+
+P&L:              $-92.64
+Balance Before:   $9,422.51
+Balance After:    $9,329.87
+
+❌ LOSS - Stop loss hit
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #050 - BUY - LOSS
+Date & Time:      2025-12-02 14:15 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      PDL ($4216.46)
+
+Entry Price:      $4227.87
+Stop Loss:        $4187.59
+Take Profit:      $4348.70
+Lot Size:         0.23
+ATR at Entry:     $26.85
+
+❌ No partial activation - full stop loss hit
+
+Exit Price:       $4187.59
+Exit Time:        2025-12-02 15:30 UTC
+Candles in Trade: 5 (75 minutes)
+
+P&L:              $-92.64
+Balance Before:   $9,329.87
+Balance After:    $9,237.23
+
+❌ LOSS - Stop loss hit
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #016 - SELL - LOSS
+Date & Time:      2025-11-11 15:15 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      PDH ($4120.97)
+
+Entry Price:      $4100.75
+Stop Loss:        $4139.14
+Take Profit:      $3985.57
+Lot Size:         0.24
+ATR at Entry:     $25.59
+
+❌ No partial activation - full stop loss hit
+
+Exit Price:       $4139.14
+Exit Time:        2025-11-11 23:30 UTC
+Candles in Trade: 33 (495 minutes)
+
+P&L:              $-92.14
+Balance Before:   $9,336.64
+Balance After:    $9,244.50
+
+❌ LOSS - Stop loss hit
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #070 - SELL - LOSS
+Date & Time:      2025-12-12 15:45 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_HIGH ($4288.01)
+
+Entry Price:      $4287.32
+Stop Loss:        $4335.57
+Take Profit:      $4142.56
+Lot Size:         0.19
+ATR at Entry:     $32.17
+
+❌ No partial activation - full stop loss hit
+
+Exit Price:       $4335.57
+Exit Time:        2025-12-15 05:30 UTC
+Candles in Trade: 151 (2265 minutes)
+
+P&L:              $-91.68
+Balance Before:   $9,228.17
+Balance After:    $9,136.50
+
+❌ LOSS - Stop loss hit
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #023 - BUY - LOSS
+Date & Time:      2025-11-17 09:15 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDL ($4078.10)
+
+Entry Price:      $4084.13
+Stop Loss:        $4051.41
+Take Profit:      $4182.28
+Lot Size:         0.28
+ATR at Entry:     $21.81
+
+❌ No partial activation - full stop loss hit
+
+Exit Price:       $4051.41
+Exit Time:        2025-11-17 19:30 UTC
+Candles in Trade: 41 (615 minutes)
+
+P&L:              $-91.62
+Balance Before:   $9,282.33
+Balance After:    $9,190.71
+
+❌ LOSS - Stop loss hit
+
+----------------------------------------------------------------------------------------------------
+
+====================================================================================================
+BREAKEVEN TRADES (10 TOTAL)
+====================================================================================================
+
+TRADE #001 - SELL - BREAKEVEN
+Date & Time:      2025-11-04 08:00 UTC
+Session:          LONDON
+Market Structure: BEARISH
+Level Swept:      TOKYO_HIGH ($3996.92)
+
+Entry Price:      $3984.62
+Stop Loss:        $4022.28
+Take Profit:      $3871.63
+Lot Size:         0.27
+ATR at Entry:     $25.11
+
+🎯 PARTIAL PROFIT BANKED:
+   50% closed at:  $3928.13 (1:1.5 RR)
+   After candles:  26
+   Remaining 50%:  Closed at breakeven ($3984.62)
+   Net P&L:        $+76.26 (partial profit only)
+
+Exit Price:       $3984.62
+Exit Time:        2025-11-05 17:00 UTC
+Candles in Trade: 132 (1980 minutes)
+
+P&L:              $+76.26
+Balance Before:   $10,000.00
+Balance After:    $10,076.26
+
+➖ BREAKEVEN - Protected by partial profit or entry exit
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #076 - BUY - BREAKEVEN
+Date & Time:      2025-12-18 10:45 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_LOW ($4324.70)
+
+Entry Price:      $4325.11
+Stop Loss:        $4292.74
+Take Profit:      $4422.21
+Lot Size:         0.3
+ATR at Entry:     $21.58
+
+🎯 PARTIAL PROFIT BANKED:
+   50% closed at:  $4373.66 (1:1.5 RR)
+   After candles:  22
+   Remaining 50%:  Closed at breakeven ($4325.11)
+   Net P&L:        $+72.83 (partial profit only)
+
+Exit Price:       $4325.11
+Exit Time:        2025-12-18 17:00 UTC
+Candles in Trade: 25 (375 minutes)
+
+P&L:              $+72.83
+Balance Before:   $9,596.11
+Balance After:    $9,668.94
+
+➖ BREAKEVEN - Protected by partial profit or entry exit
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #073 - SELL - BREAKEVEN
+Date & Time:      2025-12-15 10:30 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_HIGH ($4347.37)
+
+Entry Price:      $4339.43
+Stop Loss:        $4363.34
+Take Profit:      $4267.70
+Lot Size:         0.4
+ATR at Entry:     $15.94
+
+🎯 PARTIAL PROFIT BANKED:
+   50% closed at:  $4303.57 (1:1.5 RR)
+   After candles:  22
+   Remaining 50%:  Closed at breakeven ($4339.43)
+   Net P&L:        $+71.73 (partial profit only)
+
+Exit Price:       $4339.43
+Exit Time:        2025-12-17 05:45 UTC
+Candles in Trade: 173 (2595 minutes)
+
+P&L:              $+71.73
+Balance Before:   $9,550.72
+Balance After:    $9,622.45
+
+➖ BREAKEVEN - Protected by partial profit or entry exit
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #057 - BUY - BREAKEVEN
+Date & Time:      2025-12-04 13:15 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      PDL ($4195.02)
+
+Entry Price:      $4195.66
+Stop Loss:        $4154.71
+Take Profit:      $4318.51
+Lot Size:         0.23
+ATR at Entry:     $27.30
+
+🎯 PARTIAL PROFIT BANKED:
+   50% closed at:  $4257.08 (1:1.5 RR)
+   After candles:  105
+   Remaining 50%:  Closed at breakeven ($4195.66)
+   Net P&L:        $+70.64 (partial profit only)
+
+Exit Price:       $4195.66
+Exit Time:        2025-12-05 21:15 UTC
+Candles in Trade: 128 (1920 minutes)
+
+P&L:              $+70.64
+Balance Before:   $9,237.23
+Balance After:    $9,307.87
+
+➖ BREAKEVEN - Protected by partial profit or entry exit
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #058 - BUY - BREAKEVEN
+Date & Time:      2025-12-04 13:45 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      PDL ($4195.02)
+
+Entry Price:      $4196.81
+Stop Loss:        $4155.86
+Take Profit:      $4319.65
+Lot Size:         0.23
+ATR at Entry:     $27.30
+
+🎯 PARTIAL PROFIT BANKED:
+   50% closed at:  $4258.24 (1:1.5 RR)
+   After candles:  103
+   Remaining 50%:  Closed at breakeven ($4196.81)
+   Net P&L:        $+70.64 (partial profit only)
+
+Exit Price:       $4196.81
+Exit Time:        2025-12-05 21:15 UTC
+Candles in Trade: 126 (1890 minutes)
+
+P&L:              $+70.64
+Balance Before:   $9,307.87
+Balance After:    $9,378.50
+
+➖ BREAKEVEN - Protected by partial profit or entry exit
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #075 - BUY - BREAKEVEN
+Date & Time:      2025-12-18 10:30 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_LOW ($4324.70)
+
+Entry Price:      $4326.91
+Stop Loss:        $4294.54
+Take Profit:      $4424.02
+Lot Size:         0.29
+ATR at Entry:     $21.58
+
+🎯 PARTIAL PROFIT BANKED:
+   50% closed at:  $4375.47 (1:1.5 RR)
+   After candles:  23
+   Remaining 50%:  Closed at breakeven ($4326.91)
+   Net P&L:        $+70.40 (partial profit only)
+
+Exit Price:       $4326.91
+Exit Time:        2025-12-18 17:00 UTC
+Candles in Trade: 26 (390 minutes)
+
+P&L:              $+70.40
+Balance Before:   $9,525.71
+Balance After:    $9,596.11
+
+➖ BREAKEVEN - Protected by partial profit or entry exit
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #062 - SELL - BREAKEVEN
+Date & Time:      2025-12-08 10:45 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDH ($4205.29)
+
+Entry Price:      $4204.09
+Stop Loss:        $4221.60
+Take Profit:      $4151.58
+Lot Size:         0.53
+ATR at Entry:     $11.67
+
+🎯 PARTIAL PROFIT BANKED:
+   50% closed at:  $4177.82 (1:1.5 RR)
+   After candles:  18
+   Remaining 50%:  Closed at breakeven ($4204.09)
+   Net P&L:        $+69.60 (partial profit only)
+
+Exit Price:       $4204.09
+Exit Time:        2025-12-09 09:15 UTC
+Candles in Trade: 90 (1350 minutes)
+
+P&L:              $+69.60
+Balance Before:   $9,191.68
+Balance After:    $9,261.29
+
+➖ BREAKEVEN - Protected by partial profit or entry exit
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #047 - SELL - BREAKEVEN
+Date & Time:      2025-12-01 14:30 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      PDH ($4230.29)
+
+Entry Price:      $4225.39
+Stop Loss:        $4259.58
+Take Profit:      $4122.81
+Lot Size:         0.27
+ATR at Entry:     $22.80
+
+🎯 PARTIAL PROFIT BANKED:
+   50% closed at:  $4174.11 (1:1.5 RR)
+   After candles:  101
+   Remaining 50%:  Closed at breakeven ($4225.39)
+   Net P&L:        $+69.23 (partial profit only)
+
+Exit Price:       $4225.39
+Exit Time:        2025-12-03 02:30 UTC
+Candles in Trade: 144 (2160 minutes)
+
+P&L:              $+69.23
+Balance Before:   $9,353.28
+Balance After:    $9,422.51
+
+➖ BREAKEVEN - Protected by partial profit or entry exit
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #063 - SELL - BREAKEVEN
+Date & Time:      2025-12-08 13:15 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      PDH ($4205.29)
+
+Entry Price:      $4204.51
+Stop Loss:        $4222.50
+Take Profit:      $4150.55
+Lot Size:         0.51
+ATR at Entry:     $11.99
+
+🎯 PARTIAL PROFIT BANKED:
+   50% closed at:  $4177.53 (1:1.5 RR)
+   After candles:  8
+   Remaining 50%:  Closed at breakeven ($4204.51)
+   Net P&L:        $+68.81 (partial profit only)
+
+Exit Price:       $4204.51
+Exit Time:        2025-12-09 09:15 UTC
+Candles in Trade: 80 (1200 minutes)
+
+P&L:              $+68.81
+Balance Before:   $9,261.29
+Balance After:    $9,330.10
+
+➖ BREAKEVEN - Protected by partial profit or entry exit
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #065 - SELL - BREAKEVEN
+Date & Time:      2025-12-08 14:30 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      PDH ($4205.29)
+
+Entry Price:      $4200.84
+Stop Loss:        $4218.83
+Take Profit:      $4146.88
+Lot Size:         0.51
+ATR at Entry:     $11.99
+
+🎯 PARTIAL PROFIT BANKED:
+   50% closed at:  $4173.86 (1:1.5 RR)
+   After candles:  62
+   Remaining 50%:  Closed at breakeven ($4200.84)
+   Net P&L:        $+68.81 (partial profit only)
+
+Exit Price:       $4200.84
+Exit Time:        2025-12-09 09:00 UTC
+Candles in Trade: 74 (1110 minutes)
+
+P&L:              $+68.81
+Balance Before:   $9,236.55
+Balance After:    $9,305.36
+
+➖ BREAKEVEN - Protected by partial profit or entry exit
+
+----------------------------------------------------------------------------------------------------
+
+====================================================================================================
+OPEN TRADES (24 TOTAL) - Still active at backtest end
+====================================================================================================
+
+TRADE #026 - SELL - OPEN
+Date & Time:      2025-11-19 08:00 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDH ($4081.72)
+
+Entry Price:      $4080.12
+Stop Loss:        $4135.48
+Take Profit:      $3914.04
+Lot Size:         0.17
+ATR at Entry:     $36.91
+
+⏳ Awaiting 1:1.5 RR or SL hit
+
+Balance Before:   $9,298.14
+
+⏳ STILL OPEN - Trade not resolved by backtest end
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #027 - SELL - OPEN
+Date & Time:      2025-11-19 15:45 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_HIGH ($4099.15)
+
+Entry Price:      $4093.64
+Stop Loss:        $4150.13
+Take Profit:      $3924.17
+Lot Size:         0.16
+ATR at Entry:     $37.66
+
+⏳ Awaiting 1:1.5 RR or SL hit
+
+Balance Before:   $9,298.14
+
+⏳ STILL OPEN - Trade not resolved by backtest end
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #028 - BUY - OPEN
+Date & Time:      2025-11-20 08:30 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_LOW ($4044.95)
+
+Entry Price:      $4052.39
+Stop Loss:        $3995.77
+Take Profit:      $4222.24
+Lot Size:         0.16
+ATR at Entry:     $37.74
+
+⏳ Awaiting 1:1.5 RR or SL hit
+
+Balance Before:   $9,298.14
+
+⏳ STILL OPEN - Trade not resolved by backtest end
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #029 - BUY - OPEN
+Date & Time:      2025-11-20 08:45 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDL ($4054.87)
+
+Entry Price:      $4068.05
+Stop Loss:        $4011.43
+Take Profit:      $4237.90
+Lot Size:         0.16
+ATR at Entry:     $37.74
+
+⏳ Awaiting 1:1.5 RR or SL hit
+
+Balance Before:   $9,298.14
+
+⏳ STILL OPEN - Trade not resolved by backtest end
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #030 - BUY - OPEN
+Date & Time:      2025-11-21 08:15 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDL ($4040.89)
+
+Entry Price:      $4047.23
+Stop Loss:        $3989.45
+Take Profit:      $4220.57
+Lot Size:         0.16
+ATR at Entry:     $38.52
+
+⏳ Awaiting 1:1.5 RR or SL hit
+
+Balance Before:   $9,298.14
+
+⏳ STILL OPEN - Trade not resolved by backtest end
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #031 - BUY - OPEN
+Date & Time:      2025-11-21 09:00 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDL ($4040.89)
+
+Entry Price:      $4052.79
+Stop Loss:        $3995.01
+Take Profit:      $4226.13
+Lot Size:         0.16
+ATR at Entry:     $38.52
+
+⏳ Awaiting 1:1.5 RR or SL hit
+
+Balance Before:   $9,298.14
+
+⏳ STILL OPEN - Trade not resolved by backtest end
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #032 - SELL - OPEN
+Date & Time:      2025-11-21 14:15 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_HIGH ($4081.61)
+
+Entry Price:      $4066.69
+Stop Loss:        $4125.53
+Take Profit:      $3890.16
+Lot Size:         0.16
+ATR at Entry:     $39.23
+
+⏳ Awaiting 1:1.5 RR or SL hit
+
+Balance Before:   $9,298.14
+
+⏳ STILL OPEN - Trade not resolved by backtest end
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #036 - BUY - OPEN
+Date & Time:      2025-11-25 09:00 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_LOW ($4123.54)
+
+Entry Price:      $4127.05
+Stop Loss:        $4096.72
+Take Profit:      $4218.04
+Lot Size:         0.32
+ATR at Entry:     $20.22
+
+🎯 PARTIAL PROFIT ALREADY BANKED:
+   50% closed at:  $4172.55 (1:1.5 RR)
+   After candles:  107
+   Remaining 50%:  Still open, SL at breakeven
+
+Balance Before:   $9,621.37
+
+⏳ STILL OPEN - Trade not resolved by backtest end
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #037 - BUY - OPEN
+Date & Time:      2025-11-25 13:00 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_LOW ($4123.54)
+
+Entry Price:      $4137.98
+Stop Loss:        $4103.10
+Take Profit:      $4242.61
+Lot Size:         0.28
+ATR at Entry:     $23.25
+
+⏳ Awaiting 1:1.5 RR or SL hit
+
+Balance Before:   $9,621.37
+
+⏳ STILL OPEN - Trade not resolved by backtest end
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #039 - SELL - OPEN
+Date & Time:      2025-11-26 10:30 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDH ($4159.15)
+
+Entry Price:      $4159.03
+Stop Loss:        $4199.71
+Take Profit:      $4037.01
+Lot Size:         0.23
+ATR at Entry:     $27.12
+
+⏳ Awaiting 1:1.5 RR or SL hit
+
+Balance Before:   $9,523.70
+
+⏳ STILL OPEN - Trade not resolved by backtest end
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #045 - SELL - OPEN
+Date & Time:      2025-12-01 10:15 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_HIGH ($4254.91)
+
+Entry Price:      $4254.26
+Stop Loss:        $4287.39
+Take Profit:      $4154.88
+Lot Size:         0.28
+ATR at Entry:     $22.09
+
+🎯 PARTIAL PROFIT ALREADY BANKED:
+   50% closed at:  $4204.57 (1:1.5 RR)
+   After candles:  59
+   Remaining 50%:  Still open, SL at breakeven
+
+Balance Before:   $9,353.28
+
+⏳ STILL OPEN - Trade not resolved by backtest end
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #046 - SELL - OPEN
+Date & Time:      2025-12-01 13:45 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_HIGH ($4254.91)
+
+Entry Price:      $4253.46
+Stop Loss:        $4287.65
+Take Profit:      $4150.88
+Lot Size:         0.27
+ATR at Entry:     $22.80
+
+🎯 PARTIAL PROFIT ALREADY BANKED:
+   50% closed at:  $4202.18 (1:1.5 RR)
+   After candles:  45
+   Remaining 50%:  Still open, SL at breakeven
+
+Balance Before:   $9,353.28
+
+⏳ STILL OPEN - Trade not resolved by backtest end
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #048 - BUY - OPEN
+Date & Time:      2025-12-02 13:15 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_LOW ($4202.07)
+
+Entry Price:      $4206.42
+Stop Loss:        $4166.15
+Take Profit:      $4327.26
+Lot Size:         0.23
+ATR at Entry:     $26.85
+
+⏳ Awaiting 1:1.5 RR or SL hit
+
+Balance Before:   $9,422.51
+
+⏳ STILL OPEN - Trade not resolved by backtest end
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #051 - SELL - OPEN
+Date & Time:      2025-12-02 14:30 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_HIGH ($4229.36)
+
+Entry Price:      $4217.43
+Stop Loss:        $4257.71
+Take Profit:      $4096.60
+Lot Size:         0.23
+ATR at Entry:     $26.85
+
+⏳ Awaiting 1:1.5 RR or SL hit
+
+Balance Before:   $9,237.23
+
+⏳ STILL OPEN - Trade not resolved by backtest end
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #052 - BUY - OPEN
+Date & Time:      2025-12-03 07:30 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_LOW ($4204.19)
+
+Entry Price:      $4206.70
+Stop Loss:        $4161.88
+Take Profit:      $4341.15
+Lot Size:         0.21
+ATR at Entry:     $29.88
+
+⏳ Awaiting 1:1.5 RR or SL hit
+
+Balance Before:   $9,237.23
+
+⏳ STILL OPEN - Trade not resolved by backtest end
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #053 - SELL - OPEN
+Date & Time:      2025-12-03 14:00 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      PDH ($4229.45)
+
+Entry Price:      $4225.04
+Stop Loss:        $4269.93
+Take Profit:      $4090.39
+Lot Size:         0.21
+ATR at Entry:     $29.92
+
+⏳ Awaiting 1:1.5 RR or SL hit
+
+Balance Before:   $9,237.23
+
+⏳ STILL OPEN - Trade not resolved by backtest end
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #054 - SELL - OPEN
+Date & Time:      2025-12-03 14:45 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      PDH ($4229.45)
+
+Entry Price:      $4214.31
+Stop Loss:        $4259.20
+Take Profit:      $4079.66
+Lot Size:         0.21
+ATR at Entry:     $29.92
+
+⏳ Awaiting 1:1.5 RR or SL hit
+
+Balance Before:   $9,237.23
+
+⏳ STILL OPEN - Trade not resolved by backtest end
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #055 - BUY - OPEN
+Date & Time:      2025-12-04 09:30 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDL ($4195.02)
+
+Entry Price:      $4195.86
+Stop Loss:        $4153.82
+Take Profit:      $4321.96
+Lot Size:         0.22
+ATR at Entry:     $28.02
+
+⏳ Awaiting 1:1.5 RR or SL hit
+
+Balance Before:   $9,237.23
+
+⏳ STILL OPEN - Trade not resolved by backtest end
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #056 - BUY - OPEN
+Date & Time:      2025-12-04 09:45 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDL ($4195.02)
+
+Entry Price:      $4200.63
+Stop Loss:        $4158.60
+Take Profit:      $4326.74
+Lot Size:         0.22
+ATR at Entry:     $28.02
+
+⏳ Awaiting 1:1.5 RR or SL hit
+
+Balance Before:   $9,237.23
+
+⏳ STILL OPEN - Trade not resolved by backtest end
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #061 - SELL - OPEN
+Date & Time:      2025-12-06 08:45 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_HIGH ($4197.55)
+
+Entry Price:      $4197.46
+Stop Loss:        $4222.97
+Take Profit:      $4120.93
+Lot Size:         0.36
+ATR at Entry:     $17.01
+
+⏳ Awaiting 1:1.5 RR or SL hit
+
+Balance Before:   $9,191.68
+
+⏳ STILL OPEN - Trade not resolved by backtest end
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #077 - BUY - OPEN
+Date & Time:      2025-12-18 13:30 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_LOW ($4324.70)
+
+Entry Price:      $4336.16
+Stop Loss:        $4301.68
+Take Profit:      $4439.58
+Lot Size:         0.28
+ATR at Entry:     $22.98
+
+⏳ Awaiting 1:1.5 RR or SL hit
+
+Balance Before:   $9,668.94
+
+⏳ STILL OPEN - Trade not resolved by backtest end
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #078 - BUY - OPEN
+Date & Time:      2025-12-18 15:00 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_LOW ($4324.70)
+
+Entry Price:      $4333.49
+Stop Loss:        $4299.01
+Take Profit:      $4436.91
+Lot Size:         0.28
+ATR at Entry:     $22.98
+
+⏳ Awaiting 1:1.5 RR or SL hit
+
+Balance Before:   $9,668.94
+
+⏳ STILL OPEN - Trade not resolved by backtest end
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #082 - BUY - OPEN
+Date & Time:      2025-12-24 15:00 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_LOW ($4472.13)
+
+Entry Price:      $4473.20
+Stop Loss:        $4425.71
+Take Profit:      $4615.70
+Lot Size:         0.2
+ATR at Entry:     $31.67
+
+🎯 PARTIAL PROFIT ALREADY BANKED:
+   50% closed at:  $4544.43 (1:1.5 RR)
+   After candles:  194
+   Remaining 50%:  Still open, SL at breakeven
+
+Balance Before:   $9,380.84
+
+⏳ STILL OPEN - Trade not resolved by backtest end
+
+----------------------------------------------------------------------------------------------------
+
+TRADE #083 - SELL - OPEN
+Date & Time:      2025-12-27 08:30 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_HIGH ($4532.82)
+
+Entry Price:      $4532.67
+Stop Loss:        $4555.46
+Take Profit:      $4464.31
+Lot Size:         0.41
+ATR at Entry:     $15.19
+
+⏳ Awaiting 1:1.5 RR or SL hit
+
+Balance Before:   $9,380.84
+
+⏳ STILL OPEN - Trade not resolved by backtest end
+
+----------------------------------------------------------------------------------------------------
+
+
+====================================================================================================
+QUICK REFERENCE: v6.0 vs v4 SIDE-BY-SIDE
+====================================================================================================
+
+Metric                      | v4 Liquidity Sniper | v6.0 Resilient Sniper
+----------------------------|---------------------|----------------------
+ROI                         | +44.02%             | -6.19%
+Total Trades                | 101                 | 83
+Win Rate                    | 5.9%                | 13.3%
+Loss Rate                   | 50.5%               | 45.8%
+Breakeven Rate              | 40.6%               | 12.0%
+Partial Activation Rate     | N/A (1:1 BE only)   | 30.1%
+Average Win                 | $354.26             | $207.93
+Average Loss                | -$44.63             | $-95.14
+Win/Loss Ratio              | 7.9:1               | 2.2:1
+
+ENHANCEMENTS:
+v4: 1:1 breakeven trigger, full sessions, no filters
+v6.0: 1:1.5 partial profit, displacement filter, narrowed time windows
+
+====================================================================================================
+END OF DETAILED REPORT
+====================================================================================================

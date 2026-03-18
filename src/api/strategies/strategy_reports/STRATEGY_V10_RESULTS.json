@@ -1,0 +1,85 @@
+{
+  "demo_start": 5000.0,
+  "demo_final": 4650.0028999999995,
+  "real_start": 200.0,
+  "real_final": 178.41516999999976,
+  "trades": [
+    {
+      "time": "2025-11-18 16:00",
+      "signal": "SELL",
+      "status": "LOSS",
+      "demo_pnl": -51.539799999998195,
+      "real_pnl": 0,
+      "real_active": false,
+      "entry": 4012.04422,
+      "sl": 4022.35218,
+      "tp": 3981.1203400000013
+    },
+    {
+      "time": "2025-11-18 15:45",
+      "signal": "SELL",
+      "status": "LOSS",
+      "demo_pnl": -50.35128000000076,
+      "real_pnl": -4.195940000000064,
+      "real_active": true,
+      "entry": 4010.75848,
+      "sl": 4014.95442,
+      "tp": 3998.1706599999998
+    },
+    {
+      "time": "2025-11-18 15:00",
+      "signal": "SELL",
+      "status": "LOSS",
+      "demo_pnl": -49.18902000000071,
+      "real_pnl": -8.198170000000118,
+      "real_active": true,
+      "entry": 4010.71551,
+      "sl": 4018.91368,
+      "tp": 3986.1209999999996
+    },
+    {
+      "time": "2025-11-18 14:15",
+      "signal": "SELL",
+      "status": "LOSS",
+      "demo_pnl": -51.56340000000091,
+      "real_pnl": 0,
+      "real_active": false,
+      "entry": 4012.91648,
+      "sl": 4025.80733,
+      "tp": 3974.243929999999
+    },
+    {
+      "time": "2025-11-18 14:00",
+      "signal": "SELL",
+      "status": "LOSS",
+      "demo_pnl": -45.953600000000286,
+      "real_pnl": -9.190720000000056,
+      "real_active": true,
+      "entry": 4011.45403,
+      "sl": 4020.64475,
+      "tp": 3983.8818699999997
+    },
+    {
+      "time": "2025-10-31 13:30",
+      "signal": "SELL",
+      "status": "LOSS",
+      "demo_pnl": -49.34999999999945,
+      "real_pnl": 0,
+      "real_active": false,
+      "entry": 4000.46,
+      "sl": 4016.91,
+      "tp": 3951.1100000000006
+    },
+    {
+      "time": "2025-10-31 13:00",
+      "signal": "SELL",
+      "status": "LOSS",
+      "demo_pnl": -52.04999999999927,
+      "real_pnl": 0,
+      "real_active": false,
+      "entry": 4007.59,
+      "sl": 4018.0,
+      "tp": 3976.3600000000006
+    }
+  ]
+}

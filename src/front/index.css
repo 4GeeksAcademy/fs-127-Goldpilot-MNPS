@@ -1,3 +1,121 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    /* Liquid Glass Design Tokens - Custom Palette */
+
+    /* Base Colors from Palette */
+    --color-gold: #c38f37;
+    --color-brown-medium: #564535;
+    --color-brown-dark: #2c2117;
+    --color-green-dark: #243018;
+    --color-olive: #637742;
+
+    /* Colors - Base Glass */
+    --glass-white: rgba(255, 255, 255, 0.7);
+    --glass-white-light: rgba(255, 255, 255, 0.5);
+    --glass-white-lighter: rgba(255, 255, 255, 0.3);
+    --glass-black: rgba(0, 0, 0, 0.6);
+    --glass-black-light: rgba(0, 0, 0, 0.3);
+    --glass-black-lighter: rgba(0, 0, 0, 0.1);
+
+    /* Colors - Custom Palette Glass (with transparency) */
+    --glass-gold: rgba(195, 143, 55, 0.85);
+    --glass-gold-light: rgba(195, 143, 55, 0.6);
+    --glass-gold-lighter: rgba(195, 143, 55, 0.35);
+
+    --glass-brown: rgba(86, 69, 53, 0.85);
+    --glass-brown-light: rgba(86, 69, 53, 0.6);
+    --glass-brown-lighter: rgba(86, 69, 53, 0.35);
+
+    --glass-brown-dark: rgba(44, 33, 23, 0.85);
+    --glass-brown-dark-light: rgba(44, 33, 23, 0.6);
+
+    --glass-green-dark: rgba(36, 48, 24, 0.85);
+    --glass-green-dark-light: rgba(36, 48, 24, 0.6);
+
+    --glass-olive: rgba(99, 119, 66, 0.85);
+    --glass-olive-light: rgba(99, 119, 66, 0.6);
+    --glass-olive-lighter: rgba(99, 119, 66, 0.35);
+
+    /* Blur Effects */
+    --blur-sm: 10px;
+    --blur-md: 20px;
+    --blur-lg: 40px;
+    --blur-xl: 60px;
+
+    /* Border Radius - Liquid */
+    --radius-liquid-sm: 12px;
+    --radius-liquid-md: 20px;
+    --radius-liquid-lg: 28px;
+    --radius-liquid-xl: 36px;
+    --radius-liquid-full: 9999px;
+
+    /* Shadows - Layered Glass */
+    --shadow-glass-sm:
+      0 2px 8px rgba(44, 33, 23, 0.15), 0 1px 2px rgba(44, 33, 23, 0.2),
+      inset 0 1px 1px rgba(255, 255, 255, 0.5);
+
+    --shadow-glass-md:
+      0 4px 16px rgba(44, 33, 23, 0.2), 0 2px 4px rgba(44, 33, 23, 0.25),
+      inset 0 1px 2px rgba(255, 255, 255, 0.5);
+
+    --shadow-glass-lg:
+      0 8px 32px rgba(44, 33, 23, 0.25), 0 4px 8px rgba(44, 33, 23, 0.3),
+      inset 0 2px 4px rgba(255, 255, 255, 0.4);
+
+    --shadow-glass-xl:
+      0 16px 48px rgba(44, 33, 23, 0.3), 0 8px 16px rgba(44, 33, 23, 0.35),
+      inset 0 2px 4px rgba(255, 255, 255, 0.4);
+
+    /* Glow Effects - Custom Palette */
+    --glow-gold:
+      0 0 20px rgba(195, 143, 55, 0.5), 0 0 40px rgba(195, 143, 55, 0.3);
+    --glow-olive:
+      0 0 20px rgba(99, 119, 66, 0.5), 0 0 40px rgba(99, 119, 66, 0.3);
+    --glow-brown:
+      0 0 20px rgba(86, 69, 53, 0.5), 0 0 40px rgba(86, 69, 53, 0.3);
+
+    /* Gradients */
+    --gradient-gold: linear-gradient(
+      135deg,
+      var(--color-gold) 0%,
+      #f5e6be 100%
+    );
+    --gradient-liquid: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.1),
+      rgba(255, 255, 255, 0.05)
+    );
+  }
+
+  body {
+    @apply bg-[var(--color-brown-dark)] text-white selection:bg-[var(--color-gold)] selection:text-black;
+    font-family:
+      -apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui, sans-serif;
+  }
+}
+
+@layer components {
+  .liquid-glass {
+    @apply backdrop-blur-[var(--blur-md)] border border-[rgba(255,255,255,0.1)] shadow-[var(--shadow-glass-lg)];
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.05) 0%,
+      rgba(255, 255, 255, 0.01) 100%
+    );
+  }
+
+  .text-liquid-gold {
+    @apply bg-clip-text text-transparent bg-gradient-to-br from-[var(--color-gold)] via-[#F5E6BE] to-[var(--color-gold)];
+  }
+
+  .btn-liquid {
+    @apply rounded-full px-6 py-3 font-medium transition-all duration-300 transform hover:scale-105 active:scale-95;
+    background: var(--glass-gold);
+    box-shadow: var(--shadow-glass-md);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+}

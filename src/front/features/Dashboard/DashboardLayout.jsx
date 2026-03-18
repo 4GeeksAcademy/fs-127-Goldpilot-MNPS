@@ -1,0 +1,175 @@
+import React, { useEffect, useRef } from "react";
+import { Outlet, NavLink, useLocation, Navigate, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { UserProfile } from "./components/UserProfile";
+import { LanguageSwitcher } from "./components/LanguageSwitcher";
+import useGlobalReducer from "../../hooks/useGlobalReducer";
+import { getProfile } from "./api";
+
+const SidebarItem = ({ label, icon, to }) => {
+    const baseClasses =
+        "relative flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium transition-all duration-200 cursor-pointer select-none group";
+
+    const activeClasses = "bg-white/[0.06] text-white border border-white/10";
+    const inactiveClasses = "text-white/40 hover:text-white/70 hover:bg-white/[0.03] border border-transparent";
+
+    return (
+        <NavLink
+            to={to}
+            end={to === "/dashboard"}
+            className={({ isActive }) => `${baseClasses} ${isActive ? activeClasses : inactiveClasses}`}
+        >
+            {({ isActive }) => (
+                <>
+                    {isActive && (
+                        <span
+                            className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-6 rounded-r-full"
+                            style={{
+                                background: "var(--color-gold)",
+                                boxShadow: "0 0 10px var(--color-gold), 0 0 20px rgba(195,143,55,0.4)",
+                            }}
+                        />
+                    )}
+                    <span
+                        className={`text-base transition-colors ${isActive ? "text-[var(--color-gold)]" : "text-white/30 group-hover:text-white/50"}`}
+                    >
+                        {icon}
+                    </span>
+                    <span>{label}</span>
+                </>
+            )}
+        </NavLink>
+    );
+};
+
+export const DashboardLayout = () => {
+    const token = localStorage.getItem("token");
+    if (!token) return <Navigate to="/login" replace />;
+
+    const { t } = useTranslation();
+    const { store, dispatch } = useGlobalReducer();
+    const location  = useLocation();
+    const navigate  = useNavigate();
+
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        dispatch({ type: "logout" });
+        navigate("/login");
+    };
+
+    const mainRef = useRef(null);
+
+    const storeUser = store?.user;
+    const greeting = storeUser?.first_name || storeUser?.username || "Usuario";
+
+    // Al recargar la página el store se reinicia: si hay token pero no user, recargar perfil
+    useEffect(() => {
+        if (!store?.user) {
+            getProfile()
+                .then((data) => dispatch({ type: "set_user_data", payload: data }))
+                .catch(() => { });
+        }
+    }, []);
+
+
+    useEffect(() => {
+        if (mainRef.current) {
+            mainRef.current.scrollTo({ top: 0, behavior: "smooth" });
+        }
+    }, [location.pathname]);
+
+    const menuItems = [
+        { label: t("nav.dashboard"), icon: "⊞", to: "/dashboard" },
+        { label: t("nav.strategies"), icon: "⌖", to: "/dashboard/strategies" },
+        { label: t("nav.wallets"), icon: "◈", to: "/dashboard/wallets" },
+        { label: t("nav.historial"), icon: "◳", to: "/dashboard/historial" },
+        { label: t("nav.settings"), icon: "⚙", to: "/dashboard/ajustes" },
+    ];
+
+    return (
+        <div
+            className="h-screen text-white flex overflow-hidden"
+            style={{ background: "var(--color-green-dark)" }}
+        >
+            <aside
+                className="w-60 h-full flex-shrink-0 hidden lg:flex flex-col py-6 px-3 gap-6 border-r border-white/[0.06]"
+                style={{ background: "rgba(20, 28, 14, 0.85)", backdropFilter: "blur(24px)" }}
+            >
+                <div className="flex items-center mx-3 mb-4">
+                    <img
+                        src="/logo-principal-blanco.png"
+                        alt="Logo Principal"
+                        className="h-8 w-auto drop-shadow-sm"
+                    />
+                </div>
+
+                <div className="flex flex-col gap-1">
+                    {menuItems.map((item) => (
+                        <SidebarItem
+                            key={item.to}
+                            label={item.label}
+                            icon={item.icon}
+                            to={item.to}
+                        />
+                    ))}
+                </div>
+            </aside>
+
+            <main ref={mainRef} className="flex-1 flex flex-col min-w-0 overflow-y-auto">
+                <header
+                    className="sticky top-0 z-10 w-full px-6 py-4 flex items-center gap-8 border-b border-white/[0.05]"
+                    style={{ background: "rgba(20, 28, 14, 0.7)", backdropFilter: "blur(16px)" }}
+                >
+                    <div className="lg:hidden flex items-center">
+                        <img
+                            src="/logo-principal-blanco.png"
+                            alt="Logo Principal"
+                            className="h-6 w-auto drop-shadow-sm"
+                        />
+                    </div>
+                    <div className="flex-1 flex-col hidden sm:flex">
+                        <span className="text-2xl font-black tracking-tight text-white leading-none">
+                            {t("header.greeting")} <span
+                                className="font-black"
+                                style={{
+                                    color: "var(--color-gold)",
+                                    textShadow: "0 0 24px rgba(195,143,55,0.35)",
+                                }}
+                            >{greeting}</span>
+                        </span>
+                        <span className="text-xs text-white/30 mt-1 tracking-wide">
+                            {t("header.subtitle")}
+                        </span>
+                    </div>
+                    <LanguageSwitcher />
+
+                    <NavLink
+                        to="/dashboard/nivel-inversor"
+                        title="Nivel Inversor"
+                        className="shrink-0 transition-all hover:scale-110"
+                        style={{ background: "none", border: "none", padding: 0, lineHeight: 0 }}
+                    >
+                        <img
+                            src="/oro2.png"
+                            alt="Nivel Inversor"
+                            style={{
+                                width: 44,
+                                height: 44,
+                                objectFit: "contain",
+                                mixBlendMode: "screen",
+                                filter: "drop-shadow(0 0 10px rgba(195,143,55,0.6))",
+                                display: "block",
+                            }}
+                        />
+                    </NavLink>
+
+                    <UserProfile />
+                </header>
+
+                <section className="px-6 py-8 w-full max-w-[1400px] mx-auto flex flex-col gap-6">
+                    <Outlet />
+                </section>
+            </main>
+        </div>
+    );
+};

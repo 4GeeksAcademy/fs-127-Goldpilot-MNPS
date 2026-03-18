@@ -1,0 +1,1 @@
+// aquí va el componente Hero de la landingpage

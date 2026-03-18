@@ -17,12 +17,19 @@ gunicorn = "*"
 cloudinary = "*"
 flask-admin = "==2.0.0"
 typing-extensions = "*"
-flask-jwt-extended = "==4.6.0"
 wtforms = "==3.1.2"
 sqlalchemy = "*"
+bcrypt = "*"
+flask-jwt-extended = "*"
+flask-mail = "*"
+requests = "*"
+backtrader = "*"
+yfinance = "*"
+pandas = "*"
+metaapi-cloud-sdk = "*"
 
 [requires]
-python_version = "3.13"
+python_version = "3.13.12"
 
 [scripts]
 start="flask run -p 3001 -h 0.0.0.0"

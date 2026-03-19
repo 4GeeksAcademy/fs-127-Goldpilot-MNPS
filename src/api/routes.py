@@ -37,7 +37,7 @@ def get_all_strategies():
 def run_unified_backtest(level):
     try:
         balance_param = request.args.get('balance', default=10000.0, type=float)
-        start_param = request.args.get('start', default='2024-01-01', type=str)
+        start_param = request.args.get('start', default='2026-01-01', type=str)
         
         data = execute_backtest_by_level(level, initial_cash=balance_param, start_date=start_param) 
         return jsonify(data), 200

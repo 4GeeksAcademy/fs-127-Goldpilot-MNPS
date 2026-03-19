@@ -1,3 +1,4 @@
+"""
 High-risk, high-frequency scalping strategy.
 Trades last < 5 minutes (force-exited via `max_bars_open`).
 

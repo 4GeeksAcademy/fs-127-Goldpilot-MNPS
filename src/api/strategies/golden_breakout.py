@@ -1,3 +1,4 @@
+"""
 Logic: Fibonacci 61.8% retracement + RSI(7) momentum cross + EMA(50) trend bias.
 
 After a strong impulse, institutional money re-enters at the 61.8% golden ratio.

@@ -1,0 +1,217 @@
+{
+  "demo_start_balance": 5000.0,
+  "demo_final_balance": 4499.640446630467,
+  "demo_roi": -10.007191067390668,
+  "real_start_balance": 100.0,
+  "real_final_balance": -246.20824857142907,
+  "real_roi": -346.20824857142907,
+  "trades": [
+    {
+      "time": "2025-12-26 10:00",
+      "signal": "SELL",
+      "status": "LOSS",
+      "demo_pnl": -50.00000000000021,
+      "real_pnl": -32.994642857142935,
+      "entry": 4487.86098,
+      "exit": 4520.855622857143
+    },
+    {
+      "time": "2025-12-24 15:15",
+      "signal": "SELL",
+      "status": "BE",
+      "demo_pnl": -0.0,
+      "real_pnl": -0.0,
+      "entry": 4497.18145,
+      "exit": 4497.18145
+    },
+    {
+      "time": "2025-12-24 10:15",
+      "signal": "SELL",
+      "status": "BE",
+      "demo_pnl": -0.0,
+      "real_pnl": -0.0,
+      "entry": 4492.78628,
+      "exit": 4492.78628
+    },
+    {
+      "time": "2025-12-19 14:00",
+      "signal": "BUY",
+      "status": "BE",
+      "demo_pnl": 0.0,
+      "real_pnl": 0.0,
+      "entry": 4316.15568,
+      "exit": 4316.15568
+    },
+    {
+      "time": "2025-12-19 13:45",
+      "signal": "BUY",
+      "status": "BE",
+      "demo_pnl": 0.0,
+      "real_pnl": 0.0,
+      "entry": 4316.83174,
+      "exit": 4316.83174
+    },
+    {
+      "time": "2025-12-18 11:00",
+      "signal": "SELL",
+      "status": "LOSS",
+      "demo_pnl": -49.50000000000021,
+      "real_pnl": -32.994642857142935,
+      "entry": 4337.75994,
+      "exit": 4370.754582857143
+    },
+    {
+      "time": "2025-12-18 10:30",
+      "signal": "SELL",
+      "status": "LOSS",
+      "demo_pnl": -49.00500000000021,
+      "real_pnl": -32.994642857142935,
+      "entry": 4339.11337,
+      "exit": 4372.108012857143
+    },
+    {
+      "time": "2025-12-16 13:30",
+      "signal": "BUY",
+      "status": "BE",
+      "demo_pnl": 0.0,
+      "real_pnl": 0.0,
+      "entry": 4308.51242,
+      "exit": 4308.51242
+    },
+    {
+      "time": "2025-12-10 16:30",
+      "signal": "SELL",
+      "status": "LOSS",
+      "demo_pnl": -48.514950000000205,
+      "real_pnl": -32.994642857142935,
+      "entry": 4211.78603,
+      "exit": 4244.780672857143
+    },
+    {
+      "time": "2025-12-10 13:15",
+      "signal": "SELL",
+      "status": "LOSS",
+      "demo_pnl": -48.0298005000002,
+      "real_pnl": -32.994642857142935,
+      "entry": 4213.36097,
+      "exit": 4246.355612857143
+    },
+    {
+      "time": "2025-12-09 14:15",
+      "signal": "BUY",
+      "status": "TIME_EXIT",
+      "demo_pnl": -4.4404323062987245,
+      "real_pnl": -3.0812200000000303,
+      "entry": 4197.21695,
+      "exit": 4194.13573
+    },
+    {
+      "time": "2025-12-02 11:45",
+      "signal": "BUY",
+      "status": "LOSS",
+      "demo_pnl": -47.50509817193721,
+      "real_pnl": -32.994642857142935,
+      "entry": 4229.26433,
+      "exit": 4196.269687142857
+    },
+    {
+      "time": "2025-11-28 11:15",
+      "signal": "SELL",
+      "status": "LOSS",
+      "demo_pnl": -47.030047190217836,
+      "real_pnl": -32.994642857142935,
+      "entry": 4170.92579,
+      "exit": 4203.920432857143
+    },
+    {
+      "time": "2025-11-26 13:00",
+      "signal": "SELL",
+      "status": "TIME_EXIT",
+      "demo_pnl": -18.599546606777754,
+      "real_pnl": -13.180599999999687,
+      "entry": 4150.91939,
+      "exit": 4164.09999
+    },
+    {
+      "time": "2025-11-19 16:15",
+      "signal": "SELL",
+      "status": "BE",
+      "demo_pnl": -0.0,
+      "real_pnl": -0.0,
+      "entry": 4088.63578,
+      "exit": 4088.63578
+    },
+    {
+      "time": "2025-11-19 16:00",
+      "signal": "SELL",
+      "status": "BE",
+      "demo_pnl": -0.0,
+      "real_pnl": -0.0,
+      "entry": 4078.40598,
+      "exit": 4078.40598
+    },
+    {
+      "time": "2025-11-12 11:30",
+      "signal": "SELL",
+      "status": "LOSS",
+      "demo_pnl": -46.37375125224787,
+      "real_pnl": -32.994642857142935,
+      "entry": 4142.0658,
+      "exit": 4175.060442857143
+    },
+    {
+      "time": "2025-11-12 11:15",
+      "signal": "SELL",
+      "status": "LOSS",
+      "demo_pnl": -45.9100137397254,
+      "real_pnl": -32.994642857142935,
+      "entry": 4140.73271,
+      "exit": 4173.727352857143
+    },
+    {
+      "time": "2025-11-05 16:30",
+      "signal": "BUY",
+      "status": "BE",
+      "demo_pnl": 0.0,
+      "real_pnl": 0.0,
+      "entry": 3960.55,
+      "exit": 3960.55
+    },
+    {
+      "time": "2025-11-05 16:15",
+      "signal": "BUY",
+      "status": "BE",
+      "demo_pnl": 0.0,
+      "real_pnl": 0.0,
+      "entry": 3967.0,
+      "exit": 3967.0
+    },
+    {
+      "time": "2025-11-04 16:45",
+      "signal": "BUY",
+      "status": "LOSS",
+      "demo_pnl": -45.450913602328136,
+      "real_pnl": -32.994642857142935,
+      "entry": 3967.51,
+      "exit": 3934.5153571428573
+    },
+    {
+      "time": "2025-10-31 11:45",
+      "signal": "SELL",
+      "status": "BE",
+      "demo_pnl": -0.0,
+      "real_pnl": -0.0,
+      "entry": 4024.51,
+      "exit": 4024.51
+    },
+    {
+      "time": "2025-10-31 10:00",
+      "signal": "SELL",
+      "status": "BE",
+      "demo_pnl": -0.0,
+      "real_pnl": -0.0,
+      "entry": 4022.62,
+      "exit": 4022.62
+    }
+  ]
+}

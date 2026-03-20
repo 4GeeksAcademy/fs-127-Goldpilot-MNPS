@@ -1,0 +1,29 @@
+================================================================================
+STRATEGY v6.0: QUICK REFERENCE
+================================================================================
+
+ROI:              -6.19%
+Final Balance:    $9,380.84
+Total P&L:        $-619.16
+
+Total Trades:    83
+├─ Wins:         11    (13.3%)   ✅
+├─ Losses:       38   (45.8%)  ❌
+├─ Breakevens:   10   (12.0%)  ➖
+└─ Open:         24   (28.9%)  ⏳
+
+Partial Activations: 25 (30.1%)
+
+Average Win:     $207.93
+Average Loss:    $-95.14
+Win/Loss Ratio:  2.2:1
+
+================================================================================
+v6.0 ENHANCEMENTS:
+  1. Partial profit at 1:1.5 RR (50% close)
+  2. Displacement filter (expansion candle)
+  3. Narrowed windows (London 07:00-11:00 + NY 13:00-16:00)
+
+RESULT: All 3 enhancements FAILED
+RECOMMENDATION: Revert to v4 (+44.02% ROI)
+================================================================================

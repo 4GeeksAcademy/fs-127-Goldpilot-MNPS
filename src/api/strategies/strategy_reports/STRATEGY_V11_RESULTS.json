@@ -1,0 +1,17 @@
+{
+  "demo_start": 5000.0,
+  "demo_final": 4950.0,
+  "real_start": 200.0,
+  "real_final": 200.0,
+  "trades": [
+    {
+      "time": "2025-10-31 13:30",
+      "status": "LOSS",
+      "demo_pnl": -50.00000000000044,
+      "real_pnl": 0,
+      "real_active": false,
+      "signal": "SELL",
+      "entry": 0
+    }
+  ]
+}

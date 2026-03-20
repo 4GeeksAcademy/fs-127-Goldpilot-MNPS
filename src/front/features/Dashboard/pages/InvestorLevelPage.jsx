@@ -65,7 +65,7 @@ export const InvestorLevelPage = () => {
             let gains = 0;
             if (history.status === "fulfilled") {
                 const trades = Array.isArray(history.value) ? history.value : history.value?.trades ?? [];
-                gains = trades.reduce((acc, tr) => { const p = parseFloat(tr.profit ?? tr.gain ?? 0); return p > 0 ? acc + p : acc; }, 0);
+                gains = trades.reduce((acc, tr) => { const p = parseFloat(tr.profit_loss ?? tr.profit ?? tr.gain ?? 0); return p > 0 ? acc + p : acc; }, 0);
             }
             if (gains === 0 && summary.status === "fulfilled") {
                 const s = summary.value;

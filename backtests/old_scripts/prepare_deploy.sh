@@ -1,0 +1,31 @@
+#!/bin/bash
+
+echo "🚀 Preparing for Railway Deployment"
+echo "===================================="
+echo ""
+
+echo "📝 Files to deploy:"
+echo "  ✅ aggressor_pulse_live.py (main bot)"
+echo "  ✅ strategies/ (strategy folder)"
+echo "  ✅ requirements.txt"
+echo "  ✅ Procfile"
+echo "  ✅ railway.json"
+echo ""
+
+echo "🔍 Checking files..."
+test -f aggressor_pulse_live.py && echo "  ✅ aggressor_pulse_live.py" || echo "  ❌ Missing: aggressor_pulse_live.py"
+test -d strategies && echo "  ✅ strategies/" || echo "  ❌ Missing: strategies/"
+test -f requirements.txt && echo "  ✅ requirements.txt" || echo "  ❌ Missing: requirements.txt"
+test -f Procfile && echo "  ✅ Procfile" || echo "  ❌ Missing: Procfile"
+test -f railway.json && echo "  ✅ railway.json" || echo "  ❌ Missing: railway.json"
+echo ""
+
+echo "📦 Ready to commit!"
+echo ""
+echo "Next steps:"
+echo "  1. git add aggressor_pulse_live.py requirements.txt Procfile railway.json .gitignore strategies/"
+echo "  2. git commit -m 'Deploy: Aggressor Pulse to Railway'"
+echo "  3. git push origin main"
+echo "  4. Go to https://railway.app/new and deploy from GitHub"
+echo ""
+echo "Need help? Read: QUICK_DEPLOY.md"

@@ -1,3 +1,4 @@
+"""
 The ONLY proven profitable strategy from the evolution analysis (+44% ROI on demo).
 
 Core rules (from STRATEGY_EVOLUTION_ANALYSIS.md — DO NOT add extra filters):

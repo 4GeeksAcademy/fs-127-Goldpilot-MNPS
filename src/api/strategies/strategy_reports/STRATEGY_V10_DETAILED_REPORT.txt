@@ -1,0 +1,74 @@
+====================================================================================================
+AURUM ARCHITECT: STRATEGY v10.1 DUAL-CORE PREDATOR AUDIT
+====================================================================================================
+Generated: 2025-12-27 13:42:24
+Logic: 1:3 RR | BE at 1:1 | 50% Partial at 1:2 | Volatility Gating
+
+====================================================================================================
+EXECUTIVE SUMMARY
+====================================================================================================
+VAULT A (DEMO $5K):   ROI -7.00% | Final: $4,650.00
+VAULT B (REAL $200):  ROI -10.79% | Final: $178.42 ⭐
+
+TRADE STATISTICS:
+  Total Signals:      7
+  Full Wins (1:3):    0  (0.0%)
+  Partial Wins (1:2): 0  (0.0%) 💰
+  Breakevens (1:1):   0  (0.0%) 🛡️
+  Full Losses:        7  (100.0%)
+  Timeouts/Open:      0  (0.0%)
+
+  SURVIVAL RATE:      0.0% (Win + Partial + BE)
+
+VOLATILITY GATING (REAL ACCOUNT PROTECTION):
+  Trades Skipped:     4 out of 7 (Volatile setups rejected for $200 wallet)
+
+====================================================================================================
+DETAILED EXECUTION LOG
+====================================================================================================
+[2025-11-18 16:00] SELL at $4012.04 -> ❌ [LOSS]
+   Real Account Status: GATED (SKIPPED)
+   Demo PnL: $-51.54 | Real PnL: $+0.00
+--------------------------------------------------
+[2025-11-18 15:45] SELL at $4010.76 -> ❌ [LOSS]
+   Real Account Status: ACTIVE
+   Demo PnL: $-50.35 | Real PnL: $-4.20
+--------------------------------------------------
+[2025-11-18 15:00] SELL at $4010.72 -> ❌ [LOSS]
+   Real Account Status: ACTIVE
+   Demo PnL: $-49.19 | Real PnL: $-8.20
+--------------------------------------------------
+[2025-11-18 14:15] SELL at $4012.92 -> ❌ [LOSS]
+   Real Account Status: GATED (SKIPPED)
+   Demo PnL: $-51.56 | Real PnL: $+0.00
+--------------------------------------------------
+[2025-11-18 14:00] SELL at $4011.45 -> ❌ [LOSS]
+   Real Account Status: ACTIVE
+   Demo PnL: $-45.95 | Real PnL: $-9.19
+--------------------------------------------------
+[2025-10-31 13:30] SELL at $4000.46 -> ❌ [LOSS]
+   Real Account Status: GATED (SKIPPED)
+   Demo PnL: $-49.35 | Real PnL: $+0.00
+--------------------------------------------------
+[2025-10-31 13:00] SELL at $4007.59 -> ❌ [LOSS]
+   Real Account Status: GATED (SKIPPED)
+   Demo PnL: $-52.05 | Real PnL: $+0.00
+--------------------------------------------------
+
+====================================================================================================
+ARCHITECT'S NOTES: PATH TO INCOME
+====================================================================================================
+1. THE PARTIAL_BE STATUS:
+   Notice the 'PARTIAL_BE' trades. These are trades that hit our 1:2 RR target, banked
+   50% profit, but then reversed. This is your 'Daily Income'. It ensures that even
+   if the market doesn't trend to 1:3, you are still growing your capital.
+
+2. THE VOLATILITY GATE:
+   The 'GATED' trades in the log saved your $200 account from high-variance moves.
+   By only taking trades where the SL was < $10.00, we maintained a professional
+   risk profile on the real wallet while letting the demo handle the heavy lifting.
+
+3. NEXT STEP RECOMMENDATION:
+   If the Real Account ROI is positive and the Survival Rate is > 45%, this logic
+   is ready for live micro-lot testing on the Oanda server.
+====================================================================================================

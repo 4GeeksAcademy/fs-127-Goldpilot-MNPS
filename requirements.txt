@@ -21,3 +21,6 @@ ta
 metaapi-cloud-sdk
 APScheduler
 yfinance
+twelvedata
+pytz
+numpy

@@ -20,3 +20,4 @@ backtesting>=0.3.3
 ta
 metaapi-cloud-sdk
 APScheduler
+yfinance

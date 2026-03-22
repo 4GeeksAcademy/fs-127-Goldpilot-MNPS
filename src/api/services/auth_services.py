@@ -1,23 +1,9 @@
 import os
-import requests
 from datetime import date
 from flask import abort
+from flask_mail import Message
 from flask_jwt_extended import create_access_token
 from api.models import db, User
-
-
-def _send_email_resend(to_email, subject, html_body):
-    """Send email via Resend HTTP API (works on Railway)."""
-    api_key = os.getenv("RESEND_API_KEY")
-    from_addr = os.getenv("MAIL_FROM", f"Xsniper <{os.getenv('MAIL_USERNAME', 'noreply@xsniper.app')}>")
-    resp = requests.post(
-        "https://api.resend.com/emails",
-        headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"},
-        json={"from": from_addr, "to": [to_email], "subject": subject, "html": html_body},
-        timeout=15
-    )
-    if not resp.ok:
-        raise Exception(f"Resend error {resp.status_code}: {resp.text}")
 
 
 class AuthService:
@@ -76,10 +62,14 @@ class AuthService:
     @staticmethod
     def _send_verification_email(user):
         """Envia un email con el link de verificacion."""
+        from app import mail
         frontend_url = os.getenv("FRONTEND_URL", "http://localhost:3000").rstrip("/")
         verification_link = f"{frontend_url}/verify?token={user.verification_token}"
 
-        html = f"""
+        msg = Message(
+            subject="Bienvenido a Xsniper — Confirma tu acceso",
+            recipients=[user.email],
+            html=f"""
             <!DOCTYPE html>
             <html lang="es">
             <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
@@ -136,7 +126,8 @@ class AuthService:
             </body>
             </html>
             """
-        _send_email_resend(user.email, "Bienvenido a Xsniper — Confirma tu acceso", html)
+        )
+        mail.send(msg)
 
     @staticmethod
     def verify_email(token):  # NUEVO: metodo para verificar email con el token recibido (NAPOLES)
@@ -208,10 +199,14 @@ class AuthService:
     @staticmethod
     def _send_password_reset_email(user):
         """Envia el email con el enlace para restablecer la contraseña."""
+        from app import mail
         frontend_url = os.getenv("FRONTEND_URL", "http://localhost:3000").rstrip("/")
         confirm_link = f"{frontend_url}/reset-password?token={user.password_change_token}"
 
-        html = f"""
+        msg = Message(
+            subject="Xsniper — Confirma tu cambio de contraseña",
+            recipients=[user.email],
+            html=f"""
             <!DOCTYPE html>
             <html lang="es">
             <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
@@ -258,7 +253,8 @@ class AuthService:
             </body>
             </html>
             """
-        _send_email_resend(user.email, "Xsniper — Confirma tu cambio de contraseña", html)
+        )
+        mail.send(msg)
 
     @staticmethod
     def login(data):

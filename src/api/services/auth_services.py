@@ -28,7 +28,8 @@ def _send_email_via_sendgrid(to_email, subject, html_content):
 
 def _send_email(to_email, subject, html_content):
     """Route email through SendGrid (production) or Flask-Mail (local)."""
-    if os.getenv("SENDGRID_API_KEY"):
+    api_key = os.getenv("SENDGRID_API_KEY", "").strip()
+    if api_key:
         _send_email_via_sendgrid(to_email, subject, html_content)
     else:
         from app import mail

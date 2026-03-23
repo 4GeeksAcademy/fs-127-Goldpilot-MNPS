@@ -8,6 +8,7 @@ from flask_migrate import Migrate
 from flask_swagger import swagger
 from flask_mail import Mail  # NUEVO: importamos Flask-Mail para envio de emails
 from flask_jwt_extended import JWTManager
+from flask_cors import CORS
 from api.utils import APIException, generate_sitemap
 from api.models import db
 from api.routes import api
@@ -21,6 +22,7 @@ static_file_dir = os.path.join(os.path.dirname(
     os.path.realpath(__file__)), '../dist/')
 app = Flask(__name__)
 app.url_map.strict_slashes = False
+CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 # database condiguration
 db_url = os.getenv("DATABASE_URL")

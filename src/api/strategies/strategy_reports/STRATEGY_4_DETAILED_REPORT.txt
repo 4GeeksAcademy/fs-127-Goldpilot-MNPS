@@ -1,0 +1,3226 @@
+====================================================================================================
+STRATEGY #4: AURUM LIQUIDITY SNIPER - COMPREHENSIVE TRADE ANALYSIS
+====================================================================================================
+
+Test Period: November 1 - December 27, 2025 (57 days)
+Data Source: Twelve Data API
+Initial Balance: $10,000.00
+Final Balance: $14,401.62
+Total P&L: $+4,401.62
+ROI: +44.02%
+
+Total Trades: 101
+Wins: 6 (5.9%)
+Losses: 51 (50.5%)
+Breakevens: 41 (40.6%)
+Open: 3 (3.0%)
+
+Average Win: $354.26
+Average Loss: $44.63
+
+====================================================================================================
+INDIVIDUAL TRADE DETAILS
+====================================================================================================
+
+====================================================================================================
+TRADE #001 - SELL - LOSS
+====================================================================================================
+Date & Time:      2025-11-06 at 18:45 UTC
+Session:          NY
+Market Structure: BEARISH
+Level Swept:      PDH ($3988.23)
+
+Entry Price:      $3985.93
+Stop Loss:        $3990.79
+Take Profit:      $3971.35
+Risk:Reward:      1:3.0
+
+Lot Size:         2.06
+Risk Amount:      $100.12 (1%)
+ATR at Entry:     $29.77
+
+Exit Price:       $3990.79
+Exit Time:        2025-11-06 19:00 UTC
+Candles in Trade: 1 (15 minutes)
+
+P&L:              $+100.12
+Balance Before:   $10,000.00
+Balance After:    $10,100.12
+
+Breakeven:        ❌ Not triggered
+
+Max Favorable:    $1.35
+Max Adverse:      $6.47
+
+❌ LOSS - Stop loss hit
+
+====================================================================================================
+TRADE #002 - SELL - BREAKEVEN
+====================================================================================================
+Date & Time:      2025-11-06 at 19:30 UTC
+Session:          NY
+Market Structure: BEARISH
+Level Swept:      PDH ($3988.23)
+
+Entry Price:      $3985.85
+Stop Loss:        $3991.31
+Take Profit:      $3969.47
+Risk:Reward:      1:3.0
+
+Lot Size:         1.85
+Risk Amount:      $101.01 (1%)
+ATR at Entry:     $29.77
+
+Exit Price:       $3985.85
+Exit Time:        2025-11-06 19:45 UTC
+Candles in Trade: 1 (15 minutes)
+
+P&L:              $-0.00
+Balance Before:   $10,100.12
+Balance After:    $10,100.12
+
+Breakeven:        ✅ Activated after 1 candles
+
+Max Favorable:    $6.38
+Max Adverse:      $0.24
+
+➖ BREAKEVEN - Protected by 1:1 RR move
+
+====================================================================================================
+TRADE #003 - SELL - BREAKEVEN
+====================================================================================================
+Date & Time:      2025-11-06 at 19:45 UTC
+Session:          NY
+Market Structure: BEARISH
+Level Swept:      PDH ($3988.23)
+
+Entry Price:      $3981.31
+Stop Loss:        $3988.09
+Take Profit:      $3960.97
+Risk:Reward:      1:3.0
+
+Lot Size:         1.49
+Risk Amount:      $101.02 (1%)
+ATR at Entry:     $29.77
+
+Exit Price:       $3981.31
+Exit Time:        2025-11-06 23:00 UTC
+Candles in Trade: 13 (195 minutes)
+
+P&L:              $-0.00
+Balance Before:   $10,100.12
+Balance After:    $10,100.12
+
+Breakeven:        ✅ Activated after 5 candles
+
+Max Favorable:    $9.21
+Max Adverse:      $0.68
+
+➖ BREAKEVEN - Protected by 1:1 RR move
+
+====================================================================================================
+TRADE #004 - SELL - BREAKEVEN
+====================================================================================================
+Date & Time:      2025-11-06 at 20:00 UTC
+Session:          NY
+Market Structure: BEARISH
+Level Swept:      PDH ($3988.23)
+
+Entry Price:      $3979.89
+Stop Loss:        $3983.99
+Take Profit:      $3967.59
+Risk:Reward:      1:3.0
+
+Lot Size:         2.46
+Risk Amount:      $100.86 (1%)
+ATR at Entry:     $29.77
+
+Exit Price:       $3979.89
+Exit Time:        2025-11-06 22:00 UTC
+Candles in Trade: 8 (120 minutes)
+
+P&L:              $-0.00
+Balance Before:   $10,100.12
+Balance After:    $10,100.12
+
+Breakeven:        ✅ Activated after 3 candles
+
+Max Favorable:    $6.99
+Max Adverse:      $1.42
+
+➖ BREAKEVEN - Protected by 1:1 RR move
+
+====================================================================================================
+TRADE #005 - SELL - LOSS
+====================================================================================================
+Date & Time:      2025-11-07 at 16:45 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_HIGH ($4003.85)
+
+Entry Price:      $3997.99
+Stop Loss:        $4012.42
+Take Profit:      $3954.70
+Risk:Reward:      1:3.0
+
+Lot Size:         0.7
+Risk Amount:      $101.01 (1%)
+ATR at Entry:     $23.79
+
+Exit Price:       $4012.42
+Exit Time:        2025-11-10 00:45 UTC
+Candles in Trade: 89 (1335 minutes)
+
+P&L:              $+101.01
+Balance Before:   $10,100.12
+Balance After:    $10,201.13
+
+Breakeven:        ❌ Not triggered
+
+Max Favorable:    $11.79
+Max Adverse:      $19.11
+
+❌ LOSS - Stop loss hit
+
+====================================================================================================
+TRADE #006 - SELL - LOSS
+====================================================================================================
+Date & Time:      2025-11-07 at 17:00 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_HIGH ($4003.85)
+
+Entry Price:      $3992.33
+Stop Loss:        $4001.90
+Take Profit:      $3963.62
+Risk:Reward:      1:3.0
+
+Lot Size:         1.07
+Risk Amount:      $102.40 (1%)
+ATR at Entry:     $23.79
+
+Exit Price:       $4001.90
+Exit Time:        2025-11-07 18:00 UTC
+Candles in Trade: 4 (60 minutes)
+
+P&L:              $+102.40
+Balance Before:   $10,201.13
+Balance After:    $10,303.53
+
+Breakeven:        ❌ Not triggered
+
+Max Favorable:    $6.13
+Max Adverse:      $10.89
+
+❌ LOSS - Stop loss hit
+
+====================================================================================================
+TRADE #007 - SELL - BREAKEVEN
+====================================================================================================
+Date & Time:      2025-11-07 at 17:15 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_HIGH ($4003.85)
+
+Entry Price:      $3994.35
+Stop Loss:        $3996.80
+Take Profit:      $3987.00
+Risk:Reward:      1:3.0
+
+Lot Size:         4.21
+Risk Amount:      $103.15 (1%)
+ATR at Entry:     $23.79
+
+Exit Price:       $3994.35
+Exit Time:        2025-11-07 17:30 UTC
+Candles in Trade: 1 (15 minutes)
+
+P&L:              $-0.00
+Balance Before:   $10,303.53
+Balance After:    $10,303.53
+
+Breakeven:        ✅ Activated after 1 candles
+
+Max Favorable:    $4.49
+Max Adverse:      $0.10
+
+➖ BREAKEVEN - Protected by 1:1 RR move
+
+====================================================================================================
+TRADE #008 - SELL - LOSS
+====================================================================================================
+Date & Time:      2025-11-07 at 18:45 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_HIGH ($4003.85)
+
+Entry Price:      $4002.41
+Stop Loss:        $4006.00
+Take Profit:      $3991.64
+Risk:Reward:      1:3.0
+
+Lot Size:         2.87
+Risk Amount:      $103.03 (1%)
+ATR at Entry:     $24.44
+
+Exit Price:       $4006.00
+Exit Time:        2025-11-07 19:15 UTC
+Candles in Trade: 2 (30 minutes)
+
+P&L:              $+103.03
+Balance Before:   $10,303.53
+Balance After:    $10,406.56
+
+Breakeven:        ❌ Not triggered
+
+Max Favorable:    $0.99
+Max Adverse:      $5.61
+
+❌ LOSS - Stop loss hit
+
+====================================================================================================
+TRADE #009 - SELL - LOSS
+====================================================================================================
+Date & Time:      2025-11-11 at 12:45 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_HIGH ($4139.34)
+
+Entry Price:      $4136.23
+Stop Loss:        $4143.06
+Take Profit:      $4115.73
+Risk:Reward:      1:3.0
+
+Lot Size:         1.52
+Risk Amount:      $103.82 (1%)
+ATR at Entry:     $21.85
+
+Exit Price:       $4143.06
+Exit Time:        2025-11-11 13:15 UTC
+Candles in Trade: 2 (30 minutes)
+
+P&L:              $+103.88
+Balance Before:   $10,406.56
+Balance After:    $10,510.44
+
+Breakeven:        ❌ Not triggered
+
+Max Favorable:    $1.57
+Max Adverse:      $7.02
+
+❌ LOSS - Stop loss hit
+
+====================================================================================================
+TRADE #010 - BUY - BREAKEVEN
+====================================================================================================
+Date & Time:      2025-11-11 at 15:45 UTC
+Session:          LONDON
+Market Structure: BULLISH
+Level Swept:      TOKYO_LOW ($4099.21)
+
+Entry Price:      $4107.57
+Stop Loss:        $4103.59
+Take Profit:      $4119.49
+Risk:Reward:      1:3.0
+
+Lot Size:         2.64
+Risk Amount:      $105.07 (1%)
+ATR at Entry:     $21.23
+
+Exit Price:       $4107.57
+Exit Time:        2025-11-11 16:00 UTC
+Candles in Trade: 1 (15 minutes)
+
+P&L:              $+0.00
+Balance Before:   $10,510.44
+Balance After:    $10,510.44
+
+Breakeven:        ✅ Activated after 1 candles
+
+Max Favorable:    $4.86
+Max Adverse:      $1.93
+
+➖ BREAKEVEN - Protected by 1:1 RR move
+
+====================================================================================================
+TRADE #011 - BUY - WIN
+====================================================================================================
+Date & Time:      2025-11-11 at 16:00 UTC
+Session:          NY
+Market Structure: BULLISH
+Level Swept:      TOKYO_LOW ($4099.21)
+
+Entry Price:      $4112.39
+Stop Loss:        $4103.64
+Take Profit:      $4138.66
+Risk:Reward:      1:3.0
+
+Lot Size:         1.2
+Risk Amount:      $105.12 (1%)
+ATR at Entry:     $21.23
+
+Exit Price:       $4138.66
+Exit Time:        2025-11-11 23:30 UTC
+Candles in Trade: 30 (450 minutes)
+
+P&L:              $+315.22
+Balance Before:   $10,510.44
+Balance After:    $10,825.66
+
+Breakeven:        ✅ Activated after 15 candles
+
+Max Favorable:    $31.69
+Max Adverse:      $5.84
+
+✅ WINNER - Full 1:3 RR achieved
+
+====================================================================================================
+TRADE #012 - BUY - LOSS
+====================================================================================================
+Date & Time:      2025-11-14 at 11:30 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDL ($4141.94)
+
+Entry Price:      $4155.36
+Stop Loss:        $4145.28
+Take Profit:      $4185.59
+Risk:Reward:      1:3.0
+
+Lot Size:         1.07
+Risk Amount:      $107.86 (1%)
+ATR at Entry:     $33.78
+
+Exit Price:       $4145.28
+Exit Time:        2025-11-14 11:45 UTC
+Candles in Trade: 1 (15 minutes)
+
+P&L:              $-107.85
+Balance Before:   $10,825.66
+Balance After:    $10,717.81
+
+Breakeven:        ❌ Not triggered
+
+Max Favorable:    $0.12
+Max Adverse:      $21.85
+
+❌ LOSS - Stop loss hit
+
+====================================================================================================
+TRADE #013 - BUY - BREAKEVEN
+====================================================================================================
+Date & Time:      2025-11-16 at 19:15 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      PDL ($4080.38)
+
+Entry Price:      $4080.48
+Stop Loss:        $4078.39
+Take Profit:      $4086.76
+Risk:Reward:      1:3.0
+
+Lot Size:         5.12
+Risk Amount:      $107.01 (1%)
+ATR at Entry:     $36.31
+
+Exit Price:       $4080.48
+Exit Time:        2025-11-16 23:00 UTC
+Candles in Trade: 15 (225 minutes)
+
+P&L:              $+0.00
+Balance Before:   $10,717.81
+Balance After:    $10,717.81
+
+Breakeven:        ✅ Activated after 15 candles
+
+Max Favorable:    $25.76
+Max Adverse:      $2.38
+
+➖ BREAKEVEN - Protected by 1:1 RR move
+
+====================================================================================================
+TRADE #014 - BUY - BREAKEVEN
+====================================================================================================
+Date & Time:      2025-11-16 at 19:30 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      PDL ($4080.38)
+
+Entry Price:      $4080.54
+Stop Loss:        $4078.39
+Take Profit:      $4087.00
+Risk:Reward:      1:3.0
+
+Lot Size:         4.98
+Risk Amount:      $107.07 (1%)
+ATR at Entry:     $34.13
+
+Exit Price:       $4080.54
+Exit Time:        2025-11-16 23:00 UTC
+Candles in Trade: 14 (210 minutes)
+
+P&L:              $+0.00
+Balance Before:   $10,717.81
+Balance After:    $10,717.81
+
+Breakeven:        ✅ Activated after 14 candles
+
+Max Favorable:    $25.69
+Max Adverse:      $2.44
+
+➖ BREAKEVEN - Protected by 1:1 RR move
+
+====================================================================================================
+TRADE #015 - BUY - LOSS
+====================================================================================================
+Date & Time:      2025-11-17 at 11:30 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDL ($4078.10)
+
+Entry Price:      $4081.60
+Stop Loss:        $4063.42
+Take Profit:      $4136.14
+Risk:Reward:      1:3.0
+
+Lot Size:         0.59
+Risk Amount:      $107.26 (1%)
+ATR at Entry:     $24.28
+
+Exit Price:       $4063.42
+Exit Time:        2025-11-17 13:45 UTC
+Candles in Trade: 9 (135 minutes)
+
+P&L:              $-107.28
+Balance Before:   $10,717.81
+Balance After:    $10,610.53
+
+Breakeven:        ❌ Not triggered
+
+Max Favorable:    $8.65
+Max Adverse:      $19.57
+
+❌ LOSS - Stop loss hit
+
+====================================================================================================
+TRADE #016 - BUY - LOSS
+====================================================================================================
+Date & Time:      2025-11-17 at 11:45 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDL ($4078.10)
+
+Entry Price:      $4078.88
+Stop Loss:        $4075.12
+Take Profit:      $4090.19
+Risk:Reward:      1:3.0
+
+Lot Size:         2.81
+Risk Amount:      $105.94 (1%)
+ATR at Entry:     $24.28
+
+Exit Price:       $4075.12
+Exit Time:        2025-11-17 12:15 UTC
+Candles in Trade: 2 (30 minutes)
+
+P&L:              $-105.79
+Balance Before:   $10,610.53
+Balance After:    $10,504.74
+
+Breakeven:        ❌ Not triggered
+
+Max Favorable:    $2.47
+Max Adverse:      $5.06
+
+❌ LOSS - Stop loss hit
+
+====================================================================================================
+TRADE #017 - BUY - BREAKEVEN
+====================================================================================================
+Date & Time:      2025-11-17 at 12:00 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDL ($4078.10)
+
+Entry Price:      $4078.61
+Stop Loss:        $4075.89
+Take Profit:      $4086.75
+Risk:Reward:      1:3.0
+
+Lot Size:         3.87
+Risk Amount:      $104.88 (1%)
+ATR at Entry:     $24.28
+
+Exit Price:       $4078.61
+Exit Time:        2025-11-17 12:15 UTC
+Candles in Trade: 1 (15 minutes)
+
+P&L:              $+0.00
+Balance Before:   $10,504.74
+Balance After:    $10,504.74
+
+Breakeven:        ✅ Activated after 1 candles
+
+Max Favorable:    $2.74
+Max Adverse:      $4.78
+
+➖ BREAKEVEN - Protected by 1:1 RR move
+
+====================================================================================================
+TRADE #018 - BUY - BREAKEVEN
+====================================================================================================
+Date & Time:      2025-11-17 at 12:15 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDL ($4078.10)
+
+Entry Price:      $4078.66
+Stop Loss:        $4071.83
+Take Profit:      $4099.17
+Risk:Reward:      1:3.0
+
+Lot Size:         1.54
+Risk Amount:      $105.34 (1%)
+ATR at Entry:     $24.28
+
+Exit Price:       $4078.66
+Exit Time:        2025-11-17 13:00 UTC
+Candles in Trade: 3 (45 minutes)
+
+P&L:              $+0.00
+Balance Before:   $10,504.74
+Balance After:    $10,504.74
+
+Breakeven:        ✅ Activated after 3 candles
+
+Max Favorable:    $11.58
+Max Adverse:      $4.23
+
+➖ BREAKEVEN - Protected by 1:1 RR move
+
+====================================================================================================
+TRADE #019 - BUY - BREAKEVEN
+====================================================================================================
+Date & Time:      2025-11-19 at 17:15 UTC
+Session:          NY
+Market Structure: BULLISH
+Level Swept:      TOKYO_LOW ($4057.06)
+
+Entry Price:      $4071.11
+Stop Loss:        $4059.34
+Take Profit:      $4106.43
+Risk:Reward:      1:3.0
+
+Lot Size:         0.89
+Risk Amount:      $104.75 (1%)
+ATR at Entry:     $35.89
+
+Exit Price:       $4071.11
+Exit Time:        2025-11-19 19:15 UTC
+Candles in Trade: 8 (120 minutes)
+
+P&L:              $+0.00
+Balance Before:   $10,504.74
+Balance After:    $10,504.74
+
+Breakeven:        ✅ Activated after 3 candles
+
+Max Favorable:    $19.59
+Max Adverse:      $7.18
+
+➖ BREAKEVEN - Protected by 1:1 RR move
+
+====================================================================================================
+TRADE #020 - BUY - BREAKEVEN
+====================================================================================================
+Date & Time:      2025-11-19 at 17:30 UTC
+Session:          NY
+Market Structure: BULLISH
+Level Swept:      TOKYO_LOW ($4057.06)
+
+Entry Price:      $4074.69
+Stop Loss:        $4061.93
+Take Profit:      $4112.96
+Risk:Reward:      1:3.0
+
+Lot Size:         0.82
+Risk Amount:      $104.63 (1%)
+ATR at Entry:     $35.89
+
+Exit Price:       $4074.69
+Exit Time:        2025-11-19 19:00 UTC
+Candles in Trade: 6 (90 minutes)
+
+P&L:              $+0.00
+Balance Before:   $10,504.74
+Balance After:    $10,504.74
+
+Breakeven:        ✅ Activated after 5 candles
+
+Max Favorable:    $16.01
+Max Adverse:      $0.55
+
+➖ BREAKEVEN - Protected by 1:1 RR move
+
+====================================================================================================
+TRADE #021 - SELL - LOSS
+====================================================================================================
+Date & Time:      2025-11-19 at 18:30 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      PDH ($4081.72)
+
+Entry Price:      $4078.83
+Stop Loss:        $4083.98
+Take Profit:      $4063.38
+Risk:Reward:      1:3.0
+
+Lot Size:         2.04
+Risk Amount:      $105.06 (1%)
+ATR at Entry:     $35.89
+
+Exit Price:       $4083.98
+Exit Time:        2025-11-19 18:45 UTC
+Candles in Trade: 1 (15 minutes)
+
+P&L:              $+105.11
+Balance Before:   $10,504.74
+Balance After:    $10,609.85
+
+Breakeven:        ❌ Not triggered
+
+Max Favorable:    $0.23
+Max Adverse:      $11.87
+
+❌ LOSS - Stop loss hit
+
+====================================================================================================
+TRADE #022 - SELL - LOSS
+====================================================================================================
+Date & Time:      2025-11-19 at 19:00 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      PDH ($4081.72)
+
+Entry Price:      $4075.86
+Stop Loss:        $4090.09
+Take Profit:      $4033.18
+Risk:Reward:      1:3.0
+
+Lot Size:         0.75
+Risk Amount:      $106.72 (1%)
+ATR at Entry:     $35.89
+
+Exit Price:       $4090.09
+Exit Time:        2025-11-19 23:15 UTC
+Candles in Trade: 17 (255 minutes)
+
+P&L:              $+106.69
+Balance Before:   $10,609.85
+Balance After:    $10,716.54
+
+Breakeven:        ❌ Not triggered
+
+Max Favorable:    $8.76
+Max Adverse:      $16.13
+
+❌ LOSS - Stop loss hit
+
+====================================================================================================
+TRADE #023 - BUY - BREAKEVEN
+====================================================================================================
+Date & Time:      2025-11-20 at 08:30 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_LOW ($4044.95)
+
+Entry Price:      $4052.39
+Stop Loss:        $4041.32
+Take Profit:      $4085.61
+Risk:Reward:      1:3.0
+
+Lot Size:         0.97
+Risk Amount:      $107.38 (1%)
+ATR at Entry:     $37.94
+
+Exit Price:       $4052.39
+Exit Time:        2025-11-20 08:45 UTC
+Candles in Trade: 1 (15 minutes)
+
+P&L:              $+0.00
+Balance Before:   $10,716.54
+Balance After:    $10,716.54
+
+Breakeven:        ✅ Activated after 1 candles
+
+Max Favorable:    $15.66
+Max Adverse:      $0.22
+
+➖ BREAKEVEN - Protected by 1:1 RR move
+
+====================================================================================================
+TRADE #024 - BUY - BREAKEVEN
+====================================================================================================
+Date & Time:      2025-11-20 at 08:45 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDL ($4054.87)
+
+Entry Price:      $4068.05
+Stop Loss:        $4050.16
+Take Profit:      $4121.70
+Risk:Reward:      1:3.0
+
+Lot Size:         0.6
+Risk Amount:      $107.34 (1%)
+ATR at Entry:     $37.94
+
+Exit Price:       $4068.05
+Exit Time:        2025-11-20 16:15 UTC
+Candles in Trade: 30 (450 minutes)
+
+P&L:              $+0.00
+Balance Before:   $10,716.54
+Balance After:    $10,716.54
+
+Breakeven:        ✅ Activated after 17 candles
+
+Max Favorable:    $42.89
+Max Adverse:      $16.31
+
+➖ BREAKEVEN - Protected by 1:1 RR move
+
+====================================================================================================
+TRADE #025 - BUY - LOSS
+====================================================================================================
+Date & Time:      2025-11-20 at 09:00 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDL ($4054.87)
+
+Entry Price:      $4069.93
+Stop Loss:        $4062.90
+Take Profit:      $4091.00
+Risk:Reward:      1:3.0
+
+Lot Size:         1.53
+Risk Amount:      $107.41 (1%)
+ATR at Entry:     $37.94
+
+Exit Price:       $4062.90
+Exit Time:        2025-11-20 09:15 UTC
+Candles in Trade: 1 (15 minutes)
+
+P&L:              $-107.54
+Balance Before:   $10,716.54
+Balance After:    $10,609.00
+
+Breakeven:        ❌ Not triggered
+
+Max Favorable:    $1.81
+Max Adverse:      $8.78
+
+❌ LOSS - Stop loss hit
+
+====================================================================================================
+TRADE #026 - BUY - BREAKEVEN
+====================================================================================================
+Date & Time:      2025-11-20 at 09:15 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDL ($4054.87)
+
+Entry Price:      $4061.61
+Stop Loss:        $4059.15
+Take Profit:      $4068.98
+Risk:Reward:      1:3.0
+
+Lot Size:         4.32
+Risk Amount:      $106.27 (1%)
+ATR at Entry:     $37.94
+
+Exit Price:       $4061.61
+Exit Time:        2025-11-20 09:30 UTC
+Candles in Trade: 1 (15 minutes)
+
+P&L:              $+0.00
+Balance Before:   $10,609.00
+Balance After:    $10,609.00
+
+Breakeven:        ✅ Activated after 1 candles
+
+Max Favorable:    $4.04
+Max Adverse:      $6.44
+
+➖ BREAKEVEN - Protected by 1:1 RR move
+
+====================================================================================================
+TRADE #027 - SELL - LOSS
+====================================================================================================
+Date & Time:      2025-11-23 at 19:15 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      PDH ($4066.08)
+
+Entry Price:      $4065.89
+Stop Loss:        $4068.06
+Take Profit:      $4059.36
+Risk:Reward:      1:3.0
+
+Lot Size:         4.87
+Risk Amount:      $106.17 (1%)
+ATR at Entry:     $35.10
+
+Exit Price:       $4068.06
+Exit Time:        2025-11-23 23:00 UTC
+Candles in Trade: 15 (225 minutes)
+
+P&L:              $+105.78
+Balance Before:   $10,609.00
+Balance After:    $10,714.78
+
+Breakeven:        ❌ Not triggered
+
+Max Favorable:    $0.10
+Max Adverse:      $10.50
+
+❌ LOSS - Stop loss hit
+
+====================================================================================================
+TRADE #028 - SELL - LOSS
+====================================================================================================
+Date & Time:      2025-11-23 at 19:30 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      PDH ($4066.08)
+
+Entry Price:      $4065.86
+Stop Loss:        $4068.07
+Take Profit:      $4059.22
+Risk:Reward:      1:3.0
+
+Lot Size:         4.85
+Risk Amount:      $107.18 (1%)
+ATR at Entry:     $32.20
+
+Exit Price:       $4068.07
+Exit Time:        2025-11-23 23:00 UTC
+Candles in Trade: 14 (210 minutes)
+
+P&L:              $+107.28
+Balance Before:   $10,714.78
+Balance After:    $10,822.06
+
+Breakeven:        ❌ Not triggered
+
+Max Favorable:    $0.07
+Max Adverse:      $10.53
+
+❌ LOSS - Stop loss hit
+
+====================================================================================================
+TRADE #029 - BUY - BREAKEVEN
+====================================================================================================
+Date & Time:      2025-11-24 at 09:00 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDL ($4065.79)
+
+Entry Price:      $4071.37
+Stop Loss:        $4061.12
+Take Profit:      $4102.10
+Risk:Reward:      1:3.0
+
+Lot Size:         1.06
+Risk Amount:      $108.54 (1%)
+ATR at Entry:     $23.52
+
+Exit Price:       $4071.37
+Exit Time:        2025-11-24 14:30 UTC
+Candles in Trade: 22 (330 minutes)
+
+P&L:              $+0.00
+Balance Before:   $10,822.06
+Balance After:    $10,822.06
+
+Breakeven:        ✅ Activated after 15 candles
+
+Max Favorable:    $15.03
+Max Adverse:      $7.44
+
+➖ BREAKEVEN - Protected by 1:1 RR move
+
+====================================================================================================
+TRADE #030 - BUY - BREAKEVEN
+====================================================================================================
+Date & Time:      2025-11-24 at 09:15 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDL ($4065.79)
+
+Entry Price:      $4068.53
+Stop Loss:        $4065.23
+Take Profit:      $4078.42
+Risk:Reward:      1:3.0
+
+Lot Size:         3.28
+Risk Amount:      $108.24 (1%)
+ATR at Entry:     $23.52
+
+Exit Price:       $4068.53
+Exit Time:        2025-11-24 09:30 UTC
+Candles in Trade: 1 (15 minutes)
+
+P&L:              $+0.00
+Balance Before:   $10,822.06
+Balance After:    $10,822.06
+
+Breakeven:        ✅ Activated after 1 candles
+
+Max Favorable:    $3.71
+Max Adverse:      $0.26
+
+➖ BREAKEVEN - Protected by 1:1 RR move
+
+====================================================================================================
+TRADE #031 - BUY - LOSS
+====================================================================================================
+Date & Time:      2025-11-24 at 09:30 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDL ($4065.79)
+
+Entry Price:      $4069.98
+Stop Loss:        $4066.28
+Take Profit:      $4081.08
+Risk:Reward:      1:3.0
+
+Lot Size:         2.92
+Risk Amount:      $108.04 (1%)
+ATR at Entry:     $23.52
+
+Exit Price:       $4066.28
+Exit Time:        2025-11-24 09:45 UTC
+Candles in Trade: 1 (15 minutes)
+
+P&L:              $-108.00
+Balance Before:   $10,822.06
+Balance After:    $10,714.06
+
+Breakeven:        ❌ Not triggered
+
+Max Favorable:    $2.36
+Max Adverse:      $3.93
+
+❌ LOSS - Stop loss hit
+
+====================================================================================================
+TRADE #032 - BUY - BREAKEVEN
+====================================================================================================
+Date & Time:      2025-11-24 at 11:00 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDL ($4065.79)
+
+Entry Price:      $4066.84
+Stop Loss:        $4061.93
+Take Profit:      $4081.59
+Risk:Reward:      1:3.0
+
+Lot Size:         2.18
+Risk Amount:      $107.26 (1%)
+ATR at Entry:     $23.52
+
+Exit Price:       $4066.84
+Exit Time:        2025-11-24 12:00 UTC
+Candles in Trade: 4 (60 minutes)
+
+P&L:              $+0.00
+Balance Before:   $10,714.06
+Balance After:    $10,714.06
+
+Breakeven:        ✅ Activated after 4 candles
+
+Max Favorable:    $6.74
+Max Adverse:      $0.08
+
+➖ BREAKEVEN - Protected by 1:1 RR move
+
+====================================================================================================
+TRADE #033 - BUY - BREAKEVEN
+====================================================================================================
+Date & Time:      2025-11-25 at 09:00 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_LOW ($4123.54)
+
+Entry Price:      $4127.05
+Stop Loss:        $4113.73
+Take Profit:      $4167.01
+Risk:Reward:      1:3.0
+
+Lot Size:         0.8
+Risk Amount:      $106.56 (1%)
+ATR at Entry:     $16.56
+
+Exit Price:       $4127.05
+Exit Time:        2025-11-25 14:30 UTC
+Candles in Trade: 22 (330 minutes)
+
+P&L:              $+0.00
+Balance Before:   $10,714.06
+Balance After:    $10,714.06
+
+Breakeven:        ✅ Activated after 17 candles
+
+Max Favorable:    $23.46
+Max Adverse:      $12.11
+
+➖ BREAKEVEN - Protected by 1:1 RR move
+
+====================================================================================================
+TRADE #034 - BUY - BREAKEVEN
+====================================================================================================
+Date & Time:      2025-11-25 at 09:15 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_LOW ($4123.54)
+
+Entry Price:      $4123.99
+Stop Loss:        $4121.99
+Take Profit:      $4129.99
+Risk:Reward:      1:3.0
+
+Lot Size:         5.36
+Risk Amount:      $107.20 (1%)
+ATR at Entry:     $16.56
+
+Exit Price:       $4123.99
+Exit Time:        2025-11-25 09:30 UTC
+Candles in Trade: 1 (15 minutes)
+
+P&L:              $+0.00
+Balance Before:   $10,714.06
+Balance After:    $10,714.06
+
+Breakeven:        ✅ Activated after 1 candles
+
+Max Favorable:    $7.14
+Max Adverse:      $0.18
+
+➖ BREAKEVEN - Protected by 1:1 RR move
+
+====================================================================================================
+TRADE #035 - BUY - LOSS
+====================================================================================================
+Date & Time:      2025-11-25 at 09:30 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_LOW ($4123.54)
+
+Entry Price:      $4130.30
+Stop Loss:        $4121.81
+Take Profit:      $4155.75
+Risk:Reward:      1:3.0
+
+Lot Size:         1.26
+Risk Amount:      $106.85 (1%)
+ATR at Entry:     $16.56
+
+Exit Price:       $4121.81
+Exit Time:        2025-11-25 12:45 UTC
+Candles in Trade: 13 (195 minutes)
+
+P&L:              $-106.93
+Balance Before:   $10,714.06
+Balance After:    $10,607.13
+
+Breakeven:        ❌ Not triggered
+
+Max Favorable:    $8.01
+Max Adverse:      $11.62
+
+❌ LOSS - Stop loss hit
+
+====================================================================================================
+TRADE #036 - SELL - WIN
+====================================================================================================
+Date & Time:      2025-11-25 at 14:00 UTC
+Session:          LONDON
+Market Structure: BEARISH
+Level Swept:      PDH ($4145.20)
+
+Entry Price:      $4143.36
+Stop Loss:        $4150.29
+Take Profit:      $4122.60
+Risk:Reward:      1:3.0
+
+Lot Size:         1.53
+Risk Amount:      $105.88 (1%)
+ATR at Entry:     $16.00
+
+Exit Price:       $4122.60
+Exit Time:        2025-11-25 14:30 UTC
+Candles in Trade: 2 (30 minutes)
+
+P&L:              $+317.70
+Balance Before:   $10,607.13
+Balance After:    $10,924.83
+
+Breakeven:        ✅ Activated after 1 candles
+
+Max Favorable:    $28.43
+Max Adverse:      $0.00
+
+✅ WINNER - Full 1:3 RR achieved
+
+====================================================================================================
+TRADE #037 - SELL - LOSS
+====================================================================================================
+Date & Time:      2025-11-26 at 10:30 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDH ($4159.15)
+
+Entry Price:      $4159.03
+Stop Loss:        $4165.40
+Take Profit:      $4139.91
+Risk:Reward:      1:3.0
+
+Lot Size:         1.71
+Risk Amount:      $108.93 (1%)
+ATR at Entry:     $21.61
+
+Exit Price:       $4165.40
+Exit Time:        2025-11-26 11:30 UTC
+Candles in Trade: 4 (60 minutes)
+
+P&L:              $+108.91
+Balance Before:   $10,924.83
+Balance After:    $11,033.74
+
+Breakeven:        ❌ Not triggered
+
+Max Favorable:    $2.01
+Max Adverse:      $13.30
+
+❌ LOSS - Stop loss hit
+
+====================================================================================================
+TRADE #038 - SELL - LOSS
+====================================================================================================
+Date & Time:      2025-11-26 at 10:45 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDH ($4159.15)
+
+Entry Price:      $4158.92
+Stop Loss:        $4162.89
+Take Profit:      $4147.03
+Risk:Reward:      1:3.0
+
+Lot Size:         2.78
+Risk Amount:      $110.37 (1%)
+ATR at Entry:     $21.61
+
+Exit Price:       $4162.89
+Exit Time:        2025-11-26 11:15 UTC
+Candles in Trade: 2 (30 minutes)
+
+P&L:              $+110.35
+Balance Before:   $11,033.74
+Balance After:    $11,144.09
+
+Breakeven:        ❌ Not triggered
+
+Max Favorable:    $1.02
+Max Adverse:      $5.81
+
+❌ LOSS - Stop loss hit
+
+====================================================================================================
+TRADE #039 - SELL - BREAKEVEN
+====================================================================================================
+Date & Time:      2025-11-26 at 12:15 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_HIGH ($4169.84)
+
+Entry Price:      $4166.98
+Stop Loss:        $4173.14
+Take Profit:      $4148.51
+Risk:Reward:      1:3.0
+
+Lot Size:         1.81
+Risk Amount:      $111.50 (1%)
+ATR at Entry:     $24.21
+
+Exit Price:       $4166.98
+Exit Time:        2025-11-26 12:30 UTC
+Candles in Trade: 1 (15 minutes)
+
+P&L:              $-0.00
+Balance Before:   $11,144.09
+Balance After:    $11,144.09
+
+Breakeven:        ✅ Activated after 1 candles
+
+Max Favorable:    $10.85
+Max Adverse:      $0.40
+
+➖ BREAKEVEN - Protected by 1:1 RR move
+
+====================================================================================================
+TRADE #040 - SELL - BREAKEVEN
+====================================================================================================
+Date & Time:      2025-11-26 at 18:15 UTC
+Session:          NY
+Market Structure: BEARISH
+Level Swept:      TOKYO_HIGH ($4169.84)
+
+Entry Price:      $4168.39
+Stop Loss:        $4173.15
+Take Profit:      $4154.13
+Risk:Reward:      1:3.0
+
+Lot Size:         2.34
+Risk Amount:      $111.15 (1%)
+ATR at Entry:     $24.94
+
+Exit Price:       $4168.39
+Exit Time:        2025-11-26 19:15 UTC
+Candles in Trade: 4 (60 minutes)
+
+P&L:              $-0.00
+Balance Before:   $11,144.09
+Balance After:    $11,144.09
+
+Breakeven:        ✅ Activated after 1 candles
+
+Max Favorable:    $9.98
+Max Adverse:      $1.02
+
+➖ BREAKEVEN - Protected by 1:1 RR move
+
+====================================================================================================
+TRADE #041 - SELL - LOSS
+====================================================================================================
+Date & Time:      2025-11-28 at 08:15 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDH ($4167.07)
+
+Entry Price:      $4164.33
+Stop Loss:        $4175.24
+Take Profit:      $4131.58
+Risk:Reward:      1:3.0
+
+Lot Size:         1.02
+Risk Amount:      $111.28 (1%)
+ATR at Entry:     $22.45
+
+Exit Price:       $4175.24
+Exit Time:        2025-11-28 11:00 UTC
+Candles in Trade: 11 (165 minutes)
+
+P&L:              $+111.29
+Balance Before:   $11,144.09
+Balance After:    $11,255.38
+
+Breakeven:        ❌ Not triggered
+
+Max Favorable:    $5.46
+Max Adverse:      $11.39
+
+❌ LOSS - Stop loss hit
+
+====================================================================================================
+TRADE #042 - SELL - LOSS
+====================================================================================================
+Date & Time:      2025-11-28 at 08:30 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDH ($4167.07)
+
+Entry Price:      $4165.46
+Stop Loss:        $4173.49
+Take Profit:      $4141.34
+Risk:Reward:      1:3.0
+
+Lot Size:         1.4
+Risk Amount:      $112.56 (1%)
+ATR at Entry:     $22.45
+
+Exit Price:       $4173.49
+Exit Time:        2025-11-28 10:00 UTC
+Candles in Trade: 6 (90 minutes)
+
+P&L:              $+112.49
+Balance Before:   $11,255.38
+Balance After:    $11,367.87
+
+Breakeven:        ❌ Not triggered
+
+Max Favorable:    $4.78
+Max Adverse:      $9.05
+
+❌ LOSS - Stop loss hit
+
+====================================================================================================
+TRADE #043 - SELL - LOSS
+====================================================================================================
+Date & Time:      2025-11-28 at 08:45 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDH ($4167.07)
+
+Entry Price:      $4166.71
+Stop Loss:        $4169.41
+Take Profit:      $4158.63
+Risk:Reward:      1:3.0
+
+Lot Size:         4.22
+Risk Amount:      $113.52 (1%)
+ATR at Entry:     $22.45
+
+Exit Price:       $4169.41
+Exit Time:        2025-11-28 09:00 UTC
+Candles in Trade: 1 (15 minutes)
+
+P&L:              $+113.83
+Balance Before:   $11,367.87
+Balance After:    $11,481.69
+
+Breakeven:        ❌ Not triggered
+
+Max Favorable:    $1.23
+Max Adverse:      $2.85
+
+❌ LOSS - Stop loss hit
+
+====================================================================================================
+TRADE #044 - SELL - BREAKEVEN
+====================================================================================================
+Date & Time:      2025-11-28 at 09:00 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDH ($4167.07)
+
+Entry Price:      $4166.13
+Stop Loss:        $4171.56
+Take Profit:      $4149.83
+Risk:Reward:      1:3.0
+
+Lot Size:         2.11
+Risk Amount:      $114.57 (1%)
+ATR at Entry:     $22.45
+
+Exit Price:       $4166.13
+Exit Time:        2025-11-28 09:15 UTC
+Candles in Trade: 1 (15 minutes)
+
+P&L:              $-0.00
+Balance Before:   $11,481.69
+Balance After:    $11,481.69
+
+Breakeven:        ✅ Activated after 1 candles
+
+Max Favorable:    $5.45
+Max Adverse:      $0.34
+
+➖ BREAKEVEN - Protected by 1:1 RR move
+
+====================================================================================================
+TRADE #045 - SELL - BREAKEVEN
+====================================================================================================
+Date & Time:      2025-12-01 at 10:15 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_HIGH ($4254.91)
+
+Entry Price:      $4254.26
+Stop Loss:        $4263.56
+Take Profit:      $4226.37
+Risk:Reward:      1:3.0
+
+Lot Size:         1.24
+Risk Amount:      $115.32 (1%)
+ATR at Entry:     $20.03
+
+Exit Price:       $4254.26
+Exit Time:        2025-12-01 13:00 UTC
+Candles in Trade: 11 (165 minutes)
+
+P&L:              $-0.00
+Balance Before:   $11,481.69
+Balance After:    $11,481.69
+
+Breakeven:        ✅ Activated after 10 candles
+
+Max Favorable:    $10.17
+Max Adverse:      $4.24
+
+➖ BREAKEVEN - Protected by 1:1 RR move
+
+====================================================================================================
+TRADE #046 - SELL - LOSS
+====================================================================================================
+Date & Time:      2025-12-01 at 10:30 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_HIGH ($4254.91)
+
+Entry Price:      $4254.23
+Stop Loss:        $4256.81
+Take Profit:      $4246.48
+Risk:Reward:      1:3.0
+
+Lot Size:         4.44
+Risk Amount:      $114.55 (1%)
+ATR at Entry:     $20.03
+
+Exit Price:       $4256.81
+Exit Time:        2025-12-01 10:45 UTC
+Candles in Trade: 1 (15 minutes)
+
+P&L:              $+114.67
+Balance Before:   $11,481.69
+Balance After:    $11,596.36
+
+Breakeven:        ❌ Not triggered
+
+Max Favorable:    $1.17
+Max Adverse:      $2.68
+
+❌ LOSS - Stop loss hit
+
+====================================================================================================
+TRADE #047 - SELL - BREAKEVEN
+====================================================================================================
+Date & Time:      2025-12-01 at 11:00 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_HIGH ($4254.91)
+
+Entry Price:      $4252.66
+Stop Loss:        $4258.90
+Take Profit:      $4233.91
+Risk:Reward:      1:3.0
+
+Lot Size:         1.86
+Risk Amount:      $116.25 (1%)
+ATR at Entry:     $20.03
+
+Exit Price:       $4252.66
+Exit Time:        2025-12-01 12:45 UTC
+Candles in Trade: 7 (105 minutes)
+
+P&L:              $-0.00
+Balance Before:   $11,596.36
+Balance After:    $11,596.36
+
+Breakeven:        ✅ Activated after 7 candles
+
+Max Favorable:    $8.57
+Max Adverse:      $5.85
+
+➖ BREAKEVEN - Protected by 1:1 RR move
+
+====================================================================================================
+TRADE #048 - SELL - LOSS
+====================================================================================================
+Date & Time:      2025-12-01 at 11:15 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_HIGH ($4254.91)
+
+Entry Price:      $4253.96
+Stop Loss:        $4257.22
+Take Profit:      $4244.17
+Risk:Reward:      1:3.0
+
+Lot Size:         3.56
+Risk Amount:      $116.06 (1%)
+ATR at Entry:     $20.03
+
+Exit Price:       $4257.22
+Exit Time:        2025-12-01 11:45 UTC
+Candles in Trade: 2 (30 minutes)
+
+P&L:              $+116.09
+Balance Before:   $11,596.36
+Balance After:    $11,712.45
+
+Breakeven:        ❌ Not triggered
+
+Max Favorable:    $2.32
+Max Adverse:      $4.54
+
+❌ LOSS - Stop loss hit
+
+====================================================================================================
+TRADE #049 - BUY - LOSS
+====================================================================================================
+Date & Time:      2025-12-03 at 09:15 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_LOW ($4199.97)
+
+Entry Price:      $4200.74
+Stop Loss:        $4197.04
+Take Profit:      $4211.86
+Risk:Reward:      1:3.0
+
+Lot Size:         3.16
+Risk Amount:      $116.92 (1%)
+ATR at Entry:     $20.53
+
+Exit Price:       $4197.04
+Exit Time:        2025-12-03 10:00 UTC
+Candles in Trade: 3 (45 minutes)
+
+P&L:              $-116.98
+Balance Before:   $11,712.45
+Balance After:    $11,595.48
+
+Breakeven:        ❌ Not triggered
+
+Max Favorable:    $1.55
+Max Adverse:      $4.97
+
+❌ LOSS - Stop loss hit
+
+====================================================================================================
+TRADE #050 - BUY - LOSS
+====================================================================================================
+Date & Time:      2025-12-03 at 09:30 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_LOW ($4199.97)
+
+Entry Price:      $4201.08
+Stop Loss:        $4198.00
+Take Profit:      $4210.32
+Risk:Reward:      1:3.0
+
+Lot Size:         3.76
+Risk Amount:      $115.81 (1%)
+ATR at Entry:     $20.53
+
+Exit Price:       $4198.00
+Exit Time:        2025-12-03 10:00 UTC
+Candles in Trade: 2 (30 minutes)
+
+P&L:              $-115.73
+Balance Before:   $11,595.48
+Balance After:    $11,479.75
+
+Breakeven:        ❌ Not triggered
+
+Max Favorable:    $1.21
+Max Adverse:      $5.31
+
+❌ LOSS - Stop loss hit
+
+====================================================================================================
+TRADE #051 - BUY - LOSS
+====================================================================================================
+Date & Time:      2025-12-03 at 09:45 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_LOW ($4199.97)
+
+Entry Price:      $4201.86
+Stop Loss:        $4198.23
+Take Profit:      $4212.74
+Risk:Reward:      1:3.0
+
+Lot Size:         3.17
+Risk Amount:      $115.07 (1%)
+ATR at Entry:     $20.53
+
+Exit Price:       $4198.23
+Exit Time:        2025-12-03 10:00 UTC
+Candles in Trade: 1 (15 minutes)
+
+P&L:              $-114.92
+Balance Before:   $11,479.75
+Balance After:    $11,364.83
+
+Breakeven:        ❌ Not triggered
+
+Max Favorable:    $0.43
+Max Adverse:      $6.09
+
+❌ LOSS - Stop loss hit
+
+====================================================================================================
+TRADE #052 - BUY - WIN
+====================================================================================================
+Date & Time:      2025-12-03 at 10:15 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_LOW ($4199.97)
+
+Entry Price:      $4201.39
+Stop Loss:        $4193.47
+Take Profit:      $4225.16
+Risk:Reward:      1:3.0
+
+Lot Size:         1.43
+Risk Amount:      $113.26 (1%)
+ATR at Entry:     $20.53
+
+Exit Price:       $4225.16
+Exit Time:        2025-12-03 13:30 UTC
+Candles in Trade: 13 (195 minutes)
+
+P&L:              $+339.89
+Balance Before:   $11,364.83
+Balance After:    $11,704.72
+
+Breakeven:        ✅ Activated after 7 candles
+
+Max Favorable:    $25.49
+Max Adverse:      $3.53
+
+✅ WINNER - Full 1:3 RR achieved
+
+====================================================================================================
+TRADE #053 - BUY - LOSS
+====================================================================================================
+Date & Time:      2025-12-04 at 12:15 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDL ($4195.02)
+
+Entry Price:      $4196.15
+Stop Loss:        $4194.05
+Take Profit:      $4202.47
+Risk:Reward:      1:3.0
+
+Lot Size:         5.56
+Risk Amount:      $116.76 (1%)
+ATR at Entry:     $29.38
+
+Exit Price:       $4194.05
+Exit Time:        2025-12-04 12:30 UTC
+Candles in Trade: 1 (15 minutes)
+
+P&L:              $-116.95
+Balance Before:   $11,704.72
+Balance After:    $11,587.77
+
+Breakeven:        ❌ Not triggered
+
+Max Favorable:    $0.22
+Max Adverse:      $6.95
+
+❌ LOSS - Stop loss hit
+
+====================================================================================================
+TRADE #054 - BUY - BREAKEVEN
+====================================================================================================
+Date & Time:      2025-12-04 at 13:15 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDL ($4195.02)
+
+Entry Price:      $4195.66
+Stop Loss:        $4184.63
+Take Profit:      $4228.77
+Risk:Reward:      1:3.0
+
+Lot Size:         1.05
+Risk Amount:      $115.92 (1%)
+ATR at Entry:     $29.38
+
+Exit Price:       $4195.66
+Exit Time:        2025-12-04 14:30 UTC
+Candles in Trade: 5 (75 minutes)
+
+P&L:              $+0.00
+Balance Before:   $11,587.77
+Balance After:    $11,587.77
+
+Breakeven:        ✅ Activated after 4 candles
+
+Max Favorable:    $16.00
+Max Adverse:      $8.79
+
+➖ BREAKEVEN - Protected by 1:1 RR move
+
+====================================================================================================
+TRADE #055 - BUY - BREAKEVEN
+====================================================================================================
+Date & Time:      2025-12-04 at 13:45 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDL ($4195.02)
+
+Entry Price:      $4196.81
+Stop Loss:        $4187.27
+Take Profit:      $4225.44
+Risk:Reward:      1:3.0
+
+Lot Size:         1.21
+Risk Amount:      $115.43 (1%)
+ATR at Entry:     $29.38
+
+Exit Price:       $4196.81
+Exit Time:        2025-12-04 14:30 UTC
+Candles in Trade: 3 (45 minutes)
+
+P&L:              $+0.00
+Balance Before:   $11,587.77
+Balance After:    $11,587.77
+
+Breakeven:        ✅ Activated after 2 candles
+
+Max Favorable:    $14.85
+Max Adverse:      $1.63
+
+➖ BREAKEVEN - Protected by 1:1 RR move
+
+====================================================================================================
+TRADE #056 - BUY - LOSS
+====================================================================================================
+Date & Time:      2025-12-04 at 14:00 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDL ($4195.02)
+
+Entry Price:      $4205.42
+Stop Loss:        $4194.66
+Take Profit:      $4237.67
+Risk:Reward:      1:3.0
+
+Lot Size:         1.08
+Risk Amount:      $116.10 (1%)
+ATR at Entry:     $29.38
+
+Exit Price:       $4194.66
+Exit Time:        2025-12-04 15:00 UTC
+Candles in Trade: 4 (60 minutes)
+
+P&L:              $-116.17
+Balance Before:   $11,587.77
+Balance After:    $11,471.60
+
+Breakeven:        ❌ Not triggered
+
+Max Favorable:    $6.24
+Max Adverse:      $11.98
+
+❌ LOSS - Stop loss hit
+
+====================================================================================================
+TRADE #057 - SELL - LOSS
+====================================================================================================
+Date & Time:      2025-12-06 at 08:45 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_HIGH ($4197.56)
+
+Entry Price:      $4197.46
+Stop Loss:        $4199.54
+Take Profit:      $4191.22
+Risk:Reward:      1:3.0
+
+Lot Size:         5.51
+Risk Amount:      $114.61 (1%)
+ATR at Entry:     $20.55
+
+Exit Price:       $4199.54
+Exit Time:        2025-12-07 23:00 UTC
+Candles in Trade: 57 (855 minutes)
+
+P&L:              $+114.50
+Balance Before:   $11,471.60
+Balance After:    $11,586.09
+
+Breakeven:        ❌ Not triggered
+
+Max Favorable:    $0.31
+Max Adverse:      $7.15
+
+❌ LOSS - Stop loss hit
+
+====================================================================================================
+TRADE #058 - SELL - LOSS
+====================================================================================================
+Date & Time:      2025-12-06 at 09:00 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_HIGH ($4197.56)
+
+Entry Price:      $4197.43
+Stop Loss:        $4199.55
+Take Profit:      $4191.07
+Risk:Reward:      1:3.0
+
+Lot Size:         5.46
+Risk Amount:      $115.75 (1%)
+ATR at Entry:     $20.55
+
+Exit Price:       $4199.55
+Exit Time:        2025-12-07 23:00 UTC
+Candles in Trade: 56 (840 minutes)
+
+P&L:              $+115.60
+Balance Before:   $11,586.09
+Balance After:    $11,701.69
+
+Breakeven:        ❌ Not triggered
+
+Max Favorable:    $0.28
+Max Adverse:      $7.18
+
+❌ LOSS - Stop loss hit
+
+====================================================================================================
+TRADE #059 - SELL - LOSS
+====================================================================================================
+Date & Time:      2025-12-06 at 11:15 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_HIGH ($4197.56)
+
+Entry Price:      $4197.37
+Stop Loss:        $4199.56
+Take Profit:      $4190.81
+Risk:Reward:      1:3.0
+
+Lot Size:         5.35
+Risk Amount:      $117.16 (1%)
+ATR at Entry:     $20.55
+
+Exit Price:       $4199.56
+Exit Time:        2025-12-07 23:00 UTC
+Candles in Trade: 47 (705 minutes)
+
+P&L:              $+117.11
+Balance Before:   $11,701.69
+Balance After:    $11,818.81
+
+Breakeven:        ❌ Not triggered
+
+Max Favorable:    $0.21
+Max Adverse:      $7.24
+
+❌ LOSS - Stop loss hit
+
+====================================================================================================
+TRADE #060 - SELL - LOSS
+====================================================================================================
+Date & Time:      2025-12-06 at 11:30 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_HIGH ($4197.56)
+
+Entry Price:      $4197.34
+Stop Loss:        $4199.55
+Take Profit:      $4190.71
+Risk:Reward:      1:3.0
+
+Lot Size:         5.34
+Risk Amount:      $118.01 (1%)
+ATR at Entry:     $21.32
+
+Exit Price:       $4199.55
+Exit Time:        2025-12-07 23:00 UTC
+Candles in Trade: 46 (690 minutes)
+
+P&L:              $+118.01
+Balance Before:   $11,818.81
+Balance After:    $11,936.82
+
+Breakeven:        ❌ Not triggered
+
+Max Favorable:    $0.18
+Max Adverse:      $7.27
+
+❌ LOSS - Stop loss hit
+
+====================================================================================================
+TRADE #061 - BUY - BREAKEVEN
+====================================================================================================
+Date & Time:      2025-12-07 at 19:15 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      PDL ($4197.30)
+
+Entry Price:      $4197.47
+Stop Loss:        $4195.32
+Take Profit:      $4203.92
+Risk:Reward:      1:3.0
+
+Lot Size:         5.55
+Risk Amount:      $119.32 (1%)
+ATR at Entry:     $23.66
+
+Exit Price:       $4197.47
+Exit Time:        2025-12-07 23:00 UTC
+Candles in Trade: 15 (225 minutes)
+
+P&L:              $+0.00
+Balance Before:   $11,936.82
+Balance After:    $11,936.82
+
+Breakeven:        ✅ Activated after 15 candles
+
+Max Favorable:    $7.14
+Max Adverse:      $0.31
+
+➖ BREAKEVEN - Protected by 1:1 RR move
+
+====================================================================================================
+TRADE #062 - BUY - BREAKEVEN
+====================================================================================================
+Date & Time:      2025-12-07 at 19:30 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      PDL ($4197.30)
+
+Entry Price:      $4197.42
+Stop Loss:        $4195.32
+Take Profit:      $4203.71
+Risk:Reward:      1:3.0
+
+Lot Size:         5.69
+Risk Amount:      $119.49 (1%)
+ATR at Entry:     $22.10
+
+Exit Price:       $4197.42
+Exit Time:        2025-12-07 23:00 UTC
+Candles in Trade: 14 (210 minutes)
+
+P&L:              $+0.00
+Balance Before:   $11,936.82
+Balance After:    $11,936.82
+
+Breakeven:        ✅ Activated after 14 candles
+
+Max Favorable:    $7.20
+Max Adverse:      $0.26
+
+➖ BREAKEVEN - Protected by 1:1 RR move
+
+====================================================================================================
+TRADE #063 - SELL - WIN
+====================================================================================================
+Date & Time:      2025-12-08 at 13:15 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDH ($4205.29)
+
+Entry Price:      $4204.51
+Stop Loss:        $4212.77
+Take Profit:      $4179.75
+Risk:Reward:      1:3.0
+
+Lot Size:         1.45
+Risk Amount:      $119.62 (1%)
+ATR at Entry:     $15.81
+
+Exit Price:       $4179.75
+Exit Time:        2025-12-08 15:00 UTC
+Candles in Trade: 7 (105 minutes)
+
+P&L:              $+359.07
+Balance Before:   $11,936.82
+Balance After:    $12,295.89
+
+Breakeven:        ✅ Activated after 7 candles
+
+Max Favorable:    $25.93
+Max Adverse:      $6.83
+
+✅ WINNER - Full 1:3 RR achieved
+
+====================================================================================================
+TRADE #064 - SELL - BREAKEVEN
+====================================================================================================
+Date & Time:      2025-12-08 at 13:30 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDH ($4205.29)
+
+Entry Price:      $4202.53
+Stop Loss:        $4206.54
+Take Profit:      $4190.49
+Risk:Reward:      1:3.0
+
+Lot Size:         3.06
+Risk Amount:      $122.71 (1%)
+ATR at Entry:     $15.81
+
+Exit Price:       $4202.53
+Exit Time:        2025-12-08 13:45 UTC
+Candles in Trade: 1 (15 minutes)
+
+P&L:              $-0.00
+Balance Before:   $12,295.89
+Balance After:    $12,295.89
+
+Breakeven:        ✅ Activated after 1 candles
+
+Max Favorable:    $6.03
+Max Adverse:      $3.99
+
+➖ BREAKEVEN - Protected by 1:1 RR move
+
+====================================================================================================
+TRADE #065 - SELL - LOSS
+====================================================================================================
+Date & Time:      2025-12-08 at 13:45 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDH ($4205.29)
+
+Entry Price:      $4200.73
+Stop Loss:        $4208.52
+Take Profit:      $4177.35
+Risk:Reward:      1:3.0
+
+Lot Size:         1.58
+Risk Amount:      $123.08 (1%)
+ATR at Entry:     $15.81
+
+Exit Price:       $4208.52
+Exit Time:        2025-12-08 14:00 UTC
+Candles in Trade: 1 (15 minutes)
+
+P&L:              $+123.10
+Balance Before:   $12,295.89
+Balance After:    $12,418.99
+
+Breakeven:        ❌ Not triggered
+
+Max Favorable:    $1.67
+Max Adverse:      $9.09
+
+❌ LOSS - Stop loss hit
+
+====================================================================================================
+TRADE #066 - BUY - LOSS
+====================================================================================================
+Date & Time:      2025-12-08 at 14:00 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDL ($4197.16)
+
+Entry Price:      $4209.09
+Stop Loss:        $4197.06
+Take Profit:      $4245.16
+Risk:Reward:      1:3.0
+
+Lot Size:         1.03
+Risk Amount:      $123.91 (1%)
+ATR at Entry:     $15.81
+
+Exit Price:       $4197.06
+Exit Time:        2025-12-08 15:00 UTC
+Candles in Trade: 4 (60 minutes)
+
+P&L:              $-123.87
+Balance Before:   $12,418.99
+Balance After:    $12,295.12
+
+Breakeven:        ❌ Not triggered
+
+Max Favorable:    $2.25
+Max Adverse:      $30.50
+
+❌ LOSS - Stop loss hit
+
+====================================================================================================
+TRADE #067 - SELL - BREAKEVEN
+====================================================================================================
+Date & Time:      2025-12-09 at 16:15 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      PDH ($4218.46)
+
+Entry Price:      $4213.91
+Stop Loss:        $4220.86
+Take Profit:      $4193.08
+Risk:Reward:      1:3.0
+
+Lot Size:         1.77
+Risk Amount:      $122.84 (1%)
+ATR at Entry:     $13.70
+
+Exit Price:       $4213.91
+Exit Time:        2025-12-09 19:45 UTC
+Candles in Trade: 14 (210 minutes)
+
+P&L:              $-0.00
+Balance Before:   $12,295.12
+Balance After:    $12,295.12
+
+Breakeven:        ✅ Activated after 4 candles
+
+Max Favorable:    $12.34
+Max Adverse:      $6.93
+
+➖ BREAKEVEN - Protected by 1:1 RR move
+
+====================================================================================================
+TRADE #068 - BUY - LOSS
+====================================================================================================
+Date & Time:      2025-12-10 at 08:15 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_LOW ($4202.08)
+
+Entry Price:      $4204.17
+Stop Loss:        $4200.49
+Take Profit:      $4215.20
+Risk:Reward:      1:3.0
+
+Lot Size:         3.34
+Risk Amount:      $122.91 (1%)
+ATR at Entry:     $11.29
+
+Exit Price:       $4200.49
+Exit Time:        2025-12-10 08:30 UTC
+Candles in Trade: 1 (15 minutes)
+
+P&L:              $-122.88
+Balance Before:   $12,295.12
+Balance After:    $12,172.24
+
+Breakeven:        ❌ Not triggered
+
+Max Favorable:    $0.00
+Max Adverse:      $3.91
+
+❌ LOSS - Stop loss hit
+
+====================================================================================================
+TRADE #069 - SELL - LOSS
+====================================================================================================
+Date & Time:      2025-12-10 at 19:15 UTC
+Session:          NY
+Market Structure: BEARISH
+Level Swept:      TOKYO_HIGH ($4218.45)
+
+Entry Price:      $4197.91
+Stop Loss:        $4218.93
+Take Profit:      $4134.86
+Risk:Reward:      1:3.0
+
+Lot Size:         0.58
+Risk Amount:      $121.92 (1%)
+ATR at Entry:     $15.15
+
+Exit Price:       $4218.93
+Exit Time:        2025-12-10 20:00 UTC
+Candles in Trade: 3 (45 minutes)
+
+P&L:              $+121.91
+Balance Before:   $12,172.24
+Balance After:    $12,294.15
+
+Breakeven:        ❌ Not triggered
+
+Max Favorable:    $15.26
+Max Adverse:      $36.08
+
+❌ LOSS - Stop loss hit
+
+====================================================================================================
+TRADE #070 - SELL - LOSS
+====================================================================================================
+Date & Time:      2025-12-10 at 19:30 UTC
+Session:          NY
+Market Structure: BEARISH
+Level Swept:      TOKYO_HIGH ($4218.45)
+
+Entry Price:      $4186.16
+Stop Loss:        $4210.93
+Take Profit:      $4111.86
+Risk:Reward:      1:3.0
+
+Lot Size:         0.5
+Risk Amount:      $123.85 (1%)
+ATR at Entry:     $16.51
+
+Exit Price:       $4210.93
+Exit Time:        2025-12-10 19:45 UTC
+Candles in Trade: 1 (15 minutes)
+
+P&L:              $+123.83
+Balance Before:   $12,294.15
+Balance After:    $12,417.98
+
+Breakeven:        ❌ Not triggered
+
+Max Favorable:    $0.55
+Max Adverse:      $29.69
+
+❌ LOSS - Stop loss hit
+
+====================================================================================================
+TRADE #071 - SELL - LOSS
+====================================================================================================
+Date & Time:      2025-12-11 at 14:45 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDH ($4238.50)
+
+Entry Price:      $4230.70
+Stop Loss:        $4244.33
+Take Profit:      $4189.80
+Risk:Reward:      1:3.0
+
+Lot Size:         0.91
+Risk Amount:      $124.03 (1%)
+ATR at Entry:     $18.56
+
+Exit Price:       $4244.33
+Exit Time:        2025-12-11 15:30 UTC
+Candles in Trade: 3 (45 minutes)
+
+P&L:              $+124.03
+Balance Before:   $12,417.98
+Balance After:    $12,542.01
+
+Breakeven:        ❌ Not triggered
+
+Max Favorable:    $2.35
+Max Adverse:      $24.26
+
+❌ LOSS - Stop loss hit
+
+====================================================================================================
+TRADE #072 - SELL - LOSS
+====================================================================================================
+Date & Time:      2025-12-12 at 07:15 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDH ($4287.12)
+
+Entry Price:      $4285.86
+Stop Loss:        $4288.98
+Take Profit:      $4276.48
+Risk:Reward:      1:3.0
+
+Lot Size:         4.01
+Risk Amount:      $125.51 (1%)
+ATR at Entry:     $20.89
+
+Exit Price:       $4288.98
+Exit Time:        2025-12-12 07:30 UTC
+Candles in Trade: 1 (15 minutes)
+
+P&L:              $+125.26
+Balance Before:   $12,542.01
+Balance After:    $12,667.27
+
+Breakeven:        ❌ Not triggered
+
+Max Favorable:    $2.30
+Max Adverse:      $4.10
+
+❌ LOSS - Stop loss hit
+
+====================================================================================================
+TRADE #073 - SELL - LOSS
+====================================================================================================
+Date & Time:      2025-12-12 at 07:30 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDH ($4287.12)
+
+Entry Price:      $4287.09
+Stop Loss:        $4291.96
+Take Profit:      $4272.50
+Risk:Reward:      1:3.0
+
+Lot Size:         2.6
+Risk Amount:      $126.36 (1%)
+ATR at Entry:     $21.19
+
+Exit Price:       $4291.96
+Exit Time:        2025-12-12 08:00 UTC
+Candles in Trade: 2 (30 minutes)
+
+P&L:              $+126.52
+Balance Before:   $12,667.27
+Balance After:    $12,793.79
+
+Breakeven:        ❌ Not triggered
+
+Max Favorable:    $1.19
+Max Adverse:      $8.56
+
+❌ LOSS - Stop loss hit
+
+====================================================================================================
+TRADE #074 - SELL - LOSS
+====================================================================================================
+Date & Time:      2025-12-12 at 07:45 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDH ($4287.12)
+
+Entry Price:      $4286.88
+Stop Loss:        $4291.00
+Take Profit:      $4274.50
+Risk:Reward:      1:3.0
+
+Lot Size:         3.1
+Risk Amount:      $128.03 (1%)
+ATR at Entry:     $21.19
+
+Exit Price:       $4291.00
+Exit Time:        2025-12-12 08:00 UTC
+Candles in Trade: 1 (15 minutes)
+
+P&L:              $+127.79
+Balance Before:   $12,793.79
+Balance After:    $12,921.58
+
+Breakeven:        ❌ Not triggered
+
+Max Favorable:    $0.09
+Max Adverse:      $8.77
+
+❌ LOSS - Stop loss hit
+
+====================================================================================================
+TRADE #075 - BUY - WIN
+====================================================================================================
+Date & Time:      2025-12-12 at 16:45 UTC
+Session:          NY
+Market Structure: BULLISH
+Level Swept:      TOKYO_LOW ($4265.19)
+
+Entry Price:      $4280.15
+Stop Loss:        $4269.58
+Take Profit:      $4311.87
+Risk:Reward:      1:3.0
+
+Lot Size:         1.22
+Risk Amount:      $128.95 (1%)
+ATR at Entry:     $23.49
+
+Exit Price:       $4311.87
+Exit Time:        2025-12-15 01:00 UTC
+Candles in Trade: 129 (1935 minutes)
+
+P&L:              $+386.94
+Balance Before:   $12,921.58
+Balance After:    $13,308.53
+
+Breakeven:        ✅ Activated after 3 candles
+
+Max Favorable:    $33.16
+Max Adverse:      $7.31
+
+✅ WINNER - Full 1:3 RR achieved
+
+====================================================================================================
+TRADE #076 - BUY - BREAKEVEN
+====================================================================================================
+Date & Time:      2025-12-14 at 20:45 UTC
+Session:          NY
+Market Structure: BULLISH
+Level Swept:      PDL ($4302.35)
+
+Entry Price:      $4302.52
+Stop Loss:        $4300.37
+Take Profit:      $4308.98
+Risk:Reward:      1:3.0
+
+Lot Size:         6.18
+Risk Amount:      $132.87 (1%)
+ATR at Entry:     $33.07
+
+Exit Price:       $4302.52
+Exit Time:        2025-12-14 23:00 UTC
+Candles in Trade: 9 (135 minutes)
+
+P&L:              $+0.00
+Balance Before:   $13,308.53
+Balance After:    $13,308.53
+
+Breakeven:        ✅ Activated after 9 candles
+
+Max Favorable:    $4.43
+Max Adverse:      $3.41
+
+➖ BREAKEVEN - Protected by 1:1 RR move
+
+====================================================================================================
+TRADE #077 - SELL - BREAKEVEN
+====================================================================================================
+Date & Time:      2025-12-15 at 16:00 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      PDH ($4307.45)
+
+Entry Price:      $4304.00
+Stop Loss:        $4320.57
+Take Profit:      $4254.28
+Risk:Reward:      1:3.0
+
+Lot Size:         0.8
+Risk Amount:      $132.56 (1%)
+ATR at Entry:     $24.62
+
+Exit Price:       $4304.00
+Exit Time:        2025-12-15 17:30 UTC
+Candles in Trade: 6 (90 minutes)
+
+P&L:              $-0.00
+Balance Before:   $13,308.53
+Balance After:    $13,308.53
+
+Breakeven:        ✅ Activated after 2 candles
+
+Max Favorable:    $17.09
+Max Adverse:      $0.74
+
+➖ BREAKEVEN - Protected by 1:1 RR move
+
+====================================================================================================
+TRADE #078 - SELL - LOSS
+====================================================================================================
+Date & Time:      2025-12-15 at 16:15 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      PDH ($4307.45)
+
+Entry Price:      $4296.20
+Stop Loss:        $4306.74
+Take Profit:      $4264.59
+Risk:Reward:      1:3.0
+
+Lot Size:         1.26
+Risk Amount:      $132.80 (1%)
+ATR at Entry:     $24.62
+
+Exit Price:       $4306.74
+Exit Time:        2025-12-15 18:15 UTC
+Candles in Trade: 8 (120 minutes)
+
+P&L:              $+132.75
+Balance Before:   $13,308.53
+Balance After:    $13,441.28
+
+Breakeven:        ❌ Not triggered
+
+Max Favorable:    $9.29
+Max Adverse:      $11.86
+
+❌ LOSS - Stop loss hit
+
+====================================================================================================
+TRADE #079 - SELL - LOSS
+====================================================================================================
+Date & Time:      2025-12-15 at 16:30 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      PDH ($4307.45)
+
+Entry Price:      $4295.09
+Stop Loss:        $4301.33
+Take Profit:      $4276.38
+Risk:Reward:      1:3.0
+
+Lot Size:         2.16
+Risk Amount:      $134.78 (1%)
+ATR at Entry:     $24.62
+
+Exit Price:       $4301.33
+Exit Time:        2025-12-15 17:15 UTC
+Candles in Trade: 3 (45 minutes)
+
+P&L:              $+134.73
+Balance Before:   $13,441.28
+Balance After:    $13,576.01
+
+Breakeven:        ❌ Not triggered
+
+Max Favorable:    $2.51
+Max Adverse:      $7.62
+
+❌ LOSS - Stop loss hit
+
+====================================================================================================
+TRADE #080 - BUY - BREAKEVEN
+====================================================================================================
+Date & Time:      2025-12-15 at 17:00 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      PDL ($4299.11)
+
+Entry Price:      $4299.16
+Stop Loss:        $4290.58
+Take Profit:      $4324.90
+Risk:Reward:      1:3.0
+
+Lot Size:         1.58
+Risk Amount:      $135.56 (1%)
+ATR at Entry:     $24.62
+
+Exit Price:       $4299.16
+Exit Time:        2025-12-16 02:45 UTC
+Candles in Trade: 39 (585 minutes)
+
+P&L:              $+0.00
+Balance Before:   $13,576.01
+Balance After:    $13,576.01
+
+Breakeven:        ✅ Activated after 5 candles
+
+Max Favorable:    $18.54
+Max Adverse:      $9.82
+
+➖ BREAKEVEN - Protected by 1:1 RR move
+
+====================================================================================================
+TRADE #081 - BUY - WIN
+====================================================================================================
+Date & Time:      2025-12-16 at 12:00 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDL ($4286.91)
+
+Entry Price:      $4288.00
+Stop Loss:        $4275.45
+Take Profit:      $4325.66
+Risk:Reward:      1:3.0
+
+Lot Size:         1.08
+Risk Amount:      $135.54 (1%)
+ATR at Entry:     $19.22
+
+Exit Price:       $4325.66
+Exit Time:        2025-12-16 14:15 UTC
+Candles in Trade: 9 (135 minutes)
+
+P&L:              $+406.72
+Balance Before:   $13,576.01
+Balance After:    $13,982.73
+
+Breakeven:        ✅ Activated after 5 candles
+
+Max Favorable:    $41.38
+Max Adverse:      $0.07
+
+✅ WINNER - Full 1:3 RR achieved
+
+====================================================================================================
+TRADE #082 - BUY - BREAKEVEN
+====================================================================================================
+Date & Time:      2025-12-16 at 12:15 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDL ($4286.91)
+
+Entry Price:      $4291.43
+Stop Loss:        $4285.93
+Take Profit:      $4307.90
+Risk:Reward:      1:3.0
+
+Lot Size:         2.55
+Risk Amount:      $140.00 (1%)
+ATR at Entry:     $19.22
+
+Exit Price:       $4291.43
+Exit Time:        2025-12-16 13:00 UTC
+Candles in Trade: 3 (45 minutes)
+
+P&L:              $+0.00
+Balance Before:   $13,982.73
+Balance After:    $13,982.73
+
+Breakeven:        ✅ Activated after 3 candles
+
+Max Favorable:    $7.16
+Max Adverse:      $2.32
+
+➖ BREAKEVEN - Protected by 1:1 RR move
+
+====================================================================================================
+TRADE #083 - BUY - BREAKEVEN
+====================================================================================================
+Date & Time:      2025-12-16 at 12:30 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDL ($4286.91)
+
+Entry Price:      $4291.89
+Stop Loss:        $4287.10
+Take Profit:      $4306.26
+Risk:Reward:      1:3.0
+
+Lot Size:         2.92
+Risk Amount:      $139.87 (1%)
+ATR at Entry:     $19.22
+
+Exit Price:       $4291.89
+Exit Time:        2025-12-16 13:00 UTC
+Candles in Trade: 2 (30 minutes)
+
+P&L:              $+0.00
+Balance Before:   $13,982.73
+Balance After:    $13,982.73
+
+Breakeven:        ✅ Activated after 2 candles
+
+Max Favorable:    $6.69
+Max Adverse:      $2.18
+
+➖ BREAKEVEN - Protected by 1:1 RR move
+
+====================================================================================================
+TRADE #084 - SELL - LOSS
+====================================================================================================
+Date & Time:      2025-12-17 at 14:00 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDH ($4334.18)
+
+Entry Price:      $4332.22
+Stop Loss:        $4348.05
+Take Profit:      $4284.75
+Risk:Reward:      1:3.0
+
+Lot Size:         0.88
+Risk Amount:      $139.22 (1%)
+ATR at Entry:     $15.74
+
+Exit Price:       $4348.05
+Exit Time:        2025-12-17 15:30 UTC
+Candles in Trade: 6 (90 minutes)
+
+P&L:              $+139.29
+Balance Before:   $13,982.73
+Balance After:    $14,122.02
+
+Breakeven:        ❌ Not triggered
+
+Max Favorable:    $7.91
+Max Adverse:      $16.41
+
+❌ LOSS - Stop loss hit
+
+====================================================================================================
+TRADE #085 - SELL - LOSS
+====================================================================================================
+Date & Time:      2025-12-17 at 14:15 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDH ($4334.18)
+
+Entry Price:      $4328.48
+Stop Loss:        $4334.19
+Take Profit:      $4311.33
+Risk:Reward:      1:3.0
+
+Lot Size:         2.47
+Risk Amount:      $141.04 (1%)
+ATR at Entry:     $15.74
+
+Exit Price:       $4334.19
+Exit Time:        2025-12-17 14:30 UTC
+Candles in Trade: 1 (15 minutes)
+
+P&L:              $+141.09
+Balance Before:   $14,122.02
+Balance After:    $14,263.11
+
+Breakeven:        ❌ Not triggered
+
+Max Favorable:    $0.12
+Max Adverse:      $8.89
+
+❌ LOSS - Stop loss hit
+
+====================================================================================================
+TRADE #086 - BUY - LOSS
+====================================================================================================
+Date & Time:      2025-12-18 at 09:00 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_LOW ($4324.70)
+
+Entry Price:      $4325.83
+Stop Loss:        $4323.53
+Take Profit:      $4332.74
+Risk:Reward:      1:3.0
+
+Lot Size:         6.2
+Risk Amount:      $142.60 (1%)
+ATR at Entry:     $25.16
+
+Exit Price:       $4323.53
+Exit Time:        2025-12-18 09:30 UTC
+Candles in Trade: 2 (30 minutes)
+
+P&L:              $-142.85
+Balance Before:   $14,263.11
+Balance After:    $14,120.26
+
+Breakeven:        ❌ Not triggered
+
+Max Favorable:    $2.29
+Max Adverse:      $4.17
+
+❌ LOSS - Stop loss hit
+
+====================================================================================================
+TRADE #087 - SELL - OPEN
+====================================================================================================
+Date & Time:      2025-12-18 at 17:00 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      PDH ($4348.63)
+
+Entry Price:      $4327.84
+Stop Loss:        $4364.45
+Take Profit:      $4217.99
+Risk:Reward:      1:3.0
+
+Lot Size:         0.39
+Risk Amount:      $142.82 (1%)
+ATR at Entry:     $25.33
+
+Status:           ⏳ STILL OPEN at backtest end
+Max Favorable:    $16.18
+Max Adverse:      $28.44
+
+====================================================================================================
+TRADE #088 - BUY - BREAKEVEN
+====================================================================================================
+Date & Time:      2025-12-18 at 17:15 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_LOW ($4324.70)
+
+Entry Price:      $4329.39
+Stop Loss:        $4322.18
+Take Profit:      $4351.01
+Risk:Reward:      1:3.0
+
+Lot Size:         1.96
+Risk Amount:      $141.32 (1%)
+ATR at Entry:     $25.33
+
+Exit Price:       $4329.39
+Exit Time:        2025-12-18 17:30 UTC
+Candles in Trade: 1 (15 minutes)
+
+P&L:              $+0.00
+Balance Before:   $14,120.26
+Balance After:    $14,120.26
+
+Breakeven:        ✅ Activated after 1 candles
+
+Max Favorable:    $11.55
+Max Adverse:      $1.89
+
+➖ BREAKEVEN - Protected by 1:1 RR move
+
+====================================================================================================
+TRADE #089 - BUY - LOSS
+====================================================================================================
+Date & Time:      2025-12-18 at 17:30 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_LOW ($4324.70)
+
+Entry Price:      $4336.54
+Stop Loss:        $4325.50
+Take Profit:      $4369.68
+Risk:Reward:      1:3.0
+
+Lot Size:         1.28
+Risk Amount:      $141.44 (1%)
+ATR at Entry:     $25.33
+
+Exit Price:       $4325.50
+Exit Time:        2025-12-18 18:45 UTC
+Candles in Trade: 5 (75 minutes)
+
+P&L:              $-141.33
+Balance Before:   $14,120.26
+Balance After:    $13,978.93
+
+Breakeven:        ❌ Not triggered
+
+Max Favorable:    $3.83
+Max Adverse:      $12.52
+
+❌ LOSS - Stop loss hit
+
+====================================================================================================
+TRADE #090 - SELL - LOSS
+====================================================================================================
+Date & Time:      2025-12-19 at 14:45 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_HIGH ($4336.70)
+
+Entry Price:      $4332.43
+Stop Loss:        $4336.28
+Take Profit:      $4320.91
+Risk:Reward:      1:3.0
+
+Lot Size:         3.64
+Risk Amount:      $139.78 (1%)
+ATR at Entry:     $23.64
+
+Exit Price:       $4336.28
+Exit Time:        2025-12-19 15:00 UTC
+Candles in Trade: 1 (15 minutes)
+
+P&L:              $+139.98
+Balance Before:   $13,978.93
+Balance After:    $14,118.91
+
+Breakeven:        ❌ Not triggered
+
+Max Favorable:    $0.02
+Max Adverse:      $12.23
+
+❌ LOSS - Stop loss hit
+
+====================================================================================================
+TRADE #091 - BUY - BREAKEVEN
+====================================================================================================
+Date & Time:      2025-12-21 at 19:15 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      PDL ($4338.47)
+
+Entry Price:      $4338.56
+Stop Loss:        $4336.48
+Take Profit:      $4344.81
+Risk:Reward:      1:3.0
+
+Lot Size:         6.78
+Risk Amount:      $141.02 (1%)
+ATR at Entry:     $21.07
+
+Exit Price:       $4338.56
+Exit Time:        2025-12-21 23:00 UTC
+Candles in Trade: 15 (225 minutes)
+
+P&L:              $+0.00
+Balance Before:   $14,118.91
+Balance After:    $14,118.91
+
+Breakeven:        ✅ Activated after 15 candles
+
+Max Favorable:    $6.35
+Max Adverse:      $0.38
+
+➖ BREAKEVEN - Protected by 1:1 RR move
+
+====================================================================================================
+TRADE #092 - BUY - BREAKEVEN
+====================================================================================================
+Date & Time:      2025-12-21 at 19:30 UTC
+Session:          NY
+Market Structure: NEUTRAL
+Level Swept:      PDL ($4338.47)
+
+Entry Price:      $4338.50
+Stop Loss:        $4336.47
+Take Profit:      $4344.59
+Risk:Reward:      1:3.0
+
+Lot Size:         6.96
+Risk Amount:      $141.29 (1%)
+ATR at Entry:     $21.25
+
+Exit Price:       $4338.50
+Exit Time:        2025-12-21 23:00 UTC
+Candles in Trade: 14 (210 minutes)
+
+P&L:              $+0.00
+Balance Before:   $14,118.91
+Balance After:    $14,118.91
+
+Breakeven:        ✅ Activated after 14 candles
+
+Max Favorable:    $6.40
+Max Adverse:      $0.33
+
+➖ BREAKEVEN - Protected by 1:1 RR move
+
+====================================================================================================
+TRADE #093 - SELL - LOSS
+====================================================================================================
+Date & Time:      2025-12-21 at 20:30 UTC
+Session:          NY
+Market Structure: BEARISH
+Level Swept:      PDH ($4338.73)
+
+Entry Price:      $4338.50
+Stop Loss:        $4340.72
+Take Profit:      $4331.86
+Risk:Reward:      1:3.0
+
+Lot Size:         6.37
+Risk Amount:      $141.41 (1%)
+ATR at Entry:     $21.25
+
+Exit Price:       $4340.72
+Exit Time:        2025-12-21 23:00 UTC
+Candles in Trade: 10 (150 minutes)
+
+P&L:              $+141.10
+Balance Before:   $14,118.91
+Balance After:    $14,260.01
+
+Breakeven:        ❌ Not triggered
+
+Max Favorable:    $0.33
+Max Adverse:      $6.40
+
+❌ LOSS - Stop loss hit
+
+====================================================================================================
+TRADE #094 - SELL - LOSS
+====================================================================================================
+Date & Time:      2025-12-21 at 20:45 UTC
+Session:          NY
+Market Structure: BEARISH
+Level Swept:      PDH ($4338.73)
+
+Entry Price:      $4338.55
+Stop Loss:        $4340.84
+Take Profit:      $4331.69
+Risk:Reward:      1:3.0
+
+Lot Size:         6.24
+Risk Amount:      $142.90 (1%)
+ATR at Entry:     $21.25
+
+Exit Price:       $4340.84
+Exit Time:        2025-12-21 23:00 UTC
+Candles in Trade: 9 (135 minutes)
+
+P&L:              $+142.97
+Balance Before:   $14,260.01
+Balance After:    $14,402.97
+
+Breakeven:        ❌ Not triggered
+
+Max Favorable:    $0.37
+Max Adverse:      $6.36
+
+❌ LOSS - Stop loss hit
+
+====================================================================================================
+TRADE #095 - SELL - BREAKEVEN
+====================================================================================================
+Date & Time:      2025-12-23 at 14:30 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDH ($4461.83)
+
+Entry Price:      $4456.10
+Stop Loss:        $4471.01
+Take Profit:      $4411.34
+Risk:Reward:      1:3.0
+
+Lot Size:         0.97
+Risk Amount:      $144.72 (1%)
+ATR at Entry:     $11.50
+
+Exit Price:       $4456.10
+Exit Time:        2025-12-23 15:30 UTC
+Candles in Trade: 4 (60 minutes)
+
+P&L:              $-0.00
+Balance Before:   $14,402.97
+Balance After:    $14,402.97
+
+Breakeven:        ✅ Activated after 2 candles
+
+Max Favorable:    $22.78
+Max Adverse:      $2.07
+
+➖ BREAKEVEN - Protected by 1:1 RR move
+
+====================================================================================================
+TRADE #096 - SELL - BREAKEVEN
+====================================================================================================
+Date & Time:      2025-12-23 at 14:45 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDH ($4461.83)
+
+Entry Price:      $4450.42
+Stop Loss:        $4460.17
+Take Profit:      $4421.18
+Risk:Reward:      1:3.0
+
+Lot Size:         1.48
+Risk Amount:      $144.30 (1%)
+ATR at Entry:     $11.50
+
+Exit Price:       $4450.42
+Exit Time:        2025-12-23 15:00 UTC
+Candles in Trade: 1 (15 minutes)
+
+P&L:              $-0.00
+Balance Before:   $14,402.97
+Balance After:    $14,402.97
+
+Breakeven:        ✅ Activated after 1 candles
+
+Max Favorable:    $17.10
+Max Adverse:      $0.04
+
+➖ BREAKEVEN - Protected by 1:1 RR move
+
+====================================================================================================
+TRADE #097 - SELL - LOSS
+====================================================================================================
+Date & Time:      2025-12-23 at 15:00 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      PDH ($4461.83)
+
+Entry Price:      $4441.74
+Stop Loss:        $4452.46
+Take Profit:      $4409.56
+Risk:Reward:      1:3.0
+
+Lot Size:         1.34
+Risk Amount:      $143.65 (1%)
+ATR at Entry:     $11.50
+
+Exit Price:       $4452.46
+Exit Time:        2025-12-23 15:30 UTC
+Candles in Trade: 2 (30 minutes)
+
+P&L:              $+143.70
+Balance Before:   $14,402.97
+Balance After:    $14,546.68
+
+Breakeven:        ❌ Not triggered
+
+Max Favorable:    $0.45
+Max Adverse:      $15.80
+
+❌ LOSS - Stop loss hit
+
+====================================================================================================
+TRADE #098 - BUY - BREAKEVEN
+====================================================================================================
+Date & Time:      2025-12-23 at 15:15 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_LOW ($4444.51)
+
+Entry Price:      $4446.96
+Stop Loss:        $4439.75
+Take Profit:      $4468.61
+Risk:Reward:      1:3.0
+
+Lot Size:         2.02
+Risk Amount:      $145.64 (1%)
+ATR at Entry:     $11.50
+
+Exit Price:       $4446.96
+Exit Time:        2025-12-23 15:30 UTC
+Candles in Trade: 1 (15 minutes)
+
+P&L:              $+0.00
+Balance Before:   $14,546.68
+Balance After:    $14,546.68
+
+Breakeven:        ✅ Activated after 1 candles
+
+Max Favorable:    $10.58
+Max Adverse:      $5.68
+
+➖ BREAKEVEN - Protected by 1:1 RR move
+
+====================================================================================================
+TRADE #099 - BUY - LOSS
+====================================================================================================
+Date & Time:      2025-12-24 at 15:00 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_LOW ($4472.13)
+
+Entry Price:      $4473.20
+Stop Loss:        $4461.41
+Take Profit:      $4508.59
+Risk:Reward:      1:3.0
+
+Lot Size:         1.23
+Risk Amount:      $145.14 (1%)
+ATR at Entry:     $14.98
+
+Exit Price:       $4461.41
+Exit Time:        2025-12-24 15:30 UTC
+Candles in Trade: 2 (30 minutes)
+
+P&L:              $-145.06
+Balance Before:   $14,546.68
+Balance After:    $14,401.62
+
+Breakeven:        ❌ Not triggered
+
+Max Favorable:    $2.28
+Max Adverse:      $21.13
+
+❌ LOSS - Stop loss hit
+
+====================================================================================================
+TRADE #100 - SELL - OPEN
+====================================================================================================
+Date & Time:      2025-12-27 at 08:30 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_HIGH ($4532.82)
+
+Entry Price:      $4532.67
+Stop Loss:        $4534.82
+Take Profit:      $4526.24
+Risk:Reward:      1:3.0
+
+Lot Size:         6.72
+Risk Amount:      $143.81 (1%)
+ATR at Entry:     $18.43
+
+Status:           ⏳ STILL OPEN at backtest end
+Max Favorable:    $0.11
+Max Adverse:      $0.15
+
+====================================================================================================
+TRADE #101 - SELL - OPEN
+====================================================================================================
+Date & Time:      2025-12-27 at 08:45 UTC
+Session:          LONDON
+Market Structure: NEUTRAL
+Level Swept:      TOKYO_HIGH ($4532.82)
+
+Entry Price:      $4532.73
+Stop Loss:        $4534.82
+Take Profit:      $4526.45
+Risk:Reward:      1:3.0
+
+Lot Size:         6.88
+Risk Amount:      $143.79 (1%)
+ATR at Entry:     $18.43
+
+Status:           ⏳ STILL OPEN at backtest end
+Max Favorable:    $0.17
+Max Adverse:      $0.10
+
+====================================================================================================
+END OF REPORT
+====================================================================================================

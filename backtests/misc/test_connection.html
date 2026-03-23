@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebSocket Test</title>
+    <style>
+        body { font-family: monospace; padding: 20px; background: #000; color: #0f0; }
+        .log { margin: 5px 0; }
+        .error { color: #f00; }
+        .success { color: #0f0; }
+        .info { color: #ff0; }
+    </style>
+</head>
+<body>
+    <h1>🔌 Trading Bot WebSocket Test</h1>
+    <div id="status"></div>
+    <hr>
+    <div id="logs"></div>
+
+    <script>
+        const statusDiv = document.getElementById('status');
+        const logsDiv = document.getElementById('logs');
+
+        function addLog(message, type = 'info') {
+            const div = document.createElement('div');
+            div.className = `log ${type}`;
+            div.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            logsDiv.insertBefore(div, logsDiv.firstChild);
+        }
+
+        addLog('Connecting to ws://localhost:8080...', 'info');
+        statusDiv.textContent = '⏳ Connecting...';
+
+        const ws = new WebSocket('ws://localhost:8080');
+
+        ws.onopen = () => {
+            addLog('✅ Connected to backend!', 'success');
+            statusDiv.textContent = '✅ CONNECTED';
+        };
+
+        ws.onerror = (error) => {
+            addLog(`❌ WebSocket Error: ${error}`, 'error');
+            statusDiv.textContent = '❌ ERROR';
+        };
+
+        ws.onclose = () => {
+            addLog('🔌 Connection closed', 'error');
+            statusDiv.textContent = '❌ DISCONNECTED';
+        };
+
+        ws.onmessage = (event) => {
+            try {
+                const data = JSON.parse(event.data);
+
+                if (data.type === 'MULTI_VAULT_UPDATE') {
+                    addLog(`💼 Vaults: ${data.vaults.length} accounts`, 'success');
+                    data.vaults.forEach(v => {
+                        addLog(`   ${v.name}: $${v.equity.toFixed(2)} | Positions: ${v.positions.length}`, 'info');
+                    });
+                } else if (data.type === 'HEARTBEAT') {
+                    addLog(`💓 ${data.symbol} | $${data.price} | ${data.decision}`, 'info');
+                } else if (data.symbol) {
+                    addLog(`📊 ${data.symbol}: $${data.price}`, 'info');
+                }
+            } catch (e) {
+                addLog(`⚠️ Parse error: ${e}`, 'error');
+            }
+        };
+    </script>
+</body>
+</html>

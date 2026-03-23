@@ -13,7 +13,7 @@ export const StrategiesCard = () => {
     const [results, setResults] = useState(null);
     
     const [customBalance, setCustomBalance] = useState(10000);
-    const [customStartDate, setCustomStartDate] = useState("2024-01-01");
+    const [customStartDate, setCustomStartDate] = useState("2026-01-01");
 
     const strategies = [
         {
@@ -54,10 +54,10 @@ export const StrategiesCard = () => {
         try {
             const response = await fetch(url);
             const data = await response.json();
-            if (data.status === "success") {
+            if (data.status === "ok") {
                 setResults(data);
             } else {
-                alert("Error en el motor: " + data.error);
+                alert("Error en el motor: " + (data.error || JSON.stringify(data)));
             }
         } catch (error) {
             console.error("Error de conexión:", error);
@@ -153,7 +153,7 @@ export const StrategiesCard = () => {
                                         type="date" 
                                         value={customStartDate}
                                         min="2020-01-01"
-                                        max="2026-03-11"
+                                        max="2026-03-19"
                                         onChange={(e) => setCustomStartDate(e.target.value)}
                                         className="bg-[#0a0a0a] border border-white/10 rounded-xl p-3 text-gray-300 text-sm outline-none focus:border-[var(--color-gold)] transition-colors w-44 text-center"
                                         style={{ colorScheme: "dark" }}
@@ -225,19 +225,21 @@ export const StrategiesCard = () => {
                                     <tbody className="text-sm">
                                         {results.history.map((trade, i) => (
                                             <tr key={i} className="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
-                                                <td className="p-4 text-gray-400 font-mono text-[11px]">{trade.date}</td>
+                                                <td className="p-4 text-gray-400 font-mono text-[11px]">
+                                                    {trade.entry_time ? trade.entry_time.slice(0, 16).replace("T", " ") : "—"}
+                                                </td>
                                                 <td className="p-4">
-                                                    <span className={`px-2 py-0.5 rounded text-[9px] font-black tracking-tighter ${trade.type === 'BUY' ? 'bg-green-500/10 text-green-400' : 'bg-red-500/10 text-red-400'}`}>
-                                                        {trade.type}
+                                                    <span className={`px-2 py-0.5 rounded text-[9px] font-black tracking-tighter ${trade.direction === 'BUY' ? 'bg-green-500/10 text-green-400' : 'bg-red-500/10 text-red-400'}`}>
+                                                        {trade.direction}
                                                     </span>
                                                 </td>
-                                                <td className="p-4 text-white/80 font-mono">${trade.entry_price}</td>
-                                                <td className="p-4 text-gray-500 font-mono">${trade.exit_price}</td>
-                                                <td className={`p-4 text-right font-mono font-bold ${trade.profit >= 0 ? "text-green-400" : "text-red-500"}`}>
-                                                    {trade.profit >= 0 ? "+" : ""}{trade.profit}
+                                                <td className="p-4 text-white/80 font-mono">${Number(trade.entry_price).toFixed(2)}</td>
+                                                <td className="p-4 text-gray-500 font-mono">${Number(trade.exit_price).toFixed(2)}</td>
+                                                <td className={`p-4 text-right font-mono font-bold ${trade.pnl >= 0 ? "text-green-400" : "text-red-500"}`}>
+                                                    {trade.pnl >= 0 ? "+" : ""}${Number(trade.pnl).toFixed(2)}
                                                 </td>
                                                 <td className="p-4 text-center">
-                                                    {trade.profit >= 0 ? "🎯" : "💀"}
+                                                    {trade.pnl >= 0 ? "🎯" : "💀"}
                                                 </td>
                                             </tr>
                                         ))}

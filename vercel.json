@@ -1,7 +1,4 @@
 {
-<<<<<<< dev
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
-=======
   "installCommand": "npm install",
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
@@ -11,5 +8,4 @@
       "destination": "/index.html"
     }
   ]
->>>>>>> dev
 }

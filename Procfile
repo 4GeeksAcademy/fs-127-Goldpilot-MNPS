@@ -1,2 +1,2 @@
-release: pipenv run upgrade
+release: flask db upgrade
 web: gunicorn wsgi --chdir ./src/

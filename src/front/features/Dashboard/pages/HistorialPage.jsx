@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { PortfolioCard } from "../components/PortfolioCard";
-import { getTradeHistory } from "../api";
+import useGlobalReducer from "../../../hooks/useGlobalReducer";
 
 /**
 /**
@@ -30,8 +30,8 @@ const calcStats = (trades) => {
  */
 export const HistorialPage = () => {
     const { t } = useTranslation();
-    const [trades, setTrades] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const { store } = useGlobalReducer();
+    const trades = store.tradeHistory || [];
     const [activeFilter, setActiveFilter] = useState("ALL");
 
     const FILTERS = [
@@ -39,13 +39,6 @@ export const HistorialPage = () => {
         { label: t("historial.filterBuy"), value: "BUY" },
         { label: t("historial.filterSell"), value: "SELL" },
     ];
-
-    useEffect(() => {
-        getTradeHistory()
-            .then((data) => setTrades(data.trades || []))
-            .catch(() => setTrades([]))
-            .finally(() => setLoading(false));
-    }, []);
 
     const filteredTrades = activeFilter === "ALL"
         ? trades

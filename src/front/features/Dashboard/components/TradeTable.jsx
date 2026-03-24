@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import useGlobalReducer from "../../../hooks/useGlobalReducer";
 
-const POLL_INTERVAL_MS = 5_000;
 const BASE = import.meta.env.VITE_BACKEND_URL;
 
 const formatDate = (isoString) => {
@@ -12,63 +12,33 @@ const formatDate = (isoString) => {
 };
 
 export const TradeTable = () => {
-    const [trades, setTrades]               = useState([]);
-    const [loading, setLoading]             = useState(true);
-    const [lastUpdated, setLastUpdated]     = useState(null);
+    const { store, dispatch } = useGlobalReducer();
     const [pendingCancel, setPendingCancel] = useState(null);
     const timeoutRef = useRef(null);
-    const pollRef    = useRef(null);
 
-    const authHeaders = () => ({
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-    });
+    const authHeaders = () => ({ Authorization: `Bearer ${localStorage.getItem("token")}` });
 
-    const fetchTrades = useCallback(async () => {
-        try {
-            const [openRes, histRes] = await Promise.all([
-                fetch(`${BASE}/api/dashboard/trades/open`,    { headers: authHeaders() }),
-                fetch(`${BASE}/api/dashboard/trades/history`, { headers: authHeaders() }),
-            ]);
-            const [open, history] = await Promise.all([
-                openRes.ok ? openRes.json()  : { trades: [] },
-                histRes.ok ? histRes.json()  : { trades: [] },
-            ]);
-            const combined = [
-                ...(open.trades    || []),
-                ...(history.trades || []),
-            ].sort((a, b) => new Date(b.opened_at) - new Date(a.opened_at));
-            setTrades(combined);
-            setLastUpdated(new Date());
-        } catch {
-            // silent
-        } finally {
-            setLoading(false);
-        }
-    }, []);
+    const trades = [
+        ...(store.openTrades   || []),
+        ...(store.tradeHistory || []),
+    ].sort((a, b) => new Date(b.opened_at) - new Date(a.opened_at));
 
-    const syncTrades = useCallback(async () => {
-        try {
-            await fetch(`${BASE}/api/dashboard/sync`, {
-                method:  "POST",
-                headers: authHeaders(),
-            });
-            fetchTrades();
-        } catch {
-            // silent
-        }
-    }, [fetchTrades]);
-
+    // Re-fetch after a manual trade is placed
     useEffect(() => {
-        fetchTrades();
-        pollRef.current = setInterval(fetchTrades, POLL_INTERVAL_MS);
-        return () => clearInterval(pollRef.current);
-    }, [fetchTrades]);
-
-    useEffect(() => {
-        const handler = () => fetchTrades();
+        const handler = async () => {
+            try {
+                const [openRes, histRes] = await Promise.all([
+                    fetch(`${BASE}/api/dashboard/trades/open`,    { headers: authHeaders() }),
+                    fetch(`${BASE}/api/dashboard/trades/history`, { headers: authHeaders() }),
+                ]);
+                const [open, hist] = await Promise.all([openRes.json(), histRes.json()]);
+                dispatch({ type: "set_open_trades",   payload: open.trades || [] });
+                dispatch({ type: "set_trade_history", payload: hist.trades || [] });
+            } catch { /* silent */ }
+        };
         window.addEventListener("trade-placed", handler);
         return () => window.removeEventListener("trade-placed", handler);
-    }, [fetchTrades]);
+    }, []);
 
     useEffect(() => {
         if (pendingCancel === null) return;
@@ -81,19 +51,18 @@ export const TradeTable = () => {
             clearTimeout(timeoutRef.current);
             setPendingCancel(null);
             fetch(`${BASE}/api/dashboard/trades/${tradeId}/cancel`, {
-                method:  "PATCH",
-                headers: authHeaders(),
+                method: "PATCH", headers: authHeaders(),
             })
                 .then(r => r.ok ? r.json() : Promise.reject())
                 .catch(() => {})
-                .finally(() => setTrades(prev => prev.filter(t => t.id !== tradeId)));
+                .finally(() => dispatch({ type: "set_open_trades", payload: (store.openTrades || []).filter(t => t.id !== tradeId) }));
         } else {
             setPendingCancel(tradeId);
         }
     };
 
-    const openCount   = trades.filter(t => t.status === "open").length;
-    const closedCount = trades.filter(t => t.status === "closed").length;
+    const openCount   = (store.openTrades   || []).length;
+    const closedCount = (store.tradeHistory || []).length;
 
     return (
         <div className="liquid-glass border border-white/5 rounded-2xl overflow-hidden">
@@ -115,7 +84,7 @@ export const TradeTable = () => {
                         </span>
                     )}
                     <button
-                        onClick={() => { fetchTrades(); syncTrades(); }}
+                        onClick={() => window.dispatchEvent(new CustomEvent("trade-placed"))}
                         title="Sincronizar ahora"
                         className="w-7 h-7 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:bg-white/10 transition-all text-xs"
                     >
@@ -125,9 +94,7 @@ export const TradeTable = () => {
             </div>
 
             <div className="overflow-x-auto">
-                {loading ? (
-                    <div className="p-8 text-center text-white/30 text-sm">Cargando operaciones...</div>
-                ) : trades.length === 0 ? (
+                {trades.length === 0 ? (
                     <div className="p-8 text-center text-white/30 text-sm">Sin operaciones registradas</div>
                 ) : (
                     <table className="w-full">

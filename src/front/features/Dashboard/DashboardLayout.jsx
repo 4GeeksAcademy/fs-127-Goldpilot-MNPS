@@ -4,7 +4,22 @@ import { useTranslation } from "react-i18next";
 import { UserProfile } from "./components/UserProfile";
 import { LanguageSwitcher } from "./components/LanguageSwitcher";
 import useGlobalReducer from "../../hooks/useGlobalReducer";
-import { getProfile } from "./api";
+import { getProfile, getDashboardSummary, getTradeHistory, getOpenTrades, getWallets } from "./api";
+
+const REFRESH_MS = 30_000;
+
+const fetchAllDashboardData = async (dispatch) => {
+    const [summary, history, open, wallets] = await Promise.allSettled([
+        getDashboardSummary(),
+        getTradeHistory(),
+        getOpenTrades(),
+        getWallets(),
+    ]);
+    if (summary.status  === "fulfilled") dispatch({ type: "set_dashboard_summary", payload: summary.value });
+    if (history.status  === "fulfilled") dispatch({ type: "set_trade_history",     payload: history.value.trades || [] });
+    if (open.status     === "fulfilled") dispatch({ type: "set_open_trades",        payload: open.value.trades   || [] });
+    if (wallets.status  === "fulfilled") dispatch({ type: "set_wallets",            payload: wallets.value.wallets || wallets.value || [] });
+};
 
 const SidebarItem = ({ label, icon, to }) => {
     const baseClasses =
@@ -62,13 +77,15 @@ export const DashboardLayout = () => {
     const storeUser = store?.user;
     const greeting = storeUser?.first_name || storeUser?.username || "Usuario";
 
-    // Al recargar la página el store se reinicia: si hay token pero no user, recargar perfil
     useEffect(() => {
         if (!store?.user) {
             getProfile()
                 .then((data) => dispatch({ type: "set_user_data", payload: data }))
-                .catch(() => { });
+                .catch(() => {});
         }
+        fetchAllDashboardData(dispatch);
+        const interval = setInterval(() => fetchAllDashboardData(dispatch), REFRESH_MS);
+        return () => clearInterval(interval);
     }, []);
 
 

@@ -6,7 +6,8 @@ import { PortfolioCard } from "../components/PortfolioCard";
 import { WalletPanel } from "../components/WalletPanel";
 import { AdBanner } from "../components/AdBanner";
 import { TradeTable } from "../components/TradeTable";
-import { getDashboardSummary, getWallets } from "../api";
+import { getWallets } from "../api";
+import useGlobalReducer from "../../../hooks/useGlobalReducer";
 
 const BACKEND = import.meta.env.VITE_BACKEND_URL;
 
@@ -205,21 +206,8 @@ const QuickTradePanel = () => {
 
 export const DashboardHome = () => {
     const { t } = useTranslation();
-    const [summary, setSummary] = useState(EMPTY_SUMMARY);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        const fetchSummary = () =>
-            getDashboardSummary()
-                .then((data) => { if (data) setSummary(data); })
-                .catch(() => {})
-                .finally(() => setLoading(false));
-
-        fetchSummary();
-        const interval = setInterval(fetchSummary, 30_000);
-        return () => clearInterval(interval);
-    }, []);
-
+    const { store } = useGlobalReducer();
+    const summary = store.dashboardSummary || EMPTY_SUMMARY;
     const { wallets, stats } = summary;
     const isProfitable = stats.total_profit >= 0;
 

@@ -1,10 +1,40 @@
-import os  # NUEVO: para leer variables de entorno (FRONTEND_URL)
+import os
+import requests
 from datetime import date
 from flask import abort
-# NUEVO: clase para construir el email de verificacion
 from flask_mail import Message
 from flask_jwt_extended import create_access_token
 from api.models import db, User
+
+
+def _send_email_via_sendgrid(to_email, subject, html_content):
+    """Send email via SendGrid HTTP API (used in production/Railway)."""
+    api_key = os.getenv("SENDGRID_API_KEY")
+    from_email = os.getenv("MAIL_USERNAME", "proyectofinalxs@gmail.com")
+    response = requests.post(
+        "https://api.sendgrid.com/v3/mail/send",
+        headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"},
+        json={
+            "personalizations": [{"to": [{"email": to_email}]}],
+            "from": {"email": from_email, "name": "Xsniper"},
+            "subject": subject,
+            "content": [{"type": "text/html", "value": html_content}]
+        },
+        timeout=10
+    )
+    if response.status_code >= 400:
+        raise Exception(f"SendGrid error {response.status_code}: {response.text}")
+
+
+def _send_email(to_email, subject, html_content):
+    """Route email through SendGrid (production) or Flask-Mail (local)."""
+    api_key = os.getenv("SENDGRID_API_KEY", "").strip()
+    if api_key:
+        _send_email_via_sendgrid(to_email, subject, html_content)
+    else:
+        from app import mail
+        msg = Message(subject=subject, recipients=[to_email], html=html_content)
+        mail.send(msg)
 
 
 class AuthService:
@@ -61,18 +91,12 @@ class AuthService:
             abort(500, description=f"Error al registrar usuario: {str(error)}")
 
     @staticmethod
-    # NUEVO: metodo privado para enviar email de verificacion
     def _send_verification_email(user):
         """Envia un email con el link de verificacion."""
-        from app import mail  # NUEVO: importamos la instancia de Mail configurada en app.py
-
         frontend_url = os.getenv("FRONTEND_URL", "http://localhost:3000").rstrip("/")
         verification_link = f"{frontend_url}/verify?token={user.verification_token}"
 
-        msg = Message(
-            subject="Bienvenido a Xsniper — Confirma tu acceso",
-            recipients=[user.email],
-            html=f"""
+        html_content = f"""
             <!DOCTYPE html>
             <html lang="es">
             <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
@@ -129,8 +153,7 @@ class AuthService:
             </body>
             </html>
             """
-        )
-        mail.send(msg)
+        _send_email(user.email, "Bienvenido a Xsniper — Confirma tu acceso", html_content)
 
     @staticmethod
     def verify_email(token):  # NUEVO: metodo para verificar email con el token recibido (NAPOLES)
@@ -202,15 +225,10 @@ class AuthService:
     @staticmethod
     def _send_password_reset_email(user):
         """Envia el email con el enlace para restablecer la contraseña."""
-        from app import mail
-
         frontend_url = os.getenv("FRONTEND_URL", "http://localhost:3000").rstrip("/")
         confirm_link = f"{frontend_url}/reset-password?token={user.password_change_token}"
 
-        msg = Message(
-            subject="Xsniper — Confirma tu cambio de contraseña",
-            recipients=[user.email],
-            html=f"""
+        html_content = f"""
             <!DOCTYPE html>
             <html lang="es">
             <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
@@ -257,9 +275,7 @@ class AuthService:
             </body>
             </html>
             """
-        )
-        mail.send(msg)
-
+        _send_email(user.email, "Xsniper — Confirma tu cambio de contraseña", html_content)
 
     @staticmethod
     def login(data):

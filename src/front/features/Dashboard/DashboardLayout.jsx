@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { UserProfile } from "./components/UserProfile";
 import { LanguageSwitcher } from "./components/LanguageSwitcher";
 import useGlobalReducer from "../../hooks/useGlobalReducer";
-import { getProfile } from "./api";
+import { getProfile, getDashboardSummary, getTradeHistory, getOpenTrades, getWallets } from "./api";
 
 const SidebarItem = ({ label, icon, to }) => {
     const baseClasses =
@@ -69,6 +69,11 @@ export const DashboardLayout = () => {
                 .then((data) => dispatch({ type: "set_user_data", payload: data }))
                 .catch(() => { });
         }
+        // Prefetch all dashboard data into cache so tab switches are instant
+        getDashboardSummary().catch(() => {});
+        getTradeHistory().catch(() => {});
+        getOpenTrades().catch(() => {});
+        getWallets().catch(() => {});
     }, []);
 
 

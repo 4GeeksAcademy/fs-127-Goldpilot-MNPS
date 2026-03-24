@@ -1,5 +1,6 @@
 import requests as req
-from flask import Blueprint, jsonify, abort
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from flask import Blueprint, jsonify, abort, request
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from api.models.wallet import MetaApiAccount
 from api.models.trade import Trade
@@ -48,14 +49,25 @@ def get_summary():
     accounts = MetaApiAccount.query.filter_by(user_id=user_id).all()
 
     has_token = _check_token()
-    wallets_data = []
+    empty_balance = {"balance": None, "equity": None, "currency": None, "margin": None, "free_margin": None}
 
+    if has_token and accounts:
+        with ThreadPoolExecutor(max_workers=min(len(accounts), 5)) as executor:
+            futures = {executor.submit(_fetch_wallet_balance, acc): acc for acc in accounts}
+            balances = {acc.id: empty_balance for acc in accounts}
+            for future in as_completed(futures):
+                acc = futures[future]
+                try:
+                    balances[acc.id] = future.result()
+                except Exception:
+                    pass
+    else:
+        balances = {acc.id: empty_balance for acc in accounts}
+
+    wallets_data = []
     for account in accounts:
         wallet_info = account.serialize()
-        balance_info = _fetch_wallet_balance(account) if has_token else {
-            "balance": None, "equity": None, "currency": None, "margin": None, "free_margin": None
-        }
-        wallet_info.update(balance_info)
+        wallet_info.update(balances[account.id])
         wallets_data.append(wallet_info)
 
     closed_trades = Trade.query.filter_by(user_id=user_id, status="closed").all()
@@ -86,11 +98,20 @@ def get_summary():
 @jwt_required()
 def get_trade_history():
     user_id = int(get_jwt_identity())
-    trades = Trade.query.filter_by(
-        user_id=user_id, status="closed"
-    ).order_by(Trade.closed_at.desc()).all()
+    page  = request.args.get("page",  1,   type=int)
+    limit = request.args.get("limit", 50,  type=int)
+    limit = min(limit, 200)
 
-    return jsonify({"trades": [t.serialize() for t in trades]}), 200
+    query = Trade.query.filter_by(user_id=user_id, status="closed").order_by(Trade.closed_at.desc())
+    total  = query.count()
+    trades = query.offset((page - 1) * limit).limit(limit).all()
+
+    return jsonify({
+        "trades": [t.serialize() for t in trades],
+        "total": total,
+        "page": page,
+        "pages": (total + limit - 1) // limit,
+    }), 200
 
 
 @dashboard_bp.route('/trades/open', methods=['GET'])

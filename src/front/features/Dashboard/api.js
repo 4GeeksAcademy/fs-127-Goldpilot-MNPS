@@ -1,5 +1,27 @@
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
+// ── Simple in-memory cache (stale-while-revalidate) ─────────────────────────
+const _cache = {};
+
+const cached = (key, ttlMs, fetcher) => {
+  const hit = _cache[key];
+  const fresh = hit && Date.now() - hit.ts < ttlMs;
+  if (fresh) return Promise.resolve(hit.data);
+  const promise = fetcher().then((data) => {
+    _cache[key] = { data, ts: Date.now() };
+    return data;
+  });
+  if (hit) {
+    // stale: return old data immediately, refresh in background
+    promise.catch(() => {});
+    return Promise.resolve(hit.data);
+  }
+  return promise;
+};
+
+export const invalidateCache = (key) => { delete _cache[key]; };
+// ─────────────────────────────────────────────────────────────────────────────
+
 const parseError = async (response) => {
   try {
     const json = await response.json();
@@ -60,17 +82,15 @@ export const stopBot = async (walletId = null) => {
   return response.json();
 };
 
-export const getWallets = async () => {
-  const token = localStorage.getItem("token");
-  const response = await fetch(`${BACKEND_URL}/api/wallets`, {
-    headers: { Authorization: `Bearer ${token}` },
+export const getWallets = () =>
+  cached("wallets", 60_000, async () => {
+    const token = localStorage.getItem("token");
+    const response = await fetch(`${BACKEND_URL}/api/wallets`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    if (!response.ok) { const msg = await parseError(response); throw new Error(msg); }
+    return response.json();
   });
-  if (!response.ok) {
-    const msg = await parseError(response);
-    throw new Error(msg);
-  }
-  return response.json();
-};
 
 export const addWallet = async (data) => {
   const token = localStorage.getItem("token");
@@ -225,17 +245,15 @@ export const updateProfile = async (data) => {
   return response.json();
 };
 
-export const getOpenTrades = async () => {
-  const token = localStorage.getItem("token");
-  const response = checkAuth(await fetch(`${BACKEND_URL}/api/dashboard/trades/open`, {
-    headers: { Authorization: `Bearer ${token}` },
-  }));
-  if (!response.ok) {
-    const msg = await parseError(response);
-    throw new Error(msg);
-  }
-  return response.json();
-};
+export const getOpenTrades = () =>
+  cached("open_trades", 20_000, async () => {
+    const token = localStorage.getItem("token");
+    const response = checkAuth(await fetch(`${BACKEND_URL}/api/dashboard/trades/open`, {
+      headers: { Authorization: `Bearer ${token}` },
+    }));
+    if (!response.ok) { const msg = await parseError(response); throw new Error(msg); }
+    return response.json();
+  });
 
 export const syncTrades = async () => {
   const token = localStorage.getItem("token");
@@ -263,29 +281,25 @@ export const getBotSignal = async () => {
   return response.json();
 };
 
-export const getDashboardSummary = async () => {
-  const token = localStorage.getItem("token");
-  const response = checkAuth(await fetch(`${BACKEND_URL}/api/dashboard/summary`, {
-    headers: { Authorization: `Bearer ${token}` },
-  }));
-  if (!response.ok) {
-    const msg = await parseError(response);
-    throw new Error(msg);
-  }
-  return response.json();
-};
+export const getDashboardSummary = () =>
+  cached("dashboard_summary", 30_000, async () => {
+    const token = localStorage.getItem("token");
+    const response = checkAuth(await fetch(`${BACKEND_URL}/api/dashboard/summary`, {
+      headers: { Authorization: `Bearer ${token}` },
+    }));
+    if (!response.ok) { const msg = await parseError(response); throw new Error(msg); }
+    return response.json();
+  });
 
-export const getTradeHistory = async () => {
-  const token = localStorage.getItem("token");
-  const response = checkAuth(await fetch(`${BACKEND_URL}/api/dashboard/trades/history`, {
-    headers: { Authorization: `Bearer ${token}` },
-  }));
-  if (!response.ok) {
-    const msg = await parseError(response);
-    throw new Error(msg);
-  }
-  return response.json();
-};
+export const getTradeHistory = () =>
+  cached("trade_history", 60_000, async () => {
+    const token = localStorage.getItem("token");
+    const response = checkAuth(await fetch(`${BACKEND_URL}/api/dashboard/trades/history`, {
+      headers: { Authorization: `Bearer ${token}` },
+    }));
+    if (!response.ok) { const msg = await parseError(response); throw new Error(msg); }
+    return response.json();
+  });
 
 /**
  * Obtiene candles históricas OHLCV para un símbolo de mercado vía MetaApi.

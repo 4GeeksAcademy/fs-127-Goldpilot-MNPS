@@ -15,6 +15,11 @@ export const initialStore=()=>{
     ],
     user: null,
     token: localStorage.getItem("token") || null,
+    // Dashboard data — persists across tab switches
+    dashboardSummary: null,
+    tradeHistory: [],
+    openTrades: [],
+    wallets: [],
   }
 }
 
@@ -72,12 +77,28 @@ export default function storeReducer(store, action = {}) {
         user: { ...store.user, avatar: action.payload },
       };
 
+    case 'set_dashboard_summary':
+      return { ...store, dashboardSummary: action.payload };
+
+    case 'set_trade_history':
+      return { ...store, tradeHistory: action.payload };
+
+    case 'set_open_trades':
+      return { ...store, openTrades: action.payload };
+
+    case 'set_wallets':
+      return { ...store, wallets: action.payload };
+
     case 'logout':
       localStorage.removeItem("token");
       return {
         ...store,
         user: null,
         token: null,
+        dashboardSummary: null,
+        tradeHistory: [],
+        openTrades: [],
+        wallets: [],
       };
 
     default:

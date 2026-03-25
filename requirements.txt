@@ -3,7 +3,7 @@ flask-sqlalchemy
 flask-migrate
 flask-swagger
 flask-cors
-flask-admin==2.0.0
+flask-admin>=1.6.1
 flask-jwt-extended
 flask-mail
 bcrypt

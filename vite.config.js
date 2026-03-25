@@ -7,6 +7,9 @@ export default defineConfig({
     plugins: [react()],
     server: {
         port: 3000,
+        watch: {
+            ignored: ['**/.venv/**', '**/node_modules/**']
+        },
         proxy: {
             '/api': {
                 target: 'http://localhost:3001',

@@ -18,7 +18,7 @@ const fetchAllDashboardData = async (dispatch) => {
     if (summary.status  === "fulfilled") dispatch({ type: "set_dashboard_summary", payload: summary.value });
     if (history.status  === "fulfilled") dispatch({ type: "set_trade_history",     payload: history.value.trades || [] });
     if (open.status     === "fulfilled") dispatch({ type: "set_open_trades",        payload: open.value.trades   || [] });
-    if (wallets.status  === "fulfilled") dispatch({ type: "set_wallets",            payload: wallets.value.wallets || wallets.value || [] });
+    if (wallets.status  === "fulfilled") dispatch({ type: "set_wallets",            payload: wallets.value.wallets || [] });
 };
 
 const SidebarItem = ({ label, icon, to }) => {

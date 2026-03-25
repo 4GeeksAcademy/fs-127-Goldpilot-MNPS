@@ -78,11 +78,6 @@ export const TradeTable = () => {
                     </div>
                 </div>
                 <div className="flex items-center gap-3">
-                    {lastUpdated && (
-                        <span className="text-[9px] text-white/20">
-                            {lastUpdated.toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit", second: "2-digit" })}
-                        </span>
-                    )}
                     <button
                         onClick={() => window.dispatchEvent(new CustomEvent("trade-placed"))}
                         title="Sincronizar ahora"
